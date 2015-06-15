@@ -1,0 +1,16 @@
+
+*~
+
+# Eclipse
+.buildpath
+.project
+.settings
+
+# Chester 
+.sass-cache/
+
+# Pruebas locales
+test.*
+
+# Dependencias
+vendor
