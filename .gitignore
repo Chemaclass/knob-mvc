@@ -14,3 +14,5 @@ test.*
 
 # Dependencias
 vendor
+
+*.lock

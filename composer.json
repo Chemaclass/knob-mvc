@@ -1,0 +1,28 @@
+{
+	"name": "com.domain",
+	"description": "domain.com",
+	"authors": [
+	    {
+	        "name": "José María Valera Reales",
+	        "email": "chemaclass@outlook.es"
+	    }
+	],
+	"require": {
+	    "mustache/mustache" : "2.7.*",
+	    "phpmailer/phpmailer": "5.2.*",
+		"components/bootstrap": "3.3.*",
+		"components/jquery": "2.1.*",
+		"components/font-awesome": "4.*"
+	},
+	"autoload": {
+	    "psr-0": {
+	        "Controllers": "mvc/",
+            "I18n": "mvc/",
+            "Libs": "mvc/",
+	        "Models": "mvc/"
+	    },
+		"classmap" : [
+			"mvc/"
+	    ]
+	}
+}
