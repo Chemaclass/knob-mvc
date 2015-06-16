@@ -104,7 +104,7 @@ abstract class BaseController {
 	 */
 	private function _addGlobalVars($templateVars = []) {
 		return array_merge($templateVars, [ 
-			'blogTitle' => self::_getBlogTitle(),
+			'blogTitle' => BLOG_TITLE,
 			'currentUser' => $this->currentUser,
 			'homeUrl' => get_home_url(),
 			'isEnvProd' => Env::isProd(),
@@ -156,10 +156,10 @@ abstract class BaseController {
 	 */
 	public static function getBlogInfoData() {
 		return array (
-			'blogTitle' => self::_getBlogTitle(),
+			'blogTitle' => BLOG_TITLE,
 			'name' => get_bloginfo('name'),
 			'description' => get_bloginfo('description'),
-			'adminEmail' => get_bloginfo('admin_email'),
+			'adminEmail' => ADMIN_EMAIL,
 			
 			'url' => get_bloginfo('url'),
 			'wpurl' => get_bloginfo('wpurl'),
@@ -186,18 +186,6 @@ abstract class BaseController {
 			
 			'isUserLoggedIn' => is_user_logged_in() 
 		);
-	}
-	
-	/**
-	 *
-	 * @return string
-	 */
-	private static function _getBlogTitle() {
-		if (is_home()) {
-			return get_bloginfo('name');
-		} else {
-			return wp_title("-", false, "right") . " " . get_bloginfo('name');
-		}
 	}
 	
 	/**
