@@ -58,7 +58,7 @@ class User extends ModelBase {
 	 * @return string
 	 */
 	public function getLastName() {
-		return get_user_meta($this->ID, self::KEY_USER_APELLIDOS, true);
+		return get_user_meta($this->ID, self::KEY_LAST_NAME, true);
 	}
 	
 	/**
