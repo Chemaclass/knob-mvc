@@ -53,7 +53,7 @@ public function getHome() {
 Controllers should extend BaseController. This then provides access to the templating functions. 
 
 ```php
-class PageController extends BaseController {
+class HomeController extends BaseController {
 
     public function getPage() { ... }
 
@@ -71,9 +71,9 @@ Place controllers inside mvc/controllers.
 Require the controller, init it and call the relevant function.
 
 ```php
-require_once(dirname(__FILE__).'/mvc/controllers/PageController.php');
+namespace Controllers;
 
-$controller = new PageController();
+$controller = new HomeController();
 $controller->getPage();
 ```    
 
@@ -117,8 +117,10 @@ Create the following templates:
 * footer.mustache 
 
 `head` include '<!DOCTYPE html>' until the first 'body' tag.
+
 `footer` include just '</body></html>'
 
+# Building ...#
 
 # Before to start... you need #
 
