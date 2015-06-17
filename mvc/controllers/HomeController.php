@@ -24,4 +24,17 @@ class HomeController extends BaseController {
 		];
 		return $this->renderPage('home', $args);
 	}
+	
+	/**
+	 * Error
+	 */
+	public function getError() {
+		$args = [ 
+			'error' => [ 
+				'code' => 404,
+				'message' => 'Not found' 
+			] 
+		];
+		return $this->renderPage('error', $args);
+	}
 }
