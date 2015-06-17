@@ -16,3 +16,6 @@ test.*
 vendor
 
 *.lock
+
+# css
+main.css
