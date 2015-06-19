@@ -17,7 +17,7 @@ class User extends ModelBase {
 	const KEY_LAST_NAME = 'last_name';
 	
 	/**
-	 * Devuelve el login
+	 * Return the login user
 	 *
 	 * @return string
 	 */
@@ -26,7 +26,7 @@ class User extends ModelBase {
 	}
 	
 	/**
-	 * Devuelve el email
+	 * Return the email
 	 *
 	 * @return string
 	 */
@@ -35,7 +35,7 @@ class User extends ModelBase {
 	}
 	
 	/**
-	 * Devuelve el nombre público del User (display_name)
+	 * Return the public name
 	 *
 	 * @return string
 	 */
@@ -44,7 +44,7 @@ class User extends ModelBase {
 	}
 	
 	/**
-	 * Devuelve el nombre del User
+	 * Return the first name
 	 *
 	 * @return string
 	 */
@@ -53,7 +53,7 @@ class User extends ModelBase {
 	}
 	
 	/**
-	 * Devuelve os apellidos del User
+	 * Return the last name
 	 *
 	 * @return string
 	 */
@@ -76,7 +76,7 @@ class User extends ModelBase {
 	}
 	
 	/**
-	 * Devuelve la URL de la pantalla de edición del perfil del User
+	 * Return the URL for to edit the User
 	 *
 	 * @return string
 	 */
@@ -85,7 +85,7 @@ class User extends ModelBase {
 	}
 	
 	/**
-	 * Devuelve la URL del User
+	 * Return the public URL
 	 *
 	 * @return string
 	 */
@@ -94,7 +94,7 @@ class User extends ModelBase {
 	}
 	
 	/**
-	 * Devuelve la lista de roles para el usuario
+	 * Return all roles/capabilities
 	 *
 	 * @return array<string>
 	 */
