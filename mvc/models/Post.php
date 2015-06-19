@@ -3,6 +3,7 @@
 namespace Models;
 
 use I18n\I18n;
+use Libs\Utils;
 
 /**
  * Post Model
@@ -31,6 +32,7 @@ class Post extends Image {
 	 * Counts
 	 */
 	const COUNT_SHORT_TITLE = 40;
+	const COUNT_EXCERPT = 20;
 	
 	/**
 	 * Return the author
@@ -149,6 +151,19 @@ class Post extends Image {
 	}
 	
 	/**
+	 * Return
+	 *
+	 * @return string
+	 */
+	public function getExcerpt() {
+		$the_excerpt = strip_tags(strip_shortcodes($this->post_content));
+		$the_excerpt = trim(preg_replace('/\s\s+/', ' ', $the_excerpt));
+		$the_excerpt = preg_replace("/[\xc2|\xa0]/", ' ', $the_excerpt);
+		$the_excerpt = Utils::getWordsByStr($the_excerpt, self::COUNT_EXCERPT);
+		return $the_excerpt;
+	}
+	
+	/**
 	 * Return the first Category from this Post
 	 * http://codex.wordpress.org/Function_Reference/get_the_category
 	 *
@@ -157,6 +172,24 @@ class Post extends Image {
 	public function getFirstCategory() {
 		$categories = get_the_category($this->ID);
 		return $categories[0];
+	}
+	
+	/**
+	 * Return the public link.
+	 *
+	 * @return string
+	 */
+	public function getPermalink() {
+		return get_permalink($this->ID);
+	}
+	
+	/**
+	 * Return the edit url.
+	 *
+	 * @return string
+	 */
+	public function getEditLink() {
+		return get_edit_post_link($this->ID);
 	}
 	
 	/**
