@@ -1,8 +1,8 @@
 <?php
-/**
- * Any Page by default
- */
 use Controllers\HomeController;
 
+/**
+ * Any Page we don't know
+ */
 $controller = new HomeController();
 $controller->getError();
