@@ -54,10 +54,27 @@ public function getHome() {
 Controllers should extend BaseController. This then provides access to the templating functions. 
 
 ```php
+namespace Controllers;
+
+use Models\Post;
+
 class HomeController extends BaseController {
 
-    public function getPost() { ... }
-
+	/**
+	 * post.php
+	 */
+    public function getPost() {
+		if (have_posts()) {
+			the_post();
+			$post = Post::find(get_the_ID());
+		}		
+		if (!isset($post)) {
+			return $this->getError();
+		}		
+		return $this->renderPage('post', [ 
+			'post' => $post 
+		]);
+    }
 }
 ```
 
@@ -72,7 +89,7 @@ Place controllers inside mvc/controllers.
 Require the controller, init it and call the relevant function.
 
 ```php
-namespace Controllers;
+use Controllers\HomeController;
 
 $controller = new HomeController();
 $controller->getPost();
@@ -88,10 +105,21 @@ Create your mustache template within mvc/templates.
 Here is an example template showing a post:
 
 ```html
-<div class="col-xs-12 titular text-center">
-	<h1 class="title">Error {{error.code}}</h1>
-	<p>{{error.message}}</p>
-</div>
+{{< base }}
+	{{$ content }}	
+		{{# post }}
+		<div id="post" class="row">
+			<div class="col-xs-12">
+			
+				<h1 class="title">{{{getTitle}}}</h1>
+				
+				{{{ getContent }}}
+				
+			</div>			
+		</div>
+		{{/ post }}
+	{{/ content }}
+{{/ base }}
 ```
 
 ### Loading a template from within a controller
@@ -111,17 +139,17 @@ return $this->renderPage('error', $args);
 
 ### Loading templates with automatically included Header and footer feature
 
-Create the following templates:
+The 3 first most important templates are:
 
-* head.mustache
-* base.mustache
-* footer.mustache 
+* templates/head.mustache
+* templates/base.mustache
+* templates/footer.mustache 
 
-`head` include `<!DOCTYPE html>` until the first `<body class="...">`tag.
+`head` include `<!DOCTYPE html>` until the first `<body class="...">` tag.
 
 `footer` include just `</body></html>`
 
-* We use the `base.mustache` as Decorator pattern:
+* We use the `templates/base.mustache` as Decorator pattern:
 
 ```html
 <header id="top" class="container">	
@@ -130,18 +158,16 @@ Create the following templates:
 		<span class="col-xs-12">{{blogDescription}}</span>
 	</div>
 </header>
-<div id="page" class="container">
-	<div id="super" class="row">		
-	    <div id="content" class="col-xs-12">
-	    	{{$ content }} 
-	    		You don't have to see this text, cause you've 
-	    		to override this tags "content" in your Son template.
-	    	{{/content }}
-	    </div>
+<div id="page" class="container">	
+    <div id="content" class="row">
+    	{{$ content }} 
+    		You don't have to see this text, cause you've to override this tags "content" in your Son template.
+    	{{/content }}
 	</div>
 </div>
+{{$ scripts }} {{/ scripts }}
 ```
-And then:
+And then we have `templates/home.mustache`:
 
 ```html
 {{< base }}	
@@ -160,7 +186,7 @@ And then:
 {{/ base }}
 ```
 
-And we have the partial `home/_post`:
+And we have the partial `templates/home/_post.mustache`:
 
 ```html
 <div class="row">
