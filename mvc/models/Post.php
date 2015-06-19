@@ -4,19 +4,44 @@ namespace Models;
 
 /**
  * Post Model
- * 
+ *
  * @author José María Valera Reales
  */
 class Post extends Image {
 	public static $table = "posts";
 	
 	/*
-	 * Const
+	 * Images sizes
 	 */
-	const IMG_THUMBNAIL = 'thumbnail';
-	const IMG_MEDIUM = 'medium';
-	const IMG_LARGE = 'large';
-	const IMG_FULL = 'full';
+	const IMG_SIZE_THUMBNAIL = 'thumbnail';
+	const IMG_SIZE_MEDIUM = 'medium';
+	const IMG_SIZE_LARGE = 'large';
+	const IMG_SIZE_FULL = 'full';
+	
+	/*
+	 * STATUS
+	 */
+	const STATUS_PUBLISH = "publish";
+	const STATUS_PENDING = "pending";
+	const STATUS_APPROVE = 'aprove';
+	
+	/**
+	 * Return all comments
+	 *
+	 * @see http://codex.wordpress.org/Function_Reference/get_comments
+	 */
+	public function getComments() {
+		$args_comments = [ 
+			'post_id' => $this->ID,
+			'orderby' => 'comment_date_gmt',
+			'status' => static::STATUS_APPROVE 
+		];
+		$comments = [ ];
+		foreach ( get_comments($args_comments, $this->ID) as $c ) {
+			$comments[] = Comment::find($c->comment_ID);
+		}
+		return $comments;
+	}
 	
 	/**
 	 *
