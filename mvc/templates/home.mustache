@@ -2,18 +2,22 @@
 
 	{{$ content }}
 		
-		<div id="home" class="text-center">
-			<span class="col-xs-12">
+		<div id="home">
+			<span class="text-center">
 				<span class="col-xs-6">
 					{{#transu}}wellcome{{/transu}} to {{project.name}}
 				</span>
 				<span class="col-xs-6">
 					By {{author.name}}
 				</span>
+				<span class="col-xs-12">
+					{{project.description}}
+				</span>
 			</span>
-			<span class="col-xs-12">
-				{{project.description}}
-			</span>
+			{{# posts }}
+				{{> home/_post}}
+			{{/ posts }}
+			
 			
 			
 		</div>

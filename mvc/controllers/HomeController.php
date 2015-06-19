@@ -22,7 +22,8 @@ class HomeController extends BaseController {
 			],
 			'author' => [ 
 				'name' => 'José María Valera Reales' 
-			] 
+			],
+			'posts' => self::getPosts() 
 		];
 		return $this->renderPage('home', $args);
 	}
