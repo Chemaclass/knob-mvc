@@ -41,4 +41,31 @@ class Utils {
 	public static function getRequestUri() {
 		return $_SERVER[REQUEST_URI];
 	}
+	
+	/**
+	 *
+	 * @param unknown $str        	
+	 * @param number $cant        	
+	 * @param string $separator        	
+	 * @return string
+	 */
+	public static function getWordsByStr($str, $cant = 8, $separator = ' ') {
+		// Generate an arraz from the str cut by the separator
+		$words = explode($separator, $str, $cant + 1);
+		$numWords = count($words);
+		// remove all empty values
+		$filteredWords = array_filter($words, 'strlen');
+		$numWordsFiltradas = count($filteredWords);
+		// if they're a different number of words that mean something was filtered
+		if ($numWordsFiltradas != $numWords) {
+			$cant -= ($numWords - $numWordsFiltradas);
+			$words = $filteredWords;
+		}
+		// if the content it's longer than the excerpt put '...'
+		if (count($words) > $cant) {
+			array_pop($words);
+			$words[] = '...';
+		}
+		return implode($separator, $words);
+	}
 }
