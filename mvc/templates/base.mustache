@@ -1,14 +1,17 @@
 <header id="top" class="container">	
 	<div id="blog-title" class="row">		
 		<div class="col-xs-12">
-			{{blogTitle}}
+			<a href="{{homeUrl}}">{{blogTitle}}</a>
 		</div>		
 	</div>
 </header>
 <div id="page" class="container">
 	<div id="super" class="row">		
 	    <div id="content" class="col-xs-12">
-	    	{{$ content }} Content {{/content }}
+	    	{{$ content }} 
+	    		You don't have to see this text, cause you've 
+	    		to override this tags "content" in your Son template.
+	    	{{/content }}
 	    </div>
 	</div>
 </div>
