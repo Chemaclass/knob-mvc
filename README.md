@@ -116,9 +116,9 @@ Create the following templates:
 * base.mustache
 * footer.mustache 
 
-`head` include '<!DOCTYPE html>' until the first 'body' tag.
+`head` include `<!DOCTYPE html>` until the first `<body class="...">`tag.
 
-`footer` include just '</body></html>'
+`footer` include just `</body></html>`
 
 # Building ...#
 
