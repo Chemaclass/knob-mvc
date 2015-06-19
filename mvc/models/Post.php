@@ -25,6 +25,11 @@ class Post extends Image {
 	const STATUS_PENDING = "pending";
 	const STATUS_APPROVE = 'aprove';
 	
+	/*
+	 * Counts
+	 */
+	const COUNT_SHORT_TITLE = 40;
+	
 	/**
 	 * Return the first Category from this Post
 	 * http://codex.wordpress.org/Function_Reference/get_the_category
@@ -68,5 +73,27 @@ class Post extends Image {
 	 */
 	public function getNextPost() {
 		return Post::find(get_next_post()->ID);
+	}
+	
+	/**
+	 * Return the title Post
+	 *
+	 * @param string $short        	
+	 * @param integer $countShort        	
+	 * @return string The Title
+	 */
+	public function getTitle($short = false, $countShort = self::COUNT_SHORT_TITLE) {
+		$title = get_the_title($this->ID);
+		if (!$short || (strlen($title) > $countShort)) {
+			return $title;
+		}
+		
+		$substr = substr($title, 0, $countShort);
+		// strrchr => return all after the last ocurrence from one str
+		$lastSpace = strpos($substr, strrchr($substr, ' '));
+		if ($lastSpace) {
+			$substr = substr($substr, 0, $lastSpace) . '...';
+		}
+		return $substr;
 	}
 }
