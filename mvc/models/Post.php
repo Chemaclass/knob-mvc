@@ -2,6 +2,8 @@
 
 namespace Models;
 
+use I18n\I18n;
+
 /**
  * Post Model
  *
@@ -23,7 +25,7 @@ class Post extends Image {
 	 */
 	const STATUS_PUBLISH = "publish";
 	const STATUS_PENDING = "pending";
-	const STATUS_APPROVE = 'aprove';
+	const STATUS_APPROVE = 'approve';
 	
 	/*
 	 * Counts
@@ -56,12 +58,31 @@ class Post extends Image {
 	}
 	
 	/**
+	 * Return the content
+	 *
+	 * @return string
+	 */
+	public function getContent() {
+		$content = apply_filters('the_content', $this->post_content);
+		$content = str_replace(']]>', ']]&gt;', $content);
+		return $content;
+	}
+	
+	/**
 	 * Return the total of categories.
 	 *
 	 * @return number
 	 */
 	public function getCountCategories() {
 		return count($this->getCategories());
+	}
+	
+	/**
+	 *
+	 * @return number
+	 */
+	public function getCountComments() {
+		return count($this->getComments());
 	}
 	
 	/**
@@ -90,6 +111,31 @@ class Post extends Image {
 	public function getDate() {
 		global $wpdb;
 		return $wpdb->get_var($wpdb->prepare('SELECT post_date FROM wp_posts WHERE ID = %d', $this->ID));
+	}
+	
+	/**
+	 * Return the form for comments
+	 *
+	 * @return string
+	 */
+	public function getFormComments() {
+		ob_start();
+		$placeholderTextarea = I18n::transu('share_comment', [ ]);
+		$params = [ 
+			'comment_notes_after' => '',
+			'author' => '<p class="comment-form-author">' . '<label for="author">' . __('Your Name') . '</label>
+					<input id="author" name="author" type="text"  value="Your First and Last Name" size="30" /></p>',
+			'comment_field' => '
+				<div class="form-group comment-form-comment">
+		            <label for="comment">' . _x('Comment', 'noun') . '</label>
+		            <textarea class="form-control" id="comment" name="comment" cols="45" rows="2"
+							maxlength="1000" aria-required="true" placeholder="' . $placeholderTextarea . '"></textarea>
+		        </div>' 
+		];
+		comment_form($params, $this->ID);
+		$comment_form = ob_get_clean();
+		$comment_form = str_replace('id="submit"', 'class="btn btn-default"', $comment_form);
+		return $comment_form;
 	}
 	
 	/**
