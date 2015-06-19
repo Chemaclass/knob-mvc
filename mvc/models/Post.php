@@ -31,6 +31,15 @@ class Post extends Image {
 	const COUNT_SHORT_TITLE = 40;
 	
 	/**
+	 * Return the author
+	 *
+	 * @return User
+	 */
+	public function getAuthor() {
+		return User::find($this->post_author);
+	}
+	
+	/**
 	 * Return the first Category from this Post
 	 * http://codex.wordpress.org/Function_Reference/get_the_category
 	 *
