@@ -26,6 +26,17 @@ class Post extends Image {
 	const STATUS_APPROVE = 'aprove';
 	
 	/**
+	 * Return the first Category from this Post
+	 * http://codex.wordpress.org/Function_Reference/get_the_category
+	 *
+	 * @return object
+	 */
+	public function getCategory() {
+		$categories = get_the_category($this->ID);
+		return $categories[0];
+	}
+	
+	/**
 	 * Return all comments
 	 *
 	 * @see http://codex.wordpress.org/Function_Reference/get_comments
