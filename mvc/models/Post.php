@@ -60,6 +60,26 @@ class Post extends Image {
 	}
 	
 	/**
+	 * Return the publish date
+	 *
+	 * @return string
+	 */
+	public function getDate() {
+		global $wpdb;
+		return $wpdb->get_var($wpdb->prepare('SELECT post_date FROM wp_posts WHERE ID = %d', $this->ID));
+	}
+	
+	/**
+	 * Return the modified date
+	 *
+	 * @return string
+	 */
+	public function getDateModified() {
+		global $wpdb;
+		return $wpdb->get_var($wpdb->prepare('SELECT post_modified FROM wp_posts WHERE ID = %d', $this->ID));
+	}
+	
+	/**
 	 *
 	 * @return Post
 	 */
