@@ -1,0 +1,45 @@
+{{< base }}
+
+	{{$ content }}
+	
+		{{# post }}
+		<div id="post" class="post-content">
+			<div class="col-xs-12 post category-{{getFirstCategory.slug}}" itemscope itemType="http://schema.org/BlogPosting">
+
+				<h1 class="page-header titular" itemprop="headline">{{{getTitle}}}</h1>
+
+				<div class="info row">
+					<div class="col-xs-12 col-sm-8 titular">
+						<meta itemprop="datePublished" content="{{ getDate | date.xmlschema}}"/>
+						<i class="fa fa-calendar"></i> <span class="post-time">{{getDate | date.string}}</span>
+						{{#trans}}por{{/trans}} 
+						<span class="post-author"><a href="{{getAuthor.getUserUrl}}">{{getAuthor.getDisplayName}}</a></span>
+						{{# getCountCategories }}
+							{{#trans}}in{{/trans}} <span class="categories">{{> post/_categories}}</span>
+						{{/ getCountCategories }} 
+					</div>
+				</div>
+
+				<div class="content text-center col-xs-12" itemprop="articleBody">
+					{{{ getContent }}}
+				</div>
+
+				<div id="comment-form" class="col-xs-12"> 
+					{{{ getFormComments }}}
+				</div>
+
+				{{# getCountComments }}
+				<div id="comments" class="col-xs-12">
+					<h3 class="col-xs-12 titular">{{#transu}}comentarios{{/transu}}</h3>
+					{{# getComments }}
+						{{> post/_comment }}						
+					{{/ getComments }}
+				</div>
+				{{/ getCountComments }}
+			</div>
+			
+		</div>
+		{{/ post }}
+	{{/ content }}
+
+{{/ base }}
