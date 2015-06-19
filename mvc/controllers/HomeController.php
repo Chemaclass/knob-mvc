@@ -2,6 +2,8 @@
 
 namespace Controllers;
 
+use Models\Post;
+
 /**
  * Home Controller
  *
@@ -28,13 +30,49 @@ class HomeController extends BaseController {
 	/**
 	 * Error
 	 */
-	public function getError() {
+	public function getError($code = 404, $message = 'Not found') {
 		$args = [ 
 			'error' => [ 
-				'code' => 404,
-				'message' => 'Not found' 
+				'code' => $code,
+				'message' => $message 
 			] 
 		];
 		return $this->renderPage('error', $args);
+	}
+	
+	/**
+	 * page.php
+	 */
+	public function getPage() {
+		if (have_posts()) {
+			the_post();
+			$page = Post::find(get_the_ID());
+		}
+		
+		if (!isset($page)) {
+			return $this->getError();
+		}
+		
+		return $this->renderPage('page', [ 
+			'page' => $page 
+		]);
+	}
+	
+	/**
+	 * post.php
+	 */
+	public function getPost() {
+		if (have_posts()) {
+			the_post();
+			$post = Post::find(get_the_ID());
+		}
+		
+		if (!isset($post)) {
+			return $this->getError();
+		}
+		
+		return $this->renderPage('post', [ 
+			'post' => $post 
+		]);
 	}
 }
