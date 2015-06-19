@@ -40,7 +40,8 @@ public function getHome() {
 		],
 		'author' => [ 
 			'name' => 'José María Valera Reales' 
-		] 
+		],
+		'posts' => self::getPosts() 
 	];
 	return $this->renderPage('home', $args);
 }
@@ -55,7 +56,7 @@ Controllers should extend BaseController. This then provides access to the templ
 ```php
 class HomeController extends BaseController {
 
-    public function getPage() { ... }
+    public function getPost() { ... }
 
 }
 ```
@@ -66,7 +67,7 @@ Place controllers inside mvc/controllers.
 
 ### Calling a controller from a WordPress template page
 
-[Create a template for WordPress](http://codex.wordpress.org/Template_Hierarchy), for example page.php which is used when pages are loaded.
+[Create a template for WordPress](http://codex.wordpress.org/Template_Hierarchy), for example single.php which is used when one Post are loaded.
 
 Require the controller, init it and call the relevant function.
 
@@ -74,7 +75,7 @@ Require the controller, init it and call the relevant function.
 namespace Controllers;
 
 $controller = new HomeController();
-$controller->getPage();
+$controller->getPost();
 ```    
 
 
@@ -120,7 +121,62 @@ Create the following templates:
 
 `footer` include just `</body></html>`
 
-# Building ...#
+* We use the `base.mustache` as Decorator pattern:
+
+```html
+<header id="top" class="container">	
+	<div id="blog-title" class="row">
+		<a class="col-xs-12" href="{{homeUrl}}">{{blogTitle}}</a>
+		<span class="col-xs-12">{{blogDescription}}</span>
+	</div>
+</header>
+<div id="page" class="container">
+	<div id="super" class="row">		
+	    <div id="content" class="col-xs-12">
+	    	{{$ content }} 
+	    		You don't have to see this text, cause you've 
+	    		to override this tags "content" in your Son template.
+	    	{{/content }}
+	    </div>
+	</div>
+</div>
+```
+And then:
+
+```html
+{{< base }}	
+	{{$ content }}		
+		<div id="home">		
+			<div id="wellcome" class="row text-center">
+				<span class="col-xs-12">
+					{{#transu}}wellcome{{/transu}} to {{project.name}} by {{author.name}}
+				</span>
+			</div>			
+			{{# posts }}
+				{{> home/_post}}
+			{{/ posts }}			
+		</div>		
+	{{/ content }}	
+{{/ base }}
+```
+
+And we have the partial `home/_post`:
+
+```html
+<div class="row">
+	<div class="col-xs-12 post">	
+		<span class="col-xs-12">
+			<span class="post-time">{{getDate | date.string}}</span>
+		</span>		
+		<span class="col-xs-12">
+			<a href="{{getPermalink}}">{{getTitle}}</a>
+		</span>		
+		<span class="col-xs-12">
+			{{{ getExcerpt }}}
+		</span>
+	</div>	
+</div>
+```
 
 # Before to start... you need #
 
