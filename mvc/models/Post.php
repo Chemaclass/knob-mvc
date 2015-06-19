@@ -40,14 +40,28 @@ class Post extends Image {
 	}
 	
 	/**
-	 * Return the first Category from this Post
-	 * http://codex.wordpress.org/Function_Reference/get_the_category
 	 *
-	 * @return object
+	 * @return array
 	 */
-	public function getCategory() {
+	public function getCategories() {
 		$categories = get_the_category($this->ID);
-		return $categories[0];
+		if (!$categories) {
+			return [ ];
+		}
+		foreach ( $categories as $category ) {
+			$category->category_link = get_category_link($category->term_id);
+			$array[] = $category;
+		}
+		return $array;
+	}
+	
+	/**
+	 * Return the total of categories.
+	 *
+	 * @return number
+	 */
+	public function getCountCategories() {
+		return count($this->getCategories());
 	}
 	
 	/**
@@ -86,6 +100,17 @@ class Post extends Image {
 	public function getDateModified() {
 		global $wpdb;
 		return $wpdb->get_var($wpdb->prepare('SELECT post_modified FROM wp_posts WHERE ID = %d', $this->ID));
+	}
+	
+	/**
+	 * Return the first Category from this Post
+	 * http://codex.wordpress.org/Function_Reference/get_the_category
+	 *
+	 * @return object
+	 */
+	public function getFirstCategory() {
+		$categories = get_the_category($this->ID);
+		return $categories[0];
 	}
 	
 	/**
