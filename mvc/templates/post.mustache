@@ -3,8 +3,8 @@
 	{{$ content }}
 	
 		{{# post }}
-		<div id="post" class="post-content">
-			<div class="col-xs-12 post category-{{getFirstCategory.slug}}" itemscope itemType="http://schema.org/BlogPosting">
+		<div id="post" class="row post-content">
+			<div class="col-xs-12 category-{{getFirstCategory.slug}}" itemscope itemType="http://schema.org/BlogPosting">
 
 				<h1 class="page-header titular" itemprop="headline">{{{getTitle}}}</h1>
 
@@ -20,11 +20,13 @@
 					</div>
 				</div>
 
-				<div class="content text-center col-xs-12" itemprop="articleBody">
+				<div class="col-xs-12 text-left content" itemprop="articleBody">
 					{{{ getContent }}}
 				</div>
+				
+				<hr>
 
-				<div id="comment-form" class="col-xs-12"> 
+				<div id="comment-form" class="col-xs-12 comment-form"> 
 					{{{ getFormComments }}}
 				</div>
 
