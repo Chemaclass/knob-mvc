@@ -86,15 +86,12 @@ Place controllers inside mvc/controllers.
 
 [Create a template for WordPress](http://codex.wordpress.org/Template_Hierarchy), for example single.php which is used when one Post are loaded.
 
-Require the controller, init it and call the relevant function.
-
 ```php
 use Controllers\HomeController;
 
 $controller = new HomeController();
 $controller->getPost();
 ```    
-
 
 ### Creating mustache templates
 
@@ -110,11 +107,8 @@ Here is an example template showing a post:
 		{{# post }}
 		<div id="post" class="row">
 			<div class="col-xs-12">
-			
 				<h1 class="title">{{{getTitle}}}</h1>
-				
 				{{{ getContent }}}
-				
 			</div>			
 		</div>
 		{{/ post }}
@@ -141,15 +135,15 @@ return $this->renderPage('error', $args);
 
 The 3 first most important templates are:
 
-* templates/head.mustache
-* templates/base.mustache
-* templates/footer.mustache 
+* head.mustache
+* base.mustache
+* footer.mustache 
 
 `head` include `<!DOCTYPE html>` until the first `<body class="...">` tag.
 
 `footer` include just `</body></html>`
 
-* We use the `templates/base.mustache` as Decorator pattern:
+* We use the `base.mustache` as Decorator pattern:
 
 ```html
 <header id="top" class="container">	
@@ -161,13 +155,14 @@ The 3 first most important templates are:
 <div id="page" class="container">	
     <div id="content" class="row">
     	{{$ content }} 
-    		You don't have to see this text, cause you've to override this tags "content" in your Son template.
+    		You don't have to see this text, cause you've to override this 
+    		tags "content" in your Son template.
     	{{/content }}
 	</div>
 </div>
-{{$ scripts }} {{/ scripts }}
+{{$ js }} {{/ js }}
 ```
-And then we have `templates/home.mustache`:
+And then we have `home.mustache`:
 
 ```html
 {{< base }}	
@@ -175,7 +170,8 @@ And then we have `templates/home.mustache`:
 		<div id="home">		
 			<div id="wellcome" class="row text-center">
 				<span class="col-xs-12">
-					{{#transu}}wellcome{{/transu}} to {{project.name}} by {{author.name}}
+					{{#transu}}wellcome{{/transu}} to {{project.name}} 
+					by {{author.name}}
 				</span>
 			</div>			
 			{{# posts }}
@@ -204,7 +200,7 @@ And we have the partial `templates/home/_post.mustache`:
 </div>
 ```
 
-# Before to start... you need #
+# Before to start... you need! #
 
 * Isntall ruby y compass
 	sudo apt-get install ruby
