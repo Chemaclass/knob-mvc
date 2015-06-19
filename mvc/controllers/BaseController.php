@@ -105,6 +105,7 @@ abstract class BaseController {
 	private function _addGlobalVars($templateVars = []) {
 		return array_merge($templateVars, [ 
 			'blogTitle' => BLOG_TITLE,
+			'blogDescription' => get_bloginfo('description'),
 			'currentUser' => $this->currentUser,
 			'homeUrl' => get_home_url(),
 			'isEnvProd' => Env::isProd(),
@@ -150,9 +151,10 @@ abstract class BaseController {
 	}
 	
 	/**
-	 * Devuelve una lista con la información básica del blog
+	 * Return a list with the basic values from the options from the blog
 	 *
-	 * @return multitype:string NULL
+	 * @deprecated
+	 *
 	 */
 	public static function getBlogInfoData() {
 		return array (

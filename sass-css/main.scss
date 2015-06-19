@@ -9,7 +9,16 @@ body {
 	margin-bottom: 6px;
 }
 
-#blog-title {
-	font-size: 32px;
-	text-align: center;
+#blog-title {	
+	margin: 30px 0;
+	border: 2px solid #000;
+		text-align: left;
+	a { 
+		font-size: 32px;
+		color: #000;
+    	text-decoration: none;
+	}
+	span {
+		font-size: 21px;
+	}
 }
