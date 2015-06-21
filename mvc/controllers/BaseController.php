@@ -201,20 +201,19 @@ abstract class BaseController {
 	 * @return array<Post>
 	 */
 	public static function getPosts($dateFormat = false, $postType = 'post', $numberPostsToFetch = -1, $customFields = [], $oddOrEven = false, $moreQuerySettings = []) {
-		// Obtengo los post fijados
+		// Get all fixed posts.
 		$posts = self::_getStickyPosts($dateFormat, $postType, $numberPostsToFetch, $customFields, $oddOrEven, $moreQuerySettings);
 		$isCat = isset($moreQuerySettings['cat']);
 		$postsStickyIds = [ ];
-		// Recorro los post fijados totales y compruebo que su categoría se corresponda con la categoría que se está buscando
-		foreach ( get_option('sticky_posts') as $post_id ) {
-			if ($isCat && ($post = Post::find($post_id)) && $post->getCategoria()->term_id == $moreQuerySettings['cat']) {
-				$postsStickyIds[] = $post_id;
+		// Check all fixed posts with the category we're searching.
+		foreach ( get_option('sticky_posts') as $postId ) {
+			if ($isCat && ($post = Post::find($postId)) && $post->getCategory()->term_id == $moreQuerySettings['cat']) {
+				$postsStickyIds[] = $postId;
 			}
 		}
-		// Comparamos la cantidad de post fijados totales con la cantidad de post fijados que hemos obtenido
+		// Check the total fixed posts with the total post we got it.
 		$countSticky = count($postsStickyIds);
-		// De ser igual quiere decir que tenemos que restarle a la cantidad pedida el número de post fijados totales, de lo contrario
-		// la cantidad pedida seguirá siendo la misma.
+		// if it's the same doesn't matter. If it's different we have to rest the different.
 		$numberPostsToFetch = (count($posts) == $countSticky) ? $numberPostsToFetch - $countSticky : $numberPostsToFetch;
 		
 		$querySettings = [ 
@@ -226,7 +225,7 @@ abstract class BaseController {
 			],
 			'post__not_in' => $postsStickyIds,
 			'posts_per_page' => $numberPostsToFetch,
-			'post_status' => 'publish' 
+			'post_status' => Post::STATUS_PUBLISH 
 		];
 		$querySettings = array_merge($querySettings, $moreQuerySettings);
 		$loop = new \WP_Query($querySettings);
@@ -258,7 +257,7 @@ abstract class BaseController {
 	}
 	
 	/**
-	 * Recorrer la query y monta los objetos Post
+	 * Loop the query and mount the Post objects
 	 *
 	 * @param WP_Query $loop        	
 	 * @param boolean $oddOrEven        	
