@@ -10,7 +10,7 @@ namespace Models;
 abstract class Image extends ModelBase {
 	
 	/**
-	 * Set imgage
+	 * Set image
 	 *
 	 * @param string $keyImg
 	 *        	Key from the image
@@ -130,20 +130,21 @@ abstract class Image extends ModelBase {
 			unlink($getImagePath['current']);
 		}
 		
-		// Y lo quitamos de su meta
+		// remove his meta info
 		return delete_user_meta($this->ID, $keyImg);
 	}
 	
 	/**
-	 * Devuelvo el nombre de la img base del header y el nombre de la img current del header.
-	 * Ejemplo [
-	 * 'current' => 'Chemaclass_header-353x200.png',
-	 * 'base' => 'Chemaclass_header.png',
-	 * 'virgen' => 'Chemaclass_img_header',
+	 * Return the base name of the img and the name of the current img.
+	 *
+	 * for example [
+	 * 'current' => 'Chemaclass_avatar-26x26.png',
+	 * 'base' => 'Chemaclass_avatar.png',
+	 * 'virgen' => 'Chemaclass_avatar',
 	 * 'ext' => '.png',
 	 * ];
 	 *
-	 * @return array<string> Lista con el nombre 'base' y 'current'.
+	 * @return array<string> List with the current name, base, virgen and extension of the image
 	 */
 	private function getImagePath($keyImg) {
 		$upload_path = wp_upload_dir();
@@ -155,7 +156,7 @@ abstract class Image extends ModelBase {
 			$_base = substr($base, 0, strpos($base, "-")) . $ext[0];
 			$pathBase = str_replace($current, $_base, $path);
 		}
-		// y la ruta virgen
+		// and the virgen path
 		$_base_virgen = substr($base, 0, strpos($base, "-"));
 		$virgen = str_replace($current, $_base_virgen, $path);
 		return [ 
