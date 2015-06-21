@@ -34,6 +34,11 @@ class Post extends Image {
 	const COUNT_SHORT_TITLE = 40;
 	const COUNT_EXCERPT = 20;
 	
+	/*
+	 * Types
+	 */
+	const TYPE_POST = 'post';
+	
 	/**
 	 * Return the author
 	 *

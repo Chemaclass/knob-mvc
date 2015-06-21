@@ -3,13 +3,14 @@
 namespace Models;
 
 use Libs\Utils;
+use Controllers\HomeController;
 
 /**
  * User Model
  *
  * @author José María Valera Reales
  */
-class User extends ModelBase {
+class User extends Image {
 	public static $table = "users";
 	
 	/*
@@ -28,6 +29,11 @@ class User extends ModelBase {
 	const KEY_AVATAR = 'avatar';
 	const KEY_LANGUAGE = 'language';
 	
+	/*
+	 * Total constants
+	 */
+	const TOTAL_POSTS_TO_SHOW = 10;
+	
 	/**
 	 * Return the URL with the avatar from the User
 	 *
@@ -35,7 +41,7 @@ class User extends ModelBase {
 	 * @return string
 	 */
 	public function getAvatar($size = self::AVATAR_SIZE_DEFAULT) {
-		$avatar = $this->getAvatar(self::KEY_AVATAR, $size, $size);
+		$avatar = $this->getImage(self::KEY_AVATAR, $size, $size);
 		if (empty($avatar)) {
 			return Utils::getUrlAvatarDefault($size);
 		}
@@ -59,6 +65,18 @@ class User extends ModelBase {
 	 */
 	public function setAvatar($newAvatar = false) {
 		return $this->setAvatar(self::KEY_AVATAR, $newAvatar);
+	}
+	
+	/**
+	 * Get all posts
+	 *
+	 * @param integer $max
+	 *        	total posts to show
+	 * @return array<Post>
+	 */
+	public function getPosts($max = self::TOTAL_POSTS_TO_SHOW) {
+		$moreQuerySettings['author'] = $this->ID;
+		return HomeController::getPosts(Post::TYPE_POST, $max, [ ], false, $moreQuerySettings);
 	}
 	
 	/**
