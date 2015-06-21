@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Models\Post;
+use Models\User;
 
 /**
  * Home Controller
@@ -10,6 +11,23 @@ use Models\Post;
  * @author José María Valera Reales
  */
 class HomeController extends BaseController {
+	
+	/**
+	 * author.php
+	 */
+	public function getAuthor() {
+		$author = get_queried_object();
+		$user = User::find($author->ID);
+		if (!$user) {
+			return $this->getError();
+		}
+		
+		$args = [ 
+			'user' => $user,
+		];
+		
+		return $this->renderPage('user', $args);
+	}
 	
 	/**
 	 * home.php

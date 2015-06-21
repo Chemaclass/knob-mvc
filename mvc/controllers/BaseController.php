@@ -132,7 +132,7 @@ abstract class BaseController {
 			
 			'pingbackUrl' => get_bloginfo('pingback_url'),
 			'publicDir' => PUBLIC_DIR,
-
+			
 			'rdfUrl' => get_bloginfo('rdf_url'),
 			'rss2Url' => get_bloginfo('rss2_url'),
 			'rssUrl' => get_bloginfo('rss_url'),
@@ -192,9 +192,9 @@ abstract class BaseController {
 	 * @param array $moreQuerySettings        	
 	 * @return array<Post>
 	 */
-	public static function getPosts($dateFormat = false, $postType = 'post', $numberPostsToFetch = -1, $customFields = [], $oddOrEven = false, $moreQuerySettings = []) {
+	public static function getPosts($postType = 'post', $numberPostsToFetch = -1, $customFields = [], $oddOrEven = false, $moreQuerySettings = []) {
 		// Get all fixed posts.
-		$posts = self::getStickyPosts($dateFormat, $postType, $numberPostsToFetch, $customFields, $oddOrEven, $moreQuerySettings);
+		$posts = self::getStickyPosts($postType, $numberPostsToFetch, $customFields, $oddOrEven, $moreQuerySettings);
 		$isCat = isset($moreQuerySettings['cat']);
 		$postsStickyIds = [ ];
 		// Check all fixed posts with the category we're searching.
@@ -230,7 +230,7 @@ abstract class BaseController {
 	 *
 	 * @return array<Post>
 	 */
-	private static function getStickyPosts($dateFormat = false, $postType = 'post', $numberPostsToFetch = -1, $customFields = array(), $oddOrEven = false, $moreQuerySettings = array()) {
+	private static function getStickyPosts($postType = 'post', $numberPostsToFetch = -1, $customFields = array(), $oddOrEven = false, $moreQuerySettings = array()) {
 		$sticky_posts = get_option('sticky_posts');
 		if (!$sticky_posts) {
 			return [ ];
@@ -264,5 +264,40 @@ abstract class BaseController {
 			}
 		}
 		return $posts;
+	}
+	
+	/**
+	 *
+	 * @param integer $autorId        	
+	 * @param integer $max        	
+	 * @param array $moreQuerySettings        	
+	 * @return array
+	 */
+	public static function getPostsByAuthor($autorId, $max = self::NUM_POST_POR_SECCION, $moreQuerySettings = []) {
+		return self::getPostsBy(Utils::TYPE_AUTHOR, $autorId, $max, $moreQuerySettings);
+	}
+	
+	/**
+	 *
+	 * @param unknown $type        	
+	 * @param unknown $by        	
+	 * @param unknown $max        	
+	 * @param unknown $moreQuerySettings        	
+	 * @return \Controllers\array<Post>
+	 */
+	private static function getPostsBy($type, $by, $max = self::NUM_POST_POR_SECCION, $moreQuerySettings = []) {
+		if ($type == Utils::TYPE_TAG) {
+			$tagId = Utils::getTagIdbyName($by);
+			$moreQuerySettings['tag_id'] = "$tagId";
+		} elseif ($type == Utils::TYPE_CATEGORY) {
+			$catId = get_cat_ID($by);
+			$moreQuerySettings['cat'] = "$catId";
+		} elseif ($type == Utils::TYPE_SEARCH) {
+			$aBuscar = $by;
+			$moreQuerySettings['s'] = "$aBuscar";
+		} elseif ($type == Utils::TYPE_AUTHOR) {
+			$moreQuerySettings['author'] = $by;
+		}
+		return self::getPosts(Post::TYPE_POST, $max, [ ], false, $moreQuerySettings);
 	}
 }
