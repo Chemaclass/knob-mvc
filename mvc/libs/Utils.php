@@ -12,6 +12,40 @@ use Models\User;
 class Utils {
 	
 	/**
+	 * Devuelve el ID del attachment apartir de su url
+	 *
+	 * @param string $attachmentUrl
+	 *        	URL del attachment
+	 * @return integer ID del attachment
+	 */
+	function getAttachmentIdFromUrl($attachmentUrl = '') {
+		global $wpdb;
+		$attachmentId = false;
+		// If there is no url, return.
+		if ('' == $attachmentUrl) {
+			return;
+		}
+		// Get the upload directory paths
+		$upload_dir_paths = wp_upload_dir();
+		// Make sure the upload path base directory exists in the attachment URL,
+		// to verify that we're working with a media library image
+		if (false !== strpos($attachmentUrl, $upload_dir_paths['baseurl'])) {
+			// If this is the URL of an auto-generated thumbnail, get the URL of the original image
+			$attachmentUrl = preg_replace('/-\d+x\d+(?=\.(jpg|jpeg|png|gif)$)/i', '', $attachmentUrl);
+			// Remove the upload path base directory from the attachment URL
+			$attachmentUrl = str_replace($upload_dir_paths['baseurl'] . '/', '', $attachmentUrl);
+			// Finally, run a custom database query to get the attachment ID from the modified attachment URL
+			$attachmentId = $wpdb->get_var($wpdb->prepare("SELECT wposts.ID 
+					FROM {$wpdb->posts} wposts, {$wpdb->postmeta} wpostmeta 
+					WHERE wposts.ID = wpostmeta.post_id 
+					AND wpostmeta.meta_key = '_wp_attached_file' 
+					AND wpostmeta.meta_value = '%s' 
+					AND wposts.post_type = 'attachment'", $attachmentUrl));
+		}
+		return $attachmentId;
+	}
+	
+	/**
 	 * Return the current lang of the browerser
 	 *
 	 * @return string Just the first two chars. Ex: de, es, en, fr
