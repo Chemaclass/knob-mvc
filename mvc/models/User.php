@@ -2,6 +2,8 @@
 
 namespace Models;
 
+use Libs\Utils;
+
 /**
  * User Model
  *
@@ -11,10 +13,53 @@ class User extends ModelBase {
 	public static $table = "users";
 	
 	/*
+	 * Avatar Size
+	 */
+	const AVATAR_SIZE_ICO = 26;
+	const AVATAR_SIZE_SMALL = 64;
+	const AVATAR_SIZE_DEFAULT = 96;
+	const AVATAR_SIZE_PROFILE = 190;
+	
+	/*
 	 * Const
 	 */
 	const KEY_FIRST_NAME = 'first_name';
 	const KEY_LAST_NAME = 'last_name';
+	const KEY_AVATAR = 'avatar';
+	const KEY_LANGUAGE = 'language';
+	
+	/**
+	 * Return the URL with the avatar from the User
+	 *
+	 * @param integer $size        	
+	 * @return string
+	 */
+	public function getAvatar($size = self::AVATAR_SIZE_DEFAULT) {
+		$avatar = $this->getAvatar(self::KEY_AVATAR, $size, $size);
+		if (empty($avatar)) {
+			return Utils::getUrlAvatarDefault($size);
+		}
+		return $avatar;
+	}
+	
+	/**
+	 * Devuelve la url del avatar para el perfil
+	 *
+	 * @return string
+	 */
+	public function getAvatarProfile() {
+		return $this->getAvatar(self::AVATAR_SIZE_PROFILE);
+	}
+	
+	/**
+	 * Establecer un nuevo avatar al User
+	 *
+	 * @param FILE $newAvatar        	
+	 * @return boolean
+	 */
+	public function setAvatar($newAvatar = false) {
+		return $this->setAvatar(self::KEY_AVATAR, $newAvatar);
+	}
 	
 	/**
 	 * Return the login user
