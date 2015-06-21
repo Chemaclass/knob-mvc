@@ -1,0 +1,29 @@
+{{< base }}
+
+	{{$ content }}
+	
+		{{# user }}
+			<div id="user" class="row author">
+		
+				<div class="profile">
+					<span class="avatar col-xs-4">
+						<img src="{{getAvatarProfile}}" title="{{getDisplayName}} avatar">
+					</span>
+					<span class="info col-xs-8">
+						<span class="col-xs-12"> Full name: {{getFullName}} </span>
+						<span class="col-xs-12"> Display name: {{getDisplayName}} </span>
+					</span>
+				</div>
+				
+				<div class="posts">
+					{{# getPosts }}
+						{{> home/_post }}
+					{{/ getPosts }}
+				</div>
+			
+			</div>
+		{{/ user }}
+		
+	{{/ content }}
+
+{{/ base }}
