@@ -102,19 +102,51 @@ abstract class BaseController {
 	 * @param array $templateVars
 	 *        	Referencia del array con las variables que pasaran todos los controladores a sus vistas
 	 */
-	private function _addGlobalVars($templateVars = []) {
+	private function addGlobalVariables($templateVars = []) {
 		return array_merge($templateVars, [ 
+			'adminEmail' => ADMIN_EMAIL,
+			'atomUrl' => get_bloginfo('atom_url'),
+			
 			'blogTitle' => BLOG_TITLE,
 			'blogDescription' => get_bloginfo('description'),
+			
+			'charset' => get_bloginfo('charset'),
+			'commentsAtomUrl' => get_bloginfo('comments_atom_url'),
+			'commentsRss2Url' => get_bloginfo('comments_rss2_url'),
+			'componentsDir' => COMPONENTS_DIR,
+			'currentLang' => I18n::getLangBrowserByCurrentUser(),
 			'currentUser' => $this->currentUser,
+			
 			'homeUrl' => get_home_url(),
+			'htmlType' => get_bloginfo('html_type'),
+			
 			'isEnvProd' => Env::isProd(),
 			'isEnvDev' => Env::isDev(),
 			'isEnvLoc' => Env::isLoc(),
-			'publicDir' => PUBLIC_DIR,
-			'componentsDir' => COMPONENTS_DIR,
+			'isUserLoggedIn' => is_user_logged_in(),
+			
+			'language' => get_bloginfo('language'),
 			'loginUrl' => wp_login_url($_SERVER['REQUEST_URI']),
-			'currentLang' => I18n::getLangBrowserByCurrentUser() 
+			
+			'name' => get_bloginfo('name'),
+			
+			'pingbackUrl' => get_bloginfo('pingback_url'),
+			'publicDir' => PUBLIC_DIR,
+
+			'rdfUrl' => get_bloginfo('rdf_url'),
+			'rss2Url' => get_bloginfo('rss2_url'),
+			'rssUrl' => get_bloginfo('rss_url'),
+			
+			'stylesheetDirectory' => get_bloginfo('stylesheet_directory'),
+			'stylesheetUrl' => get_bloginfo('stylesheet_url'),
+			
+			'templateDirectory' => get_bloginfo('template_directory'),
+			'templateUrl' => get_bloginfo('template_url'),
+			'textDirection' => get_bloginfo('text_direction'),
+			
+			'version' => get_bloginfo('version'),
+			
+			'wpurl' => get_bloginfo('wpurl') 
 		]);
 	}
 	
@@ -127,7 +159,7 @@ abstract class BaseController {
 	 *        	Parámetros para la vista
 	 */
 	public function renderPage($templateName, $templateVars = []) {
-		$templateVars = $this->_addGlobalVars($templateVars);
+		$templateVars = $this->addGlobalVariables($templateVars);
 		// Pintamos el header, la plantilla que nos dieron y seguidamente el footer
 		foreach ( [ 
 			'head',
@@ -147,47 +179,7 @@ abstract class BaseController {
 	 *        	Parámetros para la vista
 	 */
 	public function render($templateName, $templateVars = []) {
-		return $this->template->render($templateName, $this->_addGlobalVars($templateVars));
-	}
-	
-	/**
-	 * Return a list with the basic values from the options from the blog
-	 *
-	 * @deprecated
-	 *
-	 */
-	public static function getBlogInfoData() {
-		return array (
-			'blogTitle' => BLOG_TITLE,
-			'name' => get_bloginfo('name'),
-			'description' => get_bloginfo('description'),
-			'adminEmail' => ADMIN_EMAIL,
-			
-			'url' => get_bloginfo('url'),
-			'wpurl' => get_bloginfo('wpurl'),
-			
-			'stylesheetDirectory' => get_bloginfo('stylesheet_directory'),
-			'stylesheetUrl' => get_bloginfo('stylesheet_url'),
-			'templateDirectory' => get_bloginfo('template_directory'),
-			'templateUrl' => get_bloginfo('template_url'),
-			
-			'atomUrl' => get_bloginfo('atom_url'),
-			'rss2Url' => get_bloginfo('rss2_url'),
-			'rssUrl' => get_bloginfo('rss_url'),
-			'pingbackUrl' => get_bloginfo('pingback_url'),
-			'rdfUrl' => get_bloginfo('rdf_url'),
-			
-			'commentsAtom_url' => get_bloginfo('comments_atom_url'),
-			'commentsRss2Url' => get_bloginfo('comments_rss2_url'),
-			
-			'charset' => get_bloginfo('charset'),
-			'htmlType' => get_bloginfo('html_type'),
-			'language' => get_bloginfo('language'),
-			'textDirection' => get_bloginfo('text_direction'),
-			'version' => get_bloginfo('version'),
-			
-			'isUserLoggedIn' => is_user_logged_in() 
-		);
+		return $this->template->render($templateName, $this->addGlobalVariables($templateVars));
 	}
 	
 	/**
@@ -202,7 +194,7 @@ abstract class BaseController {
 	 */
 	public static function getPosts($dateFormat = false, $postType = 'post', $numberPostsToFetch = -1, $customFields = [], $oddOrEven = false, $moreQuerySettings = []) {
 		// Get all fixed posts.
-		$posts = self::_getStickyPosts($dateFormat, $postType, $numberPostsToFetch, $customFields, $oddOrEven, $moreQuerySettings);
+		$posts = self::getStickyPosts($dateFormat, $postType, $numberPostsToFetch, $customFields, $oddOrEven, $moreQuerySettings);
 		$isCat = isset($moreQuerySettings['cat']);
 		$postsStickyIds = [ ];
 		// Check all fixed posts with the category we're searching.
@@ -230,7 +222,7 @@ abstract class BaseController {
 		$querySettings = array_merge($querySettings, $moreQuerySettings);
 		$loop = new \WP_Query($querySettings);
 		
-		return array_merge($posts, self::_loop($loop));
+		return array_merge($posts, self::loopQueryPosts($loop));
 	}
 	
 	/**
@@ -238,7 +230,7 @@ abstract class BaseController {
 	 *
 	 * @return array<Post>
 	 */
-	private static function _getStickyPosts($dateFormat = false, $postType = 'post', $numberPostsToFetch = -1, $customFields = array(), $oddOrEven = false, $moreQuerySettings = array()) {
+	private static function getStickyPosts($dateFormat = false, $postType = 'post', $numberPostsToFetch = -1, $customFields = array(), $oddOrEven = false, $moreQuerySettings = array()) {
 		$sticky_posts = get_option('sticky_posts');
 		if (!$sticky_posts) {
 			return [ ];
@@ -253,7 +245,7 @@ abstract class BaseController {
 		$querySettings = array_merge($querySettings, $moreQuerySettings);
 		$loop = new \WP_Query($querySettings);
 		
-		return self::_loop($loop);
+		return self::loopQueryPosts($loop);
 	}
 	
 	/**
@@ -263,7 +255,7 @@ abstract class BaseController {
 	 * @param boolean $oddOrEven        	
 	 * @return array<Post>
 	 */
-	private static function _loop($loop, $oddOrEven = false) {
+	private static function loopQueryPosts($loop, $oddOrEven = false) {
 		$posts = [ ];
 		for($index = 0; $loop->have_posts(); $index++) {
 			$loop->the_post();
