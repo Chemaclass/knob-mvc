@@ -130,12 +130,19 @@ class User extends ModelBase {
 	}
 	
 	/**
-	 * Return the public URL
+	 * Return the user URL
 	 *
 	 * @return string
 	 */
 	public function getUserUrl() {
 		return get_the_author_meta('user_url', $this->ID);
+	}
+	
+	/**
+	 * Return the author posts url
+	 */
+	public function getPostsUrl() {
+		return get_author_posts_url($this->ID);
 	}
 	
 	/**
