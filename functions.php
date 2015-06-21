@@ -33,6 +33,7 @@ define(ADMIN_EMAIL, get_bloginfo('admin_email'));
 // --------------------------------------------------------------
 Actions::adminPrintScripts();
 Actions::adminPrintStyles();
+Actions::loginView();
 Actions::wpBeforeAdminBarRender();
 
 // --------------------------------------------------------------

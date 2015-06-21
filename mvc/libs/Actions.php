@@ -32,6 +32,22 @@ class Actions {
 	}
 	
 	/**
+	 * Load the styles, headerurl and headertitle in the login section.
+	 */
+	public static function loginView() {
+		add_action('login_enqueue_scripts', function () {
+			wp_enqueue_style('main', PUBLIC_DIR . '/css/main.css');
+		});
+		
+		add_filter('login_headerurl', function () {
+			return home_url();
+		});
+		add_filter('login_headertitle', function () {
+			return BLOG_TITLE;
+		});
+	}
+	
+	/**
 	 * Delete the WP logo from the admin bar
 	 */
 	public static function wpBeforeAdminBarRender() {
