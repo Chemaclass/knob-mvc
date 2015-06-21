@@ -13,7 +13,7 @@
 						<meta itemprop="datePublished" content="{{ getDate | date.xmlschema}}"/>
 						<i class="fa fa-calendar"></i> <span class="post-time">{{getDate | date.string}}</span>
 						{{#trans}}por{{/trans}} 
-						<span class="post-author"><a href="{{getAuthor.getUserUrl}}">{{getAuthor.getDisplayName}}</a></span>
+						<span class="post-author"><a href="{{getAuthor.getPostsUrl}}">{{getAuthor.getDisplayName}}</a></span>
 						{{# getCountCategories }}
 							{{#trans}}in{{/trans}} <span class="categories">{{> post/_categories}}</span>
 						{{/ getCountCategories }} 
