@@ -5,16 +5,21 @@
 	</div>
 </header>
 <div id="page" class="container">
+
 	<div id="super" class="row">
+	
+		 <div id="sidebar" class="col-xs-12 col-md-2">
+	    	{{> sidebar }}
+	    </div>
+	    
 	    <div id="content" class="col-xs-12 col-md-10">
 	    	{{$ content }} 
 	    		You don't have to see this text, cause you've 
 	    		to override this tags "content" in your Son template.
 	    	{{/content }}
 		</div>
-	    <div id="sidebar" class="col-xs-12 col-md-2">
-	    	{{> sidebar }}
-	    </div>
+	   
 	</div>
+	
 </div>
 {{$ js }} {{/ js }}
