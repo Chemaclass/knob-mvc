@@ -1,16 +1,25 @@
 <div class="row">
 	<div class="col-xs-12 post">
-	
-		<span class="col-xs-12">
-			<span class="post-time">{{getDate | date.string}}</span>
-		</span>
 		
-		<span class="col-xs-12">
-			<a href="{{getPermalink}}">{{getTitle}}</a>
-		</span>
+		{{# getThumbnail }}
+		<div class="col-xs-12 col-sm-2">
+			<img src="{{getThumbnail}}">
+		</div>
+		{{/ getThumbnail }}
 		
-		<span class="col-xs-12">
-			{{{ getExcerpt }}}
-		</span>
+		<div class="col-xs-12 {{# getThumbnail }} col-sm-10 {{/ getThumbnail }}">
+			<span class="col-xs-12">
+				<span class="post-time">{{getDate | date.string}}</span>
+			</span>
+			
+			<span class="col-xs-12">
+				<a href="{{getPermalink}}">{{getTitle}}</a>
+			</span>
+			
+			<span class="col-xs-12">
+				{{{ getExcerpt }}}
+			</span>
+		</div>
+		
 	</div>	
 </div>
