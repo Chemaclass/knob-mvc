@@ -10,6 +10,10 @@ use Models\User;
  * @author José María Valera Reales
  */
 class Utils {
+	const TYPE_TAG = 'tag';
+	const TYPE_CATEGORY = 'category';
+	const TYPE_SEARCH = 'search';
+	const TYPE_AUTHOR = 'author';
 	
 	/**
 	 * Devuelve el ID del attachment apartir de su url
@@ -83,6 +87,18 @@ class Utils {
 	 */
 	public static function getUrlAvatarDefault($size = User::AVATAR_SIZE_DEFAULT) {
 		return PUBLIC_DIR . '/img/avatar/avatar_' . $size;
+	}
+	
+	/**
+	 * Return the ID from the tag name
+	 *
+	 * @param string $tagName
+	 *        	Tag name
+	 * @return number ID from the tag name
+	 */
+	public static function getTagIdbyName($tagName) {
+		$tag = get_term_by('name', $tagName, 'post_tag');
+		return ($tag) ? $tag->term_id : 0;
 	}
 	
 	/**
