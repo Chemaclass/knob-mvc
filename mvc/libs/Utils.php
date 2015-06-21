@@ -44,6 +44,15 @@ class Utils {
 	
 	/**
 	 *
+	 * @param integer $size        	
+	 * @return string URL with the img by default for users
+	 */
+	public static function getUrlAvatarDefault($size = User::AVATAR_SIZE_DEFAULT) {
+		return PUBLIC_DIR . '/img/avatar/avatar_' . $size;
+	}
+	
+	/**
+	 *
 	 * @param unknown $str        	
 	 * @param number $cant        	
 	 * @param string $separator        	
