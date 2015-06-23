@@ -127,7 +127,7 @@ class Post extends Image {
 	 */
 	public function getFormComments() {
 		ob_start();
-		$placeholderTextarea = I18n::transu('share_comment', [ ]);
+		$placeholderTextarea = I18n::transu('post.share_comment', [ ]);
 		$params = [ 
 			'comment_notes_after' => '',
 			'author' => '<p class="comment-form-author">' . '<label for="author">' . __('Your Name') . '</label>

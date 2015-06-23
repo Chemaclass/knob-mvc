@@ -3,10 +3,8 @@ return [
 	// A
 	
 	// B
-	'by' => 'by',
 	
 	// C
-	'comments' => 'comments',
 	
 	// D
 	
@@ -19,7 +17,6 @@ return [
 	// H
 	
 	// I
-	'in' => 'in',
 	
 	// J
 	
@@ -49,7 +46,6 @@ return [
 	// V
 	
 	// W
-	'wellcome' => 'wellcome',
 	
 	// X
 	

@@ -3,10 +3,8 @@ return [
 	// A
 	
 	// B
-	'by' => 'by',
 	
 	// C
-	'comments' => 'comments',
 	
 	// D
 	
@@ -19,7 +17,6 @@ return [
 	// H
 	
 	// I
-	'in' => 'in',
 	
 	// J
 	
@@ -40,7 +37,7 @@ return [
 	// R
 	
 	// S
-	'share_comment' => 'share comment',
+	'share_comment' => 'publicar comentario',
 	
 	// T
 	
@@ -49,7 +46,6 @@ return [
 	// V
 	
 	// W
-	'wellcome' => 'wellcome',
 	
 	// X
 	
