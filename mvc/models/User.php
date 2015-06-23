@@ -49,12 +49,30 @@ class User extends Image {
 	}
 	
 	/**
-	 * Devuelve la url del avatar para el perfil
+	 * Return the URL from the user avatar profile(190)
 	 *
-	 * @return string
+	 * @return string url
 	 */
 	public function getAvatarProfile() {
 		return $this->getAvatar(self::AVATAR_SIZE_PROFILE);
+	}
+	
+	/**
+	 * Return the URL from the user avatar size ico(26)
+	 *
+	 * @return string url
+	 */
+	public function getAvatarIco() {
+		return $this->getAvatar(self::AVATAR_SIZE_ICO);
+	}
+	
+	/**
+	 * Return the URL from the user avatar size small(64)
+	 *
+	 * @return string url
+	 */
+	public function getAvatarSmall() {
+		return $this->getAvatar(self::AVATAR_SIZE_SMALL);
 	}
 	
 	/**
