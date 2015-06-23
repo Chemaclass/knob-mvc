@@ -3,7 +3,7 @@
 		
 		{{# getThumbnail }}
 		<div class="col-xs-12 col-sm-2">
-			<img src="{{getThumbnail}}">
+			<a href="{{getPermalink}}"><img src="{{getThumbnail}}"></a>
 		</div>
 		{{/ getThumbnail }}
 		
@@ -13,7 +13,7 @@
 			</span>
 			
 			<span class="col-xs-12">
-				<a href="{{getPermalink}}">{{getTitle}}</a>
+				<a href="{{getPermalink}}"><h3>{{getTitle}}</h3></a>
 			</span>
 			
 			<span class="col-xs-12">
