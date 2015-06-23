@@ -45,6 +45,52 @@ class Comment extends ModelBase {
 		return User::find($this->user_id);
 	}
 	
+
+	/**
+	 * Return the user_id
+	 *
+	 * @return int
+	 */
+	public function getUserId(){
+		return $this->user_id;
+	}
+	
+	/**
+	 * Return the comment_author
+	 *
+	 * @return string
+	 */
+	public function getAuthorName() {
+		return $this->comment_author;
+	}
+	
+	/**
+	 * Return the comment_author
+	 *
+	 * @return string
+	 */
+	public function getAuthorEmail() {
+		return $this->comment_author_email;
+	}
+	
+	/**
+	 * Return the comment_content
+	 *
+	 * @return string
+	 */
+	public function getContent() {
+		return $this->comment_content;
+	}
+	
+	/**
+	 * Return the comment_date_gmt
+	 *
+	 * @return string
+	 */
+	public function getDateGmt() {
+		return $this->comment_date_gmt;
+	}
+	
 	/**
 	 * Save or Update the comment
 	 */
