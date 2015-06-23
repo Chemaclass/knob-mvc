@@ -1,11 +1,12 @@
-<span class="col-xs-8 author" id="user-{{user_id}}">
-	<span class="name"><a href="{{getUser.getPerfilUrl}}">{{comment_author}}</a></span>
-	<span class="date">{{comment_date_gmt}}</span>
-</span>
-{{#current_user.canEditor}}
-	<span class="col-xs-2">
-		<button class="btn btn-danger borrar-comentario">{{#transu}}borrar{{/transu}}</button>
-		<i class="fa fa-spinner fa-spin fa-2x hidden"></i>
-	</span>
-{{/current_user.canEditor}}
-<p class="col-xs-12">{{comment_content}}</p>
+<div class="col-xs-12 comment">
+	<div class="row">
+		<span class="col-xs-1 author" id="user-{{user_id}}">
+			<span class="name"><a href="{{getUser.getPerfilUrl}}"><img src="{{getUser.getAvatarSmall}}"></a></span>
+		</span>
+		<span class="col-xs-11 author" id="user-{{user_id}}">
+			<span class="name"><a href="{{getUser.getPerfilUrl}}">{{comment_author}}</a></span>
+			<span class="date">{{comment_date_gmt}}</span>
+			<p class="content">{{comment_content}}</p>
+		</span>
+	</div>
+</div>

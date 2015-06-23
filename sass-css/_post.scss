@@ -6,9 +6,31 @@
 	margin: 12px 0px;
 	border: 1px solid #ccc;
 
-	.comment-form {}	
-	.comments {}
-	.content {}
-	.info {}
+	#comment-form {
+		border-top: 1px solid #eee;
+		margin: 6px 0px;
+	}	
+	
+	.comments {
+		border-top: 1px solid #eee;
+		margin: 6px 0px;
+		
+		.comment {
+			border: 1px solid #bbb;
+			padding: 12px;
+			margin: 6px;
+		}
+		
+	}
+	
+	.content {
+		
+	}
+	
+	.info {
+		margin: 12px 0px;
+		text-align: right;
+	}
+	
 	.page-header {}
 }
