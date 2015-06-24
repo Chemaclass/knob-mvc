@@ -192,9 +192,9 @@ abstract class BaseController {
 	 * @param array $moreQuerySettings        	
 	 * @return array<Post>
 	 */
-	public static function getPosts($postType = 'post', $numberPostsToFetch = -1, $customFields = [], $oddOrEven = false, $moreQuerySettings = []) {
+	public static function getPosts($numberPostsToFetch = -1, $postType = 'post', $customFields = [], $oddOrEven = false, $moreQuerySettings = []) {
 		// Get all fixed posts.
-		$posts = self::getStickyPosts($postType, $numberPostsToFetch, $customFields, $oddOrEven, $moreQuerySettings);
+		$posts = self::getStickyPosts($numberPostsToFetch, $postType, $customFields, $oddOrEven, $moreQuerySettings);
 		$isCat = isset($moreQuerySettings['cat']);
 		$postsStickyIds = [ ];
 		// Check all fixed posts with the category we're searching.
@@ -230,7 +230,7 @@ abstract class BaseController {
 	 *
 	 * @return array<Post>
 	 */
-	private static function getStickyPosts($postType = 'post', $numberPostsToFetch = -1, $customFields = array(), $oddOrEven = false, $moreQuerySettings = array()) {
+	private static function getStickyPosts($numberPostsToFetch = -1, $postType = 'post', $customFields = array(), $oddOrEven = false, $moreQuerySettings = array()) {
 		$sticky_posts = get_option('sticky_posts');
 		if (!$sticky_posts) {
 			return [ ];
@@ -245,7 +245,7 @@ abstract class BaseController {
 		$querySettings = array_merge($querySettings, $moreQuerySettings);
 		$loop = new \WP_Query($querySettings);
 		
-		return self::loopQueryPosts($loop);
+		return self::loopQueryPosts($loop, $oddOrEven);
 	}
 	
 	/**
