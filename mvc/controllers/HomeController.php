@@ -21,11 +21,9 @@ class HomeController extends BaseController {
 		if (!$user) {
 			return $this->getError();
 		}
-		
 		$args = [ 
-			'user' => $user,
+			'user' => $user 
 		];
-		
 		return $this->renderPage('user', $args);
 	}
 	
@@ -34,13 +32,6 @@ class HomeController extends BaseController {
 	 */
 	public function getHome() {
 		$args = [ 
-			'project' => [ 
-				'name' => 'Knob',
-				'description' => 'Knob is one PHP MVC Framework for Templates for Wordpress' 
-			],
-			'author' => [ 
-				'name' => 'José María Valera Reales' 
-			],
 			'posts' => self::getPosts() 
 		];
 		return $this->renderPage('home', $args);
@@ -67,11 +58,9 @@ class HomeController extends BaseController {
 			the_post();
 			$page = Post::find(get_the_ID());
 		}
-		
 		if (!isset($page)) {
 			return $this->getError();
 		}
-		
 		return $this->renderPage('page', [ 
 			'page' => $page 
 		]);
@@ -85,11 +74,9 @@ class HomeController extends BaseController {
 			the_post();
 			$post = Post::find(get_the_ID());
 		}
-		
 		if (!isset($post)) {
 			return $this->getError();
 		}
-		
 		return $this->renderPage('post', [ 
 			'post' => $post 
 		]);
