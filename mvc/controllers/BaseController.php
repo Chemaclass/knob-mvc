@@ -184,17 +184,16 @@ abstract class BaseController {
 	
 	/**
 	 *
-	 * @param string $dateFormat        	
+	 * @param integer $limit        	
+	 * @param string $offset        	
+	 * @param unknown $moreQuerySettings        	
 	 * @param string $postType        	
-	 * @param integer $numberPostsToFetch        	
-	 * @param array $customFields        	
 	 * @param string $oddOrEven        	
-	 * @param array $moreQuerySettings        	
-	 * @return array<Post>
+	 * @return multitype:
 	 */
-	public static function getPosts($numberPostsToFetch = -1, $postType = 'post', $customFields = [], $oddOrEven = false, $moreQuerySettings = []) {
+	public static function getPosts($limit = -1, $offset = false, $moreQuerySettings = [], $postType = 'post', $oddOrEven = false) {
 		// Get all fixed posts.
-		$posts = self::getStickyPosts($numberPostsToFetch, $postType, $customFields, $oddOrEven, $moreQuerySettings);
+		$posts = self::getStickyPosts($limit, $offset, $moreQuerySettings, $postType, $oddOrEven);
 		$isCat = isset($moreQuerySettings['cat']);
 		$postsStickyIds = [ ];
 		// Check all fixed posts with the category we're searching.
@@ -206,19 +205,26 @@ abstract class BaseController {
 		// Check the total fixed posts with the total post we got it.
 		$countSticky = count($postsStickyIds);
 		// if it's the same doesn't matter. If it's different we have to rest the different.
-		$numberPostsToFetch = (count($posts) == $countSticky) ? $numberPostsToFetch - $countSticky : $numberPostsToFetch;
+		$limit = (count($posts) == $countSticky) ? $limit - $countSticky : $limit;
+		
+		if (!isset($moreQuerySettings['post_type'])) {
+			$moreQuerySettings['post_type'] = Post::TYPE_POST;
+		}
 		
 		$querySettings = [ 
 			'orderby' => [ 
 				'date' => 'DESC' 
 			],
 			'post_type' => [ 
-				$postType 
+				$moreQuerySettings['post_type'] 
 			],
 			'post__not_in' => $postsStickyIds,
-			'posts_per_page' => $numberPostsToFetch,
+			'posts_per_page' => $limit,
 			'post_status' => Post::STATUS_PUBLISH 
 		];
+		if ($offset) {
+			$querySettings['offset'] = $offset;
+		}
 		$querySettings = array_merge($querySettings, $moreQuerySettings);
 		$loop = new \WP_Query($querySettings);
 		
@@ -230,38 +236,41 @@ abstract class BaseController {
 	 *
 	 * @return array<Post>
 	 */
-	private static function getStickyPosts($numberPostsToFetch = -1, $postType = 'post', $customFields = array(), $oddOrEven = false, $moreQuerySettings = array()) {
+	private static function getStickyPosts($limit = -1, $offset = false, $moreQuerySettings = []) {
 		$sticky_posts = get_option('sticky_posts');
 		if (!$sticky_posts) {
 			return [ ];
 		}
+		if (!isset($moreQuerySettings['post_type'])) {
+			$moreQuerySettings['post_type'] = Post::TYPE_POST;
+		}
 		$querySettings = [ 
 			'post_type' => [ 
-				$postType 
+				$moreQuerySettings['post_type'] 
 			],
 			'post__in' => $sticky_posts,
-			'posts_per_page' => $numberPostsToFetch 
+			'posts_per_page' => $limit 
 		];
+		if ($offset) {
+			$querySettings['offset'] = $offset;
+		}
 		$querySettings = array_merge($querySettings, $moreQuerySettings);
 		$loop = new \WP_Query($querySettings);
 		
-		return self::loopQueryPosts($loop, $oddOrEven);
+		return self::loopQueryPosts($loop);
 	}
 	
 	/**
 	 * Loop the query and mount the Post objects
 	 *
 	 * @param WP_Query $loop        	
-	 * @param boolean $oddOrEven        	
 	 * @return array<Post>
 	 */
-	private static function loopQueryPosts($loop, $oddOrEven = false) {
+	private static function loopQueryPosts($loop) {
 		$posts = [ ];
 		for($index = 0; $loop->have_posts(); $index++) {
 			$loop->the_post();
-			if (!($oddOrEven) || ($oddOrEven == 'EVEN' && $index % 2) || ($oddOrEven == 'ODD' && !($index % 2))) {
-				$posts[] = Post::find(get_the_ID());
-			}
+			$posts[] = Post::find(get_the_ID());
 		}
 		return $posts;
 	}
@@ -269,23 +278,23 @@ abstract class BaseController {
 	/**
 	 *
 	 * @param integer $autorId        	
-	 * @param integer $max        	
+	 * @param integer $limit        	
 	 * @param array $moreQuerySettings        	
 	 * @return array
 	 */
-	public static function getPostsByAuthor($autorId, $max = self::NUM_POST_POR_SECCION, $moreQuerySettings = []) {
-		return self::getPostsBy(Utils::TYPE_AUTHOR, $autorId, $max, $moreQuerySettings);
+	public static function getPostsByAuthor($autorId, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
+		return self::getPostsBy(Utils::TYPE_AUTHOR, $autorId, $limit, $moreQuerySettings);
 	}
 	
 	/**
 	 *
 	 * @param unknown $type        	
 	 * @param unknown $by        	
-	 * @param unknown $max        	
+	 * @param unknown $limit        	
 	 * @param unknown $moreQuerySettings        	
 	 * @return \Controllers\array<Post>
 	 */
-	private static function getPostsBy($type, $by, $max = self::NUM_POST_POR_SECCION, $moreQuerySettings = []) {
+	private static function getPostsBy($type, $by, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
 		if ($type == Utils::TYPE_TAG) {
 			$tagId = Utils::getTagIdbyName($by);
 			$moreQuerySettings['tag_id'] = "$tagId";
@@ -298,6 +307,6 @@ abstract class BaseController {
 		} elseif ($type == Utils::TYPE_AUTHOR) {
 			$moreQuerySettings['author'] = $by;
 		}
-		return self::getPosts(Post::TYPE_POST, $max, [ ], false, $moreQuerySettings);
+		return self::getPosts($limit, $offset, $moreQuerySettings);
 	}
 }
