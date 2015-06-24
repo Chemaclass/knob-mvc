@@ -40,6 +40,7 @@ return [
 	// R
 	
 	// S
+	'see_more' => 'see more',
 	'share_comment' => 'share comment',
 	
 	// T
