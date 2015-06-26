@@ -14,9 +14,9 @@
 						<i class="fa fa-calendar"></i> <span class="date">{{getDate | date.string}}</span>
 						{{#trans}}by{{/trans}} 
 						<span class="author"><a href="{{getAuthor.getPostsUrl}}">{{getAuthor.getDisplayName}}</a></span>
-						{{# getCountCategories }}
+						{{# getCategories | count }}
 							{{#trans}}in{{/trans}} <span class="categories">{{> post/_categories }}</span>
-						{{/ getCountCategories }} 
+						{{/ getCategories | count }} 
 					</div>
 				</div>
 
@@ -30,14 +30,14 @@
 					{{{ getFormComments }}}
 				</div>
 
-				{{# getCountComments }}
+				{{# getComments | count }}
 				<div id="comments" class="col-xs-12 comments">
 					<h3 class="col-xs-12 titular">{{#transu}}comments{{/transu}}</h3>
 					{{# getComments }}
 						{{> post/_comment }}
 					{{/ getComments }}
 				</div>
-				{{/ getCountComments }}
+				{{/ getComments | count }}
 			</div>
 
 		</div>

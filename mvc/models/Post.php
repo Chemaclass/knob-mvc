@@ -76,23 +76,6 @@ class Post extends Image {
 	}
 	
 	/**
-	 * Return the total of categories.
-	 *
-	 * @return number
-	 */
-	public function getCountCategories() {
-		return count($this->getCategories());
-	}
-	
-	/**
-	 *
-	 * @return number
-	 */
-	public function getCountComments() {
-		return count($this->getComments());
-	}
-	
-	/**
 	 * Return all comments
 	 *
 	 * @see http://codex.wordpress.org/Function_Reference/get_comments
