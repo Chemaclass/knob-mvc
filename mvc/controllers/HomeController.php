@@ -33,6 +33,12 @@ class HomeController extends BaseController {
 	public function getHome() {
 		$args = [ 
 			'posts' => self::getPosts(),
+			'postWith' => [ 
+				'commentsNumber' => true,
+				'date' => true,
+				'thumbnail' => true,
+				'excerpt' => true 
+			],
 			'sidebar' => [ 
 				'active' => true,
 				'content' => [ 
