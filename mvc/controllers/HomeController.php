@@ -61,22 +61,13 @@ class HomeController extends BaseController {
 	 * page.php
 	 */
 	public function getPage() {
-		if (have_posts()) {
-			the_post();
-			$page = Post::find(get_the_ID());
-		}
-		if (!isset($page)) {
-			return $this->getError();
-		}
-		return $this->renderPage('page', [ 
-			'page' => $page 
-		]);
+		return $this->getSingle('page');
 	}
 	
 	/**
-	 * post.php
+	 * single.php
 	 */
-	public function getPost() {
+	public function getSingle($type = 'post') {
 		if (have_posts()) {
 			the_post();
 			$post = Post::find(get_the_ID());
@@ -84,8 +75,8 @@ class HomeController extends BaseController {
 		if (!isset($post)) {
 			return $this->getError();
 		}
-		return $this->renderPage('post', [ 
-			'post' => $post 
+		return $this->renderPage($type, [ 
+			$type => $post 
 		]);
 	}
 }
