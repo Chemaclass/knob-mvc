@@ -2,7 +2,7 @@
 
 	{{$ content }}
 	
-		{{# post }}
+		{{# page }}
 		<div id="post" class="row post-content">
 			<div class="col-xs-12 category-{{getFirstCategory.slug}}" itemscope itemType="http://schema.org/BlogPosting">
 
@@ -14,34 +14,19 @@
 						<i class="fa fa-calendar"></i> <span class="date">{{getDate | date.string}}</span>
 						{{#trans}}by{{/trans}} 
 						<span class="author"><a href="{{getAuthor.getPostsUrl}}">{{getAuthor.getDisplayName}}</a></span>
-						{{# getCountCategories }}
+						{{# getCategories | count }}
 							{{#trans}}in{{/trans}} <span class="categories">{{> post/_categories }}</span>
-						{{/ getCountCategories }} 
+						{{/ getCategories | count }} 
 					</div>
 				</div>
 
 				<div class="col-xs-12 text-left content" itemprop="articleBody">
 					{{{ getContent }}}
 				</div>
-				
-				<hr>
-
-				<div id="comment-form" class="col-xs-12"> 
-					{{{ getFormComments }}}
-				</div>
-
-				{{# getCountComments }}
-				<div id="comments" class="col-xs-12 comments">
-					<h3 class="col-xs-12 titular">{{#transu}}comments{{/transu}}</h3>
-					{{# getComments }}
-						{{> post/_comment }}
-					{{/ getComments }}
-				</div>
-				{{/ getCountComments }}
-			</div>
 
 		</div>
-		{{/ post }}
+		{{/ page }}
+		
 	{{/ content }}
 
 {{/ base }}
