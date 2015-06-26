@@ -20,9 +20,11 @@
 			<span class="col-xs-12 title">
 				<a class="permalink" href="{{getPermalink}}">{{getTitle}}</a> 
 				{{# postWith.commentsNumber }}
-				<span class="total-comments">
-					Comments: <span class="total">{{getComments | count}}</span>
-				</span>
+					{{# getComments | count}}
+						<span class="total-comments">
+							Comments: <span class="total">{{getComments | count}}</span>
+						</span>
+					{{/ getComments | count}}
 				{{/ postWith.commentsNumber }}
 			</span>
 
