@@ -102,7 +102,7 @@ abstract class BaseController {
 	 * @param array $templateVars
 	 *        	Referencia del array con las variables que pasaran todos los controladores a sus vistas
 	 */
-	private function addGlobalVariables($templateVars = []) {
+	private function addGlobalVariables(&$templateVars = []) {
 		return array_merge($templateVars, [ 
 			'adminEmail' => ADMIN_EMAIL,
 			'atomUrl' => get_bloginfo('atom_url'),
@@ -159,7 +159,7 @@ abstract class BaseController {
 	 *        	Parámetros para la vista
 	 */
 	public function renderPage($templateName, $templateVars = []) {
-		$templateVars = $this->addGlobalVariables($templateVars);
+		$this->addGlobalVariables($templateVars);
 		$this->checkAndAddMagicVariables($templateVars);		
 		// Print the header, the templateName and the footer templates
 		foreach ( [ 
