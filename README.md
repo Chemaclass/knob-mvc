@@ -3,7 +3,7 @@
 ### What's this repository? ###
 
 * Knob-MVC
-* This is a PHP MVC Framework for to create templates for Wordpress on more easy and funny than before.
+* This is a PHP MVC Framework for creating Wordpress templates easier and with more fun than ever before.
 * Version: 0.1
 * Author José María Valera Reales
 
@@ -36,7 +36,7 @@ public function getHome() {
 	$args = [ 
 		'project' => [ 
 			'name' => 'Knob',
-			'description' => 'Knob is one PHP MVC Framework for Templates for Wordpress' 
+			'description' => 'Knob is a PHP MVC Framework for Templates for Wordpress' 
 		],
 		'author' => [ 
 			'name' => 'José María Valera Reales' 
@@ -84,7 +84,7 @@ Place controllers inside mvc/controllers.
 
 ### Calling a controller from a WordPress template page
 
-[Create a template for WordPress](http://codex.wordpress.org/Template_Hierarchy), for example single.php which is used when one Post are loaded.
+[Create a template for WordPress](http://codex.wordpress.org/Template_Hierarchy), for example single.php which is used when a Post is loaded.
 
 ```php
 use Controllers\HomeController;
@@ -118,7 +118,7 @@ Here is an example template showing a post:
 
 ### Loading a template from within a controller
 
-To load the above template, you can use the built in function render from within your controller.
+To load the above template, you can use the built-in render function from within your controller.
 
 ```php	
 $args = [ 
@@ -139,9 +139,9 @@ The 3 first most important templates are:
 * base.mustache
 * footer.mustache 
 
-`head` include `<!DOCTYPE html>` until the first `<body class="...">` tag.
+`head` should include `<!DOCTYPE html>` until the first `<body class="...">` tag.
 
-`footer` include just `</body></html>`
+`footer` should include just `</body></html>`
 
 * We use the `base.mustache` as Decorator pattern:
 
@@ -155,8 +155,8 @@ The 3 first most important templates are:
 <div id="page" class="container">	
     <div id="content" class="row">
     	{{$ content }} 
-    		You don't have to see this text, cause you've to override this 
-    		tags "content" in your Son template.
+    		You don't have to see this text, cause you can override this 
+    		tag's "content" in your child template.
     	{{/content }}
 	</div>
 </div>
@@ -170,7 +170,7 @@ And then we have `home.mustache`:
 		<div id="home">		
 			<div id="wellcome" class="row text-center">
 				<span class="col-xs-12">
-					{{#transu}}wellcome{{/transu}} to {{project.name}} 
+					{{#transu}}welcome{{/transu}} to {{project.name}} 
 					by {{author.name}}
 				</span>
 			</div>			
@@ -200,19 +200,19 @@ And we have the partial `templates/home/_post.mustache`:
 </div>
 ```
 
-# Before to start... you need! #
+# Before the start... you'll need! #
 
-### Isntall ruby y compass ###
+### Install ruby and compass ###
 * sudo apt-get install ruby
 * sudo gem update --system
 * sudo apt-get install ruby1.9.1-dev
 * sudo gem install compass
 * sudo gem install rake
 
-### Then, you will be able to compile the scss on the directory of your project: ###
+### Then, you will be able to compile the scss in the directory of your project: ###
 * /knob-mvc $> rake watch_scss
 
-### You'll need one graphics library for to can use the image editor by php: ###
+### You'll need a PHP graphics library to be able to use the image editor: ###
 * apt-get install php5-imagick php5-gd
 * service apache2 reload 
 
