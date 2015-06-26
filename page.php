@@ -5,4 +5,4 @@ use Controllers\HomeController;
  * Any Page by default
  */
 $controller = new HomeController();
-$controller->getPage();
+$controller->getSingle('page');

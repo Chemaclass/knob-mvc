@@ -58,13 +58,6 @@ class HomeController extends BaseController {
 	}
 	
 	/**
-	 * page.php
-	 */
-	public function getPage() {
-		return $this->getSingle('page');
-	}
-	
-	/**
 	 * single.php
 	 */
 	public function getSingle($type = 'post') {
