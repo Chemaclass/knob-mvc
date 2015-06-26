@@ -1,11 +1,21 @@
-{{# sidebar.content }}
-<div id="sidebar" class="col-xs-12 col-md-2">
+{{# sidebar.active }}
+	{{# sidebar.content }}
+		<div id="sidebar" class="col-xs-12 col-md-2">
 
-	<ul class="list-group row">
-		{{# pages }}
-		<a href="{{getPermalink}}"><li class="list-group-item">{{getTitle}}</li></a>
-		{{/ pages }}
-	</ul>
-	
-</div>
-{{/ sidebar.content }}
+			{{# pages | count }}
+			<div class="pages row">
+
+				<div class="title">{{#transu}}pages{{/transu}} ({{pages | count }})</div>
+
+				<ul class="list-group">
+					{{# pages }}
+						<a href="{{getPermalink}}"><li class="list-group-item">{{getTitle}}</li></a>
+					{{/ pages }}
+				</ul>
+
+			</div>
+			{{/ pages | count }}
+
+		</div>
+	{{/ sidebar.content }}
+{{/ sidebar.active }}
