@@ -32,7 +32,10 @@ class HomeController extends BaseController {
 	 */
 	public function getHome() {
 		$args = [ 
-			'posts' => self::getPosts() 
+			'posts' => self::getPosts(),
+			'sidebar' => [ 
+				'position' => 'right'
+			] 
 		];
 		return $this->renderPage('home', $args);
 	}

@@ -160,6 +160,11 @@ abstract class BaseController {
 	 */
 	public function renderPage($templateName, $templateVars = []) {
 		$templateVars = $this->addGlobalVariables($templateVars);
+		if (isset($templateVars['sidebar']) && isset($templateVars['sidebar']['position'])) {
+			$pos = $templateVars['sidebar']['position'];
+			unset($templateVars['sidebar']['position']);
+			$templateVars['sidebar'][$pos] = true;
+		}
 		// Pintamos el header, la plantilla que nos dieron y seguidamente el footer
 		foreach ( [ 
 			'head',

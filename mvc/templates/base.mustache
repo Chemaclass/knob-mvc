@@ -8,16 +8,20 @@
 
 	<div id="super" class="row">
 	
-		 <div id="sidebar" class="col-xs-12 col-md-2">
+		{{# sidebar.left }}		
 	    	{{> sidebar }}
-	    </div>
+	    {{/ sidebar.left }}
 	    
-	    <div id="content" class="col-xs-12 col-md-10">
+	    <div id="content" class="col-xs-12 {{# sidebar }}col-md-10{{/ sidebar }}">
 	    	{{$ content }} 
 	    		You don't have to see this text, cause you've 
 	    		to override this tags "content" in your Son template.
 	    	{{/content }}
 		</div>
+		
+		{{# sidebar.right }}
+	    	{{> sidebar }}
+	    {{/ sidebar.right }}
 	   
 	</div>
 	
