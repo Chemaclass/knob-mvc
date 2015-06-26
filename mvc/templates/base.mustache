@@ -7,13 +7,13 @@
 <div id="page" class="container">
 
 	<div id="super" class="row">
-	
+		
 		{{# sidebar.left }}		
 	    	{{> sidebar }}
 	    {{/ sidebar.left }}
 	    
-	    <div id="content" class="col-xs-12 {{# sidebar }}col-md-10{{/ sidebar }}">
-	    	{{$ content }} 
+	    <div id="content" class="col-xs-12 {{# sidebar.active }}col-md-10{{/ sidebar.active }}">
+	    	{{$ content }}
 	    		You don't have to see this text, cause you've 
 	    		to override this tags "content" in your Son template.
 	    	{{/content }}

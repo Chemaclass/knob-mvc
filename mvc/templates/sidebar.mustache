@@ -1,1 +1,11 @@
-sidebar.mustache
+{{# sidebar.content }}
+<div id="sidebar" class="col-xs-12 col-md-2">
+
+	<ul class="list-group row">
+		{{# pages }}
+		<a href="{{getPermalink}}"><li class="list-group-item">{{getTitle}}</li></a>
+		{{/ pages }}
+	</ul>
+	
+</div>
+{{/ sidebar.content }}

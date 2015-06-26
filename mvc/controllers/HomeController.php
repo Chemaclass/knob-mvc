@@ -34,7 +34,11 @@ class HomeController extends BaseController {
 		$args = [ 
 			'posts' => self::getPosts(),
 			'sidebar' => [ 
-				'position' => 'right'
+				'active' => true,
+				'content' => [ 
+					'pages' => 'all' 
+				],
+				'position' => 'right' 
 			] 
 		];
 		return $this->renderPage('home', $args);

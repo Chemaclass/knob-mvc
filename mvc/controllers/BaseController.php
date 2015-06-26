@@ -160,18 +160,40 @@ abstract class BaseController {
 	 */
 	public function renderPage($templateName, $templateVars = []) {
 		$templateVars = $this->addGlobalVariables($templateVars);
-		if (isset($templateVars['sidebar']) && isset($templateVars['sidebar']['position'])) {
-			$pos = $templateVars['sidebar']['position'];
-			unset($templateVars['sidebar']['position']);
-			$templateVars['sidebar'][$pos] = true;
-		}
-		// Pintamos el header, la plantilla que nos dieron y seguidamente el footer
+		$this->checkAndAddMagicVariables($templateVars);		
+		// Print the header, the templateName and the footer templates
 		foreach ( [ 
 			'head',
 			$templateName,
 			'footer' 
 		] as $_template ) {
 			echo $this->render($_template, $templateVars);
+		}
+	}
+	
+	/**
+	 *
+	 * @param unknown $templateVars        	
+	 */
+	private function checkAndAddMagicVariables(&$templateVars) {
+		// Sidebar
+		if (isset($templateVars['sidebar'])) {
+			$sidebar = $templateVars['sidebar'];
+			// Sidebar Position
+			if (isset($sidebar['position'])) {
+				$pos = $sidebar['position'];
+				$templateVars['sidebar'][$pos] = true;
+			}
+			// Sidebar content
+			if (isset($sidebar['content'])) {
+				$content = $sidebar['content'];
+				if (isset($content['pages']) && $content['pages'] === 'all') {
+					foreach ( get_all_page_ids() as $id ) {
+						$pages[] = Post::find($id);
+					}
+					$templateVars['sidebar']['content']['pages'] = $pages;
+				}
+			}
 		}
 	}
 	
