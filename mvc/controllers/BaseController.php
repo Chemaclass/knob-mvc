@@ -218,7 +218,7 @@ abstract class BaseController {
 	 * @param string $oddOrEven        	
 	 * @return multitype:
 	 */
-	public static function getPosts($limit = -1, $offset = false, $moreQuerySettings = [], $postType = 'post', $oddOrEven = false) {
+	public static function getPosts($limit = -1, $offset = false, $moreQuerySettings = []) {
 		// Get all fixed posts.
 		$posts = self::getStickyPosts($limit, $offset, $moreQuerySettings, $postType, $oddOrEven);
 		$isCat = isset($moreQuerySettings['cat']);
