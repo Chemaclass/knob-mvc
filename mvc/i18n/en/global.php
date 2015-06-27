@@ -11,6 +11,7 @@ return [
 	// D
 	
 	// E
+	'error' => 'error',
 	
 	// F
 	
@@ -42,6 +43,7 @@ return [
 	// S
 	'see_more' => 'see more',
 	'share_comment' => 'share comment',
+	'show_more' => 'show more',
 	
 	// T
 	
@@ -50,7 +52,8 @@ return [
 	// V
 	
 	// W
-	'wellcome' => 'wellcome',
+	'welcome' => 'welcome',
+	'without_permissions' => 'without permissions',
 	
 	// X
 	
