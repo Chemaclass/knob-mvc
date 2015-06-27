@@ -196,6 +196,14 @@ abstract class BaseController {
 					}
 					$templateVars['sidebar']['content']['pages'] = $pages;
 				}
+				// sidebar.content.categories
+				if (isset($content['categories']) && $content['categories'] === 'all') {
+					$categories = get_terms('category', array (
+						'orderby' => 'count',
+						'hide_empty' => 0
+					));
+					$templateVars['sidebar']['content']['categories'] = $categories;
+				}
 			}
 		}
 		// postWith

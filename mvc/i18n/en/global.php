@@ -6,6 +6,8 @@ return [
 	'by' => 'by',
 
 	// C
+	'category' => 'category',
+	'categories' => 'categories',
 	'comments' => 'comments',
 
 	// D

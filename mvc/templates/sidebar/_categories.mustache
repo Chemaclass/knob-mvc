@@ -1,0 +1,13 @@
+{{# categories | count }}
+<div class="pages row">
+
+	<div class="title">{{#transu}}categories{{/transu}} ({{categories | count }})</div>
+
+	<ul class="list-group">
+		{{# categories }}
+			<a href="/category/{{name}}"><li class="list-group-item">{{name}}</li></a>
+		{{/ categories }}
+	</ul>
+
+</div>
+{{/ categories | count }}

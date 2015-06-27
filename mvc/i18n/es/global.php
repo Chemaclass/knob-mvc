@@ -6,6 +6,8 @@ return [
 	'by' => 'por',
 
 	// C
+	'category' => 'categoría',
+	'categories' => 'categorías',
 	'comments' => 'comentarios',
 
 	// D

@@ -73,7 +73,8 @@ class HomeController extends BaseController {
 		return [
 			'active' => true,
 			'content' => [
-				'pages' => 'all'
+				'pages' => 'all',
+				'categories' => 'all',
 			],
 			'position' => 'right'
 		];

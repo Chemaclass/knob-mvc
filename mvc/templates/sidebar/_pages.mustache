@@ -1,0 +1,13 @@
+{{# pages | count }}
+<div class="pages row">
+
+	<div class="title">{{#transu}}pages{{/transu}} ({{pages | count }})</div>
+
+	<ul class="list-group">
+		{{# pages }}
+			<a href="{{getPermalink}}"><li class="list-group-item">{{getTitle}}</li></a>
+		{{/ pages }}
+	</ul>
+
+</div>
+{{/ pages | count }}

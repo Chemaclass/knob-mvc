@@ -1,21 +1,15 @@
 {{# sidebar.active }}
+
 	{{# sidebar.content }}
+	
 		<div id="sidebar" class="col-xs-12 col-md-2">
 
-			{{# pages | count }}
-			<div class="pages row">
-
-				<div class="title">{{#transu}}pages{{/transu}} ({{pages | count }})</div>
-
-				<ul class="list-group">
-					{{# pages }}
-						<a href="{{getPermalink}}"><li class="list-group-item">{{getTitle}}</li></a>
-					{{/ pages }}
-				</ul>
-
-			</div>
-			{{/ pages | count }}
+			{{> sidebar/_pages }}
+			
+			{{> sidebar/_categories }}
 
 		</div>
+		
 	{{/ sidebar.content }}
+	
 {{/ sidebar.active }}
