@@ -32,22 +32,38 @@ class HomeController extends BaseController {
 	 */
 	public function getHome() {
 		$args = [ 
-			'posts' => self::getPosts(),
-			'postWith' => [ 
-				'commentsNumber' => true,
-				'date' => true,
-				'thumbnail' => true,
-				'excerpt' => true 
-			],
-			'sidebar' => [ 
-				'active' => true,
-				'content' => [ 
-					'pages' => 'all' 
-				],
-				'position' => 'right' 
-			] 
+			'posts' => self::getPosts(5),
+			'postWith' => static::getPostWithDefault(),
+			'sidebar' => static::getSidebarPropertiesDefault() 
 		];
 		return $this->renderPage('home', $args);
+	}
+	
+	/**
+	 *
+	 * @return array
+	 */
+	public static function getPostWithDefault() {
+		return [ 
+			'commentsNumber' => true,
+			'date' => true,
+			'thumbnail' => true,
+			'excerpt' => true 
+		];
+	}
+	
+	/**
+	 *
+	 * @return array
+	 */
+	public static function getSidebarPropertiesDefault() {
+		return [ 
+			'active' => true,
+			'content' => [ 
+				'pages' => 'all' 
+			],
+			'position' => 'right' 
+		];
 	}
 	
 	/**

@@ -160,7 +160,7 @@ abstract class BaseController {
 	 */
 	public function renderPage($templateName, $templateVars = []) {
 		$this->addGlobalVariables($templateVars);
-		$this->checkAndAddMagicVariables($templateVars);		
+		$this->checkAndAddMagicVariables($templateVars);
 		// Print the header, the templateName and the footer templates
 		foreach ( [ 
 			'head',
@@ -254,7 +254,6 @@ abstract class BaseController {
 		}
 		$querySettings = array_merge($querySettings, $moreQuerySettings);
 		$loop = new \WP_Query($querySettings);
-		
 		return array_merge($posts, self::loopQueryPosts($loop));
 	}
 	
