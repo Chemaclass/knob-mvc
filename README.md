@@ -2,9 +2,9 @@
 
 ### What's this repository? ###
 
-* Knob-MVC
+* Knob MVC
 * This is a PHP MVC Framework for creating Wordpress templates easier and with more fun than ever before.
-* Version: 0.1
+* Version: 0.2
 * Author José María Valera Reales
 
 
