@@ -30,9 +30,146 @@ class User extends Image {
 	const KEY_LANGUAGE = 'language';
 	
 	/*
+	 * Roles posibles
+	 */
+	const ROL_ADMIN = 'administrator';
+	const ROL_EDITOR = 'editor';
+	const ROL_AUTHOR = 'author';
+	const ROL_CONTRIBUTOR = 'contributor';
+	const ROL_SUBSCRIBER = 'subscriber';
+	
+	/*
 	 * Total constants
 	 */
 	const TOTAL_POSTS_TO_SHOW = 10;
+	
+	/**
+	 * Return true if the user is allowed as admin
+	 *
+	 * @param array $args        	
+	 * @return boolean
+	 */
+	public function canAdmin($args = []) {
+		$args[] = self::ROL_ADMIN;
+		return array_intersect($args, self::getRoles());
+	}
+	
+	/**
+	 * Return true if the user is allowed as editor
+	 *
+	 * @param array $args        	
+	 * @return boolean
+	 */
+	public function canEditor($args = []) {
+		$args[] = self::ROL_EDITOR;
+		return $this->canAdmin($args);
+	}
+	
+	/**
+	 * Return true if the user is allowed as author
+	 *
+	 * @param array $args        	
+	 * @return boolean
+	 */
+	public function canAutor($args = []) {
+		$args[] = self::ROL_AUTHOR;
+		return $this->canEditor($args);
+	}
+	
+	/**
+	 * Return true if the user is allowed as author
+	 *
+	 * @param array $args        	
+	 * @return boolean
+	 */
+	public function canColaborador($args = []) {
+		$args[] = self::ROL_CONTRIBUTOR;
+		return $this->canAutor($args);
+	}
+	
+	/**
+	 * Return true if the user is allowed as subscriber
+	 *
+	 * @param array $args        	
+	 * @return boolean
+	 */
+	public function canSuscriptor($args = []) {
+		$args[] = self::ROL_SUBSCRIBER;
+		return $this->canColaborador($args);
+	}
+	
+	/**
+	 * Return true if is the currentUser
+	 *
+	 * @return boolean
+	 */
+	public function isCurrentUser() {
+		return ($this->ID == wp_get_current_user()->ID);
+	}
+	
+	/**
+	 * Return true if is the currentUser or admin
+	 *
+	 * @return boolean
+	 */
+	public function isCurrentUserOrAdmin() {
+		return $this->isCurrentUser() || (wp_get_current_user()->roles[0] == self::ROL_ADMIN);
+	}
+	
+	/**
+	 * Get first capability
+	 *
+	 * @return string
+	 */
+	public function getFirstCapability() {
+		$Roles = self::getRoles();
+		return $Roles[0];
+	}
+	
+	/**
+	 * Devuelve verdadero en caso de tener el rol de Admin
+	 *
+	 * @return boolean
+	 */
+	public function isAdmin() {
+		return in_array(self::ROL_ADMIN, self::getRoles());
+	}
+	
+	/**
+	 * Devuelve verdadero en caso de tener el rol de Editor
+	 *
+	 * @return boolean
+	 */
+	public function isEditor() {
+		return in_array(self::ROL_EDITOR, self::getRoles());
+	}
+	
+	/**
+	 * Devuelve verdadero en caso de tener el rol de Autor
+	 *
+	 * @return boolean
+	 */
+	public function isAutor() {
+		return in_array(self::ROL_AUTHOR, self::getRoles());
+	}
+	
+	/**
+	 * Devuelve verdadero en caso de tener el rol de colaborador
+	 *
+	 * @return boolean
+	 */
+	public function isColaborador() {
+		return in_array(self::ROL_CONTRIBUTOR, self::getRoles());
+	}
+	
+	/**
+	 * Devuelve verdadero en caso de tener el rol de suscriptor
+	 *
+	 * @return boolean
+	 */
+	public function isSuscriptor() {
+		return in_array(self::ROL_SUBSCRIBER, self::getRoles());
+	}
 	
 	/**
 	 * Return the URL with the avatar from the User
@@ -182,14 +319,28 @@ class User extends Image {
 	}
 	
 	/**
-	 * Return all roles/capabilities
+	 * Return all roles/Roles
 	 *
 	 * @return array<string>
 	 */
-	public function getCapabilities() {
+	public function getRoles() {
 		$qRolesArr = get_user_meta($this->ID, 'wp_capabilities', true);
 		return is_array($qRolesArr) ? array_keys($qRolesArr) : array (
 			'non-user' 
 		);
+	}
+	
+	/**
+	 * Establecer un rol al User
+	 *
+	 * @param string $rol        	
+	 */
+	public function setRol($rol) {
+		if (in_array($rol, self::getAllowedRoles())) {
+			$u = new \WP_User($this->ID);
+			$u->set_role($rol);
+			return true;
+		}
+		return false;
 	}
 }
