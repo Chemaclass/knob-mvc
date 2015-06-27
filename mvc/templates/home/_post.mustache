@@ -18,7 +18,17 @@
 			{{/ postWith.date }}
 
 			<span class="col-xs-12 title">
-				<a class="permalink" href="{{getPermalink}}">{{getTitle}}</a> 
+				<a class="permalink" href="{{getPermalink}}">{{getTitle}}</a>
+				
+				{{# postWith.author }}
+					{{# postsUrl }}
+						<a class="author-url" href="{{getAuthor.getPostsUrl}}">{{getAuthor.getDisplayName}}</a>
+					{{/ postsUrl }}
+					{{# userUrl }}
+						<a class="author-url" href="{{getAuthor.getUserUrl}}">{{getAuthor.getDisplayName}}</a>
+					{{/ userUrl }}
+				{{/ postWith.author }}
+				
 				{{# postWith.commentsNumber }}
 					{{# getComments | count}}
 						<span class="total-comments">

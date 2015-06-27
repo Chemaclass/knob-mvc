@@ -176,22 +176,36 @@ abstract class BaseController {
 	 * @param unknown $templateVars        	
 	 */
 	private function checkAndAddMagicVariables(&$templateVars) {
-		// Sidebar
+		// sidebar
 		if (isset($templateVars['sidebar'])) {
 			$sidebar = $templateVars['sidebar'];
-			// Sidebar Position
+			// sidebar.position
 			if (isset($sidebar['position'])) {
 				$pos = $sidebar['position'];
 				$templateVars['sidebar'][$pos] = true;
 			}
-			// Sidebar content
+			// sidebar.content
 			if (isset($sidebar['content'])) {
 				$content = $sidebar['content'];
+				// sidebar.content.pages
 				if (isset($content['pages']) && $content['pages'] === 'all') {
 					foreach ( get_all_page_ids() as $id ) {
 						$pages[] = Post::find($id);
 					}
 					$templateVars['sidebar']['content']['pages'] = $pages;
+				}
+			}
+		}
+		// postWith
+		if (isset($templateVars['postWith'])) {
+			$postsWith = $templateVars['postWith'];
+			// postsWith.author
+			if (isset($postsWith['author'])) {
+				$author = $postsWith['author'];
+				// postsWith.author.url
+				if (isset($author['url'])) {
+					$url = $author['url'];
+					$templateVars['postWith']['author'][$url] = true;
 				}
 			}
 		}

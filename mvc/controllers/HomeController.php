@@ -33,7 +33,7 @@ class HomeController extends BaseController {
 	public function getHome() {
 		$args = [ 
 			'posts' => self::getPosts(5),
-			'postWith' => static::getPostWithDefault(),
+			'postWith' => static::getPostInHomeWithDefault(),
 			'sidebar' => static::getSidebarPropertiesDefault() 
 		];
 		return $this->renderPage('home', $args);
@@ -43,8 +43,12 @@ class HomeController extends BaseController {
 	 *
 	 * @return array
 	 */
-	public static function getPostWithDefault() {
+	public static function getPostInHomeWithDefault() {
 		return [ 
+			'author' => [
+				// url => postsUrl || userUrl
+				'url' => 'postsUrl' 
+			],
 			'commentsNumber' => true,
 			'date' => true,
 			'thumbnail' => true,
