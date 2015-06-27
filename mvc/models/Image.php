@@ -8,7 +8,7 @@ namespace Models;
  * @author José María Valera Reales
  */
 abstract class Image extends ModelBase {
-	
+
 	/**
 	 * Set image
 	 *
@@ -31,7 +31,7 @@ abstract class Image extends ModelBase {
 			'mimes' => array (
 				'jpg|jpeg|jpe' => 'image/jpeg',
 				'gif' => 'image/gif',
-				'png' => 'image/png' 
+				'png' => 'image/png'
 			),
 			'test_form' => false,
 			'unique_filename_callback' => function ($dir, $name, $ext) use($keyImg) {
@@ -42,13 +42,13 @@ abstract class Image extends ModelBase {
 					$number++;
 				}
 				return $name . $ext;
-			} 
+			}
 		));
 		// Remove the last image
 		$this->removeImage($keyImg);
-		
+
 		$metaValue = array ();
-		
+
 		$url_or_media_id = $avatar['url'];
 		// Set the new image
 		if (is_int($url_or_media_id)) {
@@ -58,7 +58,7 @@ abstract class Image extends ModelBase {
 		$metaValue['full'] = $url_or_media_id;
 		return update_user_meta($this->ID, $keyImg, $metaValue);
 	}
-	
+
 	/**
 	 * Get the image
 	 *
@@ -105,11 +105,11 @@ abstract class Image extends ModelBase {
 		}
 		return esc_url($local_avatars[$sizeW]);
 	}
-	
+
 	/**
 	 * Remove the image
 	 *
-	 * @param unknown $keyImg        	
+	 * @param unknown $keyImg
 	 */
 	private function removeImage($keyImg) {
 		// Save the path in one temporal var
@@ -121,19 +121,19 @@ abstract class Image extends ModelBase {
 				unlink($imgPath);
 			}
 		}
-		
+
 		if (file_exists($getImagePath['base'])) {
 			unlink($getImagePath['base']);
 		}
-		
+
 		if (file_exists($getImagePath['current'])) {
 			unlink($getImagePath['current']);
 		}
-		
+
 		// remove his meta info
 		return delete_user_meta($this->ID, $keyImg);
 	}
-	
+
 	/**
 	 * Return the base name of the img and the name of the current img.
 	 *
@@ -159,11 +159,11 @@ abstract class Image extends ModelBase {
 		// and the virgen path
 		$_base_virgen = substr($base, 0, strpos($base, "-"));
 		$virgen = str_replace($current, $_base_virgen, $path);
-		return [ 
+		return [
 			'current' => $path,
 			'base' => $pathBase,
 			'virgen' => $virgen,
-			'ext' => $ext[0] 
+			'ext' => $ext[0]
 		];
 	}
 }

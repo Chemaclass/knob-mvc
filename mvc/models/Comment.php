@@ -12,21 +12,21 @@ use Models\User;
 class Comment extends ModelBase {
 	static $table = "comments";
 	static $PK = 'comment_ID';
-	
+
 	/*
 	 * Some constants
 	 */
 	const MAX_LENGTH = 1000;
 	const PENDING = 0;
 	const APROVE = 1;
-	
+
 	/**
 	 * Delete comment
 	 */
 	public function delete($forceDelete = false) {
 		wp_delete_comment($this->ID, $forceDelete);
 	}
-	
+
 	/**
 	 * Get the post relaction with the commnet
 	 *
@@ -35,7 +35,7 @@ class Comment extends ModelBase {
 	public function getPost() {
 		return Post::find($this->comment_post_ID);
 	}
-	
+
 	/**
 	 * Get the author of the comment
 	 *
@@ -44,17 +44,16 @@ class Comment extends ModelBase {
 	public function getUser() {
 		return User::find($this->user_id);
 	}
-	
 
 	/**
 	 * Return the user_id
 	 *
 	 * @return int
 	 */
-	public function getUserId(){
+	public function getUserId() {
 		return $this->user_id;
 	}
-	
+
 	/**
 	 * Return the comment_author
 	 *
@@ -63,7 +62,7 @@ class Comment extends ModelBase {
 	public function getAuthorName() {
 		return $this->comment_author;
 	}
-	
+
 	/**
 	 * Return the comment_author
 	 *
@@ -72,7 +71,7 @@ class Comment extends ModelBase {
 	public function getAuthorEmail() {
 		return $this->comment_author_email;
 	}
-	
+
 	/**
 	 * Return the comment_content
 	 *
@@ -81,7 +80,7 @@ class Comment extends ModelBase {
 	public function getContent() {
 		return $this->comment_content;
 	}
-	
+
 	/**
 	 * Return the comment_date_gmt
 	 *
@@ -90,7 +89,7 @@ class Comment extends ModelBase {
 	public function getDateGmt() {
 		return $this->comment_date_gmt;
 	}
-	
+
 	/**
 	 * Save or Update the comment
 	 */

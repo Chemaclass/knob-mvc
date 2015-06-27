@@ -12,7 +12,7 @@ use Libs\Utils;
  */
 class Post extends Image {
 	public static $table = "posts";
-	
+
 	/*
 	 * Images sizes
 	 */
@@ -20,25 +20,25 @@ class Post extends Image {
 	const IMG_SIZE_MEDIUM = 'medium';
 	const IMG_SIZE_LARGE = 'large';
 	const IMG_SIZE_FULL = 'full';
-	
+
 	/*
 	 * STATUS
 	 */
 	const STATUS_PUBLISH = "publish";
 	const STATUS_PENDING = "pending";
 	const STATUS_APPROVE = 'approve';
-	
+
 	/*
 	 * Counts
 	 */
 	const COUNT_SHORT_TITLE = 40;
 	const COUNT_EXCERPT = 20;
-	
+
 	/*
 	 * Types
 	 */
 	const TYPE_POST = 'post';
-	
+
 	/**
 	 * Return the author
 	 *
@@ -47,7 +47,7 @@ class Post extends Image {
 	public function getAuthor() {
 		return User::find($this->post_author);
 	}
-	
+
 	/**
 	 *
 	 * @return array
@@ -63,7 +63,7 @@ class Post extends Image {
 		}
 		return $array;
 	}
-	
+
 	/**
 	 * Return the content
 	 *
@@ -74,17 +74,17 @@ class Post extends Image {
 		$content = str_replace(']]>', ']]&gt;', $content);
 		return $content;
 	}
-	
+
 	/**
 	 * Return all comments
 	 *
 	 * @see http://codex.wordpress.org/Function_Reference/get_comments
 	 */
 	public function getComments() {
-		$args_comments = [ 
+		$args_comments = [
 			'post_id' => $this->ID,
 			'orderby' => 'comment_date_gmt',
-			'status' => static::STATUS_APPROVE 
+			'status' => static::STATUS_APPROVE
 		];
 		$comments = [ ];
 		foreach ( get_comments($args_comments, $this->ID) as $c ) {
@@ -92,7 +92,7 @@ class Post extends Image {
 		}
 		return $comments;
 	}
-	
+
 	/**
 	 * Return the publish date
 	 *
@@ -102,7 +102,7 @@ class Post extends Image {
 		global $wpdb;
 		return $wpdb->get_var($wpdb->prepare('SELECT post_date FROM wp_posts WHERE ID = %d', $this->ID));
 	}
-	
+
 	/**
 	 * Return the form for comments
 	 *
@@ -111,7 +111,7 @@ class Post extends Image {
 	public function getFormComments() {
 		ob_start();
 		$placeholderTextarea = I18n::transu('post.share_comment', [ ]);
-		$params = [ 
+		$params = [
 			'comment_notes_after' => '',
 			'author' => '<p class="comment-form-author">' . '<label for="author">' . __('Your Name') . '</label>
 					<input id="author" name="author" type="text"  value="Your First and Last Name" size="30" /></p>',
@@ -120,14 +120,14 @@ class Post extends Image {
 		            <label for="comment">' . _x('Comment', 'noun') . '</label>
 		            <textarea class="form-control" id="comment" name="comment" cols="45" rows="2"
 							maxlength="1000" aria-required="true" placeholder="' . $placeholderTextarea . '"></textarea>
-		        </div>' 
+		        </div>'
 		];
 		comment_form($params, $this->ID);
 		$comment_form = ob_get_clean();
 		$comment_form = str_replace('id="submit"', 'class="btn btn-default"', $comment_form);
 		return $comment_form;
 	}
-	
+
 	/**
 	 * Return the modified date
 	 *
@@ -137,7 +137,7 @@ class Post extends Image {
 		global $wpdb;
 		return $wpdb->get_var($wpdb->prepare('SELECT post_modified FROM wp_posts WHERE ID = %d', $this->ID));
 	}
-	
+
 	/**
 	 * Return
 	 *
@@ -150,7 +150,7 @@ class Post extends Image {
 		$the_excerpt = Utils::getWordsByStr($the_excerpt, self::COUNT_EXCERPT);
 		return $the_excerpt;
 	}
-	
+
 	/**
 	 * Return the first Category from this Post
 	 * http://codex.wordpress.org/Function_Reference/get_the_category
@@ -161,7 +161,7 @@ class Post extends Image {
 		$categories = get_the_category($this->ID);
 		return $categories[0];
 	}
-	
+
 	/**
 	 * Return the public link.
 	 *
@@ -170,7 +170,7 @@ class Post extends Image {
 	public function getPermalink() {
 		return get_permalink($this->ID);
 	}
-	
+
 	/**
 	 * Return the edit url.
 	 *
@@ -179,7 +179,7 @@ class Post extends Image {
 	public function getEditLink() {
 		return get_edit_post_link($this->ID);
 	}
-	
+
 	/**
 	 *
 	 * @return Post
@@ -187,7 +187,7 @@ class Post extends Image {
 	public function getPreviousPost() {
 		return Post::find(get_previous_post()->ID);
 	}
-	
+
 	/**
 	 *
 	 * @return Post
@@ -195,12 +195,12 @@ class Post extends Image {
 	public function getNextPost() {
 		return Post::find(get_next_post()->ID);
 	}
-	
+
 	/**
 	 * Return the title Post
 	 *
-	 * @param string $short        	
-	 * @param integer $countShort        	
+	 * @param string $short
+	 * @param integer $countShort
 	 * @return string The Title
 	 */
 	public function getTitle($short = false, $countShort = self::COUNT_SHORT_TITLE) {
@@ -208,7 +208,7 @@ class Post extends Image {
 		if (!$short || (strlen($title) > $countShort)) {
 			return $title;
 		}
-		
+
 		$substr = substr($title, 0, $countShort);
 		// strrchr => return all after the last ocurrence from one str
 		$lastSpace = strpos($substr, strrchr($substr, ' '));
@@ -217,7 +217,7 @@ class Post extends Image {
 		}
 		return $substr;
 	}
-	
+
 	/**
 	 * Return the thumbnail medium
 	 *
@@ -226,7 +226,7 @@ class Post extends Image {
 	public function getThumbnailMedium() {
 		return $this->getThumbnail(self::IMG_SIZE_MEDIUM);
 	}
-	
+
 	/**
 	 * Devuelve el src del thumbnail del post
 	 *
@@ -244,7 +244,7 @@ class Post extends Image {
 			}
 			return $imageObject[0];
 		};
-		
+
 		if (($imageObject = $getSrc($this->ID))) {
 			return $imageObject;
 		} else {

@@ -14,12 +14,12 @@ use Libs\Utils;
  * @author José María Valera Reales <@Chemaclass>
  */
 class Tag {
-	
+
 	/*
 	 * Some constants
 	 */
 	const TRANSIENT_ALL_TAGS = 'ALL_TAGS';
-	
+
 	/**
 	 * Get all tags
 	 *

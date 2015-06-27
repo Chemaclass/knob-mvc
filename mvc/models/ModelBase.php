@@ -8,30 +8,30 @@ namespace Models;
  * @author José María Valera Reales
  */
 abstract class ModelBase {
-	
+
 	// columns from the table of our Model
 	protected static $columns = array ();
 	// Primary Key
 	protected static $PK = 'ID';
-	
+
 	/*
 	 * Members
 	 */
 	public $ID;
 	public $created_at;
 	public $updated_at;
-	
+
 	/**
 	 * Constructor
 	 *
-	 * @param integer $ID        	
+	 * @param integer $ID
 	 */
 	public function __construct($ID = 0) {
 		$this->ID = $ID;
 		global $wpdb;
 		static::$columns = $wpdb->get_col_info();
 	}
-	
+
 	/**
 	 * Return all objects
 	 *
@@ -52,11 +52,11 @@ abstract class ModelBase {
 		}
 		return $result;
 	}
-	
+
 	/**
 	 * Search and return the Object across his ID
 	 *
-	 * @param integer $ID        	
+	 * @param integer $ID
 	 * @return object
 	 */
 	public static function find($ID = false) {
@@ -80,12 +80,12 @@ abstract class ModelBase {
 		}
 		return $a;
 	}
-	
+
 	/**
 	 * Search all values across one column
 	 *
-	 * @param string $column        	
-	 * @param string $value        	
+	 * @param string $column
+	 * @param string $value
 	 * @param boolean $single
 	 *        	Por defecto false. True si es sólo 1.
 	 * @return array<object>
@@ -96,7 +96,7 @@ abstract class ModelBase {
 		$model = get_called_class();
 		$whatry = 'SELECT * FROM wp_' . static::$table . ' WHERE ' . $column . '= %s';
 		$resultsQuery = $wpdb->get_results($wpdb->prepare($whatry, $value));
-		
+
 		/*
 		 * Mount the object
 		 */
@@ -107,20 +107,20 @@ abstract class ModelBase {
 			}
 			return $object;
 		};
-		
+
 		if ($single) {
 			foreach ( $resultsQuery as $_object ) {
 				return $mountTheObject($_object);
 			}
 		}
-		
+
 		foreach ( $resultsQuery as $_object ) {
 			$objects[] = $mountTheObject($_object);
 		}
-		
+
 		return $objects;
 	}
-	
+
 	/**
 	 * Todo one DELETE
 	 *
@@ -138,13 +138,13 @@ abstract class ModelBase {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Get the first element from the where
 	 *
-	 * @param unknown $column        	
-	 * @param unknown $what        	
-	 * @param unknown $value        	
+	 * @param unknown $column
+	 * @param unknown $what
+	 * @param unknown $value
 	 */
 	public static function first($column, $what, $value) {
 		$w = self::where($column, $what, $value);
@@ -153,13 +153,13 @@ abstract class ModelBase {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Devuelve el resultado del filtrado where a todos los elementos de su tabla
 	 *
-	 * @param string $column        	
-	 * @param string $what        	
-	 * @param string $value        	
+	 * @param string $column
+	 * @param string $what
+	 * @param string $value
 	 */
 	public static function where($column, $what, $value) {
 		global $wpdb;
@@ -174,12 +174,12 @@ abstract class ModelBase {
 		}
 		return $result;
 	}
-	
+
 	/**
 	 *
-	 * @param unknown $column        	
-	 * @param unknown $what        	
-	 * @param unknown $value        	
+	 * @param unknown $column
+	 * @param unknown $what
+	 * @param unknown $value
 	 * @return boolean
 	 */
 	private static function _getComparacion($column, $what, $value) {
@@ -212,7 +212,7 @@ abstract class ModelBase {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * __toArray
 	 *
@@ -221,7 +221,7 @@ abstract class ModelBase {
 	public function __toArray() {
 		return call_user_func('get_object_vars', $this);
 	}
-	
+
 	/**
 	 * Create one key for the nonce request from ajax
 	 *
