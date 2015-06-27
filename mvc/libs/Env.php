@@ -8,7 +8,7 @@ namespace Libs;
  * @author José María Valera Reales
  */
 class Env {
-	
+
 	/**
 	 * Return true if we're in the production enviroment
 	 *
@@ -18,7 +18,7 @@ class Env {
 		$SERVER_NAME = $_SERVER['SERVER_NAME'];
 		return ($SERVER_NAME == URL_PRO);
 	}
-	
+
 	/**
 	 * Return true if we're in the development enviroment
 	 *
@@ -28,7 +28,7 @@ class Env {
 		$SERVER_NAME = $_SERVER['SERVER_NAME'];
 		return ($SERVER_NAME == URL_DEV);
 	}
-	
+
 	/**
 	 * Return true if we're in the local enviroment
 	 *

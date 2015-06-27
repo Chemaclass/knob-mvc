@@ -14,7 +14,7 @@ class Utils {
 	const TYPE_CATEGORY = 'category';
 	const TYPE_SEARCH = 'search';
 	const TYPE_AUTHOR = 'author';
-	
+
 	/**
 	 * Devuelve el ID del attachment apartir de su url
 	 *
@@ -39,16 +39,16 @@ class Utils {
 			// Remove the upload path base directory from the attachment URL
 			$attachmentUrl = str_replace($upload_dir_paths['baseurl'] . '/', '', $attachmentUrl);
 			// Finally, run a custom database query to get the attachment ID from the modified attachment URL
-			$attachmentId = $wpdb->get_var($wpdb->prepare("SELECT wposts.ID 
-					FROM {$wpdb->posts} wposts, {$wpdb->postmeta} wpostmeta 
-					WHERE wposts.ID = wpostmeta.post_id 
-					AND wpostmeta.meta_key = '_wp_attached_file' 
-					AND wpostmeta.meta_value = '%s' 
+			$attachmentId = $wpdb->get_var($wpdb->prepare("SELECT wposts.ID
+					FROM {$wpdb->posts} wposts, {$wpdb->postmeta} wpostmeta
+					WHERE wposts.ID = wpostmeta.post_id
+					AND wpostmeta.meta_key = '_wp_attached_file'
+					AND wpostmeta.meta_value = '%s'
 					AND wposts.post_type = 'attachment'", $attachmentUrl));
 		}
 		return $attachmentId;
 	}
-	
+
 	/**
 	 * Return the current lang of the browerser
 	 *
@@ -57,7 +57,7 @@ class Utils {
 	public static function getLangBrowser() {
 		return substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 	}
-	
+
 	/**
 	 * Return the instance of the current user, or null if they're not logged
 	 *
@@ -70,7 +70,7 @@ class Utils {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Return $_SERVER[ REQUEST_URI ]
 	 *
@@ -79,16 +79,16 @@ class Utils {
 	public static function getRequestUri() {
 		return $_SERVER[REQUEST_URI];
 	}
-	
+
 	/**
 	 *
-	 * @param integer $size        	
+	 * @param integer $size
 	 * @return string URL with the img by default for users
 	 */
 	public static function getUrlAvatarDefault($size = User::AVATAR_SIZE_DEFAULT) {
 		return PUBLIC_DIR . '/img/avatar/avatar_' . $size;
 	}
-	
+
 	/**
 	 * Return the ID from the tag name
 	 *
@@ -100,12 +100,12 @@ class Utils {
 		$tag = get_term_by('name', $tagName, 'post_tag');
 		return ($tag) ? $tag->term_id : 0;
 	}
-	
+
 	/**
 	 *
-	 * @param unknown $str        	
-	 * @param number $cant        	
-	 * @param string $separator        	
+	 * @param unknown $str
+	 * @param number $cant
+	 * @param string $separator
 	 * @return string
 	 */
 	public static function getWordsByStr($str, $cant = 8, $separator = ' ') {

@@ -8,10 +8,11 @@ namespace Libs;
  * @author José María Valera Reales
  */
 class Html {
+
 	/**
 	 * Remove "more" tag
 	 *
-	 * @param string $str        	
+	 * @param string $str
 	 * @return string
 	 */
 	public static function removeReadMoreTag($str) {

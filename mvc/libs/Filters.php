@@ -8,7 +8,7 @@ namespace Libs;
  * @author José María Valera Reales
  */
 class Filters {
-	
+
 	/**
 	 * Just one function as example
 	 */

@@ -8,7 +8,7 @@ namespace Libs;
  * @author José María Valera Reales
  */
 class Actions {
-	
+
 	/**
 	 * Put scripts into the admin view
 	 */
@@ -19,7 +19,7 @@ class Actions {
 			wp_enqueue_script('main', PUBLIC_DIR . '/js/main.js');
 		});
 	}
-	
+
 	/**
 	 * Put styles into the admin view
 	 */
@@ -30,7 +30,7 @@ class Actions {
 			wp_enqueue_style('main', PUBLIC_DIR . '/css/main.css');
 		});
 	}
-	
+
 	/**
 	 * Load the styles, headerurl and headertitle in the login section.
 	 */
@@ -38,7 +38,7 @@ class Actions {
 		add_action('login_enqueue_scripts', function () {
 			wp_enqueue_style('main', PUBLIC_DIR . '/css/main.css');
 		});
-		
+
 		add_filter('login_headerurl', function () {
 			return home_url();
 		});
@@ -46,7 +46,7 @@ class Actions {
 			return BLOG_TITLE;
 		});
 	}
-	
+
 	/**
 	 * Delete the WP logo from the admin bar
 	 */

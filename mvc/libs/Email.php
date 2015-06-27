@@ -9,11 +9,11 @@ use PHPMailer;
  * @author José María Valera Reales
  */
 class Email {
-	
+
 	/**
 	 * Return one new PHPMailer
 	 *
-	 * @param string|array $email        	
+	 * @param string|array $email
 	 * @return PHPMailer
 	 */
 	private function getNewMailer($email = '') {
@@ -26,10 +26,10 @@ class Email {
 		$mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
 		$mail->Port = 587; // TCP port to connect to
 		$mail->CharSet = 'utf-8';
-		
+
 		$mail->From = ADMIN_EMAIL;
 		$mail->FromName = BLOG_TITLE;
-		
+
 		if (is_string($email)) {
 			$mail->addAddress($email);
 		} else if (is_array($email)) {
@@ -39,7 +39,7 @@ class Email {
 		}
 		return $mail;
 	}
-	
+
 	/**
 	 * Send new generic email
 	 *
@@ -49,7 +49,7 @@ class Email {
 	 *        	Subject
 	 * @param string $bodyHtml
 	 *        	Body
-	 * @param string $bodyHtmlAlt        	
+	 * @param string $bodyHtmlAlt
 	 * @return boolean
 	 */
 	public static function sendGenericEmail($email, $subject, $bodyHtml, $bodyHtmlAlt = '') {

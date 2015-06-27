@@ -8,12 +8,12 @@ namespace Libs;
  * @author José María Valera Reales
  */
 class Ajax {
-	
+
 	/*
 	 * Some constant
 	 */
 	const HOME = 'home';
-	
+
 	/**
 	 *
 	 * Check the nonce from the request from ajax
@@ -28,7 +28,7 @@ class Ajax {
 	public static function verifyNonce($nonce, $typeOfNonce, $id) {
 		return wp_verify_nonce($nonce, $typeOfNonce . $id);
 	}
-	
+
 	/**
 	 * Envelop the array for the response to ajax
 	 *
@@ -44,10 +44,10 @@ class Ajax {
 		return array (
 			'code' => $code,
 			'message' => (string) $message,
-			'content' => $content 
+			'content' => $content
 		);
 	}
-	
+
 	/**
 	 * Response OK
 	 *
@@ -57,7 +57,7 @@ class Ajax {
 	public static function responseOK($content = "") {
 		return self::envelope(KeysRequest::OK, 'OK', $content);
 	}
-	
+
 	/**
 	 * Response with a generic Error
 	 *
@@ -67,7 +67,7 @@ class Ajax {
 	public static function responseError($message = "") {
 		return self::envelope(KeysRequest::NOT_CORRECT, $message, "");
 	}
-	
+
 	/**
 	 *
 	 * Generic response from the server. We send a json.
