@@ -46,7 +46,7 @@ class AjaxController extends BaseController {
 				$posts = HomeController::getPosts($limit, $offset);
 				$content = $this->render('home/_all_posts', [
 					'posts' => $posts,
-					'postWith' => HomeController::getPostWithDefault()
+					'postWith' => HomeController::getPostWithInHomeDefault()
 				]);
 				$json['content'] = $content;
 				$json['code'] = KeysRequest::OK;
