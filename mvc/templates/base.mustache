@@ -1,29 +1,36 @@
-<header id="top" class="container">	
-	<div id="blog-title" class="row">
-		<a class="col-xs-12" href="{{homeUrl}}">{{blogTitle}}</a>
-		<span class="col-xs-12">{{blogDescription}}</span>
-	</div>
-</header>
-<div id="page" class="container" ajax-url="{{templateUrl}}/ajax.php">
+<body class="tooltips" itemscope="itemscope" itemtype="http://schema.org/WebPage">
 
-	<div id="super" class="row">
-		
-		{{# sidebar.left }}		
-	    	{{> sidebar }}
-	    {{/ sidebar.left }}
-	    
-	    <div id="content" class="col-xs-12 {{# sidebar.active }}col-md-10{{/ sidebar.active }}">
-	    	{{$ content }}
-	    		You don't have to see this text, cause you've 
-	    		to override this tags "content" in your Son template.
-	    	{{/content }}
+	<header id="top" class="container">	
+		<div id="blog-title" class="row">
+			<a class="col-xs-12" href="{{homeUrl}}">{{blogTitle}}</a>
+			<span class="col-xs-12">{{blogDescription}}</span>
+		</div>
+	</header>
+	
+	<div id="page" class="container" ajax-url="{{templateUrl}}/ajax.php">
+	
+		<div id="super" class="row">
+			
+			{{# sidebar.left }}		
+		    	{{> sidebar }}
+		    {{/ sidebar.left }}
+		    
+		    <div id="content" class="col-xs-12 {{# sidebar.active }}col-md-10{{/ sidebar.active }}">
+		    	{{$ content }}
+		    		You don't have to see this text, cause you've 
+		    		to override this tags "content" in your Son template.
+		    	{{/content }}
+			</div>
+			
+			{{# sidebar.right }}
+		    	{{> sidebar }}
+		    {{/ sidebar.right }}
+		   
 		</div>
 		
-		{{# sidebar.right }}
-	    	{{> sidebar }}
-	    {{/ sidebar.right }}
-	   
 	</div>
 	
-</div>
-{{$ js }} {{/ js }}
+	{{$ js }} {{/ js }}
+	
+	
+{{! close body tag automatically after executing wp_footer function }}

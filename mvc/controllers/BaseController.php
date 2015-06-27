@@ -163,7 +163,7 @@ abstract class BaseController {
 		$this->checkAndAddMagicVariables($templateVars);
 		echo $this->render('head', $templateVars);
 		wp_head();
-		echo $this->render('head_close');
+		echo '</head>';
 		echo $this->render($templateName, $templateVars);
 		wp_footer();
 		echo $this->render('footer', $templateVars);
