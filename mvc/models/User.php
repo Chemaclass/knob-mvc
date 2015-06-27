@@ -229,9 +229,9 @@ class User extends Image {
 	 *        	total posts to show
 	 * @return array<Post>
 	 */
-	public function getPosts($max = self::TOTAL_POSTS_TO_SHOW, $offset = false) {
+	public function getPosts($limit = self::TOTAL_POSTS_TO_SHOW, $offset = false) {
 		$moreQuerySettings['author'] = $this->ID;
-		return HomeController::getPosts($limit, $offset);
+		return HomeController::getPosts($limit, $offset, $moreQuerySettings);
 	}
 	
 	/**
