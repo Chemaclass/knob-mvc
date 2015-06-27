@@ -22,7 +22,16 @@ class HomeController extends BaseController {
 			return $this->getError();
 		}
 		$args = [ 
-			'user' => $user 
+			'user' => $user,
+			'postWith' => [
+				'excerpt' => true 
+			],
+			'sidebar' => [ 
+				'content' => [ 
+					'pages' => 'all' 
+				],
+				'position' => 'left' 
+			] 
 		];
 		return $this->renderPage('user', $args);
 	}
