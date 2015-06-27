@@ -12,6 +12,7 @@ return [
 
 	// E
 	'error' => 'error',
+	'edit' => 'edit',
 
 	// F
 
