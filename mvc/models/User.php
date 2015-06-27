@@ -117,11 +117,11 @@ class User extends Image {
 	}
 	
 	/**
-	 * Get first capability
+	 * Get first Rol
 	 *
 	 * @return string
 	 */
-	public function getFirstCapability() {
+	public function getFirstRol() {
 		$Roles = self::getRoles();
 		return $Roles[0];
 	}
@@ -219,7 +219,7 @@ class User extends Image {
 	 * @return boolean
 	 */
 	public function setAvatar($newAvatar = false) {
-		return $this->setAvatar(self::KEY_AVATAR, $newAvatar);
+		return $this->setImage(self::KEY_AVATAR, $newAvatar);
 	}
 	
 	/**
