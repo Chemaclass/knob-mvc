@@ -61,20 +61,20 @@ use Models\Post;
 class HomeController extends BaseController {
 
 	/**
-	 * post.php
+	 * single.php
 	 */
-    public function getPost() {
+	public function getSingle($type = 'post') {
 		if (have_posts()) {
 			the_post();
 			$post = Post::find(get_the_ID());
-		}		
+		}
 		if (!isset($post)) {
 			return $this->getError();
-		}		
-		return $this->renderPage('post', [ 
-			'post' => $post 
+		}
+		return $this->renderPage($type, [ 
+			$type => $post 
 		]);
-    }
+	}
 }
 ```
 
@@ -90,7 +90,7 @@ Place controllers inside mvc/controllers.
 use Controllers\HomeController;
 
 $controller = new HomeController();
-$controller->getPost();
+$controller->getSingle('post');
 ```    
 
 ### Creating mustache templates
