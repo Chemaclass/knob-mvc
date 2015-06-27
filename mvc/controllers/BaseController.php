@@ -179,6 +179,10 @@ abstract class BaseController {
 		// sidebar
 		if (isset($templateVars['sidebar'])) {
 			$sidebar = $templateVars['sidebar'];
+			// sidebar.active
+			if (!isset($sidebar['active'])) {
+				$templateVars['sidebar']['active'] = true;
+			}
 			// sidebar.position
 			if (isset($sidebar['position'])) {
 				$pos = $sidebar['position'];
