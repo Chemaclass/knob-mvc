@@ -181,6 +181,14 @@ abstract class BaseController {
 	 * @param unknown $templateVars
 	 */
 	private function checkAndAddMagicVariables(&$templateVars) {
+		// If doesn't exists, we put the values by default
+		if (!isset($templateVars['postWith'])) {
+			$templateVars['postWith'] = static::getPostWithInHomeDefault();
+		}
+		if (!isset($templateVars['sidebar'])) {
+			$templateVars['sidebar'] = static::getSidebarPropertiesDefault();
+		}
+
 		// sidebar
 		if (isset($templateVars['sidebar'])) {
 			$sidebar = $templateVars['sidebar'];
@@ -196,13 +204,17 @@ abstract class BaseController {
 			// sidebar.content
 			if (isset($sidebar['content'])) {
 				$content = $sidebar['content'];
+
 				// sidebar.content.pages
 				if (isset($content['pages']) && $content['pages'] === 'all') {
 					foreach ( get_all_page_ids() as $id ) {
 						$pages[] = Post::find($id);
 					}
 					$templateVars['sidebar']['content']['pages'] = $pages;
+				} else {
+					$templateVars['sidebar']['content']['pages'] = [ ];
 				}
+
 				// sidebar.content.categories
 				if (isset($content['categories']) && $content['categories'] === 'all') {
 					$categories = get_terms('category', array (
@@ -210,14 +222,19 @@ abstract class BaseController {
 						'hide_empty' => 0
 					));
 					$templateVars['sidebar']['content']['categories'] = $categories;
+				} else {
+					$templateVars['sidebar']['content']['categories'] = [ ];
 				}
+
 				// sidebar.content.tags
-				if (isset($content['categories']) && $content['tags'] === 'all') {
+				if (isset($content['tags']) && $content['tags'] === 'all') {
 					$tags = get_terms('post_tag', array (
 						'orderby' => 'count',
 						'hide_empty' => 0
 					));
 					$templateVars['sidebar']['content']['tags'] = $tags;
+				} else {
+					$templateVars['sidebar']['content']['tags'] = [ ];
 				}
 			}
 		}
@@ -234,6 +251,39 @@ abstract class BaseController {
 				}
 			}
 		}
+	}
+
+	/**
+	 *
+	 * @return array
+	 */
+	protected static function getPostWithInHomeDefault() {
+		return [
+			'author' => [
+				// url => postsUrl || userUrl
+				'url' => 'postsUrl'
+			],
+			'commentsNumber' => true,
+			'date' => true,
+			'thumbnail' => true,
+			'excerpt' => true
+		];
+	}
+
+	/**
+	 *
+	 * @return array
+	 */
+	protected static function getSidebarPropertiesDefault() {
+		return [
+			'active' => true,
+			'content' => [
+				'pages' => 'all',
+				'categories' => 'all',
+				'tags' => 'all'
+			],
+			'position' => 'left'
+		];
 	}
 
 	/**

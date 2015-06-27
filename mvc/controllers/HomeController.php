@@ -30,7 +30,7 @@ class HomeController extends BaseController {
 				'content' => [
 					'pages' => 'all'
 				],
-				'position' => 'left'
+				'position' => 'right'
 			]
 		];
 		return $this->renderPage('user', $args);
@@ -43,9 +43,7 @@ class HomeController extends BaseController {
 		$cat = get_queried_object();
 		$args = [
 			'thingToSearch' => $cat->name,
-			'posts' => self::getPostsByCategory($cat->term_id),
-			'postWith' => static::getPostWithInHomeDefault(),
-			'sidebar' => static::getSidebarPropertiesDefault()
+			'posts' => self::getPostsByCategory($cat->term_id)
 		];
 		return $this->renderPage('search', $args);
 	}
@@ -55,44 +53,9 @@ class HomeController extends BaseController {
 	 */
 	public function getHome() {
 		$args = [
-			'posts' => self::getPosts(5),
-			'postWith' => static::getPostWithInHomeDefault(),
-			'sidebar' => static::getSidebarPropertiesDefault()
+			'posts' => self::getPosts(5)
 		];
 		return $this->renderPage('home', $args);
-	}
-
-	/**
-	 *
-	 * @return array
-	 */
-	public static function getPostWithInHomeDefault() {
-		return [
-			'author' => [
-				// url => postsUrl || userUrl
-				'url' => 'postsUrl'
-			],
-			'commentsNumber' => true,
-			'date' => true,
-			'thumbnail' => true,
-			'excerpt' => true
-		];
-	}
-
-	/**
-	 *
-	 * @return array
-	 */
-	public static function getSidebarPropertiesDefault() {
-		return [
-			'active' => true,
-			'content' => [
-				'pages' => 'all',
-				'categories' => 'all',
-				'tags' => 'all'
-			],
-			'position' => 'right'
-		];
 	}
 
 	/**
