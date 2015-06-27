@@ -11,7 +11,7 @@ use Models\User;
  * @author José María Valera Reales
  */
 class HomeController extends BaseController {
-	
+
 	/**
 	 * author.php
 	 */
@@ -21,77 +21,77 @@ class HomeController extends BaseController {
 		if (!$user) {
 			return $this->getError();
 		}
-		$args = [ 
+		$args = [
 			'user' => $user,
 			'postWith' => [
-				'excerpt' => true 
+				'excerpt' => true
 			],
-			'sidebar' => [ 
-				'content' => [ 
-					'pages' => 'all' 
+			'sidebar' => [
+				'content' => [
+					'pages' => 'all'
 				],
-				'position' => 'left' 
-			] 
+				'position' => 'left'
+			]
 		];
 		return $this->renderPage('user', $args);
 	}
-	
+
 	/**
 	 * home.php
 	 */
 	public function getHome() {
-		$args = [ 
+		$args = [
 			'posts' => self::getPosts(5),
 			'postWith' => static::getPostInHomeWithDefault(),
-			'sidebar' => static::getSidebarPropertiesDefault() 
+			'sidebar' => static::getSidebarPropertiesDefault()
 		];
 		return $this->renderPage('home', $args);
 	}
-	
+
 	/**
 	 *
 	 * @return array
 	 */
 	public static function getPostInHomeWithDefault() {
-		return [ 
+		return [
 			'author' => [
 				// url => postsUrl || userUrl
-				'url' => 'postsUrl' 
+				'url' => 'postsUrl'
 			],
 			'commentsNumber' => true,
 			'date' => true,
 			'thumbnail' => true,
-			'excerpt' => true 
+			'excerpt' => true
 		];
 	}
-	
+
 	/**
 	 *
 	 * @return array
 	 */
 	public static function getSidebarPropertiesDefault() {
-		return [ 
+		return [
 			'active' => true,
-			'content' => [ 
-				'pages' => 'all' 
+			'content' => [
+				'pages' => 'all'
 			],
-			'position' => 'right' 
+			'position' => 'right'
 		];
 	}
-	
+
 	/**
 	 * Error
 	 */
 	public function getError($code = 404, $message = 'Not found') {
-		$args = [ 
-			'error' => [ 
+		$args = [
+			'error' => [
 				'code' => $code,
-				'message' => $message 
-			] 
+				'message' => $message
+			]
 		];
 		return $this->renderPage('error', $args);
 	}
-	
+
 	/**
 	 * single.php
 	 */
@@ -103,8 +103,8 @@ class HomeController extends BaseController {
 		if (!isset($post)) {
 			return $this->getError();
 		}
-		return $this->renderPage($type, [ 
-			$type => $post 
+		return $this->renderPage($type, [
+			$type => $post
 		]);
 	}
 }

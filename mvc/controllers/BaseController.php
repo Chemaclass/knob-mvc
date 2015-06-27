@@ -16,21 +16,21 @@ use Mustache_Logger_StreamLogger;
  * @author José María Valera Reales
  */
 abstract class BaseController {
-	
+
 	/*
 	 * Members
 	 */
 	protected $currentUser;
 	protected $template;
-	
+
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
 		$this->currentUser = Utils::getCurrentUser();
-		
+
 		$templatesFolder = self::getTemplatesFolderLocation();
-		
+
 		$this->template = new Mustache_Engine(array (
 			'cache_file_mode' => 0660,
 			'cache_lambda_templates' => true,
@@ -43,18 +43,18 @@ abstract class BaseController {
 				'transu' => function ($value) {
 					return I18n::transu($value);
 				},
-				'case' => [ 
+				'case' => [
 					'lower' => function ($value) {
 						return strtolower((string) $value);
 					},
 					'upper' => function ($value) {
 						return strtoupper((string) $value);
-					} 
+					}
 				],
 				'count' => function ($value) {
 					return count($value);
 				},
-				'date' => [ 
+				'date' => [
 					'xmlschema' => function ($value) {
 						return date('c', strtotime($value));
 					},
@@ -63,14 +63,14 @@ abstract class BaseController {
 					},
 					'format' => function ($value) {
 						return date(get_option('date_format'), strtotime($value));
-					} 
+					}
 				],
 				'toArray' => function ($value) {
 					return explode(',', $value);
 				},
 				'ucfirst' => function ($value) {
 					return ucfirst($value);
-				} 
+				}
 			),
 			'escape' => function ($value) {
 				return htmlspecialchars($value, ENT_COMPAT, 'UTF-8');
@@ -78,13 +78,13 @@ abstract class BaseController {
 			'charset' => 'UTF-8',
 			'logger' => new Mustache_Logger_StreamLogger('php://stderr'),
 			'strict_callables' => true,
-			'pragmas' => [ 
+			'pragmas' => [
 				Mustache_Engine::PRAGMA_FILTERS,
-				Mustache_Engine::PRAGMA_BLOCKS 
-			] 
+				Mustache_Engine::PRAGMA_BLOCKS
+			]
 		));
 	}
-	
+
 	/**
 	 * Devuelve la ruta relativa donde se encuentran las vistas
 	 *
@@ -93,7 +93,7 @@ abstract class BaseController {
 	protected static function getTemplatesFolderLocation() {
 		return str_replace('//', '/', dirname(__FILE__) . '/') . '../templates';
 	}
-	
+
 	/**
 	 * Añadimos las variables comunes que todos los controladores.
 	 * Aquí añadiremos las variables comunes como el usuario actual, entorno, etc, que tendrán
@@ -103,53 +103,53 @@ abstract class BaseController {
 	 *        	Referencia del array con las variables que pasaran todos los controladores a sus vistas
 	 */
 	private function addGlobalVariables(&$templateVars = []) {
-		return array_merge($templateVars, [ 
+		return array_merge($templateVars, [
 			'adminEmail' => ADMIN_EMAIL,
 			'atomUrl' => get_bloginfo('atom_url'),
-			
+
 			'blogTitle' => BLOG_TITLE,
 			'blogDescription' => get_bloginfo('description'),
-			
+
 			'charset' => get_bloginfo('charset'),
 			'commentsAtomUrl' => get_bloginfo('comments_atom_url'),
 			'commentsRss2Url' => get_bloginfo('comments_rss2_url'),
 			'componentsDir' => COMPONENTS_DIR,
 			'currentLang' => I18n::getLangBrowserByCurrentUser(),
 			'currentUser' => $this->currentUser,
-			
+
 			'homeUrl' => get_home_url(),
 			'htmlType' => get_bloginfo('html_type'),
-			
+
 			'isEnvProd' => Env::isProd(),
 			'isEnvDev' => Env::isDev(),
 			'isEnvLoc' => Env::isLoc(),
 			'isUserLoggedIn' => is_user_logged_in(),
-			
+
 			'language' => get_bloginfo('language'),
 			'loginUrl' => wp_login_url($_SERVER['REQUEST_URI']),
-			
+
 			'name' => get_bloginfo('name'),
-			
+
 			'pingbackUrl' => get_bloginfo('pingback_url'),
 			'publicDir' => PUBLIC_DIR,
-			
+
 			'rdfUrl' => get_bloginfo('rdf_url'),
 			'rss2Url' => get_bloginfo('rss2_url'),
 			'rssUrl' => get_bloginfo('rss_url'),
-			
+
 			'stylesheetDirectory' => get_bloginfo('stylesheet_directory'),
 			'stylesheetUrl' => get_bloginfo('stylesheet_url'),
-			
+
 			'templateDirectory' => get_bloginfo('template_directory'),
 			'templateUrl' => get_bloginfo('template_url'),
 			'textDirection' => get_bloginfo('text_direction'),
-			
+
 			'version' => get_bloginfo('version'),
-			
-			'wpurl' => get_bloginfo('wpurl') 
+
+			'wpurl' => get_bloginfo('wpurl')
 		]);
 	}
-	
+
 	/**
 	 * Pintar header + plantilla + footer
 	 *
@@ -162,18 +162,18 @@ abstract class BaseController {
 		$this->addGlobalVariables($templateVars);
 		$this->checkAndAddMagicVariables($templateVars);
 		// Print the header, the templateName and the footer templates
-		foreach ( [ 
+		foreach ( [
 			'head',
 			$templateName,
-			'footer' 
+			'footer'
 		] as $_template ) {
 			echo $this->render($_template, $templateVars);
 		}
 	}
-	
+
 	/**
 	 *
-	 * @param unknown $templateVars        	
+	 * @param unknown $templateVars
 	 */
 	private function checkAndAddMagicVariables(&$templateVars) {
 		// sidebar
@@ -214,7 +214,7 @@ abstract class BaseController {
 			}
 		}
 	}
-	
+
 	/**
 	 * Pintar un partial
 	 *
@@ -226,14 +226,14 @@ abstract class BaseController {
 	public function render($templateName, $templateVars = []) {
 		return $this->template->render($templateName, $this->addGlobalVariables($templateVars));
 	}
-	
+
 	/**
 	 *
-	 * @param integer $limit        	
-	 * @param string $offset        	
-	 * @param unknown $moreQuerySettings        	
-	 * @param string $postType        	
-	 * @param string $oddOrEven        	
+	 * @param integer $limit
+	 * @param string $offset
+	 * @param unknown $moreQuerySettings
+	 * @param string $postType
+	 * @param string $oddOrEven
 	 * @return multitype:
 	 */
 	public static function getPosts($limit = -1, $offset = false, $moreQuerySettings = []) {
@@ -251,21 +251,21 @@ abstract class BaseController {
 		$countSticky = count($postsStickyIds);
 		// if it's the same doesn't matter. If it's different we have to rest the different.
 		$limit = (count($posts) == $countSticky) ? $limit - $countSticky : $limit;
-		
+
 		if (!isset($moreQuerySettings['post_type'])) {
 			$moreQuerySettings['post_type'] = Post::TYPE_POST;
 		}
-		
-		$querySettings = [ 
-			'orderby' => [ 
-				'date' => 'DESC' 
+
+		$querySettings = [
+			'orderby' => [
+				'date' => 'DESC'
 			],
-			'post_type' => [ 
-				$moreQuerySettings['post_type'] 
+			'post_type' => [
+				$moreQuerySettings['post_type']
 			],
 			'post__not_in' => $postsStickyIds,
 			'posts_per_page' => $limit,
-			'post_status' => Post::STATUS_PUBLISH 
+			'post_status' => Post::STATUS_PUBLISH
 		];
 		if ($offset) {
 			$querySettings['offset'] = $offset;
@@ -274,7 +274,7 @@ abstract class BaseController {
 		$loop = new \WP_Query($querySettings);
 		return array_merge($posts, self::loopQueryPosts($loop));
 	}
-	
+
 	/**
 	 * Devuelve los post fijados
 	 *
@@ -288,26 +288,26 @@ abstract class BaseController {
 		if (!isset($moreQuerySettings['post_type'])) {
 			$moreQuerySettings['post_type'] = Post::TYPE_POST;
 		}
-		$querySettings = [ 
-			'post_type' => [ 
-				$moreQuerySettings['post_type'] 
+		$querySettings = [
+			'post_type' => [
+				$moreQuerySettings['post_type']
 			],
 			'post__in' => $sticky_posts,
-			'posts_per_page' => $limit 
+			'posts_per_page' => $limit
 		];
 		if ($offset) {
 			$querySettings['offset'] = $offset;
 		}
 		$querySettings = array_merge($querySettings, $moreQuerySettings);
 		$loop = new \WP_Query($querySettings);
-		
+
 		return self::loopQueryPosts($loop);
 	}
-	
+
 	/**
 	 * Loop the query and mount the Post objects
 	 *
-	 * @param WP_Query $loop        	
+	 * @param WP_Query $loop
 	 * @return array<Post>
 	 */
 	private static function loopQueryPosts($loop) {
@@ -318,24 +318,24 @@ abstract class BaseController {
 		}
 		return $posts;
 	}
-	
+
 	/**
 	 *
-	 * @param integer $autorId        	
-	 * @param integer $limit        	
-	 * @param array $moreQuerySettings        	
+	 * @param integer $autorId
+	 * @param integer $limit
+	 * @param array $moreQuerySettings
 	 * @return array
 	 */
 	public static function getPostsByAuthor($autorId, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
 		return self::getPostsBy(Utils::TYPE_AUTHOR, $autorId, $limit, $moreQuerySettings);
 	}
-	
+
 	/**
 	 *
-	 * @param unknown $type        	
-	 * @param unknown $by        	
-	 * @param unknown $limit        	
-	 * @param unknown $moreQuerySettings        	
+	 * @param unknown $type
+	 * @param unknown $by
+	 * @param unknown $limit
+	 * @param unknown $moreQuerySettings
 	 * @return \Controllers\array<Post>
 	 */
 	private static function getPostsBy($type, $by, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {

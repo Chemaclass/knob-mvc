@@ -11,26 +11,26 @@ use Libs\Utils;
  * @author José María Valera Reales
  */
 class I18n {
-	
+
 	// English
 	const LANG_EN = 'en';
 	// Spanish
 	const LANG_ES = 'es';
 	// Current language
 	const CURRENT_LANG = 'current-lang';
-	
+
 	/**
 	 * Return a list with all languages availables
 	 *
 	 * @return array<string> names of directories availables
 	 */
 	public static function getAllLangAvailable() {
-		return [ 
+		return [
 			self::LANG_ES,
-			self::LANG_EN 
+			self::LANG_EN
 		];
 	}
-	
+
 	/**
 	 * Devuelve el idioma del usuario actual si lo tuviera.
 	 * False en caso contrario
@@ -49,7 +49,7 @@ class I18n {
 		}
 		return Utils::getLangBrowser();
 	}
-	
+
 	/**
 	 * Devuelve la palabra traducida según el idioma del navegador
 	 *
@@ -60,9 +60,9 @@ class I18n {
 	public static function trans($traducir, $params = [], $forceLang = false) {
 		$traducir = strtolower($traducir);
 		static::_getParams($traducir, $params);
-		
+
 		$dir = self::getLangBrowserByCurrentUser($forceLang);
-		
+
 		list($file, $key) = explode('.', $traducir);
 		// Si no le pasamos fichero a traducir, cogerá del fichero global
 		if (is_null($key)) {
@@ -78,7 +78,7 @@ class I18n {
 		}
 		return $valor;
 	}
-	
+
 	/**
 	 * Devuelve el array asociado al fichero de idioma que se le indica por parametros
 	 *
@@ -96,7 +96,7 @@ class I18n {
 		}
 		return require (dirname(__FILE__) . "/$idioma/$fichero.php");
 	}
-	
+
 	/**
 	 * Establecer los parámetros al string
 	 *
@@ -113,12 +113,12 @@ class I18n {
 				$_a = $i + 1;
 				for($j = $_a; $j < strlen($strFinal); $j++) {
 					$esUltimo = ($j == strlen($strFinal) - 1);
-					if (in_array($strFinal[$j], [ 
+					if (in_array($strFinal[$j], [
 						' ',
 						',',
 						'\\',
 						'\'',
-						'"' 
+						'"'
 					]) || $esUltimo) { // 2º
 						$_b = $j;
 						$_b = ($esUltimo) ? $_b + 1 : $_b;
@@ -127,7 +127,7 @@ class I18n {
 						break;
 					}
 				}
-				
+
 				// Encontramos la key
 				if (isset($params[$key])) {
 					$langKey = $params[$key];
@@ -139,7 +139,7 @@ class I18n {
 		}
 		return $strFinal;
 	}
-	
+
 	/**
 	 * Formatear, si fuera necesario, el texto a traducir con sus parámetros
 	 *
@@ -147,7 +147,7 @@ class I18n {
 	 *        	Texto a traducir con sus parámetros en forma de "JSON"
 	 *        	Se identifica dicho array por estar entre corchetes []
 	 *        	y cada clave/valor se separan por ':' y cada elemento por una ','
-	 * @param array $params        	
+	 * @param array $params
 	 */
 	private static function _getParams(&$traducir, &$params) {
 		/*
@@ -168,7 +168,7 @@ class I18n {
 			}
 		}
 	}
-	
+
 	/**
 	 * Devuelve la palabra traducida según el idioma del navegador con la primera letra mayúscula
 	 *
@@ -179,12 +179,12 @@ class I18n {
 	public static function transu($key, $params = [], $forceLang = false) {
 		return ucfirst(self::trans($key, $params, $forceLang));
 	}
-	
+
 	/**
 	 *
-	 * @param unknown $key        	
-	 * @param unknown $params        	
-	 * @param unknown $forceLang        	
+	 * @param unknown $key
+	 * @param unknown $params
+	 * @param unknown $forceLang
 	 */
 	public static function substr($key, $params = [], $forceLang = false) {
 		list($string, $len) = explode(' ', $key);

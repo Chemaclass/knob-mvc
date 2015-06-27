@@ -1,64 +1,64 @@
 <?php
 return [
 	// A
-	
+
 	// B
 	'by' => 'by',
-	
+
 	// C
 	'comments' => 'comments',
-	
+
 	// D
-	
+
 	// E
 	'error' => 'error',
-	
+
 	// F
-	
+
 	// G
-	
+
 	// H
-	
+
 	// I
 	'in' => 'in',
-	
+
 	// J
-	
+
 	// K
-	
+
 	// L
-	
+
 	// M
-	
+
 	// N
-	
+
 	// O
-	
+
 	// P
-	
+
 	// Q
-	
+
 	// R
-	
+
 	// S
 	'see_more' => 'see more',
 	'share_comment' => 'share comment',
 	'show_more' => 'show more',
-	
+
 	// T
-	
+
 	// U
-	
+
 	// V
-	
+
 	// W
 	'welcome' => 'welcome',
 	'without_permissions' => 'without permissions',
-	
+
 	// X
-	
+
 	// Y
-	
+
 	// Z
-	'z' => 'z' 
+	'z' => 'z'
 ];
