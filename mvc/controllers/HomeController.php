@@ -37,6 +37,20 @@ class HomeController extends BaseController {
 	}
 
 	/**
+	 * category.php
+	 */
+	public function getCategory() {
+		$cat = get_queried_object();
+		$args = [
+			'thingToSearch' => $cat->name,
+			'posts' => self::getPostsByCategory($cat->term_id),
+			'postWith' => static::getPostWithInHomeDefault(),
+			'sidebar' => static::getSidebarPropertiesDefault()
+		];
+		return $this->renderPage('search', $args);
+	}
+
+	/**
 	 * home.php
 	 */
 	public function getHome() {

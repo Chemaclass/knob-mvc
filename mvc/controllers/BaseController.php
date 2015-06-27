@@ -18,6 +18,11 @@ use Mustache_Logger_StreamLogger;
 abstract class BaseController {
 
 	/*
+	 * Some const
+	 */
+	const LIMIT_POST_DEFAULT = 5;
+
+	/*
 	 * Members
 	 */
 	protected $currentUser;
@@ -348,6 +353,17 @@ abstract class BaseController {
 
 	/**
 	 *
+	 * @param unknown $catId
+	 * @param unknown $limit
+	 * @param unknown $moreQuerySettings
+	 * @return \Controllers\array<Post>
+	 */
+	public static function getPostsByCategory($catId, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
+		return self::getPostsBy(Utils::TYPE_CATEGORY, $catId, $limit, $moreQuerySettings);
+	}
+
+	/**
+	 *
 	 * @param unknown $type
 	 * @param unknown $by
 	 * @param unknown $limit
@@ -359,7 +375,7 @@ abstract class BaseController {
 			$tagId = Utils::getTagIdbyName($by);
 			$moreQuerySettings['tag_id'] = "$tagId";
 		} elseif ($type == Utils::TYPE_CATEGORY) {
-			$catId = get_cat_ID($by);
+			$catId = is_numeric($by) ? $by : get_cat_ID($by);
 			$moreQuerySettings['cat'] = "$catId";
 		} elseif ($type == Utils::TYPE_SEARCH) {
 			$aBuscar = $by;

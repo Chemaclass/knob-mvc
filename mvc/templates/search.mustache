@@ -1,0 +1,18 @@
+{{< base }}	
+
+	{{$ content }}
+		
+		<div id="search">
+		
+			<h1>{{thingToSearch}}</h1>
+			<div class="all-posts">
+				{{> home/_all_posts }}				
+			</div>
+			<div class="">
+				<a class="btn btn-default show-more col-xs-12" limit="5">{{#transu}}show_more{{/transu}}</a>
+			</div>
+		</div>
+		
+	{{/ content }}
+	
+{{/ base }}
