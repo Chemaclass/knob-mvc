@@ -4,10 +4,15 @@ namespace Libs;
 
 /**
  * Ajax class
- * 
+ *
  * @author José María Valera Reales
  */
 class Ajax {
+	
+	/*
+	 * Some constant
+	 */
+	const HOME = 'home';
 	
 	/**
 	 *
