@@ -21,13 +21,13 @@ class Actions {
 	}
 
 	/**
-	 * Put styles into the admin view
+	 * Put styles into the admin view.
 	 */
 	public static function adminPrintStyles() {
 		add_action('admin_print_styles', function () {
 			wp_enqueue_style('bootstrap', COMPONENTS_DIR . '/bootstrap/css/bootstrap.css');
 			wp_enqueue_style('font-awesome', COMPONENTS_DIR . '/font-awesome/css/font-awesome.min.css');
-			wp_enqueue_style('main', PUBLIC_DIR . '/css/main.css');
+			wp_enqueue_style('knob-main', PUBLIC_DIR . '/css/main.css');
 		});
 	}
 

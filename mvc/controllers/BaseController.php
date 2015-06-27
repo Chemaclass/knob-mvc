@@ -151,24 +151,22 @@ abstract class BaseController {
 	}
 
 	/**
-	 * Pintar header + plantilla + footer
+	 * Print head + template + footer
 	 *
 	 * @param string $templateName
-	 *        	Nombre de la vista a pintar
+	 *        	Template name to print
 	 * @param array $templateVars
-	 *        	Parámetros para la vista
+	 *        	Parameters to template
 	 */
 	public function renderPage($templateName, $templateVars = []) {
 		$this->addGlobalVariables($templateVars);
 		$this->checkAndAddMagicVariables($templateVars);
-		// Print the header, the templateName and the footer templates
-		foreach ( [
-			'head',
-			$templateName,
-			'footer'
-		] as $_template ) {
-			echo $this->render($_template, $templateVars);
-		}
+		echo $this->render('head', $templateVars);
+		wp_head();
+		echo $this->render('head_close');
+		echo $this->render($templateName, $templateVars);
+		wp_footer();
+		echo $this->render('footer', $templateVars);
 	}
 
 	/**
