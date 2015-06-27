@@ -1,36 +1,29 @@
-<body class="tooltips" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+<body class="tooltips container" itemscope="itemscope" itemtype="http://schema.org/WebPage">
 
-	<header id="top" class="container">	
-		<div id="blog-title" class="row">
-			<a class="col-xs-12" href="{{homeUrl}}">{{blogTitle}}</a>
-			<span class="col-xs-12">{{blogDescription}}</span>
-		</div>
+	<header id="blog-title" class="row">	
+		<a class="col-xs-12" href="{{homeUrl}}">{{blogTitle}}</a>
+		<span class="col-xs-12">{{blogDescription}}</span>
 	</header>
-	
-	<div id="page" class="container" ajax-url="{{templateUrl}}/ajax.php">
-	
-		<div id="super" class="row">
-			
-			{{# sidebar.left }}		
-		    	{{> sidebar }}
-		    {{/ sidebar.left }}
-		    
-		    <div id="content" class="col-xs-12 {{# sidebar.active }}col-md-10{{/ sidebar.active }}">
-		    	{{$ content }}
-		    		You don't have to see this text, cause you've 
-		    		to override this tags "content" in your Son template.
-		    	{{/content }}
-			</div>
-			
-			{{# sidebar.right }}
-		    	{{> sidebar }}
-		    {{/ sidebar.right }}
-		   
+
+	<div id="page" class="row" ajax-url="{{templateUrl}}/ajax.php">
+
+		{{# sidebar.left }}		
+	    	{{> sidebar }}
+	    {{/ sidebar.left }}
+
+	    <div id="content" class="col-xs-12 {{# sidebar.active }}col-md-10{{/ sidebar.active }}">
+	    	{{$ content }}
+	    		You don't have to see this text, cause you have to override this 
+            	tag's "content" in your child template.
+	    	{{/content }}
 		</div>
-		
+
+		{{# sidebar.right }}
+	    	{{> sidebar }}
+	    {{/ sidebar.right }}
+
 	</div>
-	
+
 	{{$ js }} {{/ js }}
-	
-	
+
 {{! close body tag automatically after executing wp_footer function }}
