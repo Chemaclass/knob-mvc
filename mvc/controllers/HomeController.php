@@ -75,6 +75,7 @@ class HomeController extends BaseController {
 			'content' => [
 				'pages' => 'all',
 				'categories' => 'all',
+				'tags' => 'all'
 			],
 			'position' => 'right'
 		];

@@ -1,0 +1,13 @@
+{{# tags | count }}
+<div class="sidebar-item tags row">
+
+	<div class="title">{{#transu}}tags{{/transu}} ({{tags | count }})</div>
+
+	<ul class="tags col-xs-12">
+		{{# tags }}
+			<a href="/tag/{{name}}"><li class="">{{name}}</li></a>
+		{{/ tags }}
+	</ul>
+
+</div>
+{{/ tags | count }}

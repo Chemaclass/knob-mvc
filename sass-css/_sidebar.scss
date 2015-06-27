@@ -5,8 +5,15 @@
 
 	border: 1px solid #000;
 
-	.pages {
-	
+	.sidebar-item {
+		.pages {}
+		.tags {
+			list-style:none;
+			li {
+				float: left;
+				margin-right: 8px;
+			}			
+		}
 		.title {
 			margin: 6px;
 			padding: 6px;
