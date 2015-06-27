@@ -22,11 +22,7 @@
 					{{> home/postWith/_comments_number }}					
 				{{/ postWith.commentsNumber }}
 
-				{{# currentUser.canEditor }}
-				<span class="edit-control">
-					<a class="btn btn-default" href="{{{getEditLink}}}">{{#transu}}edit{{/transu}}</a>
-				</span>
-				{{/ currentUser.canEditor }}
+				{{> post/_edit_control }}
 
 			</span>
 
