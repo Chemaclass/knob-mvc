@@ -174,18 +174,45 @@ abstract class BaseController {
 	}
 
 	/**
-	 * Check and add magic variables
 	 *
 	 * @param array $templateVars
 	 */
-	private function checkAndAddMagicVariables(&$templateVars) {
+	private function transformTemplateVars(&$templateVars) {
+		// Get the default values
+		$postWithTo = static::getPostWithInHomeDefault();
+		$sidebarTo = static::getSidebarPropertiesDefault();
+
 		// If doesn't exists, we put the values by default
-		if (!isset($templateVars['postWith'])) {
-			$templateVars['postWith'] = static::getPostWithInHomeDefault();
-		}
-		if (!isset($templateVars['sidebar'])) {
-			$templateVars['sidebar'] = static::getSidebarPropertiesDefault();
-		}
+		$postWithFrom = (isset($templateVars['postWith']) ? $templateVars['postWith'] : $postWithTo);
+		$sidebarFrom = (isset($templateVars['sidebar']) ? $templateVars['sidebar'] : $sidebarTo);
+
+		// overwriting.
+		$overwritingDefaultValues = function ($listFrom, &$listTo) use(&$overwritingDefaultValues) {
+			foreach ( array_keys($listFrom) as $key ) {
+				$value = $listFrom[$key];
+				if (!is_array($value)) {
+					$listTo[$key] = $value;
+				} else {
+					$overwritingDefaultValues($listFrom[$key], $listTo[$key]);
+				}
+			}
+		};
+
+		$overwritingDefaultValues($postWithFrom, $postWithTo);
+		$overwritingDefaultValues($sidebarFrom, $sidebarTo);
+
+		// Put the final array into the templateVars array
+		$templateVars['postWith'] = $postWithTo;
+		$templateVars['sidebar'] = $sidebarTo;
+	}
+
+	/**
+	 *
+	 * @param array $templateVars
+	 */
+	private function checkingTemplateVars(&$templateVars) {
+		// searcher
+		// TODO:
 
 		// sidebar
 		if (isset($templateVars['sidebar'])) {
@@ -252,13 +279,30 @@ abstract class BaseController {
 	}
 
 	/**
+	 * Check and add magic variables
+	 *
+	 * @param array $templateVars
+	 */
+	private function checkAndAddMagicVariables(&$templateVars) {
+		$this->transformTemplateVars($templateVars);
+		$this->checkingTemplateVars($templateVars);
+	}
+
+	/**
 	 *
 	 * @return array
 	 */
 	protected static function getPostWithInHomeDefault() {
+		/*
+		 * Options:
+		 * - author.url => postsUrl | userUrl
+		 * - commentsNumber => true | false
+		 * - date => true | false
+		 * - thumbnail => true | false
+		 * - excerpt => true | false
+		 */
 		return [
 			'author' => [
-				// url => postsUrl || userUrl
 				'url' => 'postsUrl'
 			],
 			'commentsNumber' => true,
@@ -273,11 +317,23 @@ abstract class BaseController {
 	 * @return array
 	 */
 	protected static function getSidebarPropertiesDefault() {
+		/*
+		 * Options:
+		 * - position => left | right
+		 * - content.pages => all
+		 * - content.categories => all
+		 * - content.searcher.withButton => true
+		 * - content.tags => all
+		 * - position => left | right
+		 */
 		return [
 			'active' => true,
 			'content' => [
 				'pages' => 'all',
 				'categories' => 'all',
+				'searcher' => [
+					'withButton' => true
+				],
 				'tags' => 'all'
 			],
 			'position' => 'left'
