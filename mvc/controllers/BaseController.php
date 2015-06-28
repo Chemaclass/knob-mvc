@@ -91,7 +91,7 @@ abstract class BaseController {
 	}
 
 	/**
-	 * Devuelve la ruta relativa donde se encuentran las vistas
+	 * Return the relative path location where are the templates.
 	 *
 	 * @return string
 	 */
@@ -100,12 +100,9 @@ abstract class BaseController {
 	}
 
 	/**
-	 * Añadimos las variables comunes que todos los controladores.
-	 * Aquí añadiremos las variables comunes como el usuario actual, entorno, etc, que tendrán
-	 * disponibles todas las vistas.
+	 * Add the global variables for all controllers
 	 *
 	 * @param array $templateVars
-	 *        	Referencia del array con las variables que pasaran todos los controladores a sus vistas
 	 */
 	private function addGlobalVariables(&$templateVars = []) {
 		return array_merge($templateVars, [
@@ -177,8 +174,9 @@ abstract class BaseController {
 	}
 
 	/**
+	 * Check and add magic variables
 	 *
-	 * @param unknown $templateVars
+	 * @param array $templateVars
 	 */
 	private function checkAndAddMagicVariables(&$templateVars) {
 		// If doesn't exists, we put the values by default
@@ -287,25 +285,24 @@ abstract class BaseController {
 	}
 
 	/**
-	 * Pintar un partial
+	 * Render a partial
 	 *
 	 * @param string $templateName
-	 *        	Nombre del partial a pintar
 	 * @param array $templateVars
-	 *        	Parámetros para la vista
 	 */
 	public function render($templateName, $templateVars = []) {
 		return $this->template->render($templateName, $this->addGlobalVariables($templateVars));
 	}
 
 	/**
+	 * Get Posts
 	 *
 	 * @param integer $limit
 	 * @param string $offset
-	 * @param unknown $moreQuerySettings
+	 * @param array $moreQuerySettings
 	 * @param string $postType
 	 * @param string $oddOrEven
-	 * @return multitype:
+	 * @return array<Post>
 	 */
 	public static function getPosts($limit = -1, $offset = false, $moreQuerySettings = []) {
 		// Get all fixed posts.
@@ -347,7 +344,7 @@ abstract class BaseController {
 	}
 
 	/**
-	 * Devuelve los post fijados
+	 * Return the fixed posts
 	 *
 	 * @return array<Post>
 	 */
@@ -391,34 +388,37 @@ abstract class BaseController {
 	}
 
 	/**
+	 * Get posts from an author
 	 *
 	 * @param integer $autorId
 	 * @param integer $limit
 	 * @param array $moreQuerySettings
-	 * @return array
+	 * @return array<Post>
 	 */
 	public static function getPostsByAuthor($autorId, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
 		return self::getPostsBy(Utils::TYPE_AUTHOR, $autorId, $limit, $moreQuerySettings);
 	}
 
 	/**
+	 * Get posts from a category
 	 *
 	 * @param unknown $catId
 	 * @param unknown $limit
 	 * @param unknown $moreQuerySettings
-	 * @return \Controllers\array<Post>
+	 * @return array<Post>
 	 */
 	public static function getPostsByCategory($catId, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
 		return self::getPostsBy(Utils::TYPE_CATEGORY, $catId, $limit, $moreQuerySettings);
 	}
 
 	/**
+	 * Get posts by type
 	 *
 	 * @param unknown $type
 	 * @param unknown $by
 	 * @param unknown $limit
 	 * @param unknown $moreQuerySettings
-	 * @return \Controllers\array<Post>
+	 * @return array<Post>
 	 */
 	private static function getPostsBy($type, $by, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
 		if ($type == Utils::TYPE_TAG) {
