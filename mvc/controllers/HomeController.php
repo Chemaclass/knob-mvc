@@ -99,4 +99,16 @@ class HomeController extends BaseController {
 			$type => $post
 		]);
 	}
+
+	/**
+	 * tag.php
+	 */
+	public function getTag() {
+		$tag = get_queried_object();
+		$args = [
+			'thingToSearch' => $tag->name,
+			'posts' => self::getPostsByTag($tag->term_id)
+		];
+		return $this->renderPage('search', $args);
+	}
 }

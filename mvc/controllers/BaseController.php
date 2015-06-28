@@ -493,6 +493,17 @@ abstract class BaseController {
 	}
 
 	/**
+	 *
+	 * @param integer $tagId
+	 * @param integer $limit
+	 * @param array $moreQuerySettings
+	 * @return array<Post>
+	 */
+	protected static function getPostsByTag($tagId, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
+		return self::getPostsBy(Utils::TYPE_TAG, $tagId, $limit, $moreQuerySettings);
+	}
+
+	/**
 	 * Get posts by type
 	 *
 	 * @param string $type
@@ -503,7 +514,7 @@ abstract class BaseController {
 	 */
 	private static function getPostsBy($type, $by, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
 		if ($type == Utils::TYPE_TAG) {
-			$tagId = Utils::getTagIdbyName($by);
+			$tagId = is_numeric($by) ? $by : get_term_by('name', $by, 'post_tag')->term_id;
 			$moreQuerySettings['tag_id'] = "$tagId";
 		} elseif ($type == Utils::TYPE_CATEGORY) {
 			$catId = is_numeric($by) ? $by : get_cat_ID($by);
