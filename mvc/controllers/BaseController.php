@@ -395,29 +395,41 @@ abstract class BaseController {
 	 * @param array $moreQuerySettings
 	 * @return array<Post>
 	 */
-	public static function getPostsByAuthor($autorId, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
+	protected static function getPostsByAuthor($autorId, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
 		return self::getPostsBy(Utils::TYPE_AUTHOR, $autorId, $limit, $moreQuerySettings);
+	}
+
+	/**
+	 * Get posts from query search
+	 *
+	 * @param string $searchQuery
+	 * @param integer $limit
+	 * @param array $moreQuerySettings
+	 * @return array<Post>
+	 */
+	protected static function getPostsBySearch($searchQuery, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
+		return self::getPostsBy(Utils::TYPE_SEARCH, $searchQuery, $limit, $moreQuerySettings);
 	}
 
 	/**
 	 * Get posts from a category
 	 *
-	 * @param unknown $catId
-	 * @param unknown $limit
-	 * @param unknown $moreQuerySettings
+	 * @param integer $catId
+	 * @param integer $limit
+	 * @param array $moreQuerySettings
 	 * @return array<Post>
 	 */
-	public static function getPostsByCategory($catId, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
+	protected static function getPostsByCategory($catId, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
 		return self::getPostsBy(Utils::TYPE_CATEGORY, $catId, $limit, $moreQuerySettings);
 	}
 
 	/**
 	 * Get posts by type
 	 *
-	 * @param unknown $type
-	 * @param unknown $by
-	 * @param unknown $limit
-	 * @param unknown $moreQuerySettings
+	 * @param string $type
+	 * @param integer|string $by
+	 * @param integer $limit
+	 * @param array $moreQuerySettings
 	 * @return array<Post>
 	 */
 	private static function getPostsBy($type, $by, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
@@ -428,8 +440,7 @@ abstract class BaseController {
 			$catId = is_numeric($by) ? $by : get_cat_ID($by);
 			$moreQuerySettings['cat'] = "$catId";
 		} elseif ($type == Utils::TYPE_SEARCH) {
-			$aBuscar = $by;
-			$moreQuerySettings['s'] = "$aBuscar";
+			$moreQuerySettings['s'] = "$by";
 		} elseif ($type == Utils::TYPE_AUTHOR) {
 			$moreQuerySettings['author'] = $by;
 		}

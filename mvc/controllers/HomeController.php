@@ -72,6 +72,18 @@ class HomeController extends BaseController {
 	}
 
 	/**
+	 * search.php
+	 */
+	public function getSearch() {
+		$searchQuery = get_search_query();
+		$args = [
+			'thingToSearch' => $searchQuery,
+			'posts' => self::getPostsBySearch($searchQuery)
+		];
+		return $this->renderPage('search', $args);
+	}
+
+	/**
 	 * single.php
 	 */
 	public function getSingle($type = 'post') {
