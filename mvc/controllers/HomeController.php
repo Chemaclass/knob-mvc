@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Models\Post;
 use Models\User;
+use I18n\I18n;
 
 /**
  * Home Controller
@@ -43,6 +44,7 @@ class HomeController extends BaseController {
 	public function getCategory() {
 		$cat = get_queried_object();
 		$args = [
+			'thingType' => I18n::transu('category'),
 			'thingToSearch' => $cat->name,
 			'posts' => self::getPostsByCategory($cat->term_id)
 		];
@@ -106,6 +108,7 @@ class HomeController extends BaseController {
 	public function getTag() {
 		$tag = get_queried_object();
 		$args = [
+			'thingType' => I18n::transu('tag'),
 			'thingToSearch' => $tag->name,
 			'posts' => self::getPostsByTag($tag->term_id)
 		];

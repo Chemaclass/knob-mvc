@@ -4,8 +4,13 @@
 		
 		<div id="search">
 		
-			<h1>{{#transu}}search{{/transu}}: {{thingToSearch}}</h1>
-
+			{{# thingType }}
+				<h1>{{thingType}}: "{{thingToSearch}}"</h1>
+			{{/ thingType }}
+			{{^ thingType }}
+				<h1>{{#transu}}search{{/transu}}: "{{thingToSearch}}"</h1>
+			{{/ thingType }}
+			
 			<div class="all-posts">
 				{{> home/_all_posts }}				
 			</div>

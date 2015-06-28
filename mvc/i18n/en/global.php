@@ -49,6 +49,8 @@ return [
 	'show_more' => 'show more',
 
 	// T
+	'tag' => 'tag',
+	'tags' => 'tags',
 
 	// U
 

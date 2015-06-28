@@ -49,6 +49,8 @@ return [
 	'show_more' => 'ver más',
 
 	// T
+	'tag' => 'etiqueta',
+	'tags' => 'etiquetas',
 
 	// U
 
