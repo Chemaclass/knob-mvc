@@ -174,6 +174,7 @@ abstract class BaseController {
 	}
 
 	/**
+	 * Put all defined vars into the "default" ones (and override it).
 	 *
 	 * @param array $templateVars
 	 */
@@ -186,7 +187,18 @@ abstract class BaseController {
 		$postWithFrom = (isset($templateVars['postWith']) ? $templateVars['postWith'] : $postWithTo);
 		$sidebarFrom = (isset($templateVars['sidebar']) ? $templateVars['sidebar'] : $sidebarTo);
 
-		// overwriting.
+		$listFromTo = [
+			'postWith' => [
+				'from' => $postWithFrom,
+				'to' => $postWithTo
+			],
+			'sidebar' => [
+				'from' => $sidebarFrom,
+				'to' => $sidebarTo
+			]
+		];
+
+		// overwriting
 		$overwritingDefaultValues = function ($listFrom, &$listTo) use(&$overwritingDefaultValues) {
 			foreach ( array_keys($listFrom) as $key ) {
 				$value = $listFrom[$key];
@@ -198,12 +210,13 @@ abstract class BaseController {
 			}
 		};
 
-		$overwritingDefaultValues($postWithFrom, $postWithTo);
-		$overwritingDefaultValues($sidebarFrom, $sidebarTo);
-
-		// Put the final array into the templateVars array
-		$templateVars['postWith'] = $postWithTo;
-		$templateVars['sidebar'] = $sidebarTo;
+		// Do it!
+		foreach ( $listFromTo as $itemKey => $itemFromTo ) {
+			// Overwriting
+			$overwritingDefaultValues($itemFromTo['from'], $itemFromTo['to']);
+			// Put the final array into the templateVars array
+			$templateVars[$itemKey] = $itemFromTo['to'];
+		}
 	}
 
 	/**

@@ -28,7 +28,8 @@ class HomeController extends BaseController {
 			],
 			'sidebar' => [
 				'content' => [
-					'pages' => 'all'
+					'pages' => 'all',
+					'searcher' => false
 				],
 				'position' => 'right'
 			]
@@ -53,12 +54,7 @@ class HomeController extends BaseController {
 	 */
 	public function getHome() {
 		$args = [
-			'posts' => self::getPosts(5),
-			'sidebar' => [
-				'content' => [
-					'searcher' => false
-				]
-			]
+			'posts' => self::getPosts(5)
 		];
 		return $this->renderPage('home', $args);
 	}
