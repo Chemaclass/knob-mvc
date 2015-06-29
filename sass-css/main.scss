@@ -1,6 +1,7 @@
 /* 
 * Author: José María Valera Reales
 */
+@import "base.scss";
 @import "home.scss";
 @import "post.scss";
 @import "user.scss";
@@ -30,6 +31,10 @@ body {
 
 #content {
 	border: 1px solid #000;
+}
+
+#page {
+	@extend %post-home;
 }
 
 #footer {

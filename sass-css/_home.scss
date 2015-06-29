@@ -2,22 +2,7 @@
 * Author: José María Valera Reales
 */
 #home {
-	.post {
-		border-bottom: 1px solid #ccc;
-		margin: 6px 0;
-		padding: 12px 0;
-		.date{}
-		.excerpt{}
-		.thumbnail{}
-		.title {
-			.permalink {
-				font-size: 22px;
-				font-weight: bold;
-				text-transform: uppercase;
-			}
-			.total-comments {
-			}
-		}
-	}
+	
+	@extend %post-home;
 
 }
