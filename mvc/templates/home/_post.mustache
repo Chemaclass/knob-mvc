@@ -1,36 +1,34 @@
-<div class="row">
-	<div class="col-xs-12 post">
+<div class="col-xs-12 post">
 
-		{{# postWith.thumbnail }}
-			{{> home/postWith/_thumbnail }}
-		{{/ postWith.thumbnail }}
+	{{# postWith.thumbnail }}
+		{{> home/postWith/_thumbnail }}
+	{{/ postWith.thumbnail }}
 
-		<div class="col-xs-12 {{# getThumbnail }} col-sm-10 {{/ getThumbnail }}">
+	<div class="col-xs-12 {{# getThumbnail }} col-sm-10 {{/ getThumbnail }}">
 
-			{{# postWith.date }}
-				{{> home/postWith/_date }}
-			{{/ postWith.date }}
+		{{# postWith.date }}
+			{{> home/postWith/_date }}
+		{{/ postWith.date }}
 
-			<span class="col-xs-12 title">
-				<a class="permalink" href="{{getPermalink}}">{{getTitle}}</a>
+		<span class="col-xs-12 title">
+			<a class="permalink" href="{{getPermalink}}">{{getTitle}}</a>
 
-				{{# postWith.author }}
-					{{> home/postWith/_author }}
-				{{/ postWith.author }}
+			{{# postWith.author }}
+				{{> home/postWith/_author }}
+			{{/ postWith.author }}
 
-				{{# postWith.commentsNumber }}
-					{{> home/postWith/_comments_number }}
-				{{/ postWith.commentsNumber }}
+			{{# postWith.commentsNumber }}
+				{{> home/postWith/_comments_number }}
+			{{/ postWith.commentsNumber }}
 
-				{{> post/_edit_control }}
+			{{> post/_edit_control }}
 
-			</span>
+		</span>
 
-			{{# postWith.excerpt }}
-				{{> home/postWith/_excerpt }}
-			{{/ postWith.excerpt }}
+		{{# postWith.excerpt }}
+			{{> home/postWith/_excerpt }}
+		{{/ postWith.excerpt }}
 
-		</div>
+	</div>
 
-	</div>	
 </div>
