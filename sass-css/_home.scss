@@ -2,8 +2,13 @@
 * Author: José María Valera Reales
 */
 #home, #search {
-	margin: 12px 0px;
-	border: 1px solid #ccc;
+	
 	@extend %post-home;
-
+	
+	margin: 12px 0px;
+	border: 1px solid #ccc;	
+	
+	.show-more {
+		margin: 20px 0px;
+	}
 }

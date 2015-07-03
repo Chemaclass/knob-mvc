@@ -53,8 +53,8 @@ $(document).on('click', '.show-more', function(e) {
 		data : data,
 		dataType : "json",
 		beforeSend: function() {
-			$this.find('.fa-spin').removeClass('hidden');
-			$this.find('.fa-plus').addClass('hidden');
+			$this.find('i .fa-spinner').removeClass('hidden');
+			$this.find('i .fa-plus').addClass('hidden');
 			$this.attr("disabled", true);
 		},
 		success : function(json) {
@@ -62,7 +62,8 @@ $(document).on('click', '.show-more', function(e) {
 				content = json.content;
 				posts.append(content);
 				if( content.length == 0 || json.limit < limit ) {
-					$this.addClass('hidden');
+					$this.addClass("hidden");
+					return;
 				}
 			}
 			$this.attr("disabled", false);

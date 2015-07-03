@@ -40,6 +40,7 @@ class AjaxController extends BaseController {
 	 */
 	private function jsonHome($_datas) {
 		switch ($_datas['type']) {
+			//TODO: show-more not only in home, I mean, also into the search, category, tag...
 			case 'show-more' :
 				$limit = $_datas['limit'];
 				$offset = $_datas['offset'];
@@ -48,6 +49,7 @@ class AjaxController extends BaseController {
 					'posts' => $posts,
 					'postWith' => HomeController::getPostWithInHomeDefault()
 				]);
+				$json['limit'] = count($posts);
 				$json['content'] = $content;
 				$json['code'] = KeysRequest::OK;
 				break;
@@ -88,7 +90,6 @@ class AjaxController extends BaseController {
 
 		// cast the content to UTF-8
 		$json['content'] = mb_convert_encoding($json['content'], "UTF-8");
-
 		echo json_encode($json);
 	}
 }
