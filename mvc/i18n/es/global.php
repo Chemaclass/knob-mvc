@@ -8,6 +8,7 @@ return [
 	// C
 	'category' => 'categoría',
 	'categories' => 'categorías',
+	'comment' => 'comentario',
 	'comments' => 'comentarios',
 
 	// D

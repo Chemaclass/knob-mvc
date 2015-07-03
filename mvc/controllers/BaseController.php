@@ -59,6 +59,9 @@ abstract class BaseController {
 				'count' => function ($value) {
 					return count($value);
 				},
+				'moreThan1' => function ($value) {
+					return count($value) > 1;
+				},
 				'date' => [
 					'xmlschema' => function ($value) {
 						return date('c', strtotime($value));
