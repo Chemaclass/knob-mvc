@@ -16,6 +16,8 @@ class I18n {
 	const LANG_EN = 'en';
 	// Spanish
 	const LANG_ES = 'es';
+	// Default
+	const LANG_DEFAULT = self::LANG_EN;
 	// Current language
 	const CURRENT_LANG = 'current-lang';
 
@@ -38,16 +40,24 @@ class I18n {
 	 * @return string|boolean Idioma actual del usuario
 	 */
 	public static function getLangBrowserByCurrentUser($forceLang = false) {
-		// Si se fuerza un idioma, no hay otra posibilidad.
-		if ($forceLang && in_array($forceLang, self::getAllLangAvailable())) {
+		$langAvailables = self::getAllLangAvailable();
+
+		$isLangAvailable = function ($langToCheck) use($langAvailables) {
+			return in_array($langToCheck, $langAvailables);
+		};
+
+		// we can fonce the lang
+		if ($forceLang && $isLangAvailable($forceLang)) {
 			return $forceLang;
 		}
 		session_start();
-		// Si se estableció un idioma para la sesión
-		if ($_SESSION[self::CURRENT_LANG]) {
+		// or set by session
+		if ($_SESSION[self::CURRENT_LANG] && $isLangAvailable($_SESSION[self::CURRENT_LANG])) {
 			return $_SESSION[self::CURRENT_LANG];
 		}
-		return Utils::getLangBrowser();
+
+		$langBrowser = Utils::getLangBrowser();
+		return $isLangAvailable($langBrowser) ? $langBrowser : self::LANG_DEFAULT;
 	}
 
 	/**
