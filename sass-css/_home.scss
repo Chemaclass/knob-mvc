@@ -2,7 +2,8 @@
 * Author: José María Valera Reales
 */
 #home {
-	
+	margin: 12px 0px;
+	border: 1px solid #ccc;
 	@extend %post-home;
 
 }
