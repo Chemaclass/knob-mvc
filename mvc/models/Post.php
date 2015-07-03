@@ -14,6 +14,12 @@ class Post extends Image {
 	public static $table = "posts";
 
 	/*
+	 * Default values
+	 */
+	const CATEGORY_BASE_DEFAULT = 'category';
+	const TAG_BASE_DEFAULT = 'tag';
+
+	/*
 	 * Images sizes
 	 */
 	const IMG_SIZE_THUMBNAIL = 'thumbnail';

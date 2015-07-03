@@ -115,7 +115,7 @@ abstract class BaseController {
 			'blogTitle' => BLOG_TITLE,
 			'blogDescription' => get_bloginfo('description'),
 
-			'categoryBase' => get_option('category_base'),
+			'categoryBase' => ($c = get_option('category_base')) ? $c : Post::CATEGORY_BASE_DEFAULT,
 			'charset' => get_bloginfo('charset'),
 			'commentsAtomUrl' => get_bloginfo('comments_atom_url'),
 			'commentsRss2Url' => get_bloginfo('comments_rss2_url'),
@@ -146,7 +146,7 @@ abstract class BaseController {
 			'stylesheetDirectory' => get_bloginfo('stylesheet_directory'),
 			'stylesheetUrl' => get_bloginfo('stylesheet_url'),
 
-			'tagBase' => get_option('tag_base'),
+			'tagBase' => ($t = get_option('tag_base')) ? $t : Post::TAG_BASE_DEFAULT,
 			'templateDirectory' => get_bloginfo('template_directory'),
 			'templateUrl' => get_bloginfo('template_url'),
 			'textDirection' => get_bloginfo('text_direction'),
