@@ -22,16 +22,13 @@ $(window).on("resize", function() {
 	doScroll();
 });
 
-
 function doScroll() {	
 	var scroll = $(window).scrollTop();
 	var windowHeight = $( window ).height();
 	var documentHeight = $(document).height();
-	
+
 	var heightLessScroll = (documentHeight - windowHeight)-scroll;
-	
-	console.log("heightLessScroll: "+heightLessScroll);
-	
+
 	if (heightLessScroll <= MINIMUM_HEIGHT_FOR_TO_LOAD) {
 		//$('.show-more').trigger('click');
 	}
