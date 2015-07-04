@@ -4,7 +4,7 @@
 
 * Knob MVC
 * This is a PHP MVC Framework for creating Wordpress templates easier and with more fun than ever before.
-* Version: 0.2
+* Version: 0.5
 * Author José María Valera Reales
 
 
@@ -32,16 +32,12 @@ A controller talks to the data helpers, loads the mustache template and can then
 Here's a sample function from a controller that loads the header data into the header template.
 
 ```php
+/**
+ * home.php
+ */
 public function getHome() {
-	$args = [ 
-		'project' => [ 
-			'name' => 'Knob',
-			'description' => 'Knob is a PHP MVC Framework for Templates for Wordpress' 
-		],
-		'author' => [ 
-			'name' => 'José María Valera Reales' 
-		],
-		'posts' => self::getPosts() 
+	$args = [
+		'posts' => self::getPosts(get_option('posts_per_page'))
 	];
 	return $this->renderPage('home', $args);
 }
@@ -103,16 +99,19 @@ Here is an example template showing a post:
 
 ```html
 {{< base }}
+
 	{{$ content }}	
-		{{# post }}
-		<div id="post" class="row">
-			<div class="col-xs-12">
-				<h1 class="title">{{{getTitle}}}</h1>
-				{{{ getContent }}}
-			</div>			
+
+		<div id="post" class="col-xs-12">
+			
+			<h1 class="title">{{{post.getTitle}}}</h1>
+			
+			{{{ post.getContent }}}
+			
 		</div>
-		{{/ post }}
+
 	{{/ content }}
+
 {{/ base }}
 ```
 
@@ -141,63 +140,73 @@ The 3 first most important templates are:
 
 `head` should include `<!DOCTYPE html>` until the first `<body class="...">` tag.
 
-`footer` should include just `</body></html>`
+`footer` should include just the footer content and `</body></html>`
 
 * We use the `base.mustache` as Decorator pattern:
 
 ```html
 <header id="top" class="container">	
+
 	<div id="blog-title" class="row">
 		<a class="col-xs-12" href="{{homeUrl}}">{{blogTitle}}</a>
 		<span class="col-xs-12">{{blogDescription}}</span>
 	</div>
+	
 </header>
-<div id="page" class="container">	
-    <div id="content" class="row">
+
+<section id="page" class="container">	
+
+    <article id="content" class="row">
     	{{$ content }} 
     		You don't have to see this text, cause you can override this 
     		tag's "content" in your child template.
     	{{/content }}
-	</div>
-</div>
+	</article>
+	
+</section>
+
 {{$ js }} {{/ js }}
 ```
 And then we have `home.mustache`:
 
 ```html
 {{< base }}	
-	{{$ content }}		
-		<div id="home">		
-			<div id="wellcome" class="row text-center">
-				<span class="col-xs-12">
-					{{#transu}}welcome{{/transu}} to {{project.name}} 
-					by {{author.name}}
-				</span>
-			</div>			
-			{{# posts }}
-				{{> home/_post}}
-			{{/ posts }}			
-		</div>		
-	{{/ content }}	
+
+	{{$ content }}
+
+		<section id="home" class="col-xs-12">
+
+			<article class="all-posts">
+				{{# posts }}
+					{{> home/_post}}
+				{{/ posts }}		
+			</article>
+
+		</section>
+
+	{{/ content }}
+
 {{/ base }}
 ```
 
-And we have the partial `templates/home/_post.mustache`:
+And we have the partial `home/_post.mustache`:
 
 ```html
-<div class="row">
-	<div class="col-xs-12 post">	
-		<span class="col-xs-12">
-			<span class="post-time">{{getDate | date.string}}</span>
-		</span>		
-		<span class="col-xs-12">
-			<a href="{{getPermalink}}">{{getTitle}}</a>
-		</span>		
-		<span class="col-xs-12">
-			{{{ getExcerpt }}}
-		</span>
-	</div>	
-</div>
+<article class="col-xs-12 post">
+
+	<span class="col-xs-12">
+		<span class="post-time">{{getDate | date.string}}</span>
+	</span>
+
+	<span class="col-xs-12">
+		<a href="{{getPermalink}}">{{getTitle}}</a>
+	</span>
+
+	<span class="col-xs-12">
+		{{{ getExcerpt }}}
+	</span>
+
+</article>
 ```
 
 # Before the start... you'll need! #
