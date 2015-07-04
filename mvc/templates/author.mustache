@@ -4,7 +4,7 @@
 	
 		{{# user }}
 			<div id="user" class="col-xs-12 author list-posts">
-		
+
 				<div class="profile">
 					<span class="avatar col-xs-4">
 						<img src="{{getAvatarProfile}}" title="{{getDisplayName}} avatar">
@@ -18,13 +18,14 @@
 						<span class="col-xs-12">{{#transu}}user.total_comments{{/transu}}: {{getComments | count}} </span>
 					</span>
 				</div>
-				
+
 				<div class="posts">
 					{{# getPosts }}
 						{{> home/_post }}
 					{{/ getPosts }}
 				</div>
-			
+
+				{{> home/_show_more_btn }}
 			</div>
 		{{/ user }}
 		
