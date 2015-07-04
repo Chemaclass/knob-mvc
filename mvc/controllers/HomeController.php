@@ -35,7 +35,7 @@ class HomeController extends BaseController {
 				'position' => 'right'
 			]
 		];
-		return $this->renderPage('user', $args);
+		return $this->renderPage('author', $args);
 	}
 
 	/**
