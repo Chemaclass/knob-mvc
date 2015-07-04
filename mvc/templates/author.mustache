@@ -10,8 +10,11 @@
 						<img src="{{getAvatarProfile}}" title="{{getDisplayName}} avatar">
 					</span>
 					<span class="info col-xs-8">
-						<span class="col-xs-12"> Full name: {{getFullName}} </span>
-						<span class="col-xs-12"> Display name: {{getDisplayName}} </span>
+						<span class="col-xs-12">{{#transu}}user.display_name{{/transu}}: {{getDisplayName | ucfirst}} </span>
+						<span class="col-xs-12">{{#transu}}user.full_name{{/transu}}: {{getFullName | ucfirst}} </span>
+						<span class="col-xs-12">{{#transu}}user.rol{{/transu}}: {{getFirstRol | ucfirst}} </span>
+						<span class="col-xs-12">Web: <a href="{{getUserUrl}}" target="_blank">{{getUserUrl}}</a></span>
+						<span class="col-xs-12">{{#transu}}user.total_publish_posts{{/transu}}: {{getPosts | count}} </span>
 					</span>
 				</div>
 				
