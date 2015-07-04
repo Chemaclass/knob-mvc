@@ -37,3 +37,15 @@ body {
 	border-top: 1px solid #ddd;
 	margin: 14px 0px;	
 }
+
+.list-posts {
+
+	@extend %post-home;
+
+	margin: 12px 0px;
+	border: 1px solid #ccc;	
+
+	.show-more {
+		margin: 20px 0px;
+	}
+}
