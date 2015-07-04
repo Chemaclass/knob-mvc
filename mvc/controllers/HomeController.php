@@ -56,7 +56,7 @@ class HomeController extends BaseController {
 	 */
 	public function getHome() {
 		$args = [
-			'posts' => self::getPosts(5)
+			'posts' => self::getPosts(get_option('posts_per_page'))
 		];
 		return $this->renderPage('home', $args);
 	}
