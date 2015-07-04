@@ -39,6 +39,8 @@ return [
 	// O
 
 	// P
+	'post' => 'post',
+	'posts' => 'posts',
 
 	// Q
 

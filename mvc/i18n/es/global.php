@@ -39,6 +39,8 @@ return [
 	// O
 
 	// P
+	'post' => 'entrada',
+	'posts' => 'entradas',
 
 	// Q
 
