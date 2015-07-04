@@ -43,6 +43,7 @@ return [
 
 	// T
 	'total_publish_posts' => 'total posts publicados',
+	'total_comments' => 'total comentarios',
 
 	// U
 

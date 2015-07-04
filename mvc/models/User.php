@@ -223,6 +223,26 @@ class User extends Image {
 	}
 
 	/**
+	 * Return all comment
+	 *
+	 * @return array<Comment>
+	 */
+	public function getComments($postId = false) {
+		$cArgs = [
+			'author__in' => $this->ID,
+			'orderby' => 'comment_date_gmt'
+		];
+		if ($postId) {
+			$cArgs['post_id'] = $postId;
+		}
+		$comments = [ ];
+		foreach ( get_comments($cArgs) as $c ) {
+			$comments[] = Comment::find($c->comment_ID);
+		}
+		return $comments;
+	}
+
+	/**
 	 * Get all posts
 	 *
 	 * @param integer $max
