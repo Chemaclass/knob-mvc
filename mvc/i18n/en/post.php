@@ -3,6 +3,7 @@ return [
 	// A
 
 	// B
+	'by' => 'by',
 
 	// C
 

@@ -7,15 +7,23 @@
 	<div class="col-xs-12 {{# getThumbnail }} col-sm-10 {{/ getThumbnail }}">
 
 		{{# postWith.date }}
-			{{> home/postWith/_date }}
+			<span class="col-xs-12 date">
+				{{> home/postWith/_date }}
+				{{# postWith.author }}
+					{{> home/postWith/_author }}
+				{{/ postWith.author }}
+			</span>
 		{{/ postWith.date }}
+
 
 		<span class="col-xs-12 title">
 			<a class="permalink" href="{{getPermalink}}">{{getTitle}}</a>
 
-			{{# postWith.author }}
-				{{> home/postWith/_author }}
-			{{/ postWith.author }}
+			{{^ postWith.date }}
+				{{# postWith.author }}
+					{{> home/postWith/_author }}
+				{{/ postWith.author }}
+			{{/ postWith.date }}
 
 			{{# postWith.commentsNumber }}
 				{{> home/postWith/_comments_number }}

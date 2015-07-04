@@ -1,6 +1,14 @@
+ {{#trans}}post.by{{/trans}}
 {{# postsUrl }}
 	<a class="author-url" href="{{getAuthor.getPostsUrl}}">{{getAuthor.getDisplayName}}</a>
 {{/ postsUrl }}
+
 {{# userUrl }}
 	<a class="author-url" href="{{getAuthor.getUserUrl}}">{{getAuthor.getDisplayName}}</a>
 {{/ userUrl }}
+
+{{^ postsUrl }}
+	{{^ userUrl }}
+		{{getAuthor.getDisplayName}}
+	{{/ userUrl }}
+{{/ postsUrl }}
