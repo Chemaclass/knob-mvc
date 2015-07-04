@@ -467,7 +467,7 @@ abstract class BaseController {
 	 * @param array $moreQuerySettings
 	 * @return array<Post>
 	 */
-	protected static function getPostsByAuthor($autorId, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
+	protected static function getPostsByAuthor($autorId, $limit = false, $moreQuerySettings = []) {
 		return self::getPostsBy(Utils::TYPE_AUTHOR, $autorId, $limit, $moreQuerySettings);
 	}
 
@@ -479,7 +479,7 @@ abstract class BaseController {
 	 * @param array $moreQuerySettings
 	 * @return array<Post>
 	 */
-	protected static function getPostsBySearch($searchQuery, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
+	protected static function getPostsBySearch($searchQuery, $limit = false, $moreQuerySettings = []) {
 		return self::getPostsBy(Utils::TYPE_SEARCH, $searchQuery, $limit, $moreQuerySettings);
 	}
 
@@ -491,7 +491,7 @@ abstract class BaseController {
 	 * @param array $moreQuerySettings
 	 * @return array<Post>
 	 */
-	protected static function getPostsByCategory($catId, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
+	protected static function getPostsByCategory($catId, $limit = false, $moreQuerySettings = []) {
 		return self::getPostsBy(Utils::TYPE_CATEGORY, $catId, $limit, $moreQuerySettings);
 	}
 
@@ -502,7 +502,7 @@ abstract class BaseController {
 	 * @param array $moreQuerySettings
 	 * @return array<Post>
 	 */
-	protected static function getPostsByTag($tagId, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
+	protected static function getPostsByTag($tagId, $limit = false, $moreQuerySettings = []) {
 		return self::getPostsBy(Utils::TYPE_TAG, $tagId, $limit, $moreQuerySettings);
 	}
 
@@ -515,7 +515,10 @@ abstract class BaseController {
 	 * @param array $moreQuerySettings
 	 * @return array<Post>
 	 */
-	private static function getPostsBy($type, $by, $limit = self::LIMIT_POST_DEFAULT, $moreQuerySettings = []) {
+	private static function getPostsBy($type, $by, $limit = false, $moreQuerySettings = []) {
+		if (!$limit) {
+			$limit = get_option('posts_per_page');
+		}
 		if ($type == Utils::TYPE_TAG) {
 			$tagId = is_numeric($by) ? $by : get_term_by('name', $by, 'post_tag')->term_id;
 			$moreQuerySettings['tag_id'] = "$tagId";

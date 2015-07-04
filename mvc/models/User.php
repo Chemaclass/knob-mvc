@@ -38,11 +38,6 @@ class User extends Image {
 	const ROL_CONTRIBUTOR = 'contributor';
 	const ROL_SUBSCRIBER = 'subscriber';
 
-	/*
-	 * Total constants
-	 */
-	const TOTAL_POSTS_TO_SHOW = 10;
-
 	/**
 	 * Return true if the user is allowed as admin
 	 *
@@ -249,7 +244,10 @@ class User extends Image {
 	 *        	total posts to show
 	 * @return array<Post>
 	 */
-	public function getPosts($limit = self::TOTAL_POSTS_TO_SHOW, $offset = false) {
+	public function getPosts($limit = false, $offset = false) {
+		if (!$limit) {
+			$limit = get_option('posts_per_page');
+		}
 		$moreQuerySettings['author'] = $this->ID;
 		return HomeController::getPosts($limit, $offset, $moreQuerySettings);
 	}
