@@ -2,9 +2,6 @@
 
 namespace Models;
 
-use I18n\I18n;
-use Libs\Utils;
-
 /**
  * Tag
  * terms.term_id					->	term_taxonomy.term_id
@@ -13,7 +10,8 @@ use Libs\Utils;
  *
  * @author José María Valera Reales <@Chemaclass>
  */
-class Tag {
+class Term extends ModelBase{
+	public static $table = "terms";
 
 	/*
 	 * Some constants
