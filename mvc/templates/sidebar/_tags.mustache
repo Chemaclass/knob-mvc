@@ -1,13 +1,20 @@
-{{# tags | count }}
+{{# tags }}
 <div class="sidebar-item tags row">
 
-	<div class="title">{{#transu}}tags{{/transu}} ({{tags | count }})</div>
+	<div class="title">
+		{{# title }}
+			{{. | ucfirst}} {{# withTotal }}({{content | count }}){{/ withTotal }}
+		{{/ title }}
+		{{^ title }}
+			{{#transu}}tags{{/transu}} {{# withTotal }}({{content | count }}){{/ withTotal }}
+		{{/ title }}
+	</div>
 
 	<ul class="tags col-xs-12">
-		{{# tags }}
-			<a href="/{{tagBase}}/{{slug}}"><li class="">{{name}}</li></a>
-		{{/ tags }}
+		{{# content }}
+			<a href="/{{tagBase}}/{{getSlug}}"><li class="">{{getName}}</li></a>
+		{{/ content }}
 	</ul>
 
 </div>
-{{/ tags | count }}
+{{/ tags }}

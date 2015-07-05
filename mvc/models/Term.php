@@ -25,14 +25,13 @@ class Term extends ModelBase {
 	 * @param array $args
 	 * @return array<Term>
 	 */
-	public static function getAllCategories($args = []) {
+	public static function getCategories($args = []) {
 		if (!count($args)) {
 			$args = [
 				'orderby' => 'count',
 				'hide_empty' => true
 			];
 		}
-		$categories = [ ];
 		foreach ( get_terms('category', $args) as $c ) {
 			$categories[] = Term::find($c->term_id);
 		}
@@ -45,18 +44,17 @@ class Term extends ModelBase {
 	 * @param array $args
 	 * @return array<Term>
 	 */
-	public static function getAllTags($args = []) {
+	public static function getTags($args = []) {
 		if (!count($args)) {
 			$args = [
 				'orderby' => 'count',
 				'hide_empty' => true
 			];
 		}
-		$categories = [ ];
-		foreach ( get_terms('post_tag', $args) as $c ) {
-			$categories[] = Term::find($c->term_id);
+		foreach ( get_terms('post_tag', $args) as $t ) {
+			$tags[] = Term::find($t->term_id);
 		}
-		return $categories;
+		return $tags;
 	}
 
 	/**

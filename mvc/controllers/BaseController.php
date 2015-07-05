@@ -279,13 +279,11 @@ abstract class BaseController {
 						'hide_empty' => true
 					];
 
-					if (!is_array($catContent)) {
-						$args[] = $ids;
-						$ids = $_ids;
+					if (is_array($catContent)) {
+						$args = array_merge($args, $catContent);
 					}
-					$args = array_merge($args, $catContent);
 
-					$categories = Term::getAllCategories($args);
+					$categories = Term::getCategories($args);
 
 					$templateVars['sidebar']['content']['categories']['content'] = $categories;
 				} else {
@@ -293,11 +291,20 @@ abstract class BaseController {
 				}
 
 				// sidebar.content.tags
-				if (isset($content['tags']) && $content['tags']['content'] === 'all') {
-					$tags = Term::getAllTags([
+				if (isset($content['tags'])) {
+					$tagsContent = $content['tags']['content'];
+
+					$args = [
 						'orderby' => 'count',
 						'hide_empty' => true
-					]);
+					];
+
+					if (is_array($tagsContent)) {
+						$args = array_merge($args, $tagsContent);
+					}
+
+					$tags = Term::getTags($args);
+
 					$templateVars['sidebar']['content']['tags']['content'] = $tags;
 				} else {
 					$templateVars['sidebar']['content']['tags']['content'] = [ ];
