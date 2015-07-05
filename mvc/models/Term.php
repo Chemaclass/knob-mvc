@@ -10,14 +10,70 @@ namespace Models;
  *
  * @author José María Valera Reales <@Chemaclass>
  */
-class Term extends ModelBase{
+class Term extends ModelBase {
 	public static $table = "terms";
+	static $PK = 'term_id';
 
 	/*
 	 * Some constants
 	 */
 	const TRANSIENT_ALL_TAGS = 'ALL_TAGS';
 
+	/**
+	 * Return all categories
+	 *
+	 * @param array $args
+	 * @return array<Term>
+	 */
+	public static function getAllCategories($args = []) {
+		if (!count($args)) {
+			$args = [
+				'orderby' => 'count',
+				'hide_empty' => true
+			];
+		}
+		$categories = [ ];
+		foreach ( get_terms('category', $args) as $c ) {
+			$categories[] = Term::find($c->term_id);
+		}
+		return $categories;
+	}
+
+	/**
+	 * Return all tags
+	 *
+	 * @param array $args
+	 * @return array<Term>
+	 */
+	public static function getAllTags($args = []) {
+		if (!count($args)) {
+			$args = [
+				'orderby' => 'count',
+				'hide_empty' => true
+			];
+		}
+		$categories = [ ];
+		foreach ( get_terms('post_tag', $args) as $c ) {
+			$categories[] = Term::find($c->term_id);
+		}
+		return $categories;
+	}
+
+	/**
+	 *
+	 * @return the name
+	 */
+	public function getName() {
+		return $this->name;
+	}
+
+	/**
+	 *
+	 * @return the slug
+	 */
+	public function getSlug() {
+		return $this->slug;
+	}
 	/**
 	 * Get all tags
 	 *

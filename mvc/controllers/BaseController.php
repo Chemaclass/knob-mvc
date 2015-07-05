@@ -10,6 +10,7 @@ use I18n\I18n;
 use Mustache_Engine;
 use Mustache_Loader_FilesystemLoader;
 use Mustache_Logger_StreamLogger;
+use Models\Term;
 
 /**
  *
@@ -258,10 +259,12 @@ abstract class BaseController {
 
 				// sidebar.content.categories
 				if (isset($content['categories']) && $content['categories'] === 'all') {
-					$categories = get_terms('category', array (
+
+					$categories = Term::getAllCategories([
 						'orderby' => 'count',
-						'hide_empty' => 0
-					));
+						'hide_empty' => true
+					]);
+
 					$templateVars['sidebar']['content']['categories'] = $categories;
 				} else {
 					$templateVars['sidebar']['content']['categories'] = [ ];
@@ -269,10 +272,10 @@ abstract class BaseController {
 
 				// sidebar.content.tags
 				if (isset($content['tags']) && $content['tags'] === 'all') {
-					$tags = get_terms('post_tag', array (
+					$tags = Term::getAllTags([
 						'orderby' => 'count',
-						'hide_empty' => 0
-					));
+						'hide_empty' => true
+					]);
 					$templateVars['sidebar']['content']['tags'] = $tags;
 				} else {
 					$templateVars['sidebar']['content']['tags'] = [ ];
