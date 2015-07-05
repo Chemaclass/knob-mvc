@@ -5,11 +5,11 @@
 		{{# user }}
 			<div id="user" class="col-xs-12 author list-posts">
 
-				<div class="profile row">
-					<span class="avatar col-xs-4">
+				<div class="profile row col-xs-12">
+					<span class="avatar col-xs-12 col-sm-4">
 						<img src="{{getAvatarProfile}}" title="{{getDisplayName}} avatar">
 					</span>
-					<span class="info col-xs-8">
+					<span class="info col-xs-12 col-sm-8">
 						<span class="col-xs-12">{{#transu}}user.display_name{{/transu}}: {{getDisplayName | ucfirst}} </span>
 						<span class="col-xs-12">{{#transu}}user.full_name{{/transu}}: {{getFullName | ucfirst}} </span>
 						<span class="col-xs-12">{{#transu}}user.rol{{/transu}}: {{getFirstRol | ucfirst}} </span>

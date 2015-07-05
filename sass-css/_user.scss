@@ -1,10 +1,21 @@
-/* 
+/*
 * Author: José María Valera Reales
 */
 #user {
 	
 	.profile {
-		margin: 12px;
+		
+		
+		.avatar {
+			margin-top: 12px;
+			img {
+				max-height: 130px;
+			}
+		}
+		.info {
+			margin-top: 12px;
+			float: left;
+		}
 	}
 	
 }
