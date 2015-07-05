@@ -248,10 +248,19 @@ abstract class BaseController {
 				$content = $sidebar['content'];
 
 				// sidebar.content.pages
-				if (isset($content['pages']) && $content['pages'] === 'all') {
-					foreach ( get_all_page_ids() as $id ) {
-						$pages[] = Post::find($id);
+				if (isset($content['pages'])) {
+					$ids = ($content['pages'] === 'all') ? get_all_page_ids() : $content['pages'];
+					if (!is_array($ids)) {
+						$_ids[] = $ids;
+						$ids = $_ids;
 					}
+					foreach ( $ids as $id ) {
+						$p = Post::find($id);
+						if ($p->ID) {
+							$pages[] = $p;
+						}
+					}
+
 					$templateVars['sidebar']['content']['pages'] = $pages;
 				} else {
 					$templateVars['sidebar']['content']['pages'] = [ ];
