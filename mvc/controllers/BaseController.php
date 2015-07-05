@@ -228,6 +228,13 @@ abstract class BaseController {
 	 * @param array $templateVars
 	 */
 	private function checkingTemplateVars(&$templateVars) {
+		/*
+		 * Check if it's 'all'
+		 */
+		$isAll = function ($contentToCheck) {
+			return (!is_array($contentToCheck) && $contentToCheck === 'all') || (count($contentToCheck) == 1 && $contentToCheck[0] === 'all');
+		};
+
 		// sidebar
 		if (isset($templateVars['sidebar'])) {
 			$sidebar = $templateVars['sidebar'];
@@ -244,8 +251,7 @@ abstract class BaseController {
 				if (isset($content['pages'])) {
 					$pagesContent = $content['pages']['content'];
 
-					$isAll = (!is_array($pagesContent) && $pagesContent === 'all') || $pagesContent[0] === 'all';
-					$ids = ($isAll) ? get_all_page_ids() : $pagesContent;
+					$ids = ($isAll($pagesContent)) ? get_all_page_ids() : $pagesContent;
 					// If it's not an array, we put it into an array
 					if (!is_array($ids)) {
 						$_ids[] = $ids;
@@ -265,12 +271,21 @@ abstract class BaseController {
 				}
 
 				// sidebar.content.categories
-				if (isset($content['categories']) && $content['categories']['content'] === 'all') {
+				if (isset($content['categories'])) {
+					$catContent = $content['categories']['content'];
 
-					$categories = Term::getAllCategories([
+					$args = [
 						'orderby' => 'count',
 						'hide_empty' => true
-					]);
+					];
+
+					if (!is_array($catContent)) {
+						$args[] = $ids;
+						$ids = $_ids;
+					}
+					$args = array_merge($args, $catContent);
+
+					$categories = Term::getAllCategories($args);
 
 					$templateVars['sidebar']['content']['categories']['content'] = $categories;
 				} else {

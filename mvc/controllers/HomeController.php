@@ -24,9 +24,16 @@ class HomeController extends BaseController {
 		}
 		$args = [
 			'user' => $user,
+			'postWith' => [
+				'author' => false
+			],
 			'sidebar' => [
 				'content' => [
-					'searcher' => false
+					'searcher' => false,
+					'pages' => [
+						'withTotal' => false,
+						'content' => 5
+					]
 				],
 				'position' => 'right'
 			]

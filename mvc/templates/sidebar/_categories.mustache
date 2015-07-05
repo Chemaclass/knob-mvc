@@ -1,13 +1,20 @@
-{{# categories | count }}
+{{# categories }}
 <div class="sidebar-item categories row">
 
-	<div class="title">{{#transu}}categories{{/transu}} ({{categories | count }})</div>
+	<div class="title">
+	{{# title }}
+			{{. | ucfirst}} {{# withTotal }}({{content | count }}){{/ withTotal }}
+		{{/ title }}
+		{{^ title }}
+			{{#transu}}categories{{/transu}} {{# withTotal }}({{content | count }}){{/ withTotal }}
+		{{/ title }}
+	</div>
 
 	<ul class="list-group">
-		{{# categories }}
+		{{# content }}
 			<a href="/{{categoryBase}}/{{getSlug}}"><li class="list-group-item">{{getName}}</li></a>
-		{{/ categories }}
+		{{/ content }}
 	</ul>
 
 </div>
-{{/ categories | count }}
+{{/ categories  }}
