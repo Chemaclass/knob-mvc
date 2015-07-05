@@ -31,8 +31,13 @@ class HomeController extends BaseController {
 				'content' => [
 					'searcher' => false,
 					'pages' => [
-						'withTotal' => false,
-						'content' => 5
+						'withTotal' => false
+					],
+					'categories' => [
+						'withTotal' => false
+					],
+					'tags' => [
+						'withTotal' => false
 					]
 				],
 				'position' => 'right'
