@@ -228,16 +228,9 @@ abstract class BaseController {
 	 * @param array $templateVars
 	 */
 	private function checkingTemplateVars(&$templateVars) {
-		// searcher
-		// TODO:
-
 		// sidebar
 		if (isset($templateVars['sidebar'])) {
 			$sidebar = $templateVars['sidebar'];
-			// sidebar.active
-			if (!isset($sidebar['active'])) {
-				$templateVars['sidebar']['active'] = true;
-			}
 			// sidebar.position
 			if (isset($sidebar['position'])) {
 				$pos = $sidebar['position'];
@@ -249,11 +242,16 @@ abstract class BaseController {
 
 				// sidebar.content.pages
 				if (isset($content['pages'])) {
-					$ids = ($content['pages'] === 'all') ? get_all_page_ids() : $content['pages'];
+					$pagesContent = $content['pages']['content'];
+
+					$isAll = (!is_array($pagesContent) && $pagesContent === 'all') || $pagesContent[0] === 'all';
+					$ids = ($isAll) ? get_all_page_ids() : $pagesContent;
+					// If it's not an array, we put it into an array
 					if (!is_array($ids)) {
 						$_ids[] = $ids;
 						$ids = $_ids;
 					}
+
 					foreach ( $ids as $id ) {
 						$p = Post::find($id);
 						if ($p->ID) {
@@ -261,33 +259,33 @@ abstract class BaseController {
 						}
 					}
 
-					$templateVars['sidebar']['content']['pages'] = $pages;
+					$templateVars['sidebar']['content']['pages']['content'] = $pages;
 				} else {
-					$templateVars['sidebar']['content']['pages'] = [ ];
+					$templateVars['sidebar']['content']['pages']['content'] = [ ];
 				}
 
 				// sidebar.content.categories
-				if (isset($content['categories']) && $content['categories'] === 'all') {
+				if (isset($content['categories']) && $content['categories']['content'] === 'all') {
 
 					$categories = Term::getAllCategories([
 						'orderby' => 'count',
 						'hide_empty' => true
 					]);
 
-					$templateVars['sidebar']['content']['categories'] = $categories;
+					$templateVars['sidebar']['content']['categories']['content'] = $categories;
 				} else {
-					$templateVars['sidebar']['content']['categories'] = [ ];
+					$templateVars['sidebar']['content']['categories']['content'] = [ ];
 				}
 
 				// sidebar.content.tags
-				if (isset($content['tags']) && $content['tags'] === 'all') {
+				if (isset($content['tags']) && $content['tags']['content'] === 'all') {
 					$tags = Term::getAllTags([
 						'orderby' => 'count',
 						'hide_empty' => true
 					]);
-					$templateVars['sidebar']['content']['tags'] = $tags;
+					$templateVars['sidebar']['content']['tags']['content'] = $tags;
 				} else {
-					$templateVars['sidebar']['content']['tags'] = [ ];
+					$templateVars['sidebar']['content']['tags']['content'] = [ ];
 				}
 			}
 		}
@@ -348,21 +346,54 @@ abstract class BaseController {
 		/*
 		 * Options:
 		 * - position => left | right
-		 * - content.pages => all
-		 * - content.categories => all
+		 *
+		 * - content.pages **************
+		 * - content.pages.title => pages
+		 * - content.pages.content => all | [id1,id2,etc]
+		 * - content.pages.withTotal => true | false
+		 *
+		 * - content.categories *********
+		 * - content.categories.title => pages
+		 * - content.categories.content => all | [id1,id2,etc]
+		 * - content.categories.withTotal => true | false
+		 *
+		 * - content.searcher ***********
 		 * - content.searcher.withButton => true
-		 * - content.tags => all
+		 *
+		 * - content.tags ***************
+		 * - content.tags.title => pages
+		 * - content.tags.content => all | [id1,id2,etc]
+		 * - content.tags.withTotal => true | false
+		 *
 		 * - position => left | right
 		 */
 		return [
 			'active' => true,
 			'content' => [
-				'pages' => 'all',
-				'categories' => 'all',
+				'pages' => [
+					'title' => 'pages',
+					'content' => [
+						'all'
+					],
+					'withTotal' => true
+				],
+				'categories' => [
+					'title' => 'categories',
+					'content' => [
+						'all'
+					],
+					'withTotal' => true
+				],
 				'searcher' => [
 					'withButton' => true
 				],
-				'tags' => 'all'
+				'tags' => [
+					'title' => 'tags',
+					'content' => [
+						'all'
+					],
+					'withTotal' => true
+				]
 			],
 			'position' => 'left'
 		];
