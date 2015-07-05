@@ -50,6 +50,7 @@ return [
 	// V
 
 	// W
+	'web' => 'web',
 
 	// X
 
