@@ -168,7 +168,7 @@ abstract class BaseController {
 	 */
 	public function renderPage($templateName, $templateVars = []) {
 		$this->addGlobalVariables($templateVars);
-		$this->checkAndAddMagicVariables($templateVars);
+		$this->addSidebarVars($templateVars, true);
 		echo $this->render('head', $templateVars);
 		wp_head();
 		echo '</head>';
@@ -178,247 +178,31 @@ abstract class BaseController {
 	}
 
 	/**
-	 * Put all defined vars into the "default" ones (and override it).
+	 * Sidebar variables.
 	 *
 	 * @param array $templateVars
+	 * @param boolean $withSidebar
 	 */
-	private function transformTemplateVars(&$templateVars) {
-		// Get the default values
-		$postWithTo = static::getPostWithInHomeDefault();
-		$sidebarTo = static::getSidebarPropertiesDefault();
-
-		// If doesn't exists, we put the values by default
-		$postWithFrom = (isset($templateVars['postWith']) ? $templateVars['postWith'] : $postWithTo);
-		$sidebarFrom = (isset($templateVars['sidebar']) ? $templateVars['sidebar'] : $sidebarTo);
-
-		$listFromTo = [
-			'postWith' => [
-				'from' => $postWithFrom,
-				'to' => $postWithTo
-			],
-			'sidebar' => [
-				'from' => $sidebarFrom,
-				'to' => $sidebarTo
-			]
-		];
-
-		// overwriting
-		$overwritingDefaultValues = function ($listFrom, &$listTo) use(&$overwritingDefaultValues) {
-			foreach ( array_keys($listFrom) as $key ) {
-				$value = $listFrom[$key];
-				if (!is_array($value)) {
-					$listTo[$key] = $value;
-				} else {
-					$overwritingDefaultValues($listFrom[$key], $listTo[$key]);
-				}
-			}
-		};
-
-		// Do it!
-		foreach ( $listFromTo as $itemKey => $itemFromTo ) {
-			// Overwriting
-			$overwritingDefaultValues($itemFromTo['from'], $itemFromTo['to']);
-			// Put the final array into the templateVars array
-			$templateVars[$itemKey] = $itemFromTo['to'];
-		}
-	}
-
-	/**
-	 *
-	 * @param array $templateVars
-	 */
-	private function checkingTemplateVars(&$templateVars) {
+	private function addSidebarVars(&$templateVars, $withSidebar = true) {
 		/*
-		 * Check if it's 'all'
+		 * Active
 		 */
-		$isAll = function ($contentToCheck) {
-			return (!is_array($contentToCheck) && $contentToCheck === 'all') || (count($contentToCheck) == 1 && $contentToCheck[0] === 'all');
-		};
+		$templateVars['sidebar']['active'] = $withSidebar;
 
-		// sidebar
-		if (isset($templateVars['sidebar'])) {
-			$sidebar = $templateVars['sidebar'];
-			// sidebar.position
-			if (isset($sidebar['position'])) {
-				$pos = $sidebar['position'];
-				$templateVars['sidebar'][$pos] = true;
-			}
-			// sidebar.content
-			if (isset($sidebar['content'])) {
-				$content = $sidebar['content'];
-
-				// sidebar.content.pages
-				if (isset($content['pages'])) {
-					$pagesContent = $content['pages']['content'];
-
-					$ids = ($isAll($pagesContent)) ? get_all_page_ids() : $pagesContent;
-					// If it's not an array, we put it into an array
-					if (!is_array($ids)) {
-						$_ids[] = $ids;
-						$ids = $_ids;
-					}
-
-					foreach ( $ids as $id ) {
-						$p = Post::find($id);
-						if ($p->ID) {
-							$pages[] = $p;
-						}
-					}
-
-					$templateVars['sidebar']['content']['pages']['content'] = $pages;
-				} else {
-					$templateVars['sidebar']['content']['pages']['content'] = [ ];
-				}
-
-				// sidebar.content.categories
-				if (isset($content['categories'])) {
-					$catContent = $content['categories']['content'];
-
-					$args = [
-						'orderby' => 'count',
-						'hide_empty' => true
-					];
-
-					if (is_array($catContent)) {
-						$args = array_merge($args, $catContent);
-					}
-
-					$categories = Term::getCategories($args);
-
-					$templateVars['sidebar']['content']['categories']['content'] = $categories;
-				} else {
-					$templateVars['sidebar']['content']['categories']['content'] = [ ];
-				}
-
-				// sidebar.content.tags
-				if (isset($content['tags'])) {
-					$tagsContent = $content['tags']['content'];
-
-					$args = [
-						'orderby' => 'count',
-						'hide_empty' => true
-					];
-
-					if (is_array($tagsContent)) {
-						$args = array_merge($args, $tagsContent);
-					}
-
-					$tags = Term::getTags($args);
-
-					$templateVars['sidebar']['content']['tags']['content'] = $tags;
-				} else {
-					$templateVars['sidebar']['content']['tags']['content'] = [ ];
-				}
-			}
-		}
-		// postWith
-		if (isset($templateVars['postWith'])) {
-			$postsWith = $templateVars['postWith'];
-			// postsWith.author
-			if (isset($postsWith['author'])) {
-				$author = $postsWith['author'];
-				// postsWith.author.url
-				if (isset($author['url'])) {
-					$url = $author['url'];
-					$templateVars['postWith']['author'][$url] = true;
-				}
-			}
-		}
-	}
-
-	/**
-	 * Check and add magic variables
-	 *
-	 * @param array $templateVars
-	 */
-	private function checkAndAddMagicVariables(&$templateVars) {
-		$this->transformTemplateVars($templateVars);
-		$this->checkingTemplateVars($templateVars);
-	}
-
-	/**
-	 *
-	 * @return array
-	 */
-	protected static function getPostWithInHomeDefault() {
 		/*
-		 * Options:
-		 * - author.url => postsUrl | userUrl
-		 * - commentsNumber => true | false
-		 * - date => true | false
-		 * - thumbnail => true | false
-		 * - excerpt => true | false
+		 * Pages
 		 */
-		return [
-			'author' => [
-				'url' => 'postsUrl'
-			],
-			'commentsNumber' => true,
-			'date' => true,
-			'thumbnail' => true,
-			'excerpt' => true
-		];
-	}
+		$templateVars['sidebar']['content']['pages']['content'] = Post::getAllPages();
 
-	/**
-	 *
-	 * @return array
-	 */
-	protected static function getSidebarPropertiesDefault() {
 		/*
-		 * Options:
-		 * - position => left | right
-		 *
-		 * - content.pages **************
-		 * - content.pages.title => pages
-		 * - content.pages.content => all | [id1,id2,etc]
-		 * - content.pages.withTotal => true | false
-		 *
-		 * - content.categories *********
-		 * - content.categories.title => pages
-		 * - content.categories.content => all | [id1,id2,etc]
-		 * - content.categories.withTotal => true | false
-		 *
-		 * - content.searcher ***********
-		 * - content.searcher.withButton => true
-		 *
-		 * - content.tags ***************
-		 * - content.tags.title => pages
-		 * - content.tags.content => all | [id1,id2,etc]
-		 * - content.tags.withTotal => true | false
-		 *
-		 * - position => left | right
+		 * Categories
 		 */
-		return [
-			'active' => true,
-			'content' => [
-				'pages' => [
-					'title' => 'pages',
-					'content' => [
-						'all'
-					],
-					'withTotal' => true
-				],
-				'categories' => [
-					'title' => 'categories',
-					'content' => [
-						'all'
-					],
-					'withTotal' => true
-				],
-				'searcher' => [
-					'withButton' => true
-				],
-				'tags' => [
-					'title' => 'tags',
-					'content' => [
-						'all'
-					],
-					'withTotal' => true
-				]
-			],
-			'position' => 'left'
-		];
+		$templateVars['sidebar']['content']['categories']['content'] = Term::getCategories();
+
+		/*
+		 * Tags
+		 */
+		$templateVars['sidebar']['content']['tags']['content'] = Term::getTags();
 	}
 
 	/**

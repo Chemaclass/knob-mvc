@@ -23,25 +23,7 @@ class HomeController extends BaseController {
 			return $this->getError();
 		}
 		$args = [
-			'user' => $user,
-			'postWith' => [
-				'author' => false
-			],
-			'sidebar' => [
-				'content' => [
-					'searcher' => false,
-					'pages' => [
-						'withTotal' => false
-					],
-					'categories' => [
-						'withTotal' => false
-					],
-					'tags' => [
-						'withTotal' => false
-					]
-				],
-				'position' => 'right'
-			]
+			'user' => $user
 		];
 		return $this->renderPage('author', $args);
 	}
