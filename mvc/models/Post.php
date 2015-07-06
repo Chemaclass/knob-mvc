@@ -46,6 +46,22 @@ class Post extends Image {
 	const TYPE_POST = 'post';
 
 	/**
+	 * Return all pages.
+	 * (Post type page)
+	 *
+	 * @return array<Post>
+	 */
+	public static function getAllPages() {
+		foreach ( get_all_page_ids() as $id ) {
+			$p = Post::find($id);
+			if ($p->ID) {
+				$pages[] = $p;
+			}
+		}
+		return $pages;
+	}
+
+	/**
 	 * Return the author
 	 *
 	 * @return User
