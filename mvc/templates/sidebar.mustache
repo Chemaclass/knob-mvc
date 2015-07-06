@@ -1,19 +1,15 @@
-{{# sidebar.active }}
+{{# sidebar.content }}
 
-	{{# sidebar.content }}
+	<div id="sidebar" class="col-xs-12 col-md-2">
 
-		<div id="sidebar" class="col-xs-12 col-md-2">
+		{{> sidebar/_searcher }}
 
-			{{> sidebar/_searcher }}
+		{{> sidebar/_pages }}
 
-			{{> sidebar/_pages }}
+		{{> sidebar/_categories }}
 
-			{{> sidebar/_categories }}
+		{{> sidebar/_tags }}
 
-			{{> sidebar/_tags }}
+	</div>
 
-		</div>
-
-	{{/ sidebar.content }}
-
-{{/ sidebar.active }}
+{{/ sidebar.content }}

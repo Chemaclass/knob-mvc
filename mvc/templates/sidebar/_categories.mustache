@@ -2,12 +2,7 @@
 <div class="sidebar-item categories row">
 
 	<div class="title">
-		{{# title }}
-			{{. | ucfirst}} {{# withTotal }}({{content | count }}){{/ withTotal }}
-		{{/ title }}
-		{{^ title }}
-			{{#transu}}categories{{/transu}} {{# withTotal }}({{content | count }}){{/ withTotal }}
-		{{/ title }}
+		{{#transu}}categories{{/transu}} {{# withTotal }}({{content | count }}){{/ withTotal }}
 	</div>
 
 	<ul class="list-group">

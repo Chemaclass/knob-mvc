@@ -7,9 +7,9 @@
 
 	<div id="page" class="row" ajax-url="{{templateUrl}}/ajax.php">
 
-		{{# sidebar.left }}		
-	    	{{> sidebar }}
-	    {{/ sidebar.left }}
+		{{# sidebar.active }}
+		    {{> sidebar }}
+		{{/ sidebar.active }}
 
 	    <div id="content" class="col-xs-12 {{# sidebar.active }}col-md-10{{/ sidebar.active }}">
 	    	{{$ content }}
@@ -17,10 +17,6 @@
             	tag's "content" in your child template.
 	    	{{/content }}
 		</div>
-
-		{{# sidebar.right }}
-	    	{{> sidebar }}
-	    {{/ sidebar.right }}
 
 	</div>
 
