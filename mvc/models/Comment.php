@@ -42,6 +42,10 @@ class Comment extends ModelBase {
 	 * @return User
 	 */
 	public function getUser() {
+		// For to have all default values from an User
+		if (!$this->user_id) {
+			return new User();
+		}
 		return User::find($this->user_id);
 	}
 
