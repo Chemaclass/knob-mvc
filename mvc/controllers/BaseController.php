@@ -138,6 +138,7 @@ abstract class BaseController {
 			'name' => get_bloginfo('name'),
 
 			'pingbackUrl' => get_bloginfo('pingback_url'),
+			'postsPerPage' => get_option('posts_per_page'),
 			'publicDir' => PUBLIC_DIR,
 
 			'rdfUrl' => get_bloginfo('rdf_url'),

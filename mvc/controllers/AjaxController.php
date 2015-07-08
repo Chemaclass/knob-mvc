@@ -40,14 +40,13 @@ class AjaxController extends BaseController {
 	 */
 	private function jsonHome($_datas) {
 		switch ($_datas['type']) {
-			//TODO: show-more not only in home, I mean, also into the search, category, tag...
+			// TODO: show-more not only in home, I mean, also into the search, category, tag...
 			case 'show-more' :
 				$limit = $_datas['limit'];
 				$offset = $_datas['offset'];
 				$posts = HomeController::getPosts($limit, $offset);
 				$content = $this->render('home/_all_posts', [
-					'posts' => $posts,
-					'postWith' => HomeController::getPostWithInHomeDefault()
+					'posts' => $posts
 				]);
 				$json['limit'] = count($posts);
 				$json['content'] = $content;

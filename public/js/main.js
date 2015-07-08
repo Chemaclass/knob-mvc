@@ -39,7 +39,7 @@ $(document).on('click', '.show-more', function(e) {
 	var $this = $(this);
 	var limit = $this.attr('limit');
 	var posts = $('#home .all-posts');
-	var offset = posts.find('.post').children().size();
+	var offset = posts.find('.post').size();
 	var url = $('#page').attr('ajax-url');
 	var data = {
 		submit : 'home',
