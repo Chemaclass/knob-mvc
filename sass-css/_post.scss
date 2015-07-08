@@ -5,6 +5,7 @@
 	
 	margin: 12px 0px;
 	border: 1px solid #ccc;
+	overflow: hidden;
 
 	#comment-form {
 		border-top: 1px solid #eee;
@@ -36,4 +37,21 @@
 	}
 	
 	.page-header {}
+	
+	.previous-next-post {
+		border-top: 1px solid #ccc;
+		margin: 12px 0px;
+		padding: 12px 0px;
+		.post-siguiente {
+			border-right: 1px solid #ccc;
+		}
+		img {
+			overflow: hidden;
+			width: 100%;
+		}
+		padding-bottom: 12px;
+		line-height: 25px;
+		max-height: 63px;
+		overflow:hidden;
+	}
 }
