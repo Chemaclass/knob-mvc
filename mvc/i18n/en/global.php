@@ -14,8 +14,9 @@ return [
 	// D
 
 	// E
-	'error' => 'error',
+	'email' => 'email',
 	'edit' => 'edit',
+	'error' => 'error',
 
 	// F
 
@@ -35,6 +36,7 @@ return [
 	// M
 
 	// N
+	'name' => 'name',
 
 	// O
 
@@ -60,6 +62,7 @@ return [
 	// V
 
 	// W
+	'website' => 'website',
 	'welcome' => 'welcome',
 	'without_permissions' => 'without permissions',
 

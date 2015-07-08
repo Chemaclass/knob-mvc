@@ -132,7 +132,9 @@ class Post extends Image {
 	 */
 	public function getFormComments() {
 		ob_start();
-		$placeholderTextarea = I18n::transu('post.share_comment', [ ]);
+
+		$placeTextarea = I18n::transu('post.share_comment');
+
 		$params = [
 			'comment_notes_after' => '',
 			'author' => '<p class="comment-form-author">' . '<label for="author">' . __('Your Name') . '</label>
@@ -141,11 +143,19 @@ class Post extends Image {
 				<div class="form-group comment-form-comment">
 		            <label for="comment">' . _x('Comment', 'noun') . '</label>
 		            <textarea class="form-control" id="comment" name="comment" cols="45" rows="2"
-							maxlength="1000" aria-required="true" placeholder="' . $placeholderTextarea . '"></textarea>
+							maxlength="1000" aria-required="true" placeholder="' . $placeTextarea . '"></textarea>
 		        </div>'
 		];
+
+		$placeAuthor = I18n::transu('name');
+		$placeEmail = I18n::transu('email');
+		$placeUrl = I18n::transu('website');
+
 		comment_form($params, $this->ID);
 		$comment_form = ob_get_clean();
+		$comment_form = str_replace('id="author"', 'class="author form-control" placeholder="' . $placeAuthor . '"', $comment_form);
+		$comment_form = str_replace('id="email"', 'class="email form-control" placeholder="' . $placeEmail . '"', $comment_form);
+		$comment_form = str_replace('id="url"', 'class="url form-control" placeholder="' . $placeUrl . '"', $comment_form);
 		$comment_form = str_replace('id="submit"', 'class="btn btn-default"', $comment_form);
 		return $comment_form;
 	}
