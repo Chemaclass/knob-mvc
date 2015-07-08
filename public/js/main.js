@@ -62,7 +62,7 @@ $(document).on('click', '.show-more', function(e) {
 				content = json.content;
 				posts.append(content);
 				if( content.length == 0 || json.limit < limit ) {
-					$this.addClass("hidden");
+					$this.text("No more");
 					return;
 				}
 			}
