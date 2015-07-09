@@ -34,10 +34,9 @@ class I18n {
 	}
 
 	/**
-	 * Devuelve el idioma del usuario actual si lo tuviera.
-	 * False en caso contrario
+	 * Return the lang by current user if it was established
 	 *
-	 * @return string|boolean Idioma actual del usuario
+	 * @return string|boolean Lang from the current user
 	 */
 	public static function getLangBrowserByCurrentUser($forceLang = false) {
 		$langAvailables = self::getAllLangAvailable();
@@ -61,62 +60,64 @@ class I18n {
 	}
 
 	/**
-	 * Devuelve la palabra traducida según el idioma del navegador
+	 * Return the translate word by key
 	 *
 	 * @param string $key
-	 *        	clave del fichero de idiomas
-	 * @return string valor del idioma al que le corresponde dicha clave
+	 *        	Key from the file
+	 * @return string Value translated from the key
 	 */
-	public static function trans($traducir, $params = [], $forceLang = false) {
-		$traducir = strtolower($traducir);
-		static::_getParams($traducir, $params);
+	public static function trans($toTranslate, $params = [], $forceLang = false) {
+		$toTranslate = strtolower($toTranslate);
+		static::_getParams($toTranslate, $params);
 
 		$dir = self::getLangBrowserByCurrentUser($forceLang);
 
-		list($file, $key) = explode('.', $traducir);
-		// Si no le pasamos fichero a traducir, cogerá del fichero global
+		list($file, $key) = explode('.', $toTranslate);
+		/*
+		 * Get the file called 'global' by default. Only if we didn't specify any file
+		 */
 		if (is_null($key)) {
 			$key = $file;
 			$file = "global";
 		}
-		// Lista con las claves/valor según el idioma
+		// List with all keys/values with current lang
 		$langArray = self::getFicheroIdioma($file, $dir);
 		$key = trim($key);
-		$valor = isset($langArray[$key]) ? $langArray[$key] : $key;
-		if (is_numeric(strpos($valor, ':')) && !empty($params) && is_array($params)) {
-			$valor = static::_setParams($valor, $params);
+		$value = isset($langArray[$key]) ? $langArray[$key] : $key;
+		if (is_numeric(strpos($value, ':')) && !empty($params) && is_array($params)) {
+			$value = static::_setParams($value, $params);
 		}
-		return $valor;
+		return $value;
 	}
 
 	/**
-	 * Devuelve el array asociado al fichero de idioma que se le indica por parametros
+	 * Return the associative array (the file language)
 	 *
-	 * @param string $idioma
-	 *        	Iniciales del idioma
-	 * @param string $fichero
-	 *        	Nombre del fichero del idioma
+	 * @param string $lang
+	 *        	The 2 first chars of the language
+	 * @param string $file
+	 *        	Filename language
 	 */
-	public static function getFicheroIdioma($fichero, $idioma = false) {
-		if (!$idioma) {
-			$idioma = static::getLangBrowserByCurrentUser();
-			if (!$idioma) {
-				$idioma = Utils::getLangBrowser();
+	public static function getFicheroIdioma($file, $lang = false) {
+		if (!$lang) {
+			$lang = static::getLangBrowserByCurrentUser();
+			if (!$lang) {
+				$lang = Utils::getLangBrowser();
 			}
 		}
-		return require (dirname(__FILE__) . "/$idioma/$fichero.php");
+		return require (dirname(__FILE__) . "/$lang/$file.php");
 	}
 
 	/**
-	 * Establecer los parámetros al string
+	 * Set the params into the string
 	 *
-	 * @param string $valor
-	 *        	String final
+	 * @param string $value
+	 *        	Input
 	 * @param arrsy $params
-	 *        	Lista de parámetros
+	 *        	List of params
 	 */
-	private static function _setParams($valor, $params) {
-		$strFinal = $valor;
+	private static function _setParams($value, $params) {
+		$strFinal = $value;
 		$key = '';
 		for($i = 0; $i < strlen($strFinal); $i++) {
 			if ($strFinal[$i] == ':') { // 1º
@@ -138,7 +139,7 @@ class I18n {
 					}
 				}
 
-				// Encontramos la key
+				// We found the key
 				if (isset($params[$key])) {
 					$langKey = $params[$key];
 					$strFinalA = substr($strFinal, 0, $_a - 1);
@@ -151,26 +152,27 @@ class I18n {
 	}
 
 	/**
-	 * Formatear, si fuera necesario, el texto a traducir con sus parámetros
+	 * Format, if necessary, and translate the text with his parameters.
+	 * Put into &$params (2nd parameter) all possible parameters from the text $toTranslate.
 	 *
-	 * @param string $traducir
-	 *        	Texto a traducir con sus parámetros en forma de "JSON"
-	 *        	Se identifica dicho array por estar entre corchetes []
-	 *        	y cada clave/valor se separan por ':' y cada elemento por una ','
+	 * @param string $toTranslate
+	 *        	Text to translate their parameters as "JSON".
+	 *        	That array are identified as being in square brackets '[]'
+	 *        	and each key / value pairs are separated by ':' and each element of a ','
 	 * @param array $params
 	 */
-	private static function _getParams(&$traducir, &$params) {
+	private static function _getParams(&$toTranslate, &$params) {
 		/*
-		 * ( Si es un array y está vacío o si es un objeto)
-		 * Y ( Si la cadena a traducir tiene '[' donde irían los parámetros )
+		 * ( If the params-array is empty or it's an object)
+		 * And ( If the toTranslate-string contain '[' where would be the parameters )
 		 */
-		if (((is_array($params) && empty($params)) || is_object($params)) && ($pos = strpos($traducir, '['))) {
+		if (((is_array($params) && empty($params)) || is_object($params)) && ($pos = strpos($toTranslate, '['))) {
 			$params = [ ];
 			$_params = $params;
-			// +1 y -1 es para quitarle los corchetes '[]'
-			$strParams = substr($traducir, $pos + 1, strlen($strParams) - 1);
-			$traducir = substr($traducir, 0, $pos);
-			// Separamos por una coma los distintos parámetros
+			// +1 and -1 It's for to remove the brackets '[]'
+			$strParams = substr($toTranslate, $pos + 1, strlen($strParams) - 1);
+			$toTranslate = substr($toTranslate, 0, $pos);
+			// Split by a comma the parameters
 			$_params = explode(',', $strParams);
 			foreach ( $_params as $value ) {
 				list($k, $v) = explode(':', $value);
@@ -180,25 +182,31 @@ class I18n {
 	}
 
 	/**
-	 * Devuelve la palabra traducida según el idioma del navegador con la primera letra mayúscula
+	 * /**
+	 * Return the translated word with the first letter in uppercase.
 	 *
 	 * @param string $key
-	 *        	clave del fichero de idiomas
-	 * @return string valor del idioma al que le corresponde dicha clave
+	 *        	Language key file.
+	 * @param array $params
+	 *        	optional parameters.
+	 * @param string $forceLang
+	 *        	optional lang to force.
+	 * @return string Value translated.
+	 *
 	 */
 	public static function transu($key, $params = [], $forceLang = false) {
 		return ucfirst(self::trans($key, $params, $forceLang));
 	}
 
 	/**
+	 * Cut a string
 	 *
-	 * @param unknown $key
-	 * @param unknown $params
-	 * @param unknown $forceLang
+	 * @param string $key
+	 * @param array $params
+	 * @param string $forceLang
 	 */
 	public static function substr($key, $params = [], $forceLang = false) {
 		list($string, $len) = explode(' ', $key);
-		Utils::debug("$string, $len");
 		if ($len)
 			return substr($string, 0, $len);
 		else
