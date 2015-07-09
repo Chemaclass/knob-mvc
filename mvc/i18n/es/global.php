@@ -14,6 +14,7 @@ return [
 	// D
 
 	// E
+	'english' => 'inglés',
 	'email' => 'correo electrónico',
 	'edit' => 'editar',
 	'error' => 'error',
@@ -56,6 +57,7 @@ return [
 	'see_more' => 'ver más',
 	'share_comment' => 'comentar',
 	'show_more' => 'ver más',
+	'spanish' => 'español',
 
 	// T
 	'tag' => 'etiqueta',

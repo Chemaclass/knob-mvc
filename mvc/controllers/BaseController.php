@@ -122,6 +122,7 @@ abstract class BaseController {
 			'commentsRss2Url' => get_bloginfo('comments_rss2_url'),
 			'componentsDir' => COMPONENTS_DIR,
 			'currentLang' => I18n::getLangBrowserByCurrentUser(),
+			'currentLangFullname' => I18n::getLangFullnameBrowserByCurrentUser(),
 			'currentUser' => $this->currentUser,
 
 			'homeUrl' => get_home_url(),

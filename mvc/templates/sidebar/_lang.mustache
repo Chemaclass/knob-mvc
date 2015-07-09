@@ -4,13 +4,13 @@
 
 	<button class="col-xs-12 btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" 
 			data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-		<i class="fa fa-flag"></i> {{currentLang}}
+		<i class="fa fa-flag"></i> {{currentLangFullname | ucfirst}}
 		<span class="caret"></span>
 	</button>
 
 	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-  		<li><a href="/lang?lang=en" class="url-redirect">English [en]</a></li>
-        <li><a href="/lang?lang=es" class="url-redirect">Español [es]</a></li>
+		<li><a href="/lang?lang=en" class="url-redirect">{{#transu}}english{{/transu}} [en]</a></li>
+		<li><a href="/lang?lang=es" class="url-redirect">{{#transu}}spanish{{/transu}} [es]</a></li>
 	</ul>
 
 </div>

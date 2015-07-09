@@ -60,6 +60,22 @@ class I18n {
 	}
 
 	/**
+	 * Return the fullname of the lang by current user.
+	 *
+	 * @return string|boolean Lang from the current user
+	 */
+	public static function getLangFullnameBrowserByCurrentUser($forceLang = false) {
+		$lang = static::getLangBrowserByCurrentUser($forceLang);
+		switch ($lang) {
+			case self::LANG_ES :
+				return I18n::trans('spanish');
+			case self::LANG_EN :
+			default :
+				return I18n::trans('english');
+		}
+	}
+
+	/**
 	 * Return the translate word by key
 	 *
 	 * @param string $key
