@@ -53,6 +53,7 @@ return [
 	// R
 
 	// S
+	'search' => 'buscar',
 	'searcher' => 'buscador',
 	'see_more' => 'ver más',
 	'share_comment' => 'comentar',

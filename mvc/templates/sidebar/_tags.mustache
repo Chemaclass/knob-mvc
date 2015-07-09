@@ -2,12 +2,7 @@
 <div class="sidebar-item tags row">
 
 	<div class="title">
-		{{# title }}
-			{{. | ucfirst}} {{# withTotal }}({{content | count }}){{/ withTotal }}
-		{{/ title }}
-		{{^ title }}
-			{{#transu}}tags{{/transu}} {{# withTotal }}({{content | count }}){{/ withTotal }}
-		{{/ title }}
+		{{#transu}}tags{{/transu}} ({{content | count }})
 	</div>
 
 	<ul class="tags col-xs-12">
