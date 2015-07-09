@@ -75,3 +75,8 @@ $(document).on('click', '.show-more', function(e) {
 	     }
 	});
 });
+
+$(document).on('click','.url-redirect', function(e) {
+	e.preventDefault();
+	window.location.replace($(this).attr('href')+'&redirect='+window.location.pathname);
+});
