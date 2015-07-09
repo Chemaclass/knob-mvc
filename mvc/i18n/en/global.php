@@ -32,6 +32,7 @@ return [
 	// K
 
 	// L
+	'language' => 'language',
 
 	// M
 
@@ -41,6 +42,8 @@ return [
 	// O
 
 	// P
+	'page' => 'page',
+	'pages' => 'pages',
 	'post' => 'post',
 	'posts' => 'posts',
 

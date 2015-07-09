@@ -32,6 +32,7 @@ return [
 	// K
 
 	// L
+	'language' => 'idioma',
 
 	// M
 
@@ -41,6 +42,8 @@ return [
 	// O
 
 	// P
+	'page' => 'página',
+	'pages' => 'páginas',
 	'post' => 'entrada',
 	'posts' => 'entradas',
 
@@ -49,6 +52,7 @@ return [
 	// R
 
 	// S
+	'searcher' => 'buscador',
 	'see_more' => 'ver más',
 	'share_comment' => 'comentar',
 	'show_more' => 'ver más',
