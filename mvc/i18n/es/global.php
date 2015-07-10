@@ -12,6 +12,7 @@ return [
 	'comments' => 'comentarios',
 
 	// D
+	'delete' => 'borrar',
 
 	// E
 	'english' => 'inglés',

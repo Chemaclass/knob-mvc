@@ -1,6 +1,7 @@
 <?php
 return [
 	// A
+	'avatar' => 'avatar image',
 
 	// B
 
