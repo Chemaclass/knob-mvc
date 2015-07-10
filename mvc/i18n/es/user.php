@@ -11,6 +11,8 @@ return [
 	'display_name' => 'nickname',
 
 	// E
+	'enter' => 'introduce',
+	'enter_your_what' => 'introduce tu :what',
 
 	// F
 	'full_name' => 'nombre',
@@ -18,6 +20,7 @@ return [
 	// G
 
 	// H
+	'header' => 'imagen de cabecera',
 
 	// I
 
@@ -38,6 +41,7 @@ return [
 	// Q
 
 	// R
+	'recommended_sizes' => 'tamaños recomendados',
 	'rol' => 'rol',
 
 	// S

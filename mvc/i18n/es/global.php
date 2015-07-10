@@ -10,6 +10,7 @@ return [
 	'categories' => 'categorías',
 	'comment' => 'comentario',
 	'comments' => 'comentarios',
+	'current' => 'actual',
 
 	// D
 	'delete' => 'borrar',
@@ -25,6 +26,7 @@ return [
 	// G
 
 	// H
+	'high' => 'alto',
 
 	// I
 	'in' => 'en',
@@ -72,6 +74,7 @@ return [
 	// W
 	'website' => 'página web',
 	'wellcome' => 'bienvenido',
+	'width' => 'ancho',
 	'without_permissions' => 'sin permisos',
 
 	// X
