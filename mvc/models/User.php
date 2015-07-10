@@ -27,6 +27,7 @@ class User extends Image {
 	const KEY_FIRST_NAME = 'first_name';
 	const KEY_LAST_NAME = 'last_name';
 	const KEY_AVATAR = 'img_avatar';
+	const KEY_HEADER = 'img_header';
 	const KEY_LANGUAGE = 'language';
 
 	/*
@@ -37,6 +38,12 @@ class User extends Image {
 	const ROL_AUTHOR = 'author';
 	const ROL_CONTRIBUTOR = 'contributor';
 	const ROL_SUBSCRIBER = 'subscriber';
+
+	/*
+	 * Header sizes
+	 */
+	const HEADER_WIDTH = 1200;
+	const HEADER_HEIGHT = 270;
 
 	/**
 	 * (non-PHPdoc)
@@ -238,6 +245,25 @@ class User extends Image {
 	 */
 	public function setAvatar($newAvatar = false) {
 		return $this->setImage(self::KEY_AVATAR, $newAvatar);
+	}
+
+	/**
+	 * Return the path from his header
+	 *
+	 * @return string
+	 */
+	public function getHeader() {
+		return $this->getImage(self::KEY_HEADER, self::HEADER_WIDTH, self::HEADER_HEIGHT);
+	}
+
+	/**
+	 * Set the new header
+	 *
+	 * @param file $newHeader
+	 * @return boolean
+	 */
+	public function setHeader($newHeader = false) {
+		return $this->setImage(self::KEY_HEADER, $newHeader);
 	}
 
 	/**
