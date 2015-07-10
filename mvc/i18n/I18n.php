@@ -50,9 +50,8 @@ class I18n {
 			return $forceLang;
 		}
 
-		//session_start();
 		// or set by session
-		if ($_SESSION[self::CURRENT_LANG] && $isLangAvailable($_SESSION[self::CURRENT_LANG])) {
+		if (session_start() && $_SESSION[self::CURRENT_LANG] && $isLangAvailable($_SESSION[self::CURRENT_LANG])) {
 			return $_SESSION[self::CURRENT_LANG];
 		}
 
