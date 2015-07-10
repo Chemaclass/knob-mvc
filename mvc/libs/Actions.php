@@ -2,6 +2,9 @@
 
 namespace Libs;
 
+use Controllers\BackendController;
+use Models\User;
+
 /**
  * Actions for Wordpress
  *
@@ -55,5 +58,55 @@ class Actions {
 			global $wp_admin_bar;
 			$wp_admin_bar->remove_menu('wp-logo');
 		});
+	}
+
+	/**
+	 */
+	public static function userProfileAddImgAvatarAndHeader() {
+		/*
+		 * We need it if we can activate the img into the forms
+		 */
+		add_action('user_edit_form_tag', function () {
+			echo 'enctype="multipart/form-data"';
+		});
+
+		$profileAddImg = function ($user) {
+			$controller = new BackendController();
+			echo $controller->getRenderProfileImg(User::KEY_AVATAR, $user->ID);
+		};
+		add_action('show_user_profile', $profileAddImg);
+		add_action('edit_user_profile', $profileAddImg);
+		/*
+		 * Add the avatar to user profile
+		 */
+		$updateImg = function ($user_ID, $keyUserImg) {
+			try {
+				// 1st check if the user has the enought permission and the key exists on the FILES
+				if (current_user_can('edit_user', $user_ID) && isset($_FILES[$keyUserImg])) {
+					// Later check if the file have a defined name
+					$img = $_FILES[$keyUserImg];
+					if ($img['name']) {
+						$user = User::find($user_ID);
+						switch ($keyUserImg) {
+							case User::KEY_AVATAR :
+								$user->setAvatar($img);
+								break;
+						}
+					}
+				}
+			} catch ( \Exception $e ) {
+				// Add the error message to the WP notifications
+				add_action('user_profile_update_errors', function ($errors) use($e, $keyUserImg) {
+					$errors->add($keyUserImg, $e->getMessage());
+				});
+			}
+		};
+
+		$updateImgAvatar = function ($user_ID) use($updateImg) {
+			$updateImg($user_ID, User::KEY_AVATAR);
+		};
+
+		add_action('personal_options_update', $updateImgAvatar);
+		add_action('edit_user_profile_update', $updateImgAvatar);
 	}
 }

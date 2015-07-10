@@ -35,6 +35,7 @@ Actions::adminPrintScripts();
 // Actions::adminPrintStyles(); // Conflicts with WP styles
 Actions::loginView();
 Actions::wpBeforeAdminBarRender();
+Actions::userProfileAddImgAvatarAndHeader();
 
 // --------------------------------------------------------------
 // Filters
