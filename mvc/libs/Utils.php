@@ -16,6 +16,17 @@ class Utils {
 	const TYPE_AUTHOR = 'author';
 
 	/**
+	 * Check the value: not only spaces, with value and more than 0.
+	 *
+	 * @param string $value
+	 *        	String to check.
+	 * @return boolean true: valid, false: not valid.
+	 */
+	public static function isValidStr($value) {
+		return (isset($value) && !ctype_space($value) && strlen($value) > 0);
+	}
+
+	/**
 	 * Devuelve el ID del attachment apartir de su url
 	 *
 	 * @param string $attachmentUrl
