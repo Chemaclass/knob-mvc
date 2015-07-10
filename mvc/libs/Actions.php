@@ -73,6 +73,7 @@ class Actions {
 		$profileAddImg = function ($user) {
 			$controller = new BackendController();
 			echo $controller->getRenderProfileImg(User::KEY_AVATAR, $user->ID);
+			echo $controller->getRenderProfileImg(User::KEY_HEADER, $user->ID);
 		};
 		add_action('show_user_profile', $profileAddImg);
 		add_action('edit_user_profile', $profileAddImg);
@@ -91,6 +92,9 @@ class Actions {
 							case User::KEY_AVATAR :
 								$user->setAvatar($img);
 								break;
+							case User::KEY_HEADER :
+								$user->setHeader($img);
+								break;
 						}
 					}
 				}
@@ -105,8 +109,13 @@ class Actions {
 		$updateImgAvatar = function ($user_ID) use($updateImg) {
 			$updateImg($user_ID, User::KEY_AVATAR);
 		};
+		$updateImgHeader = function ($user_ID) use($updateImg) {
+			$updateImg($user_ID, User::KEY_HEADER);
+		};
 
 		add_action('personal_options_update', $updateImgAvatar);
 		add_action('edit_user_profile_update', $updateImgAvatar);
+		add_action('personal_options_update', $updateImgHeader);
+		add_action('edit_user_profile_update', $updateImgHeader);
 	}
 }
