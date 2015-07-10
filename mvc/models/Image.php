@@ -10,6 +10,11 @@ namespace Models;
 abstract class Image extends ModelBase {
 
 	/**
+	 * Return a list with the sizes of img to delete.
+	 */
+	protected abstract function getImageSizesToDelete();
+
+	/**
 	 * Set image
 	 *
 	 * @param string $keyImg
@@ -114,7 +119,7 @@ abstract class Image extends ModelBase {
 	private function removeImage($keyImg) {
 		// Save the path in one temporal var
 		$getImagePath = $this->getImagePath($keyImg);
-		$sizes = $this->_getTamanosABorrar();
+		$sizes = $this->getImageSizesToDelete();
 		foreach ( $sizes as $size ) {
 			$imgPath = $getImagePath['virgen'] . "-{$size}x{$size}" . $getImagePath['ext'];
 			if (file_exists($imgPath)) {

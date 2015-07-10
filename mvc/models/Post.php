@@ -62,6 +62,15 @@ class Post extends Image {
 	}
 
 	/**
+	 * (non-PHPdoc)
+	 *
+	 * @see \Models\Image::getImageSizesToDelete()
+	 */
+	protected function getImageSizesToDelete() {
+		// TODO:
+	}
+
+	/**
 	 * Return the author
 	 *
 	 * @return User

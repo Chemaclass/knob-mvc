@@ -26,7 +26,7 @@ class User extends Image {
 	 */
 	const KEY_FIRST_NAME = 'first_name';
 	const KEY_LAST_NAME = 'last_name';
-	const KEY_AVATAR = 'avatar';
+	const KEY_AVATAR = 'img_avatar';
 	const KEY_LANGUAGE = 'language';
 
 	/*
@@ -37,6 +37,15 @@ class User extends Image {
 	const ROL_AUTHOR = 'author';
 	const ROL_CONTRIBUTOR = 'contributor';
 	const ROL_SUBSCRIBER = 'subscriber';
+
+	/**
+	 * (non-PHPdoc)
+	 *
+	 * @see \Models\Image::getImageSizesToDelete()
+	 */
+	protected function getImageSizesToDelete() {
+		return $this->getSizesAvatar();
+	}
 
 	/**
 	 * Return true if the user is allowed as admin
@@ -208,9 +217,23 @@ class User extends Image {
 	}
 
 	/**
-	 * Establecer un nuevo avatar al User
+	 * Return a list with the possible sizes for the avatar
 	 *
-	 * @param FILE $newAvatar
+	 * @return array<integer>
+	 */
+	public function getSizesAvatar() {
+		return [
+			self::AVATAR_SIZE_ICO,
+			self::AVATAR_SIZE_SMALL,
+			self::AVATAR_SIZE_DEFAULT,
+			self::AVATAR_SIZE_PROFILE
+		];
+	}
+
+	/**
+	 * Set the new avatar
+	 *
+	 * @param file $newAvatar
 	 * @return boolean
 	 */
 	public function setAvatar($newAvatar = false) {
