@@ -40,7 +40,7 @@ Actions::userProfileAddImgAvatarAndHeader();
 // --------------------------------------------------------------
 // Filters
 // --------------------------------------------------------------
-Filters::wpFilterTest();
+Filters::getAvatar();
 
 /**
  * Remove the admin bar in prod
