@@ -3,17 +3,32 @@
 */
 #user {
 	
+	.img-header {
+	
+		img {
+			position: absolute;
+			height: 200px;
+			opacity: 0.95;
+			width: 100%;
+
+	    	&:hover {
+				opacity: 1;
+			}
+    	}
+    	
+	}
+	
 	.profile {
-		
+		white-space: nowrap;
+		margin-top: 100px;
 		
 		.avatar {
-			margin-top: 12px;
 			img {
 				max-height: 130px;
 			}
 		}
 		.info {
-			margin-top: 12px;
+	    	margin-top: 110px;
 			.what-result {}
 			.what-title {
 				font-weight: bold;

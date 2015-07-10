@@ -4,36 +4,48 @@
 	
 		{{# user }}
 			<div id="user" class="col-xs-12 author list-posts">
-
+			
+				<div class="row img-header">
+					{{# getHeader }}
+						<img alt="{{getDisplayName}}" src="{{getHeader}}">
+					{{/ getHeader }}
+					{{^ getHeader }}
+						<img class="sin-thumbnail">
+					{{/ getHeader }}
+				</div>
+				
 				<div class="profile row col-xs-12">
-					<span class="avatar col-xs-12 col-sm-4">
+					<span class="avatar col-xs-12 col-sm-2">
 						<img src="{{getAvatarProfile}}" title="{{getDisplayName}} avatar">
 					</span>
-					<span class="info col-xs-12 col-sm-8">
-						<span class="col-xs-12">
+					<span class="info hidden-xs hidden-sm col-sm-10">
+						
+						<span class="col-xs-12 col-sm-6 col-lg-4">
 							<span class="what-title">{{#transu}}user.display_name{{/transu}}:</span> 
-							<span class="what-result">{{getDisplayName | ucfirst}} </span> 
-						</span>
-						<span class="col-xs-12">
-							<span class="what-title">{{#transu}}user.full_name{{/transu}}:</span> 
-							<span class="what-result">{{getFullName | ucfirst}} </span> 
-						</span>
-						<span class="col-xs-12">
+							<span class="what-result" title="{{#transu}}user.display_name{{/transu}}">{{getDisplayName | ucfirst}} </span> 
+						</span>						
+						<span class="col-xs-12 col-sm-6 col-lg-4">
 							<span class="what-title">{{#transu}}user.rol{{/transu}}:</span> 
-							<span class="what-result">{{getFirstRol | ucfirst}} </span> 
+							<span class="what-result" title="{{#transu}}user.rol{{/transu}}">{{getFirstRol | ucfirst}} </span> 
 						</span>
-						<span class="col-xs-12">
+						<span class="col-xs-12 col-sm-6 col-lg-4">
+							<span class="what-title">{{#transu}}user.full_name{{/transu}}:</span> 
+							<span class="what-result" title="{{#transu}}user.full_name{{/transu}}">{{getFullName | ucfirst}} </span> 
+						</span>
+						
+						<span class="col-xs-12 col-sm-6 col-lg-4">
 							<span class="what-title">{{#transu}}user.web{{/transu}}:</span> 
-							<span class="what-result"><a href="{{getUserUrl}}" target="_blank">{{getUserUrl}}</a></span> 
+							<span class="what-result"><a href="{{getUserUrl}}" title="{{#transu}}user.web{{/transu}}" target="_blank">{{getUserUrl}}</a></span> 
 						</span>
-						<span class="col-xs-12">
+						<span class="col-xs-12 col-sm-6 col-lg-4">
 							<span class="what-title">{{#transu}}user.total_publish_posts{{/transu}}:</span> 
-							<span class="what-result">{{getPosts | count}} </span> 
+							<span class="what-result" title="{{#transu}}user.total_publish_posts{{/transu}}">{{getPosts | count}} </span> 
 						</span>
-						<span class="col-xs-12">
+						<span class="col-xs-12 col-sm-6 col-lg-4">
 							<span class="what-title">{{#transu}}user.total_comments{{/transu}}:</span> 
-							<span class="what-result">{{getComments | count}}</span> 
+							<span class="what-result" title="{{#transu}}user.total_comments{{/transu}}">{{getComments | count}}</span> 
 						</span>
+						
 					</span>
 				</div>
 
