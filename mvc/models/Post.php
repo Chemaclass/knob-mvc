@@ -51,11 +51,23 @@ class Post extends Image {
 	 *
 	 * @return array<Post>
 	 */
-	public static function getAllPages() {
+	public static function getAllPages($args = []) {
 		foreach ( get_all_page_ids() as $id ) {
 			$p = Post::find($id);
 			if ($p->ID) {
 				$pages[] = $p;
+			}
+		}
+
+		if (count($args) && isset($args['excludeSlugs'])) {
+			if (($excludeSlugs = $args['excludeSlugs']) && count($excludeSlugs)) {
+				foreach ( $pages as $kP => $p ) {
+					foreach ( $excludeSlugs as $excludeSlug ) {
+						if ($p->getSlug() == $excludeSlug) {
+							unset($pages[$kP]);
+						}
+					}
+				}
 			}
 		}
 		return $pages;
@@ -68,6 +80,13 @@ class Post extends Image {
 	 */
 	protected function getImageSizesToDelete() {
 		// TODO:
+	}
+
+	/**
+	 * Return the post_name
+	 */
+	public function getSlug() {
+		return $this->post_name;
 	}
 
 	/**

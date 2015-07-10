@@ -194,7 +194,13 @@ abstract class BaseController {
 		/*
 		 * Pages
 		 */
-		$templateVars['sidebar']['content']['pages']['content'] = Post::getAllPages();
+		$args = [
+			'excludeSlugs' => [
+				'lang'
+			]
+		];
+
+		$templateVars['sidebar']['content']['pages']['content'] = Post::getAllPages($args);
 
 		/*
 		 * Categories
