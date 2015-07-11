@@ -36,7 +36,7 @@ class HomeController extends BaseController {
 		$args = [
 			'thingType' => I18n::transu('category'),
 			'thingToSearch' => $cat->name,
-			'posts' => self::getPostsByCategory($cat->term_id)
+			'posts' => Post::getByCategory($cat->term_id)
 		];
 		return $this->renderPage('search', $args);
 	}
@@ -46,7 +46,7 @@ class HomeController extends BaseController {
 	 */
 	public function getHome() {
 		$args = [
-			'posts' => self::getPosts(get_option('posts_per_page'))
+			'posts' => Post::getAll(get_option('posts_per_page'))
 		];
 		return $this->renderPage('home', $args);
 	}
@@ -71,7 +71,7 @@ class HomeController extends BaseController {
 		$searchQuery = get_search_query();
 		$args = [
 			'thingToSearch' => $searchQuery,
-			'posts' => self::getPostsBySearch($searchQuery)
+			'posts' => Post::getBySearch($searchQuery)
 		];
 		return $this->renderPage('search', $args);
 	}
@@ -100,7 +100,7 @@ class HomeController extends BaseController {
 		$args = [
 			'thingType' => I18n::transu('tag'),
 			'thingToSearch' => $tag->name,
-			'posts' => self::getPostsByTag($tag->term_id)
+			'posts' => Post::getByTag($tag->term_id)
 		];
 		return $this->renderPage('search', $args);
 	}
