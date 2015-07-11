@@ -33,7 +33,7 @@ abstract class BaseController {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->currentUser = Utils::getCurrentUser();
+		$this->currentUser = User::getCurrent();
 
 		$templatesFolder = self::getTemplatesFolderLocation();
 

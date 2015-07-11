@@ -70,19 +70,6 @@ class Utils {
 	}
 
 	/**
-	 * Return the instance of the current user, or null if they're not logged
-	 *
-	 * @return User
-	 */
-	public static function getCurrentUser() {
-		$user = wp_get_current_user();
-		if ($user->ID) {
-			return User::find($user->ID);
-		}
-		return null;
-	}
-
-	/**
 	 * Return $_SERVER[ REQUEST_URI ]
 	 *
 	 * @return string
