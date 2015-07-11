@@ -114,7 +114,7 @@ abstract class BaseController {
 			'atomUrl' => get_bloginfo('atom_url'),
 
 			'blogTitle' => BLOG_TITLE,
-			'blogDescription' => get_bloginfo('description'),
+			'blogDescription' => ($d = I18n::trans('internal.blog_description'))? $d : get_bloginfo('description'),
 
 			'categoryBase' => ($c = get_option('category_base')) ? $c : Post::CATEGORY_BASE_DEFAULT,
 			'charset' => get_bloginfo('charset'),
