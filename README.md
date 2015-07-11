@@ -4,7 +4,7 @@
 
 * Knob MVC
 * This is a PHP MVC Framework for creating Wordpress templates easier and with more fun than ever before.
-* Version: 0.5
+* Version: 0.6
 * Author José María Valera Reales
 
 
@@ -37,7 +37,7 @@ Here's a sample function from a controller that loads the header data into the h
  */
 public function getHome() {
 	$args = [
-		'posts' => self::getPosts(get_option('posts_per_page'))
+		'posts' => Post::getAll(get_option('posts_per_page'))
 	];
 	return $this->renderPage('home', $args);
 }
@@ -104,7 +104,7 @@ Here is an example template showing a post:
 
 		<div id="post" class="col-xs-12">
 			
-			<h1 class="title">{{{post.getTitle}}}</h1>
+			<h1 class="title">{{ post.getTitle }}</h1>
 			
 			{{{ post.getContent }}}
 			
@@ -174,15 +174,15 @@ And then we have `home.mustache`:
 
 	{{$ content }}
 
-		<section id="home" class="col-xs-12">
+		<div id="home" class="col-xs-12">
 
-			<article class="all-posts">
+			<section class="all-posts">
 				{{# posts }}
 					{{> home/_post}}
 				{{/ posts }}		
-			</article>
+			</section>
 
-		</section>
+		</div>
 
 	{{/ content }}
 
