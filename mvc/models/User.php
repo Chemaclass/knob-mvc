@@ -297,8 +297,7 @@ class User extends Image {
 		if (!$limit) {
 			$limit = get_option('posts_per_page');
 		}
-		$moreQuerySettings['author'] = $this->ID;
-		return HomeController::getPosts($limit, $offset, $moreQuerySettings);
+		return Post::getByAuthor($this->ID, $limit, $offset);
 	}
 
 	/**
