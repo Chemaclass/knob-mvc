@@ -5,6 +5,7 @@ namespace Controllers;
 use Libs\Ajax;
 use I18n\I18n;
 use Libs\KeysRequest;
+use Models\Post;
 
 // Load WP.
 // We have to require this file, in other case we cant call to the WP functions
@@ -44,7 +45,7 @@ class AjaxController extends BaseController {
 			case 'show-more' :
 				$limit = $_datas['limit'];
 				$offset = $_datas['offset'];
-				$posts = HomeController::getPosts($limit, $offset);
+				$posts = Post::getAll($limit, $offset);
 				$content = $this->render('home/_all_posts', [
 					'posts' => $posts
 				]);
