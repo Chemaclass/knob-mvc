@@ -459,7 +459,7 @@ class Post extends Image {
 	 * @param array $moreQuerySettings
 	 * @return array<Post>
 	 */
-	protected static function getByTag($tagId, $limit = false, $moreQuerySettings = []) {
+	public static function getByTag($tagId, $limit = false, $moreQuerySettings = []) {
 		return self::getBy(Utils::TYPE_TAG, $tagId, $limit, $moreQuerySettings);
 	}
 
