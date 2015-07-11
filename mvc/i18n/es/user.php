@@ -8,7 +8,7 @@ return [
 	// C
 
 	// D
-	'display_name' => 'nickname',
+	'display_name' => 'apodo',
 
 	// E
 	'enter' => 'introduce',
@@ -47,7 +47,7 @@ return [
 	// S
 
 	// T
-	'total_publish_posts' => 'total posts publicados',
+	'total_publish_posts' => 'entradas publicadas',
 	'total_comments' => 'total comentarios',
 
 	// U
