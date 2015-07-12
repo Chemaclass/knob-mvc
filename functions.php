@@ -1,5 +1,6 @@
 <?php
 require_once 'vendor/autoload.php';
+require_once 'mvc/libs/Helpers.php';
 
 use Libs\Actions;
 use Libs\Filters;
