@@ -20,7 +20,7 @@ class HomeController extends BaseController {
 		$author = get_queried_object();
 		$user = User::find($author->ID);
 		if (!$user) {
-			return $this->getError();
+			return $this->get404();
 		}
 		$args = [
 			'user' => $user
@@ -52,16 +52,10 @@ class HomeController extends BaseController {
 	}
 
 	/**
-	 * Error
+	 * 404.php
 	 */
-	public function getError($code = 404, $message = 'Not found') {
-		$args = [
-			'error' => [
-				'code' => $code,
-				'message' => $message
-			]
-		];
-		return $this->renderPage('error', $args);
+	public function get404() {
+		return $this->renderPage('error_404');
 	}
 
 	/**
@@ -85,7 +79,7 @@ class HomeController extends BaseController {
 			$post = Post::find(get_the_ID());
 		}
 		if (!isset($post)) {
-			return $this->getError();
+			return $this->get404();
 		}
 		return $this->renderPage($type, [
 			$type => $post

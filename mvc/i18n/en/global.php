@@ -42,6 +42,7 @@ return [
 
 	// N
 	'name' => 'name',
+	'not_found' => 'not found',
 
 	// O
 
