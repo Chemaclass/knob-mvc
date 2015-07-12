@@ -28,8 +28,8 @@ class Actions {
 	 */
 	public static function adminPrintStyles() {
 		add_action('admin_print_styles', function () {
-			wp_enqueue_style('bootstrap', COMPONENTS_DIR . '/bootstrap/css/bootstrap.css');
-			wp_enqueue_style('font-awesome', COMPONENTS_DIR . '/font-awesome/css/font-awesome.min.css');
+			// wp_enqueue_style('knob-bootstrap', COMPONENTS_DIR . '/bootstrap/css/bootstrap.css'); // conflicts with WP
+			wp_enqueue_style('knob-font-awesome', COMPONENTS_DIR . '/font-awesome/css/font-awesome.min.css');
 			wp_enqueue_style('knob-main', PUBLIC_DIR . '/css/main.css');
 		});
 	}

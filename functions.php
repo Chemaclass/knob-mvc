@@ -32,7 +32,7 @@ define(ADMIN_EMAIL, get_bloginfo('admin_email'));
 // Actions
 // --------------------------------------------------------------
 Actions::adminPrintScripts();
-// Actions::adminPrintStyles(); // Conflicts with WP styles
+Actions::adminPrintStyles();
 Actions::loginView();
 Actions::wpBeforeAdminBarRender();
 Actions::userProfileAddImgAvatarAndHeader();
