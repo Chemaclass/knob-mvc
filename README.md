@@ -29,7 +29,7 @@ Here is an example of a header template that displays the above data.
 
 A controller talks to the data helpers, loads the mustache template and can then be called from your WordPress template files.
 
-Here's a sample function from a controller that loads the header data into the header template.
+Here's a sample function from a controller that loads all posts, limited by 'posts per page', into the home template.
 
 ```php
 /**
@@ -47,7 +47,7 @@ public function getHome() {
 
 ### Creating a controller
 
-Controllers should extend BaseController. This then provides access to the templating functions. 
+Controllers should extend BaseController. This then provides access to the templating functions.
 
 ```php
 namespace Controllers;
@@ -72,6 +72,32 @@ class HomeController extends BaseController {
 		]);
 	}
 }
+```
+
+### renderPage function
+
+We'll use this function for to render our Mustache templates:
+
+```php
+BaseController->renderPage(templateName, varsToTemplate)
+```
+
+Implementation:
+
+```php
+class BaseController {
+	// ...
+
+	public function renderPage($templateName, $templateVars = []) {
+		$this->addGlobalVariables($templateVars);
+		$this->addSidebarVars($templateVars, true);
+		echo $this->render('head', $templateVars);
+		wp_head();
+		echo '</head>';
+		echo $this->render($templateName, $templateVars);
+		wp_footer();
+		echo $this->render('footer', $templateVars);
+	}
 ```
 
 You could group functions in a single controller, or create separate controllers for each template type. We favour the later.
