@@ -86,11 +86,20 @@ Implementation:
 
 ```php
 class BaseController {
+	
 	// ...
 
+	/**
+	 * Print head + template + footer
+	 */
 	public function renderPage($templateName, $templateVars = []) {
+
+		// Add the global variables for all controllers.	
 		$this->addGlobalVariables($templateVars);
+
+		// Sidebar variables.
 		$this->addSidebarVars($templateVars, true);
+
 		echo $this->render('head', $templateVars);
 		wp_head();
 		echo '</head>';
@@ -98,6 +107,7 @@ class BaseController {
 		wp_footer();
 		echo $this->render('footer', $templateVars);
 	}
+}
 ```
 
 You could group functions in a single controller, or create separate controllers for each template type. We favour the later.
