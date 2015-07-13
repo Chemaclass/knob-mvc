@@ -109,6 +109,33 @@ abstract class BaseController {
 	 * @param array $templateVars
 	 */
 	private function addGlobalVariables(&$templateVars = []) {
+
+		/*
+		 * Active
+		 */
+		$templateVars['sidebar']['active'] = ($u = User::getCurrent()) ? $u->isWithSidebar() : User::WITH_SIDEBAR_DEFAULT;
+
+		/*
+		 * Pages
+		 */
+		$templateVars['pages'] = Post::getAllPages([
+			'excludeSlugs' => [
+				'lang'
+			]
+		]);
+		/*
+		 * Categories
+		 */
+		$templateVars['categories'] = Term::getCategories();
+
+		/*
+		 * Tags
+		 */
+		$templateVars['tags'] = Term::getTags();
+
+		/*
+		 * Generics variables
+		 */
 		return array_merge($templateVars, [
 			'adminEmail' => ADMIN_EMAIL,
 			'atomUrl' => get_bloginfo('atom_url'),
@@ -170,44 +197,12 @@ abstract class BaseController {
 	 */
 	public function renderPage($templateName, $templateVars = []) {
 		$this->addGlobalVariables($templateVars);
-		$this->addSidebarVars($templateVars, true);
 		echo $this->render('head', $templateVars);
 		wp_head();
 		echo '</head>';
 		echo $this->render($templateName, $templateVars);
 		wp_footer();
 		echo $this->render('footer', $templateVars);
-	}
-
-	/**
-	 * Sidebar variables.
-	 *
-	 * @param array $templateVars
-	 * @param boolean $withSidebar
-	 */
-	private function addSidebarVars(&$templateVars, $withSidebar = true) {
-		/*
-		 * Active
-		 */
-		$templateVars['sidebar']['active'] = $withSidebar;
-
-		/*
-		 * Pages
-		 */
-		$templateVars['pages'] = Post::getAllPages([
-			'excludeSlugs' => [
-				'lang'
-			]
-		]);
-		/*
-		 * Categories
-		 */
-		$templateVars['categories'] = Term::getCategories();
-
-		/*
-		 * Tags
-		 */
-		$templateVars['tags'] = Term::getTags();
 	}
 
 	/**
