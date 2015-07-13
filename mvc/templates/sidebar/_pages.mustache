@@ -1,15 +1,15 @@
-{{# pages }}
+{{# pages | count }}
 <div class="sidebar-item pages row">
 
 	<div class="title">
-		{{#transu}}pages{{/transu}} ({{content | count }})
+		{{#transu}}pages{{/transu}} ({{pages | count }})
 	</div>
 
 	<ul class="list-group">
-		{{# content }}
+		{{# pages }}
 			<a href="{{getPermalink}}"><li class="list-group-item">{{getTitle}}</li></a>
-		{{/ content }}
+		{{/ pages }}
 	</ul>
 
 </div>
-{{/ pages }}
+{{/ pages | count  }}

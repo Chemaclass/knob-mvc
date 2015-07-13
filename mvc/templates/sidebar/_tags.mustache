@@ -1,15 +1,15 @@
-{{# tags }}
+{{# tags | count }}
 <div class="sidebar-item tags row">
 
 	<div class="title">
-		{{#transu}}tags{{/transu}} ({{content | count }})
+		{{#transu}}tags{{/transu}} ({{tags | count }})
 	</div>
 
 	<ul class="tags col-xs-12">
-		{{# content }}
+		{{# tags }}
 			<a href="/{{tagBase}}/{{getSlug}}"><li class="">{{getName}}</li></a>
-		{{/ content }}
+		{{/ tags }}
 	</ul>
 
 </div>
-{{/ tags }}
+{{/ tags | count }}
