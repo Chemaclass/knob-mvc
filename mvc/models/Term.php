@@ -28,7 +28,7 @@ class Term extends ModelBase {
 	public static function getCategories($args = []) {
 		if (!count($args)) {
 			$args = [
-				'orderby' => 'count',
+				'orderby' => 'name,count',
 				'hide_empty' => true
 			];
 		}
@@ -47,7 +47,7 @@ class Term extends ModelBase {
 	public static function getTags($args = []) {
 		if (!count($args)) {
 			$args = [
-				'orderby' => 'count',
+				'orderby' => 'name,count',
 				'hide_empty' => true
 			];
 		}
