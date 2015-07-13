@@ -45,6 +45,11 @@ class User extends Image {
 	const HEADER_WIDTH = 1200;
 	const HEADER_HEIGHT = 270;
 
+	/*
+	 * Sidebar
+	 */
+	const WITH_SIDEBAR_DEFAULT = true;
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -421,5 +426,14 @@ class User extends Image {
 			return User::find($user->ID);
 		}
 		return null;
+	}
+
+	/**
+	 * Return true if the User can see the sidebar.
+	 *
+	 * @return boolean
+	 */
+	public function isWithSidebar() {
+		return self::WITH_SIDEBAR_DEFAULT;
 	}
 }
