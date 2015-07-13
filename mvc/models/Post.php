@@ -70,6 +70,14 @@ class Post extends Image {
 				}
 			}
 		}
+
+		/*
+		 * Sort by title
+		 */
+		usort($pages, function ($a, $b) {
+			strcmp($a->getTitle(), $b->getTitle());
+		});
+
 		return $pages;
 	}
 
