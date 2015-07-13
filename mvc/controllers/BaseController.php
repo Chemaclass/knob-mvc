@@ -114,7 +114,7 @@ abstract class BaseController {
 			'atomUrl' => get_bloginfo('atom_url'),
 
 			'blogTitle' => BLOG_TITLE,
-			'blogDescription' => ($d = I18n::trans('internal.blog_description'))? $d : get_bloginfo('description'),
+			'blogDescription' => ($d = I18n::trans('internal.blog_description')) ? $d : get_bloginfo('description'),
 
 			'categoryBase' => ($c = get_option('category_base')) ? $c : Post::CATEGORY_BASE_DEFAULT,
 			'charset' => get_bloginfo('charset'),
@@ -194,23 +194,20 @@ abstract class BaseController {
 		/*
 		 * Pages
 		 */
-		$args = [
+		$templateVars['pages'] = Post::getAllPages([
 			'excludeSlugs' => [
 				'lang'
 			]
-		];
-
-		$templateVars['sidebar']['content']['pages']['content'] = Post::getAllPages($args);
-
+		]);
 		/*
 		 * Categories
 		 */
-		$templateVars['sidebar']['content']['categories']['content'] = Term::getCategories();
+		$templateVars['categories'] = Term::getCategories();
 
 		/*
 		 * Tags
 		 */
-		$templateVars['sidebar']['content']['tags']['content'] = Term::getTags();
+		$templateVars['tags'] = Term::getTags();
 	}
 
 	/**
