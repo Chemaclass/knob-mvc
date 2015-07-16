@@ -4,6 +4,7 @@ namespace Models;
 
 use I18n\I18n;
 use Libs\Utils;
+use Libs\Ajax;
 
 /**
  * Post Model
@@ -334,6 +335,27 @@ class Post extends Image {
 	}
 
 	/**
+	 * Return a clousure
+	 *
+	 * @param string $by
+	 */
+	public static function getFuncBy($by) {
+		return function ($value, $limit = false, $offset = false, $moreQuerySettings = []) use($by) {
+			switch ($by) {
+				case Ajax::AUTHOR :
+					return static::getByAuthor("$value", $limit, $offset, $moreQuerySettings);
+				case Ajax::CATEGORY :
+					return static::getByCategory("$value", $limit, $offset, $moreQuerySettings);
+				case Ajax::TAG :
+					return static::getByTag("$value", $limit, $offset, $moreQuerySettings);
+				case Ajax::HOME :
+				default :
+					return static::getAll($limit, $offset, $moreQuerySettings);
+			}
+		};
+	}
+
+	/**
 	 * Get Posts
 	 *
 	 * @param integer $limit
@@ -345,7 +367,7 @@ class Post extends Image {
 	 */
 	public static function getAll($limit = -1, $offset = false, $moreQuerySettings = []) {
 		// Get all fixed posts.
-		$posts = self::getStickyPosts($limit, $offset, $moreQuerySettings, $postType, $oddOrEven);
+		$posts = self::getStickyPosts($limit, $offset, $moreQuerySettings);
 		$isCat = isset($moreQuerySettings['cat']);
 		$postsStickyIds = [ ];
 		// Check all fixed posts with the category we're searching.
@@ -434,8 +456,8 @@ class Post extends Image {
 	 * @param array $moreQuerySettings
 	 * @return array<Post>
 	 */
-	public static function getByAuthor($autorId, $limit = false, $moreQuerySettings = []) {
-		return self::getBy(Utils::TYPE_AUTHOR, $autorId, $limit, $moreQuerySettings);
+	public static function getByAuthor($autorId, $limit = false, $offset = false, $moreQuerySettings = []) {
+		return self::getBy(Utils::TYPE_AUTHOR, $autorId, $limit, $offset, $moreQuerySettings);
 	}
 
 	/**
@@ -446,8 +468,8 @@ class Post extends Image {
 	 * @param array $moreQuerySettings
 	 * @return array<Post>
 	 */
-	public static function getBySearch($searchQuery, $limit = false, $moreQuerySettings = []) {
-		return self::getBy(Utils::TYPE_SEARCH, $searchQuery, $limit, $moreQuerySettings);
+	public static function getBySearch($searchQuery, $limit = false, $offset = false, $moreQuerySettings = []) {
+		return self::getBy(Utils::TYPE_SEARCH, $searchQuery, $limit, $offset, $moreQuerySettings);
 	}
 
 	/**
@@ -458,8 +480,8 @@ class Post extends Image {
 	 * @param array $moreQuerySettings
 	 * @return array<Post>
 	 */
-	public static function getByCategory($catId, $limit = false, $moreQuerySettings = []) {
-		return self::getBy(Utils::TYPE_CATEGORY, $catId, $limit, $moreQuerySettings);
+	public static function getByCategory($catId, $limit = false, $offset = false, $moreQuerySettings = []) {
+		return self::getBy(Utils::TYPE_CATEGORY, $catId, $limit, $offset, $moreQuerySettings);
 	}
 
 	/**
@@ -469,8 +491,8 @@ class Post extends Image {
 	 * @param array $moreQuerySettings
 	 * @return array<Post>
 	 */
-	public static function getByTag($tagId, $limit = false, $moreQuerySettings = []) {
-		return self::getBy(Utils::TYPE_TAG, $tagId, $limit, $moreQuerySettings);
+	public static function getByTag($tagId, $limit = false, $offset = false, $moreQuerySettings = []) {
+		return self::getBy(Utils::TYPE_TAG, $tagId, $limit, $offset, $moreQuerySettings);
 	}
 
 	/**
@@ -482,19 +504,19 @@ class Post extends Image {
 	 * @param array $moreQuerySettings
 	 * @return array<Post>
 	 */
-	private static function getBy($type, $by, $limit = false, $moreQuerySettings = []) {
+	private static function getBy($type, $by, $limit = false, $offset = false, $moreQuerySettings = []) {
 		if (!$limit) {
 			$limit = get_option('posts_per_page');
 		}
-		if ($type == Utils::TYPE_TAG) {
+		if ($type == Ajax::TAG) {
 			$tagId = is_numeric($by) ? $by : get_term_by('name', $by, 'post_tag')->term_id;
 			$moreQuerySettings['tag_id'] = "$tagId";
-		} elseif ($type == Utils::TYPE_CATEGORY) {
+		} elseif ($type == Ajax::CATEGORY) {
 			$catId = is_numeric($by) ? $by : get_cat_ID($by);
 			$moreQuerySettings['cat'] = "$catId";
-		} elseif ($type == Utils::TYPE_SEARCH) {
+		} elseif ($type == Ajax::SEARCH) {
 			$moreQuerySettings['s'] = "$by";
-		} elseif ($type == Utils::TYPE_AUTHOR) {
+		} elseif ($type == Ajax::AUTHOR) {
 			$moreQuerySettings['author'] = $by;
 		}
 		return self::getAll($limit, $offset, $moreQuerySettings);
