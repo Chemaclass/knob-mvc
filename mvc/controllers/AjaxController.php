@@ -39,21 +39,22 @@ class AjaxController extends BaseController {
 	 * @param array $_datas
 	 * @return array JSON
 	 */
-	private function jsonHome($_datas) {
-		switch ($_datas['type']) {
-			// TODO: show-more not only in home, I mean, also into the search, category, tag...
-			case 'show-more' :
-				$limit = $_datas['limit'];
-				$offset = $_datas['offset'];
-				$posts = Post::getAll($limit, $offset);
-				$content = $this->render('home/_all_posts', [
-					'posts' => $posts
-				]);
-				$json['limit'] = count($posts);
-				$json['content'] = $content;
-				$json['code'] = KeysRequest::OK;
-				break;
-		}
+	private function jsonShowMore($_datas) {
+		$postsWhereKey = $_datas['postsWhereKey'];
+		$postsWhereValue = $_datas['postsWhereValue'];
+		$limit = $_datas['limit'];
+		$offset = $_datas['offset'];
+
+		$getPostsBy = Post::getFuncBy($postsWhereKey);
+		$posts = $getPostsBy($postsWhereValue, $limit, $offset);
+
+		$content = $this->render('home/_all_posts', [
+			'posts' => $posts
+		]);
+		$json['limit'] = count($posts);
+		$json['content'] = $content;
+		$json['code'] = KeysRequest::OK;
+
 		return $json;
 	}
 
@@ -63,8 +64,8 @@ class AjaxController extends BaseController {
 	 */
 	public function getJsonBySubmit($submit, $_datas) {
 		switch ($submit) {
-			case Ajax::HOME :
-				return $this->jsonHome($_datas);
+			case 'show-more' :
+				return $this->jsonShowMore($_datas);
 		}
 	}
 
