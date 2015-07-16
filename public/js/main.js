@@ -37,13 +37,16 @@ function doScroll() {
 $(document).on('click', '.show-more', function(e) {
 	e.preventDefault();
 	var $this = $(this);
+	var postsWhereKey = $this.attr('posts-where-key');
+	var postsWhereValue = $this.attr('posts-where-value');
 	var limit = $this.attr('limit');
-	var posts = $('#home .all-posts');
+	var posts = $('#all-posts');
 	var offset = posts.find('.post').size();
 	var url = $('#page').attr('ajax-url');
 	var data = {
-		submit : 'home',
-		type : 'show-more',
+		submit : 'show-more',
+		postsWhereKey: postsWhereKey,
+		postsWhereValue: postsWhereValue,
 		limit: limit,
 		offset: offset
 	};
