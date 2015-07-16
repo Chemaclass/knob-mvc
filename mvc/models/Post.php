@@ -340,14 +340,16 @@ class Post extends Image {
 	 * @param string $by
 	 */
 	public static function getFuncBy($by) {
-		return function ($value, $limit = false, $offset = false, $moreQuerySettings = []) use($by) {
+		return function ($value = false, $limit = false, $offset = false, $moreQuerySettings = []) use($by) {
 			switch ($by) {
 				case Ajax::AUTHOR :
-					return static::getByAuthor("$value", $limit, $offset, $moreQuerySettings);
+					return static::getByAuthor($value, $limit, $offset, $moreQuerySettings);
 				case Ajax::CATEGORY :
-					return static::getByCategory("$value", $limit, $offset, $moreQuerySettings);
+					return static::getByCategory($value, $limit, $offset, $moreQuerySettings);
+				case Ajax::SEARCH :
+					return static::getBySearch($value, $limit, $offset, $moreQuerySettings);
 				case Ajax::TAG :
-					return static::getByTag("$value", $limit, $offset, $moreQuerySettings);
+					return static::getByTag($value, $limit, $offset, $moreQuerySettings);
 				case Ajax::HOME :
 				default :
 					return static::getAll($limit, $offset, $moreQuerySettings);
