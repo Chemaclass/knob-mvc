@@ -5,6 +5,7 @@ namespace Controllers;
 use Models\Post;
 use Models\User;
 use I18n\I18n;
+use Libs\Ajax;
 
 /**
  * Home Controller
@@ -23,6 +24,8 @@ class HomeController extends BaseController {
 			return $this->get404();
 		}
 		$args = [
+			'postsWhereKey' => Ajax::AUTHOR,
+			'postsWhereValue' => $user->getID(),
 			'user' => $user
 		];
 		return $this->renderPage('author', $args);
@@ -36,6 +39,8 @@ class HomeController extends BaseController {
 		$args = [
 			'thingType' => I18n::transu('category'),
 			'thingToSearch' => $cat->name,
+			'postsWhereKey' => Ajax::CATEGORY,
+			'postsWhereValue' => $cat->term_id,
 			'posts' => Post::getByCategory($cat->term_id)
 		];
 		return $this->renderPage('search', $args);
@@ -46,6 +51,8 @@ class HomeController extends BaseController {
 	 */
 	public function getHome() {
 		$args = [
+			'postsWhereKey' => Ajax::HOME,
+			'postsWhereValue' => false,
 			'posts' => Post::getAll(get_option('posts_per_page'))
 		];
 		return $this->renderPage('home', $args);
@@ -64,6 +71,8 @@ class HomeController extends BaseController {
 	public function getSearch() {
 		$searchQuery = get_search_query();
 		$args = [
+			'postsWhereKey' => Ajax::SEARCH,
+			'postsWhereValue' => $searchQuery,
 			'thingToSearch' => $searchQuery,
 			'posts' => Post::getBySearch($searchQuery)
 		];
@@ -92,6 +101,8 @@ class HomeController extends BaseController {
 	public function getTag() {
 		$tag = get_queried_object();
 		$args = [
+			'postsWhereKey' => Ajax::TAG,
+			'postsWhereValue' => $tag->term_id,
 			'thingType' => I18n::transu('tag'),
 			'thingToSearch' => $tag->name,
 			'posts' => Post::getByTag($tag->term_id)
