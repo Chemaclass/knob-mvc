@@ -212,11 +212,13 @@ class Post extends Image {
 	 * @return string
 	 */
 	public function getExcerpt() {
-		$the_excerpt = strip_tags(strip_shortcodes($this->post_content));
-		$the_excerpt = trim(preg_replace('/\s\s+/', ' ', $the_excerpt));
-		$the_excerpt = preg_replace("/[\xc2|\xa0]/", ' ', $the_excerpt);
-		$the_excerpt = Utils::getWordsByStr($the_excerpt, self::COUNT_EXCERPT);
-		return $the_excerpt;
+		$excerpt = $this->post_excerpt;
+		if (!Utils::isValidStr($excerpt)) {
+			$excerpt = strip_tags(strip_shortcodes($this->post_content));
+			$excerpt = trim(preg_replace('/\s\s+/', ' ', $excerpt));
+			$excerpt = preg_replace("/[\xc2|\xa0]/", ' ', $excerpt);
+		}
+		return Utils::getWordsByStr($excerpt, self::COUNT_EXCERPT);
 	}
 
 	/**
