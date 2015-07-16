@@ -13,6 +13,10 @@ class Ajax {
 	 * Some constant
 	 */
 	const HOME = 'home';
+	const CATEGORY = 'category';
+	const TAG = 'tag';
+	const AUTHOR = 'author';
+	const SEARCH = 'search';
 
 	/**
 	 *
