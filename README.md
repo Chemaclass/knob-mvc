@@ -4,7 +4,7 @@
 
 * Knob MVC
 * This is a PHP MVC Framework for creating Wordpress templates easier and with more fun than ever before.
-* Version: 0.6
+* Version: 0.7
 * Author José María Valera Reales
 
 
@@ -45,6 +45,24 @@ public function getHome() {
 
 ## Creating basic controllers and views
 
+All controllers are inside mvc/controllers.
+
+* AjaxController
+* BaseController
+* BackendController
+* HomeController
+
+### Calling a controller from a WordPress template page
+
+[Create a template for WordPress](http://codex.wordpress.org/Template_Hierarchy), for example single.php which is used when a Post is loaded.
+
+```php
+use Controllers\HomeController;
+
+$controller = new HomeController();
+$controller->getSingle('post');
+```    
+
 ### Creating a controller
 
 Controllers should extend BaseController. This then provides access to the templating functions.
@@ -65,7 +83,7 @@ class HomeController extends BaseController {
 			$post = Post::find(get_the_ID());
 		}
 		if (!isset($post)) {
-			return $this->getError();
+			return $this->get404();
 		}
 		return $this->renderPage($type, [ 
 			$type => $post 
@@ -86,7 +104,6 @@ Implementation:
 
 ```php
 class BaseController {
-	
 	// ...
 
 	/**
@@ -94,11 +111,8 @@ class BaseController {
 	 */
 	public function renderPage($templateName, $templateVars = []) {
 
-		// Add the global variables for all controllers.	
+		// Add the global variables for all templates.	
 		$this->addGlobalVariables($templateVars);
-
-		// Sidebar variables.
-		$this->addSidebarVars($templateVars, true);
 
 		echo $this->render('head', $templateVars);
 		wp_head();
@@ -109,21 +123,6 @@ class BaseController {
 	}
 }
 ```
-
-You could group functions in a single controller, or create separate controllers for each template type. We favour the later.
-
-Place controllers inside mvc/controllers.
-
-### Calling a controller from a WordPress template page
-
-[Create a template for WordPress](http://codex.wordpress.org/Template_Hierarchy), for example single.php which is used when a Post is loaded.
-
-```php
-use Controllers\HomeController;
-
-$controller = new HomeController();
-$controller->getSingle('post');
-```    
 
 ### Creating mustache templates
 
