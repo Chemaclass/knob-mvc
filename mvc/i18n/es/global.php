@@ -55,6 +55,7 @@ return [
 	// Q
 
 	// R
+	'random' => 'aleatorio',
 
 	// S
 	'search' => 'buscar',

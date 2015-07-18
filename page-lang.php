@@ -6,8 +6,7 @@ use I18n\I18n;
  * For to use this page remember that you have to create your own
  * page through the backend from Wordpress.
  *
- * Example to use:
- * yoursite.com/lang?lang=en
+ * @example yoursite.com/lang?lang=en
  */
 
 $lang = $_GET['lang'];
