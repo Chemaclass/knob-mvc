@@ -19,6 +19,18 @@
 				<li class=""><a href="/random">{{#transu}}random{{/transu}}</a></li>
 
 				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="{{archives |count}} {{#transu}}total{{/transu}}"
+							role="button" aria-haspopup="true" aria-expanded="false">
+						{{#transu}}archives{{/transu}} <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						{{# archives }}
+							<li><a href="{{getUrl}}" title="{{getTotal}}">{{getText}}</a></li>
+						{{/ archives }}
+					</ul>
+				</li>
+
+				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="{{pages |count}} {{#transu}}total{{/transu}}"
 							role="button" aria-haspopup="true" aria-expanded="false">
 						{{#transu}}pages{{/transu}} <span class="caret"></span>
