@@ -19,11 +19,17 @@ class Term extends ModelBase {
 	 */
 	const TRANSIENT_ALL_TAGS = 'ALL_TAGS';
 
+	/*
+	 * Members
+	 */
+	private $total;
+
 	/**
 	 * Return all categories
 	 *
 	 * @param array $args
 	 * @return array<Term>
+	 * @link https://codex.wordpress.org/Function_Reference/get_terms
 	 */
 	public static function getCategories($args = []) {
 		if (!count($args)) {
@@ -32,8 +38,10 @@ class Term extends ModelBase {
 				'hide_empty' => true
 			];
 		}
-		foreach ( get_terms('category', $args) as $c ) {
-			$categories[] = Term::find($c->term_id);
+		foreach ( get_terms('category', $args) as $_c ) {
+			$cat = Term::find($_c->term_id);
+			$cat->total = $_c->count;
+			$categories[] = $cat;
 		}
 		return $categories;
 	}
@@ -43,6 +51,7 @@ class Term extends ModelBase {
 	 *
 	 * @param array $args
 	 * @return array<Term>
+	 * @link https://codex.wordpress.org/Function_Reference/get_terms
 	 */
 	public static function getTags($args = []) {
 		if (!count($args)) {
@@ -51,15 +60,17 @@ class Term extends ModelBase {
 				'hide_empty' => true
 			];
 		}
-		foreach ( get_terms('post_tag', $args) as $t ) {
-			$tags[] = Term::find($t->term_id);
+		foreach ( get_terms('post_tag', $args) as $_t ) {
+			$tag = Term::find($_t->term_id);
+			$tag->total = $_t->count;
+			$tags[] = $tag;
 		}
 		return $tags;
 	}
 
 	/**
 	 *
-	 * @return the name
+	 * @return string the name
 	 */
 	public function getName() {
 		return $this->name;
@@ -67,11 +78,20 @@ class Term extends ModelBase {
 
 	/**
 	 *
-	 * @return the slug
+	 * @return string the slug
 	 */
 	public function getSlug() {
 		return $this->slug;
 	}
+
+	/**
+	 *
+	 * @return integer
+	 */
+	public function getTotal() {
+		return $this->total;
+	}
+
 	/**
 	 * Get all tags
 	 *
