@@ -47,8 +47,8 @@ return [
 	// S
 
 	// T
-	'total_publish_posts' => 'entradas publicadas',
-	'total_comments' => 'total comentarios',
+	'total_publish_posts' => 'entradas',
+	'total_comments' => 'comentarios',
 
 	// U
 
@@ -56,6 +56,7 @@ return [
 
 	// W
 	'web' => 'web',
+	'without_description' => 'sin descripcion',
 
 	// X
 

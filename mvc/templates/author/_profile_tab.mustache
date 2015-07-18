@@ -1,0 +1,55 @@
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+	<li role="presentation" class="active"><a href="#about" aria-controls="home" role="tab" data-toggle="tab">About</a></li>
+	<li role="presentation"><a href="#statistics" aria-controls="statistics" role="tab" data-toggle="tab">Statistics</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+	<div role="tabpanel" class="tab-pane active" id="about">
+
+		<h3>{{#transu}}about{{/transu}}</h3>
+		
+		<span class="col-xs-12 display-name">
+			<span class="what-title">{{#transu}}user.display_name{{/transu}}:</span>
+			<span class="what-result" title="{{#transu}}user.display_name{{/transu}}">{{getDisplayName | ucfirst}} </span> 
+		</span>						
+		<span class="col-xs-12 rol">
+			<span class="what-title">{{#transu}}user.rol{{/transu}}:</span>
+			<span class="what-result" title="{{#transu}}user.rol{{/transu}}">{{getFirstRol | ucfirst}} </span>
+		</span>
+		
+		<span class="col-xs-12 full-name">
+			<span class="what-title">{{#transu}}user.full_name{{/transu}}:</span>
+			<span class="what-result" title="{{#transu}}user.full_name{{/transu}}">{{getFullName | ucfirst}} </span>
+		</span>
+
+		<span class="col-xs-12 web">
+			<span class="what-title">{{#transu}}user.web{{/transu}}:</span>
+			<span class="what-result"><a href="{{getUserUrl}}" title="{{#transu}}user.web{{/transu}}" target="_blank">{{getUserUrl}}</a></span> 
+		</span>
+		
+		<span class="col-xs-12 description">
+			<span class="what-title">{{#transu}}user.description{{/transu}}:</span>
+			<span class="what-result">{{getDescription}}</span>
+		</span>
+
+	</div>
+	
+	<div role="tabpanel" class="tab-pane" id="statistics">
+		
+		<h3>{{#transu}}statistics{{/transu}}</h3>
+		
+		<span class="col-xs-12 col-md-4 col-lg-4 total-posts">
+			<span class="what-title">{{#transu}}user.total_publish_posts{{/transu}}:</span> 
+			<span class="what-result" title="{{#transu}}user.total_publish_posts{{/transu}}">{{getPosts | count}} </span> 
+		</span>
+		
+		<span class="col-xs-12 col-md-4 col-lg-4 total-comments">
+			<span class="what-title">{{#transu}}user.total_comments{{/transu}}:</span> 
+			<span class="what-result" title="{{#transu}}user.total_comments{{/transu}}">{{getComments | count}}</span> 
+		</span>
+
+	</div>
+
+</div>

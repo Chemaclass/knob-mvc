@@ -47,8 +47,8 @@ return [
 	// S
 
 	// T
-	'total_publish_posts' => 'total publish posts',
-	'total_comments' => 'total comments',
+	'total_publish_posts' => 'publish posts',
+	'total_comments' => 'comments',
 
 	// U
 
@@ -56,6 +56,7 @@ return [
 
 	// W
 	'web' => 'web',
+	'without_description' => 'without description',
 
 	// X
 
