@@ -120,7 +120,8 @@ abstract class BaseController {
 		 */
 		$templateVars['pages'] = Post::getAllPages([
 			'excludeSlugs' => [
-				'lang'
+				'lang',
+				'random'
 			]
 		]);
 		/*
