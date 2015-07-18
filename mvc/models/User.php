@@ -436,4 +436,17 @@ class User extends Image {
 	public function isWithSidebar() {
 		return self::WITH_SIDEBAR_DEFAULT;
 	}
+
+	/**
+	 * Return the description
+	 *
+	 * @return string
+	 */
+	public function getDescription() {
+		$string = get_the_author_meta('description', $this->ID);
+		if (strlen($string)) {
+			return $string;
+		}
+		return false;
+	}
 }
