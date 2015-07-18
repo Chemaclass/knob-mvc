@@ -68,6 +68,7 @@ return [
 	// T
 	'tag' => 'tag',
 	'tags' => 'tags',
+	'total' => 'total',
 
 	// U
 

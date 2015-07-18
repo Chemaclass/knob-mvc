@@ -68,6 +68,7 @@ return [
 	// T
 	'tag' => 'etiqueta',
 	'tags' => 'etiquetas',
+	'total' => 'total',
 
 	// U
 
