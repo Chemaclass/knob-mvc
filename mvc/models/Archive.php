@@ -18,14 +18,16 @@ class Archive {
 	 * Members
 	 */
 	private $text;
+	private $total;
 	private $url;
 
 	/*
 	 * Constructor
 	 */
-	public function __construct($text, $url) {
+	public function __construct($text, $url, $total) {
 		$this->text = $text;
 		$this->url = $url;
+		$this->total = $total;
 	}
 
 	/**
@@ -45,6 +47,14 @@ class Archive {
 	}
 
 	/**
+	 *
+	 * @return integer
+	 */
+	public function getTotal() {
+		return $this->total;
+	}
+
+	/**
 	 * Return monthly
 	 *
 	 * @link https://core.trac.wordpress.org/browser/tags/4.2.2/src/wp-includes/general-template.php#L1335
@@ -59,7 +69,7 @@ class Archive {
 			wp_cache_set('last_changed', $last_changed, 'posts');
 		}
 
-		$query = "SELECT YEAR(post_date) AS `year`, MONTH(post_date) AS `month`, count(ID) as posts
+		$query = "SELECT YEAR(post_date) AS `year`, MONTH(post_date) AS `month`, count(ID) as total
 			FROM $wpdb->posts
 			WHERE post_type = 'post' AND post_status = 'publish'
 			GROUP BY YEAR(post_date), MONTH(post_date)
@@ -80,7 +90,7 @@ class Archive {
 			$url = get_month_link($result->year, $result->month);
 			/* translators: 1: month name, 2: 4-digit year */
 			$text = sprintf(__('%1$s %2$d'), $wp_locale->get_month($result->month), $result->year);
-			$archives[] = new Archive($text, $url);
+			$archives[] = new Archive($text, $url, $result->total);
 		}
 
 		return $archives;
