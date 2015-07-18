@@ -1,0 +1,15 @@
+{{# archives | count }}
+<div class="sidebar-item archives row">
+
+	<div class="title">
+		{{#transu}}archives{{/transu}} ({{archives | count }})
+	</div>
+
+	<ul class="list-group">
+		{{# archives }}
+			<li class="list-group-item"><a href="{{getUrl}}">{{getText}}</a></li>
+		{{/ archives }}
+	</ul>
+
+</div>
+{{/ archives | count }}
