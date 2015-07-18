@@ -25,7 +25,7 @@ class HomeController extends BaseController {
 		}
 		$args = [
 			'postsWhereKey' => Ajax::AUTHOR,
-			'postsWhereValue' => $user->getID(),
+			'postsWhereValue' => $user->ID,
 			'user' => $user
 		];
 		return $this->renderPage('author', $args);
@@ -52,7 +52,6 @@ class HomeController extends BaseController {
 	public function getHome() {
 		$args = [
 			'postsWhereKey' => Ajax::HOME,
-			'postsWhereValue' => false,
 			'posts' => Post::getAll(get_option('posts_per_page'))
 		];
 		return $this->renderPage('home', $args);
