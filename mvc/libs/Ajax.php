@@ -12,6 +12,7 @@ class Ajax {
 	/*
 	 * Some constant
 	 */
+	const ARCHIVE = 'archive';
 	const HOME = 'home';
 	const CATEGORY = 'category';
 	const TAG = 'tag';
