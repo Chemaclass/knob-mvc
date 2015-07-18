@@ -1,6 +1,8 @@
 <?php
 return [
 	// A
+	'archive' => 'archive',
+	'archives' => 'archives',
 
 	// B
 	'by' => 'by',
