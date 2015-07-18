@@ -11,6 +11,7 @@ use Mustache_Engine;
 use Mustache_Loader_FilesystemLoader;
 use Mustache_Logger_StreamLogger;
 use Models\Term;
+use Models\Archive;
 
 /**
  *
@@ -116,6 +117,11 @@ abstract class BaseController {
 		$templateVars['sidebar']['active'] = ($u = User::getCurrent()) ? $u->isWithSidebar() : User::WITH_SIDEBAR_DEFAULT;
 
 		/*
+		 * Archives
+		 */
+		$templateVars['archives'] = Archive::getMonthly();
+
+		/*
 		 * Pages
 		 */
 		$templateVars['pages'] = Post::getAllPages([
@@ -124,6 +130,7 @@ abstract class BaseController {
 				'random'
 			]
 		]);
+
 		/*
 		 * Categories
 		 */
