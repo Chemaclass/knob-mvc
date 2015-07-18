@@ -12,6 +12,7 @@ class Archive {
 	 * Const
 	 */
 	const DELIMITER = '-';
+	const LIMIT = 0;
 
 	/*
 	 * Members
@@ -49,14 +50,24 @@ class Archive {
 	 * @link https://core.trac.wordpress.org/browser/tags/4.2.2/src/wp-includes/general-template.php#L1335
 	 * @return string
 	 */
-	public static function getMonthly() {
+	public static function getMonthly($limit = self::LIMIT) {
 		global $wpdb, $wp_locale;
+
+		$last_changed = wp_cache_get('last_changed', 'posts');
+		if (!$last_changed) {
+			$last_changed = microtime();
+			wp_cache_set('last_changed', $last_changed, 'posts');
+		}
 
 		$query = "SELECT YEAR(post_date) AS `year`, MONTH(post_date) AS `month`, count(ID) as posts
 			FROM $wpdb->posts
 			WHERE post_type = 'post' AND post_status = 'publish'
 			GROUP BY YEAR(post_date), MONTH(post_date)
-			ORDER BY post_date $order $limit";
+			ORDER BY post_date DESC ";
+
+		if ($limit) {
+			$query .= " LIMIT $limit";
+		}
 
 		$key = md5($query);
 		$key = "wp_get_archives:$key:$last_changed";
