@@ -6,6 +6,7 @@ use Models\Post;
 use Models\User;
 use I18n\I18n;
 use Libs\Ajax;
+use Models\Archive;
 
 /**
  * Home Controller
@@ -29,6 +30,31 @@ class HomeController extends BaseController {
 			'user' => $user
 		];
 		return $this->renderPage('author', $args);
+	}
+
+	/**
+	 * archive.php
+	 */
+	public function getArchive() {
+		global $wp_query;
+
+		$keys = array_keys($wp_query->query);
+		$postsArgs = [ ];
+		foreach ( $keys as $k ) {
+			$postsArgs['date_query'][] = [
+				$k => $wp_query->query[$k]
+			];
+			$thingToSearch .= '/' . $wp_query->query[$k];
+		}
+
+		$args = [
+			'thingType' => I18n::transu('archive'),
+			'thingToSearch' => $thingToSearch,
+			'postsWhereKey' => Ajax::ARCHIVE,
+			'postsWhereValue' => $wp_query->query['year'] . Archive::DELIMITER . $wp_query->query['monthnum'],
+			'posts' => Post::getByArchive('', false, false, $postsArgs)
+		];
+		return $this->renderPage('search', $args);
 	}
 
 	/**
