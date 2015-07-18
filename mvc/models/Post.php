@@ -342,6 +342,8 @@ class Post extends Image {
 	public static function getFuncBy($by) {
 		return function ($value = false, $limit = false, $offset = false, $moreQuerySettings = []) use($by) {
 			switch ($by) {
+				case Ajax::ARCHIVE :
+					return static::getByArchive($value, $limit, $offset, $moreQuerySettings);
 				case Ajax::AUTHOR :
 					return static::getByAuthor($value, $limit, $offset, $moreQuerySettings);
 				case Ajax::CATEGORY :
@@ -365,7 +367,10 @@ class Post extends Image {
 	 * @param array $moreQuerySettings
 	 * @param string $postType
 	 * @param string $oddOrEven
+	 *
 	 * @return array<Post>
+	 *
+	 * @link https://codex.wordpress.org/Class_Reference/WP_Query
 	 */
 	public static function getAll($limit = -1, $offset = false, $moreQuerySettings = []) {
 		// Get all fixed posts.
@@ -451,6 +456,18 @@ class Post extends Image {
 	}
 
 	/**
+	 * Get posts from an archive
+	 *
+	 * @param string $value
+	 * @param integer $limit
+	 * @param array $moreQuerySettings
+	 * @return array<Post>
+	 */
+	public static function getByArchive($value, $limit = false, $offset = false, $moreQuerySettings = []) {
+		return self::getBy(Ajax::ARCHIVE, $value, $limit, $offset, $moreQuerySettings);
+	}
+
+	/**
 	 * Get posts from an author
 	 *
 	 * @param integer $autorId
@@ -459,7 +476,7 @@ class Post extends Image {
 	 * @return array<Post>
 	 */
 	public static function getByAuthor($autorId, $limit = false, $offset = false, $moreQuerySettings = []) {
-		return self::getBy(Utils::TYPE_AUTHOR, $autorId, $limit, $offset, $moreQuerySettings);
+		return self::getBy(Ajax::AUTHOR, $autorId, $limit, $offset, $moreQuerySettings);
 	}
 
 	/**
@@ -471,7 +488,7 @@ class Post extends Image {
 	 * @return array<Post>
 	 */
 	public static function getBySearch($searchQuery, $limit = false, $offset = false, $moreQuerySettings = []) {
-		return self::getBy(Utils::TYPE_SEARCH, $searchQuery, $limit, $offset, $moreQuerySettings);
+		return self::getBy(Ajax::SEARCH, $searchQuery, $limit, $offset, $moreQuerySettings);
 	}
 
 	/**
@@ -483,7 +500,7 @@ class Post extends Image {
 	 * @return array<Post>
 	 */
 	public static function getByCategory($catId, $limit = false, $offset = false, $moreQuerySettings = []) {
-		return self::getBy(Utils::TYPE_CATEGORY, $catId, $limit, $offset, $moreQuerySettings);
+		return self::getBy(Ajax::CATEGORY, $catId, $limit, $offset, $moreQuerySettings);
 	}
 
 	/**
@@ -494,7 +511,7 @@ class Post extends Image {
 	 * @return array<Post>
 	 */
 	public static function getByTag($tagId, $limit = false, $offset = false, $moreQuerySettings = []) {
-		return self::getBy(Utils::TYPE_TAG, $tagId, $limit, $offset, $moreQuerySettings);
+		return self::getBy(Ajax::TAG, $tagId, $limit, $offset, $moreQuerySettings);
 	}
 
 	/**
@@ -520,6 +537,12 @@ class Post extends Image {
 			$moreQuerySettings['s'] = "$by";
 		} elseif ($type == Ajax::AUTHOR) {
 			$moreQuerySettings['author'] = $by;
+		} elseif ($type == Ajax::ARCHIVE) {
+			list($year, $monthnum) = explode(Archive::DELIMITER, $by);
+			if (!isset($moreQuerySettings['year'])) {
+				$moreQuerySettings['year'] = $year;
+				$moreQuerySettings['monthnum'] = $monthnum;
+			}
 		}
 		return self::getAll($limit, $offset, $moreQuerySettings);
 	}

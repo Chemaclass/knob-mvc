@@ -9,6 +9,11 @@ namespace Models;
 class Archive {
 
 	/*
+	 * Const
+	 */
+	const DELIMITER = '-';
+
+	/*
 	 * Members
 	 */
 	private $text;
