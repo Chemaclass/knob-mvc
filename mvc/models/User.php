@@ -29,6 +29,7 @@ class User extends Image {
 	const KEY_AVATAR = 'img_avatar';
 	const KEY_HEADER = 'img_header';
 	const KEY_LANGUAGE = 'language';
+	const KEY_TWITTER = 'twitter';
 
 	/*
 	 * Roles posibles
@@ -387,6 +388,24 @@ class User extends Image {
 	 */
 	public function getPostsUrl() {
 		return get_author_posts_url($this->ID);
+	}
+
+	/**
+	 * Return Twitter
+	 *
+	 * @return string
+	 */
+	public function getTwitter() {
+		return get_user_meta($this->ID, self::KEY_TWITTER, true);
+	}
+
+	/**
+	 * Set new Twitter
+	 *
+	 * @param string $value
+	 */
+	public function setTwitter($value) {
+		update_user_meta($this->ID, User::KEY_TWITTER, $value);
 	}
 
 	/**
