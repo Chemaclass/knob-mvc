@@ -1,10 +1,10 @@
 {{< base }}
 
 	{{$ content }}
-	
+
 		{{# user }}
 			<div id="user" class="col-xs-12 author list-posts">
-			
+
 				<div class="row img-header">
 					{{# getHeader }}
 						<img alt="{{getDisplayName}}" src="{{getHeader}}">
@@ -13,23 +13,17 @@
 						<img class="sin-thumbnail">
 					{{/ getHeader }}
 				</div>
-				
+
 				<div class="profile row col-xs-12">
-					<span class="avatar col-xs-12 col-sm-2">
+
+					<span class="avatar col-xs-12 col-md-4 col-lg-3">
 						<img src="{{getAvatarProfile}}" title="{{getDisplayName}} avatar">
 					</span>
-					
-					<span class="info visible-xs visible-sm col-sm-10">						
-						<span class="col-xs-12 display-name">
-							<span class="what-title">{{#transu}}user.display_name{{/transu}}:</span> 
-							<span class="what-result" title="{{#transu}}user.display_name{{/transu}}">{{getDisplayName | ucfirst}} </span> 
-						</span>							
-					</span>
-					
-					<span class="info hidden-xs hidden-sm col-sm-10">
+
+					<span class="info icol-xs-12 col-md-8 col-lg-9">
 						{{> author/_profile_tab }}
 					</span>
-					
+
 				</div>
 
 				<h2 class="col-xs-12">{{#transu}}posts{{/transu}}</h2>
@@ -43,7 +37,7 @@
 				{{> home/_show_more_btn }}
 			</div>
 		{{/ user }}
-		
+
 	{{/ content }}
 
 {{/ base }}

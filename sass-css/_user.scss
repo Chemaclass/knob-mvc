@@ -19,19 +19,21 @@
 	}
 	
 	.profile {
-		margin-top: 120px;
-		
+
 		.avatar {
+			margin-top: 60px;
 			img {
-				max-height: 180px;
+				border-radius: 30px 0px 0 5px;
+				max-height: 190px;
 			}
 		}
+
 		.info {
-	    	margin-top: 80px;
-	    	padding-left: 90px;
-	    	.display-name {
-	    		font-size: 23px;
-	    	}
+			border-radius: 0px 30px 5px 0;
+			background-color: $body-background-color;
+	    	margin-top: 60px;
+	    	min-height: 195px;
+	    	.display-name {}
 	    	.full-name {}
 	    	.rol {}
 			.what-result {}
@@ -39,9 +41,12 @@
 				font-weight: bold;
 			}
 			&.visible-xs.visible-sm {
-				padding-left: 0px;
 				text-align: center;
 			}
+		}
+
+		.tab-pane.active{
+			margin-top: 16px;
 		}
 	}
 	
