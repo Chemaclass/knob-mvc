@@ -38,4 +38,21 @@ class BackendController extends BaseController {
 		}
 		return $this->render($template, $args);
 	}
+
+	/**
+	 * Return the view to change social networks like tw, fb...
+	 *
+	 * @param string $user_ID
+	 */
+	public function getRenderSocialNetworks($user_ID = false) {
+		if (!$user_ID) {
+			global $user_ID;
+		}
+		$user = User::find($user_ID);
+		$args = [
+			'user' => $user,
+			'KEY_TWITTER' => User::KEY_TWITTER
+		];
+		return $this->render('backend/user/_social_networks', $args);
+	}
 }

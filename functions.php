@@ -37,6 +37,7 @@ Actions::adminPrintStyles();
 Actions::loginView();
 Actions::wpBeforeAdminBarRender();
 Actions::userProfileAddImgAvatarAndHeader();
+Actions::userProfileAddSocialNetworks();
 
 // --------------------------------------------------------------
 // Filters
