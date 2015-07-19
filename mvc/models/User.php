@@ -418,17 +418,20 @@ class User extends Image {
 	 *        	Can be the nickname or the absolute url
 	 */
 	public function setTwitter($value) {
-		if (strpos($value, 'http') !== false) {
-			$url = $value;
-			$nickname = '@' . substr($value, strrpos($value, '/') + 1);
-		} else {
-			$nickname = $value;
-			if (strpos($value, '@') !== false) {
-				$value = substr($value, 1);
+		$nickname = $url = '';
+		if (strlen($value)) {
+			if (strpos($value, 'http') !== false) {
+				$url = $value;
+				$nickname = '@' . substr($value, strrpos($value, '/') + 1);
 			} else {
-				$nickname = '@' . $value;
+				$nickname = $value;
+				if (strpos($value, '@') !== false) {
+					$value = substr($value, 1);
+				} else {
+					$nickname = '@' . $value;
+				}
+				$url = 'https://twitter.com/' . $value;
 			}
-			$url = 'https://twitter.com/' . $value;
 		}
 		update_user_meta($this->ID, User::KEY_TWITTER, $nickname);
 		update_user_meta($this->ID, User::KEY_TWITTER_URL, $url);
@@ -459,12 +462,15 @@ class User extends Image {
 	 *        	Can be the nickname or the absolute url
 	 */
 	public function setFacebook($value) {
-		if (strpos($value, 'http') !== false) {
-			$url = $value;
-			$nickname = '@' . substr($value, strrpos($value, '/') + 1);
-		} else {
-			$nickname = $value;
-			$url = 'https://facebook.com/' . $value;
+		$nickname = $url = '';
+		if (strlen($value)) {
+			if (strpos($value, 'http') !== false) {
+				$url = $value;
+				$nickname = substr($value, strrpos($value, '/') + 1);
+			} else {
+				$nickname = $value;
+				$url = 'https://facebook.com/' . $value;
+			}
 		}
 		update_user_meta($this->ID, User::KEY_FACEBOOK, $nickname);
 		update_user_meta($this->ID, User::KEY_FACEBOOK_URL, $url);

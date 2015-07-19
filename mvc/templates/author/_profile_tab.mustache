@@ -32,17 +32,38 @@
 	<div role="tabpanel" class="tab-pane" id="web">
 		<span class="col-xs-12 web">
 			<span class="what-title">{{#transu}}user.web{{/transu}}:</span>
-			<span class="what-result"><a href="{{getUserUrl}}" title="{{#transu}}user.web{{/transu}}" target="_blank">{{getUserUrl}}</a></span> 
+			<span class="what-result">
+				{{# getUserUrl }}
+					<a href="{{getUserUrl}}" title="{{#transu}}user.web{{/transu}}" target="_blank">{{getUserUrl}}</a>
+				{{/ getUserUrl }}
+				{{^ getUserUrl }}
+					{{#trans}}empty{{/trans}}
+				{{/ getUserUrl }}
+			</span>
 		</span>
 
 		<span class="col-xs-12 facebook">
 			<span class="what-title">{{#transu}}user.facebook{{/transu}}:</span>
-			<span class="what-result"><a href="{{getFacebookUrl}}" title="{{#transu}}user.facebook{{/transu}}" target="_blank">{{getFacebook}}</a></span> 
+			<span class="what-result">
+				{{# getFacebook }}
+					<a href="{{getFacebookUrl}}" title="{{#transu}}user.facebook{{/transu}}" target="_blank">{{getFacebook}}</a>
+				{{/ getFacebook }}
+				{{^ getFacebook }}
+					{{#trans}}empty{{/trans}}
+				{{/ getFacebook }}
+			</span>
 		</span>
 
 		<span class="col-xs-12 twitter">
 			<span class="what-title">{{#transu}}user.twitter{{/transu}}:</span>
-			<span class="what-result"><a href="{{getTwitterUrl}}" title="{{#transu}}user.twitter{{/transu}}" target="_blank">{{getTwitter}}</a></span> 
+			<span class="what-result">
+				{{# getTwitter }}
+					<a href="{{getTwitterUrl}}" title="{{#transu}}user.twitter{{/transu}}" target="_blank">{{getTwitter}}</a>
+				{{/ getTwitter }}
+				{{^ getTwitter }}
+					{{#trans}}empty{{/trans}}
+				{{/ getTwitter }}
+			</span>
 		</span>
 	</div>
 	
