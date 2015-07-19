@@ -30,6 +30,7 @@ class User extends Image {
 	const KEY_HEADER = 'img_header';
 	const KEY_LANGUAGE = 'language';
 	const KEY_TWITTER = 'twitter';
+	const KEY_TWITTER_URL = 'twitter_url';
 
 	/*
 	 * Roles posibles
@@ -400,12 +401,35 @@ class User extends Image {
 	}
 
 	/**
+	 * Return Twitter
+	 *
+	 * @return string
+	 */
+	public function getTwitterUrl() {
+		return get_user_meta($this->ID, self::KEY_TWITTER_URL, true);
+	}
+
+	/**
 	 * Set new Twitter
 	 *
 	 * @param string $value
+	 *        	Can be the nickname or the absolute url
 	 */
 	public function setTwitter($value) {
-		update_user_meta($this->ID, User::KEY_TWITTER, $value);
+		if (strpos($value, 'http') !== false) {
+			$url = $value;
+			$nickname = '@' . substr($value, strrpos($value, '/') + 1);
+		} else {
+			$nickname = $value;
+			if (strpos($value, '@') !== false) {
+				$value = substr($value, 1);
+			} else {
+				$nickname = '@' . $value;
+			}
+			$url = 'https://twitter.com/' . $value;
+		}
+		update_user_meta($this->ID, User::KEY_TWITTER, $nickname);
+		update_user_meta($this->ID, User::KEY_TWITTER_URL, $url);
 	}
 
 	/**
