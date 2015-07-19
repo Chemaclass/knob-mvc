@@ -33,30 +33,39 @@
 		
 		{{# getUserUrl }}
 		<span class="col-xs-12 web">
-			<span class="what-title">{{#transu}}user.web{{/transu}}:</span>
+			<span class="what-title">Web:</span>
 			<span class="what-result">
-				<a href="{{getUserUrl}}" title="{{#transu}}user.web{{/transu}}" target="_blank">{{getUserUrl}}</a>
+				<a href="{{getUserUrl}}" target="_blank">{{getUserUrl}}</a>
 			</span>
 		</span>
 		{{/ getUserUrl }}
 		
 		{{# getFacebook }}
 			<span class="col-xs-12 facebook">
-				<span class="what-title">{{#transu}}user.facebook{{/transu}}:</span>
+				<span class="what-title">Facebook:</span>
 				<span class="what-result">
-					<a href="{{getFacebookUrl}}" title="{{#transu}}user.facebook{{/transu}}" target="_blank">{{getFacebook}}</a>
+					<a href="{{getFacebookUrl}}" target="_blank">{{getFacebook}}</a>
 				</span>
 			</span>
 		{{/ getFacebook }}
 
 		{{# getTwitter }}
 			<span class="col-xs-12 twitter">
-				<span class="what-title">{{#transu}}user.twitter{{/transu}}:</span>
+				<span class="what-title">Twitter:</span>
 				<span class="what-result">
-					<a href="{{getTwitterUrl}}" title="{{#transu}}user.twitter{{/transu}}" target="_blank">{{getTwitter}}</a>
+					<a href="{{getTwitterUrl}}" target="_blank">{{getTwitter}}</a>
 				</span>
 			</span>
 		{{/ getTwitter }}
+		
+		{{# getGooglePlus }}
+			<span class="col-xs-12 twitter">
+				<span class="what-title">Google+:</span>
+				<span class="what-result">
+					<a href="{{getGooglePlusUrl}}" target="_blank">{{getGooglePlus}}</a>
+				</span>
+			</span>
+		{{/ getGooglePlus }}
 	</div>
 	
 	<div role="tabpanel" class="tab-pane" id="statistics">

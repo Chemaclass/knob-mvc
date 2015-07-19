@@ -52,7 +52,8 @@ class BackendController extends BaseController {
 		$args = [
 			'user' => $user,
 			'KEY_TWITTER' => User::KEY_TWITTER,
-			'KEY_FACEBOOK' => User::KEY_FACEBOOK
+			'KEY_FACEBOOK' => User::KEY_FACEBOOK,
+			'KEY_GOOGLE_PLUS' => User::KEY_GOOGLE_PLUS
 		];
 		return $this->render('backend/user/_social_networks', $args);
 	}

@@ -33,6 +33,8 @@ class User extends Image {
 	const KEY_TWITTER_URL = 'twitter_url';
 	const KEY_FACEBOOK = 'facebook';
 	const KEY_FACEBOOK_URL = 'facebook_url';
+	const KEY_GOOGLE_PLUS = 'google_plus';
+	const KEY_GOOGLE_PLUS_URL = 'google_plus_url';
 
 	/*
 	 * Roles posibles
@@ -438,7 +440,7 @@ class User extends Image {
 	}
 
 	/**
-	 * Return Twitter
+	 * Return Facebook
 	 *
 	 * @return string
 	 */
@@ -447,7 +449,7 @@ class User extends Image {
 	}
 
 	/**
-	 * Return Twitter
+	 * Return Facebook url
 	 *
 	 * @return string
 	 */
@@ -456,7 +458,7 @@ class User extends Image {
 	}
 
 	/**
-	 * Set new Twitter
+	 * Set new Facebook
 	 *
 	 * @param string $value
 	 *        	Can be the nickname or the absolute url
@@ -474,6 +476,50 @@ class User extends Image {
 		}
 		update_user_meta($this->ID, User::KEY_FACEBOOK, $nickname);
 		update_user_meta($this->ID, User::KEY_FACEBOOK_URL, $url);
+	}
+
+	/**
+	 * Return Google+
+	 *
+	 * @return string
+	 */
+	public function getGooglePlus() {
+		return get_user_meta($this->ID, self::KEY_GOOGLE_PLUS, true);
+	}
+
+	/**
+	 * Return Google+ Url
+	 *
+	 * @return string
+	 */
+	public function getGooglePlusUrl() {
+		return get_user_meta($this->ID, self::KEY_GOOGLE_PLUS_URL, true);
+	}
+
+	/**
+	 * Set new Twitter
+	 *
+	 * @param string $value
+	 *        	Can be the nickname or the absolute url
+	 */
+	public function setGooglePlus($value) {
+		$nickname = $url = '';
+		if (strlen($value)) {
+			if (strpos($value, 'http') !== false) {
+				$url = $value;
+				$nickname = substr($value, strrpos($value, '/') + 1);
+			} else {
+				$nickname = $value;
+				if (strpos($value, '+') !== false) {
+					$nickname = substr($value, 1);
+				} else {
+					$value = '+' . $value;
+				}
+				$url = 'https://plus.google.com/' . $value;
+			}
+		}
+		update_user_meta($this->ID, User::KEY_GOOGLE_PLUS, $nickname);
+		update_user_meta($this->ID, User::KEY_GOOGLE_PLUS_URL, $url);
 	}
 
 	/**

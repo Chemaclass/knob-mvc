@@ -136,6 +136,7 @@ class Actions {
 				$user = User::find($user_ID);
 				$user->setTwitter($_POST[User::KEY_TWITTER]);
 				$user->setFacebook($_POST[User::KEY_FACEBOOK]);
+				$user->setGooglePlus($_POST[User::KEY_GOOGLE_PLUS]);
 			}
 		};
 		add_action('personal_options_update', $updateSocialNetworks);
