@@ -37,6 +37,7 @@ return [
 	// O
 
 	// P
+	'put_your' => 'put your :what',
 
 	// Q
 
@@ -45,6 +46,7 @@ return [
 	'rol' => 'rol',
 
 	// S
+	'social_networks' => 'social networks',
 
 	// T
 	'total_publish_posts' => 'publish posts',

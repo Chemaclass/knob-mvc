@@ -37,6 +37,7 @@ return [
 	// O
 
 	// P
+	'put_your' => 'introduce tu :what',
 
 	// Q
 
@@ -45,6 +46,7 @@ return [
 	'rol' => 'rol',
 
 	// S
+	'social_networks' => 'redes sociales',
 
 	// T
 	'total_publish_posts' => 'entradas',

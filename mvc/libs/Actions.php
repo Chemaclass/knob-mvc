@@ -61,6 +61,7 @@ class Actions {
 	}
 
 	/**
+	 * Add img avatar and header to user profile
 	 */
 	public static function userProfileAddImgAvatarAndHeader() {
 		/*
@@ -117,5 +118,26 @@ class Actions {
 		add_action('edit_user_profile_update', $updateImgAvatar);
 		add_action('personal_options_update', $updateImgHeader);
 		add_action('edit_user_profile_update', $updateImgHeader);
+	}
+
+	/**
+	 * Add Social networks to user
+	 */
+	public static function userProfileAddSocialNetworks() {
+		$addSocialNetworks = function ($user) {
+			$c = new BackendController();
+			echo $c->getRenderSocialNetworks($user->ID);
+		};
+		add_action('show_user_profile', $addSocialNetworks);
+		add_action('edit_user_profile', $addSocialNetworks);
+
+		$updateSocialNetworks = function ($user_ID) {
+			if (current_user_can('edit_user', $user_ID)) {
+				$user = User::find($user_ID);
+				$user->setTwitter($_POST[User::KEY_TWITTER]);
+			}
+		};
+		add_action('personal_options_update', $updateSocialNetworks);
+		add_action('edit_user_profile_update', $updateSocialNetworks);
 	}
 }
