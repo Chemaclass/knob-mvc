@@ -135,6 +135,7 @@ class Actions {
 			if (current_user_can('edit_user', $user_ID)) {
 				$user = User::find($user_ID);
 				$user->setTwitter($_POST[User::KEY_TWITTER]);
+				$user->setFacebook($_POST[User::KEY_FACEBOOK]);
 			}
 		};
 		add_action('personal_options_update', $updateSocialNetworks);
