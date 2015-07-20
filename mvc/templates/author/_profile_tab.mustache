@@ -1,7 +1,8 @@
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
-	<li role="presentation" class="active"><a href="#about" aria-controls="home" role="tab" data-toggle="tab">{{#transu}}user.about{{/transu}}</a></li>
-	<li role="presentation"><a href="#web" aria-controls="web" role="tab" data-toggle="tab">{{#transu}}user.links{{/transu}}</a></li>
+	<li role="presentation" class="active"><a href="#about" aria-controls="about" role="tab" data-toggle="tab">{{#transu}}user.about{{/transu}}</a></li>
+	<li role="presentation"><a href="#another-info" aria-controls="another-info" role="tab" data-toggle="tab">{{#transu}}user.another_info{{/transu}}</a></li>
+	<li role="presentation"><a href="#links" aria-controls="links" role="tab" data-toggle="tab">{{#transu}}user.links{{/transu}}</a></li>
 	<li role="presentation"><a href="#statistics" aria-controls="statistics" role="tab" data-toggle="tab">{{#transu}}user.statistics{{/transu}}</a></li>
 </ul>
 
@@ -18,19 +19,30 @@
 			<span class="what-result" title="{{#transu}}user.rol{{/transu}}">{{getFirstRol | ucfirst}} </span>
 		</span>
 
-		<span class="col-xs-12 full-name">
-			<span class="what-title">{{#transu}}user.full_name{{/transu}}:</span>
-			<span class="what-result" title="{{#transu}}user.full_name{{/transu}}">{{getFullName | ucfirst}} </span>
-		</span>
-
 		<span class="col-xs-12 description">
 			<span class="what-title">{{#transu}}user.description{{/transu}}:</span>
 			<span class="what-result">{{getDescription}}</span>
 		</span>
 	</div>
 
-	<div role="tabpanel" class="tab-pane" id="web">
+
+	<div role="tabpanel" class="tab-pane" id="another-info">
+		<span class="col-xs-12 full-name">
+			<span class="what-title">{{#transu}}user.full_name{{/transu}}:</span>
+			<span class="what-result" title="{{#transu}}user.full_name{{/transu}}">{{getFullName | ucfirst}} </span>
+		</span>
 		
+		<span class="col-xs-12 current-lang">
+			{{# getLang }}
+				<span class="what-title">{{#transu}}language{{/transu}}:</span>
+				<span class="what-result" title="{{#transu}}user.display_name{{/transu}}"> 
+					{{getLangTransFull}} ({{getLang | case.upper}}) 
+				</span>
+			{{/ getLang }}
+		</span>
+	</div>
+	
+	<div role="tabpanel" class="tab-pane" id="links">
 		{{# getUserUrl }}
 		<span class="col-xs-12 web">
 			<span class="what-title">Web:</span>
@@ -39,7 +51,7 @@
 			</span>
 		</span>
 		{{/ getUserUrl }}
-		
+
 		{{# getFacebook }}
 			<span class="col-xs-12 facebook">
 				<span class="what-title">Facebook:</span>
@@ -67,13 +79,13 @@
 			</span>
 		{{/ getGooglePlus }}
 	</div>
-	
+
 	<div role="tabpanel" class="tab-pane" id="statistics">
 		<span class="col-xs-12 col-md-4 col-lg-4 total-posts">
 			<span class="what-title">{{#transu}}user.total_publish_posts{{/transu}}:</span> 
 			<span class="what-result" title="{{#transu}}user.total_publish_posts{{/transu}}">{{getPosts | count}} </span> 
 		</span>
-		
+
 		<span class="col-xs-12 col-md-4 col-lg-4 total-comments">
 			<span class="what-title">{{#transu}}user.total_comments{{/transu}}:</span> 
 			<span class="what-result" title="{{#transu}}user.total_comments{{/transu}}">{{getComments | count}}</span> 

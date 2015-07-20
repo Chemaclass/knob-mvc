@@ -1,7 +1,9 @@
 <?php
 return [
 	// A
+	'about' => 'sobre mi',
 	'avatar' => 'imagen de perfil',
+	'another_info' => 'otra información',
 
 	// B
 

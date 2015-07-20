@@ -1,7 +1,9 @@
 <?php
 return [
 	// A
+	'about' => 'about',
 	'avatar' => 'avatar image',
+	'another_info' => 'another info',
 
 	// B
 
