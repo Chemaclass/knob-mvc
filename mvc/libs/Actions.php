@@ -142,4 +142,25 @@ class Actions {
 		add_action('personal_options_update', $updateSocialNetworks);
 		add_action('edit_user_profile_update', $updateSocialNetworks);
 	}
+
+	/**
+	 * Add language to user profile
+	 */
+	public static function userProfileAddLanguage() {
+		$addLang = function ($user) {
+			$c = new BackendController();
+			echo $c->getRenderLanguage($user->ID);
+		};
+		add_action('show_user_profile', $addLang);
+		add_action('edit_user_profile', $addLang);
+
+		$updateLang = function ($user_ID) {
+			if (current_user_can('edit_user', $user_ID)) {
+				$user = User::find($user_ID);
+				$user->setLang($_POST[User::KEY_LANGUAGE]);
+			}
+		};
+		add_action('personal_options_update', $updateLang);
+		add_action('edit_user_profile_update', $updateLang);
+	}
 }

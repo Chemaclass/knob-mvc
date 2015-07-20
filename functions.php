@@ -38,6 +38,7 @@ Actions::loginView();
 Actions::wpBeforeAdminBarRender();
 Actions::userProfileAddImgAvatarAndHeader();
 Actions::userProfileAddSocialNetworks();
+Actions::userProfileAddLanguage();
 
 // --------------------------------------------------------------
 // Filters
