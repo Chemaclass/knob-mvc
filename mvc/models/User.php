@@ -358,8 +358,9 @@ class User extends Image {
 	}
 
 	/**
-	 * Devuelve el nombre y los apellidos del user.
-	 * Si no tiene puesto ninguno, mostrará el alias.
+	 * Return the name and surname from the User.
+	 *
+	 * If doesn't exists we just return his alias.
 	 *
 	 * @return string
 	 */
@@ -536,7 +537,7 @@ class User extends Image {
 	}
 
 	/**
-	 * Establecer un rol al User
+	 * Set a rol to User
 	 *
 	 * @param string $rol
 	 */
@@ -603,11 +604,12 @@ class User extends Image {
 	}
 
 	/**
+	 * Return the current lang full and translated from the user
 	 *
 	 * @return string
 	 */
 	public function getLangTransFull() {
-		$idioma = ($_l = $this->getLang()) ? $_l : Utils::getLangBrowser();
-		return I18n::transu('lang_' . $idioma);
+		$langToTrans = ($currentLang = $this->getLang()) ? $currentLang : Utils::getLangBrowser();
+		return I18n::transu('lang_' . $langToTrans);
 	}
 }
