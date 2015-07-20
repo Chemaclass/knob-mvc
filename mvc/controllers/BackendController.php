@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Models\User;
+use I18n\I18n;
 
 /**
  * Backend Controller
@@ -56,5 +57,31 @@ class BackendController extends BaseController {
 			'KEY_GOOGLE_PLUS' => User::KEY_GOOGLE_PLUS
 		];
 		return $this->render('backend/user/_social_networks', $args);
+	}
+
+	/**
+	 *
+	 * @param string $user_ID
+	 */
+	public function getRenderLanguage($user_ID = false) {
+		if (!$user_ID) {
+			global $user_ID;
+		}
+		$user = User::find($user_ID);
+		// Format the list
+		$userLang = $user->getLang();
+		foreach ( I18n::getAllLangAvailable() as $t ) {
+			$languages[] = [
+				'value' => $t,
+				'text' => I18n::transu('lang_' . $t),
+				'selected' => ($userLang == $t)
+			];
+		}
+		$args = [
+			'user' => $user,
+			'KEY_LANGUAGE' => User::KEY_LANGUAGE,
+			'languages' => $languages
+		];
+		return $this->render('backend/user/_lang', $args);
 	}
 }
