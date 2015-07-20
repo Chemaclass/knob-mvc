@@ -582,4 +582,22 @@ class User extends Image {
 		}
 		return false;
 	}
+
+	/**
+	 * Return language
+	 *
+	 * @return string
+	 */
+	public function getLang() {
+		return get_user_meta($this->ID, self::KEY_LANGUAGE, true);
+	}
+
+	/**
+	 * Set new lang
+	 *
+	 * @param string $value
+	 */
+	public function setLang($value) {
+		update_user_meta($this->ID, User::KEY_LANGUAGE, $value);
+	}
 }
