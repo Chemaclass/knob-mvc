@@ -38,6 +38,8 @@ return [
 	// K
 
 	// L
+	'lang_en' => 'inglés',
+	'lang_es' => 'español',
 	'language' => 'idioma',
 
 	// M

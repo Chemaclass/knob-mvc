@@ -46,6 +46,7 @@ return [
 	'rol' => 'rol',
 
 	// S
+	'select_your' => 'select your :what',
 	'social_networks' => 'social networks',
 
 	// T
