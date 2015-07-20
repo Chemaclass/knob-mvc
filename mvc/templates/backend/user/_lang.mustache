@@ -11,6 +11,9 @@
 			</select>
 			<br><span class="description">{{#transu}}user.select_your [what:{{#trans}}language{{/trans}}]{{/transu}}</span>
 		</td>
+		{{# getLang }}
+		<td>{{#transu}}current_lang{{/transu}}: {{getLangTransFull}} ({{getLang | case.upper}})</td>
+		{{/ getLang }}
 	</tr>	
 </table>
 {{/user}}

@@ -4,6 +4,7 @@ namespace Models;
 
 use Libs\Utils;
 use Controllers\HomeController;
+use I18n\I18n;
 
 /**
  * User Model
@@ -599,5 +600,14 @@ class User extends Image {
 	 */
 	public function setLang($value) {
 		update_user_meta($this->ID, User::KEY_LANGUAGE, $value);
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getLangTransFull() {
+		$idioma = ($_l = $this->getLang()) ? $_l : Utils::getLangBrowser();
+		return I18n::transu('lang_' . $idioma);
 	}
 }

@@ -13,6 +13,7 @@ return [
 	'comment' => 'comment',
 	'comments' => 'comments',
 	'current' => 'current',
+	'current_lang' => 'current language',
 
 	// D
 	'delete' => 'delete',
