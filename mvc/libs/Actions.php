@@ -170,13 +170,13 @@ class Actions {
 	public static function widgetsInit() {
 
 		/*
-		 * widgets_right
+		 * sidebar_right_top
 		 */
 		add_action('widgets_init', function () {
 			register_sidebar(array (
-				'name' => 'Sidebar right top','class' => 'col-xs-12',
+				'name' => 'Sidebar right top',
 				'id' => 'sidebar_right_top',
-				'before_widget' => '<div class="widget sidebar-right-right">',
+				'before_widget' => '<div class="widget sidebar-right-top">',
 				'after_widget' => '</div>',
 				'before_title' => '<div class="title">',
 				'after_title' => '</div>'
@@ -184,13 +184,41 @@ class Actions {
 		});
 
 		/*
-		 * widgets_down
+		 * sidebar_right_bottom
 		 */
 		add_action('widgets_init', function () {
 			register_sidebar(array (
 				'name' => 'Sidebar right bottom',
 				'id' => 'sidebar_right_bottom',
 				'before_widget' => '<div class="widget sidebar-right-bottom">',
+				'after_widget' => '</div>',
+				'before_title' => '<div class="title">',
+				'after_title' => '</div>'
+			));
+		});
+
+		/*
+		 * footer_top
+		 */
+		add_action('widgets_init', function () {
+			register_sidebar(array (
+				'name' => 'Footer top',
+				'id' => 'footer_top',
+				'before_widget' => '<div class="widget footer-top">',
+				'after_widget' => '</div>',
+				'before_title' => '<div class="title">',
+				'after_title' => '</div>'
+			));
+		});
+
+		/*
+		 * footer_bottom
+		 */
+		add_action('widgets_init', function () {
+			register_sidebar(array (
+				'name' => 'Footer bottom',
+				'id' => 'footer_bottom',
+				'before_widget' => '<div class="widget footer-bottom">',
 				'after_widget' => '</div>',
 				'before_title' => '<div class="title">',
 				'after_title' => '</div>'

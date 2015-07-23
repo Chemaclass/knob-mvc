@@ -122,6 +122,8 @@ abstract class BaseController {
 		 */
 		$templateVars['sidebar_right_top']['widgets'] = $this->widgets['sidebar_right_top'];
 		$templateVars['sidebar_right_bottom']['widgets'] = $this->widgets['sidebar_right_bottom'];
+		$templateVars['footer_top']['widgets'] = $this->widgets['footer_top'];
+		$templateVars['footer_bottom']['widgets'] = $this->widgets['footer_bottom'];
 
 		/*
 		 * Archives
