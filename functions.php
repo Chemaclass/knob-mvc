@@ -39,6 +39,7 @@ Actions::wpBeforeAdminBarRender();
 Actions::userProfileAddImgAvatarAndHeader();
 Actions::userProfileAddSocialNetworks();
 Actions::userProfileAddLanguage();
+Actions::widgetsInit();
 
 // --------------------------------------------------------------
 // Filters

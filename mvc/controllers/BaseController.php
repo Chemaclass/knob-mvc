@@ -29,13 +29,14 @@ abstract class BaseController {
 	 */
 	protected $currentUser;
 	protected $template;
+	protected $sidebar;
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
 		$this->currentUser = User::getCurrent();
-
+		$this->sidebar = [ ];
 		$templatesFolder = self::getTemplatesFolderLocation();
 
 		$this->template = new Mustache_Engine(array (
@@ -115,6 +116,13 @@ abstract class BaseController {
 		 * Active
 		 */
 		$templateVars['sidebar']['active'] = ($u = User::getCurrent()) ? $u->isWithSidebar() : User::WITH_SIDEBAR_DEFAULT;
+
+		/*
+		 * Sidebar items
+		 */
+		foreach ( $this->sidebar as $_k => $_v ) {
+			$templateVars['sidebar']['widgets'] = $_v;
+		}
 
 		/*
 		 * Archives

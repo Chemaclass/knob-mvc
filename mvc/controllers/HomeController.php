@@ -16,6 +16,16 @@ use Models\Archive;
 class HomeController extends BaseController {
 
 	/**
+	 * construct
+	 */
+	public function __construct() {
+		parent::__construct();
+		ob_start();
+		dynamic_sidebar('home_right_1');
+		$this->sidebar['home_right_1'] = ob_get_clean();
+	}
+
+	/**
 	 * author.php
 	 */
 	public function getAuthor() {

@@ -1,0 +1,9 @@
+{{# sidebar.widgets | count }}
+<div class="sidebar-item widgets row">
+	<h3>Widgets</h3>
+	{{# sidebar.widgets }}
+		{{{ . }}}
+		<hr>
+	{{/ sidebar.widgets }}
+</div>
+{{/ sidebar.widgets | count }}
