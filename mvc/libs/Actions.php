@@ -168,61 +168,62 @@ class Actions {
 	 * Add widgetsInit
 	 */
 	public static function widgetsInit() {
-
 		/*
-		 * sidebar_right_top
+		 * List with your active widgets.
+		 *
+		 * 'id': His id. We'll use it later for get it and put in his correct place.
+		 * 'name': Sidebar name. Optional
+		 * 'classBeforeWidget': Class for 'beforeWidget'. Optional
+		 * 'beforeWidget': HTML to place before every widge. Optional
+		 * 'afterWidget': HTML to place after every widget. Optional
+		 * 'beforeTitle': HTML to place before every title. Optional
+		 * 'afterTitle': HTML to place after every title. Optional
 		 */
-		add_action('widgets_init', function () {
-			register_sidebar(array (
-				'name' => 'Sidebar right top',
+		$activeWidgets = [
+			[
 				'id' => 'sidebar_right_top',
-				'before_widget' => '<div class="widget sidebar-right-top">',
-				'after_widget' => '</div>',
-				'before_title' => '<div class="title">',
-				'after_title' => '</div>'
-			));
-		});
+				'name' => 'Sidebar right top',
+				'classBeforeWidget' => 'sidebar-right-top',
+				'beforeWidget' => '<div class="widget sidebar-right-top">',
+				'afterWidget' => '</div>',
+				'beforeTitle' => '<span class="title">',
+				'afterTitle' => '</span>'
+			],
+			[
+				'id' => 'sidebar_right_bottom'
+			],
+			[
+				'id' => 'footer_top'
+			],
+			[
+				'id' => 'footer_bottom'
+			]
+		];
 
-		/*
-		 * sidebar_right_bottom
-		 */
-		add_action('widgets_init', function () {
-			register_sidebar(array (
-				'name' => 'Sidebar right bottom',
-				'id' => 'sidebar_right_bottom',
-				'before_widget' => '<div class="widget sidebar-right-bottom">',
-				'after_widget' => '</div>',
-				'before_title' => '<div class="title">',
-				'after_title' => '</div>'
-			));
-		});
+		foreach ( $activeWidgets as $w ) {
+			add_action('widgets_init', function () use($w) {
+				if (isset($w['id'])) {
+					$name = isset($w['name']) ? $w['name'] : ucfirst(str_replace('_', ' ', $w['id']));
+					if (isset($w['beforeWidget'])) {
+						$beforeWidget = $w['beforeWidget'];
+					} else {
+						$classBeforeWidget = isset($w['classBeforeWidget']) ? $w['classBeforeWidget'] : str_replace('_', '-', $w['id']);
+						$beforeWidget = '<div class="widget ' . $classBeforeWidget . '">';
+					}
+					$afterWidget = isset($w['afterWidget']) ? $w['afterWidget'] : '</div>';
+					$beforeTitle = isset($w['beforeTitle']) ? $w['beforeTitle'] : '<span class="title">';
+					$afterTitle = isset($w['afterTitle']) ? $w['afterTitle'] : '</span>';
 
-		/*
-		 * footer_top
-		 */
-		add_action('widgets_init', function () {
-			register_sidebar(array (
-				'name' => 'Footer top',
-				'id' => 'footer_top',
-				'before_widget' => '<div class="widget footer-top">',
-				'after_widget' => '</div>',
-				'before_title' => '<div class="title">',
-				'after_title' => '</div>'
-			));
-		});
-
-		/*
-		 * footer_bottom
-		 */
-		add_action('widgets_init', function () {
-			register_sidebar(array (
-				'name' => 'Footer bottom',
-				'id' => 'footer_bottom',
-				'before_widget' => '<div class="widget footer-bottom">',
-				'after_widget' => '</div>',
-				'before_title' => '<div class="title">',
-				'after_title' => '</div>'
-			));
-		});
+					register_sidebar([
+						'id' => $w['id'],
+						'name' => $name,
+						'before_widget' => $beforeWidget,
+						'after_widget' => $afterWidget,
+						'before_title' => $beforeTitle,
+						'after_title' => $afterTitle
+					]);
+				}
+			});
+		}
 	}
 }
