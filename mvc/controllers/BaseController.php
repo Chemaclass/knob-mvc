@@ -36,7 +36,7 @@ abstract class BaseController {
 	 */
 	public function __construct() {
 		$this->currentUser = User::getCurrent();
-		$this->widgets = null;
+		$this->widgets = [ ];
 		$templatesFolder = self::getTemplatesFolderLocation();
 
 		$this->template = new Mustache_Engine(array (
@@ -120,7 +120,8 @@ abstract class BaseController {
 		/*
 		 * Sidebar items
 		 */
-		$templateVars['widgets'] = $this->widgets;
+		$templateVars['sidebar_right_top']['widgets'] = $this->widgets['sidebar_right_top'];
+		$templateVars['sidebar_right_bottom']['widgets'] = $this->widgets['sidebar_right_bottom'];
 
 		/*
 		 * Archives

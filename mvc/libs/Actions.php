@@ -168,11 +168,29 @@ class Actions {
 	 * Add widgetsInit
 	 */
 	public static function widgetsInit() {
+
+		/*
+		 * widgets_right
+		 */
 		add_action('widgets_init', function () {
 			register_sidebar(array (
-				'name' => 'Widgets right',
-				'id' => 'widgets_right',
-				'before_widget' => '<div class="widget widget-right">',
+				'name' => 'Sidebar right top','class' => 'col-xs-12',
+				'id' => 'sidebar_right_top',
+				'before_widget' => '<div class="widget sidebar-right-right">',
+				'after_widget' => '</div>',
+				'before_title' => '<div class="title">',
+				'after_title' => '</div>'
+			));
+		});
+
+		/*
+		 * widgets_down
+		 */
+		add_action('widgets_init', function () {
+			register_sidebar(array (
+				'name' => 'Sidebar right bottom',
+				'id' => 'sidebar_right_bottom',
+				'before_widget' => '<div class="widget sidebar-right-bottom">',
 				'after_widget' => '</div>',
 				'before_title' => '<div class="title">',
 				'after_title' => '</div>'
