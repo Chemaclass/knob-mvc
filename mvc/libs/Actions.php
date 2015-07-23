@@ -170,12 +170,12 @@ class Actions {
 	public static function widgetsInit() {
 		add_action('widgets_init', function () {
 			register_sidebar(array (
-				'name' => 'Home right sidebar',
-				'id' => 'home_right_1',
-				'before_widget' => '<div>',
+				'name' => 'Widgets right',
+				'id' => 'widgets_right',
+				'before_widget' => '<div class="widget widget-right">',
 				'after_widget' => '</div>',
-				'before_title' => '<h2 class="rounded">',
-				'after_title' => '</h2>'
+				'before_title' => '<div class="title">',
+				'after_title' => '</div>'
 			));
 		});
 	}

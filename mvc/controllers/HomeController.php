@@ -21,8 +21,8 @@ class HomeController extends BaseController {
 	public function __construct() {
 		parent::__construct();
 		ob_start();
-		dynamic_sidebar('home_right_1');
-		$this->sidebar['home_right_1'] = ob_get_clean();
+		dynamic_sidebar('widgets_right');
+		$this->widgets = ob_get_clean();
 	}
 
 	/**

@@ -29,14 +29,14 @@ abstract class BaseController {
 	 */
 	protected $currentUser;
 	protected $template;
-	protected $sidebar;
+	protected $widgets;
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
 		$this->currentUser = User::getCurrent();
-		$this->sidebar = [ ];
+		$this->widgets = null;
 		$templatesFolder = self::getTemplatesFolderLocation();
 
 		$this->template = new Mustache_Engine(array (
@@ -120,9 +120,7 @@ abstract class BaseController {
 		/*
 		 * Sidebar items
 		 */
-		foreach ( $this->sidebar as $_k => $_v ) {
-			$templateVars['sidebar']['widgets'] = $_v;
-		}
+		$templateVars['widgets'] = $this->widgets;
 
 		/*
 		 * Archives

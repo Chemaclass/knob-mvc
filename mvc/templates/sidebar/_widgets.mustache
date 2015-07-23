@@ -1,9 +1,7 @@
-{{# sidebar.widgets | count }}
+{{# widgets | count }}
 <div class="sidebar-item widgets row">
-	<h3>Widgets</h3>
-	{{# sidebar.widgets }}
+	{{# widgets }}
 		{{{ . }}}
-		<hr>
-	{{/ sidebar.widgets }}
+	{{/ widgets }}
 </div>
-{{/ sidebar.widgets | count }}
+{{/ widgets | count }}
