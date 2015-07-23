@@ -94,8 +94,8 @@ abstract class ModelBase {
 		global $wpdb;
 		$objects = [ ];
 		$model = get_called_class();
-		$whatry = 'SELECT * FROM wp_' . static::$table . ' WHERE ' . $column . '= %s';
-		$resultsQuery = $wpdb->get_results($wpdb->prepare($whatry, $value));
+		$query = 'SELECT * FROM wp_' . static::$table . ' WHERE ' . $column . '= %s';
+		$resultsQuery = $wpdb->get_results($wpdb->prepare($query, $value));
 
 		/*
 		 * Mount the object
@@ -155,7 +155,7 @@ abstract class ModelBase {
 	}
 
 	/**
-	 * Devuelve el resultado del filtrado where a todos los elementos de su tabla
+	 * Return the filter results
 	 *
 	 * @param string $column
 	 * @param string $what
@@ -163,11 +163,12 @@ abstract class ModelBase {
 	 */
 	public static function where($column, $what, $value) {
 		global $wpdb;
+		// TODO: Improve it
 		$all = self::all();
 		$result = [ ];
 		foreach ( $all as $item ) {
 			if (isset($item->$column)) {
-				if (self::_getComparacion($item->$column, $what, $value)) {
+				if (self::isCompareColumn($item->$column, $what, $value)) {
 					$result[] = $item;
 				}
 			}
@@ -182,7 +183,7 @@ abstract class ModelBase {
 	 * @param unknown $value
 	 * @return boolean
 	 */
-	private static function _getComparacion($column, $what, $value) {
+	private static function isCompareColumn($column, $what, $value) {
 		switch ($what) {
 			case "=" :
 				if ($column == $value) {

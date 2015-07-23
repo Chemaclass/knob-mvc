@@ -89,6 +89,7 @@ class Post extends Image {
 	 */
 	protected function getImageSizesToDelete() {
 		// TODO:
+		return [];
 	}
 
 	/**
