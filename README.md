@@ -269,7 +269,6 @@ our task to do a `merge --squash` on the "dev branch" for at the end have just o
 changes together. Then once tested in dev we can do a merge with master for to push all on production.
 
 ## TODO:
-* Possibility to add widgets to sidebar
-* Integration with others Plugins
+* Integration with others Plugins.
 * Improve the code. Always.
 
