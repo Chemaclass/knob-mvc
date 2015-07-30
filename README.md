@@ -4,7 +4,7 @@
 
 * Knob MVC
 * This is a PHP MVC Framework for creating Wordpress templates easier and with more fun than ever before.
-* Version: 0.8
+* Version: 0.9
 * Author José María Valera Reales
 
 
@@ -269,6 +269,6 @@ our task to do a `merge --squash` on the "dev branch" for at the end have just o
 changes together. Then once tested in dev we can do a merge with master for to push all on production.
 
 ## TODO:
-* Integration with others Plugins.
 * Improve the code. Always.
+* Drink a beer :-)
 
