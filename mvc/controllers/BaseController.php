@@ -7,11 +7,9 @@ use Libs\Env;
 use Models\User;
 use Models\Post;
 use I18n\I18n;
-use Mustache_Engine;
-use Mustache_Loader_FilesystemLoader;
-use Mustache_Logger_StreamLogger;
 use Models\Term;
 use Models\Archive;
+use Libs\Template;
 
 /**
  *
@@ -36,73 +34,8 @@ abstract class BaseController {
 	 */
 	public function __construct() {
 		$this->currentUser = User::getCurrent();
+		$this->template = Template::getInstance();
 		$this->widgets = [ ];
-		$templatesFolder = self::getTemplatesFolderLocation();
-
-		$this->template = new Mustache_Engine(array (
-			'cache_file_mode' => 0660,
-			'cache_lambda_templates' => true,
-			'loader' => new Mustache_Loader_FilesystemLoader($templatesFolder),
-			'partials_loader' => new Mustache_Loader_FilesystemLoader($templatesFolder),
-			'helpers' => array (
-				'trans' => function ($value) {
-					return I18n::trans($value);
-				},
-				'transu' => function ($value) {
-					return I18n::transu($value);
-				},
-				'case' => [
-					'lower' => function ($value) {
-						return strtolower((string) $value);
-					},
-					'upper' => function ($value) {
-						return strtoupper((string) $value);
-					}
-				],
-				'count' => function ($value) {
-					return count($value);
-				},
-				'moreThan1' => function ($value) {
-					return count($value) > 1;
-				},
-				'date' => [
-					'xmlschema' => function ($value) {
-						return date('c', strtotime($value));
-					},
-					'string' => function ($value) {
-						return date('l, d F Y', strtotime($value));
-					},
-					'format' => function ($value) {
-						return date(get_option('date_format'), strtotime($value));
-					}
-				],
-				'toArray' => function ($value) {
-					return explode(',', $value);
-				},
-				'ucfirst' => function ($value) {
-					return ucfirst($value);
-				}
-			),
-			'escape' => function ($value) {
-				return htmlspecialchars($value, ENT_COMPAT, 'UTF-8');
-			},
-			'charset' => 'UTF-8',
-			'logger' => new Mustache_Logger_StreamLogger('php://stderr'),
-			'strict_callables' => true,
-			'pragmas' => [
-				Mustache_Engine::PRAGMA_FILTERS,
-				Mustache_Engine::PRAGMA_BLOCKS
-			]
-		));
-	}
-
-	/**
-	 * Return the relative path location where are the templates.
-	 *
-	 * @return string
-	 */
-	protected static function getTemplatesFolderLocation() {
-		return str_replace('//', '/', dirname(__FILE__) . '/') . '../templates';
 	}
 
 	/**
