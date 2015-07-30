@@ -15,7 +15,5 @@ test.*
 # Dependencias
 vendor
 
-*.lock
-
 # css
 # main.css
