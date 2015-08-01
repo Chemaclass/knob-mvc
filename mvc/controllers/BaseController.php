@@ -10,6 +10,7 @@ use I18n\I18n;
 use Models\Term;
 use Models\Archive;
 use Libs\Template;
+use Config\Params;
 
 /**
  *
@@ -25,6 +26,7 @@ abstract class BaseController {
 	/*
 	 * Members
 	 */
+	protected $configParams;
 	protected $currentUser;
 	protected $template;
 	protected $widgets;
@@ -33,6 +35,7 @@ abstract class BaseController {
 	 * Constructor
 	 */
 	public function __construct() {
+		$this->configParams = Params::getInstance()->all();
 		$this->currentUser = User::getCurrent();
 		$this->template = Template::getInstance()->getRenderEngine();
 		$this->widgets = [ ];
@@ -44,7 +47,6 @@ abstract class BaseController {
 	 * @param array $templateVars
 	 */
 	private function addGlobalVariables(&$templateVars = []) {
-
 		/*
 		 * Active
 		 */
@@ -66,12 +68,7 @@ abstract class BaseController {
 		/*
 		 * Pages
 		 */
-		$templateVars['pages'] = Post::getAllPages([
-			'excludeSlugs' => [
-				'lang',
-				'random'
-			]
-		]);
+		$templateVars['pages'] = Post::getAllPages($this->configParams['pages']);
 
 		/*
 		 * Categories
