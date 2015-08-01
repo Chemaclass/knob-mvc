@@ -16,6 +16,7 @@
 	},
 	"autoload": {
 	    "psr-0": {
+	        "Config": "mvc/",
 	        "Controllers": "mvc/",
             "I18n": "mvc/",
             "Libs": "mvc/",
