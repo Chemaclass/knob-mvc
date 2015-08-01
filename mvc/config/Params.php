@@ -9,6 +9,9 @@ use Libs\Env;
 class Params {
 
 	/**
+	 * Return all params.
+	 * This class is for to separate the code and not put it
+	 * all into the controller.
 	 *
 	 * @return array
 	 */
@@ -29,7 +32,7 @@ class Params {
 
 			/*
 			 * ====================================
-			 * Params to pages
+			 * Params to all templates
 			 * ====================================
 			 */
 			'templateVars' => [
@@ -46,7 +49,6 @@ class Params {
 				'componentsDir' => COMPONENTS_DIR,
 				'currentLang' => I18n::getLangBrowserByCurrentUser(),
 				'currentLangFullname' => I18n::getLangFullnameBrowserByCurrentUser(),
-
 
 				'homeUrl' => get_home_url(),
 				'htmlType' => get_bloginfo('html_type'),
