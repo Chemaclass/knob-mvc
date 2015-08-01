@@ -34,7 +34,7 @@ abstract class BaseController {
 	 */
 	public function __construct() {
 		$this->currentUser = User::getCurrent();
-		$this->template = Template::getInstance();
+		$this->template = Template::getInstance()->getRenderEngine();
 		$this->widgets = [ ];
 	}
 
