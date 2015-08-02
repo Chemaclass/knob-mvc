@@ -150,21 +150,6 @@ Here is an example template showing a post:
 {{/ base }}
 ```
 
-### Loading a template from within a controller
-
-To load the above template, you can use the built-in render function from within your controller.
-
-```php	
-$args = [ 
-	'error' => [ 
-		'code' => 404,
-		'message' => 'Not found' 
-	] 
-];
-return $this->renderPage('error', $args);
-```
-
-
 ### Loading templates with automatically included Header and footer feature
 
 The 3 first most important templates are:
