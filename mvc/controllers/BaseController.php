@@ -18,11 +18,6 @@ use Config\Params;
 abstract class BaseController {
 
 	/*
-	 * Some const
-	 */
-	const LIMIT_POST_DEFAULT = 5;
-
-	/*
 	 * Members
 	 */
 	protected $configParams;
