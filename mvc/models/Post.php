@@ -61,15 +61,15 @@ class Post extends Image {
 		}
 
 		if (count($args) && isset($args['excludeSlugs'])) {
-			if (($excludeSlugs = $args['excludeSlugs']) && count($excludeSlugs)) {
-				foreach ( $pages as $kP => $p ) {
-					foreach ( $excludeSlugs as $excludeSlug ) {
-						if ($p->getSlug() == $excludeSlug) {
-							unset($pages[$kP]);
-						}
+			$excludeSlugs = $args['excludeSlugs'];
+			$pages = array_filter($pages, function ($page) use($excludeSlugs) {
+				foreach ( $excludeSlugs as $excludeSlug ) {
+					if ($page->getSlug() == $excludeSlug) {
+						return false;
 					}
 				}
-			}
+				return true;
+			});
 		}
 
 		/*
@@ -89,7 +89,7 @@ class Post extends Image {
 	 */
 	protected function getImageSizesToDelete() {
 		// TODO:
-		return [];
+		return [ ];
 	}
 
 	/**
