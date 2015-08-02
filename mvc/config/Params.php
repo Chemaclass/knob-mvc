@@ -39,11 +39,14 @@ class Params {
 				'adminEmail' => ADMIN_EMAIL,
 				'atomUrl' => get_bloginfo('atom_url'),
 
+				'blogAuthor' => 'José María Valera Reales',
+				'blogCharset' => get_bloginfo('charset'),
+				'blogKeywords' => 'knob, wordpress, framework, mvc, template',
+				'blogName' => get_bloginfo('name'),
 				'blogTitle' => BLOG_TITLE,
 				'blogDescription' => ($d = I18n::trans('internal.blog_description')) ? $d : get_bloginfo('description'),
 
 				'categoryBase' => ($c = get_option('category_base')) ? $c : Post::CATEGORY_BASE_DEFAULT,
-				'charset' => get_bloginfo('charset'),
 				'commentsAtomUrl' => get_bloginfo('comments_atom_url'),
 				'commentsRss2Url' => get_bloginfo('comments_rss2_url'),
 				'componentsDir' => COMPONENTS_DIR,
@@ -60,8 +63,6 @@ class Params {
 
 				'language' => get_bloginfo('language'),
 				'loginUrl' => wp_login_url($_SERVER['REQUEST_URI']),
-
-				'name' => get_bloginfo('name'),
 
 				'pingbackUrl' => get_bloginfo('pingback_url'),
 				'postsPerPage' => get_option('posts_per_page'),

@@ -19,7 +19,7 @@ Here is an example of a header template that displays the above data.
   <html lang="{{currentLang}}">
   <head>
     <title>{{{blogTitle}}}</title>
-    <meta charset="utf-8">
+    <meta charset="{{charset}}">
     <link rel="icon" type="image/x-icon" href="{{publicDir}}/img/favicon.ico">    
     <link media="all" rel="stylesheet" href="{{publicDir}}/css/main.css">
     <script src="{{publicDir}}/js/main.js"></script>
