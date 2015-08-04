@@ -36,15 +36,22 @@ class User extends Image {
 	const KEY_FACEBOOK_URL = 'facebook_url';
 	const KEY_GOOGLE_PLUS = 'google_plus';
 	const KEY_GOOGLE_PLUS_URL = 'google_plus_url';
+	const KEY_TYPE = 'user_type';
 
 	/*
-	 * Roles posibles
+	 * Possible roles
 	 */
 	const ROL_ADMIN = 'administrator';
 	const ROL_EDITOR = 'editor';
 	const ROL_AUTHOR = 'author';
 	const ROL_CONTRIBUTOR = 'contributor';
 	const ROL_SUBSCRIBER = 'subscriber';
+
+	/*
+	 * Possible kind of users
+	 */
+	const TYPE_AUTHOR = 'author';
+	const TYPE_DEFAULT = self::TYPE_AUTHOR;
 
 	/*
 	 * Header sizes
@@ -56,6 +63,25 @@ class User extends Image {
 	 * Sidebar
 	 */
 	const WITH_SIDEBAR_DEFAULT = true;
+
+	/**
+	 * Return all valid user types
+	 *
+	 * @return arraz<string>
+	 */
+	public static function getValidTypes() {
+		return [
+			self::TYPE_AUTHOR
+		];
+	}
+
+	/**
+	 * Return the user type
+	 */
+	public function getType() {
+		$userType = get_user_meta($this->ID, self::KEY_TYPE, true);
+		return ($userType) ? $userType : self::TYPE_DEFAULT;
+	}
 
 	/**
 	 * (non-PHPdoc)
