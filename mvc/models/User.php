@@ -51,7 +51,8 @@ class User extends Image {
 	 * Possible kind of users
 	 */
 	const TYPE_AUTHOR = 'author';
-	const TYPE_DEFAULT = self::TYPE_AUTHOR;
+	const TYPE_USER = 'user';
+	const TYPE_DEFAULT = self::TYPE_USER;
 
 	/*
 	 * Header sizes
@@ -71,7 +72,8 @@ class User extends Image {
 	 */
 	public static function getValidTypes() {
 		return [
-			self::TYPE_AUTHOR
+			self::TYPE_AUTHOR,
+			self::TYPE_USER
 		];
 	}
 

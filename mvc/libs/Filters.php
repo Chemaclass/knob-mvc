@@ -12,8 +12,11 @@ use Models\User;
 class Filters {
 
 	/**
-	 * Change the 'author' slug from the URL base (for each author) to the type of User
+	 * Change the 'author' slug from the URL base (for each author) to the type of User.
 	 *
+	 * Remeber: Manually flush your permalink structure to reflect these changes:
+	 * 1) Settings -> Permalinks -> choose default -> Save
+	 * 2) Revert the settings to original.
 	 */
 	public static function authorRewriteRules() {
 		add_action('init', function () {
@@ -41,7 +44,6 @@ class Filters {
 
 	/**
 	 * Override the get_avatar by default from WP
-	 *
 	 */
 	public static function getAvatar() {
 		/*
