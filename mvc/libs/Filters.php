@@ -12,9 +12,36 @@ use Models\User;
 class Filters {
 
 	/**
+	 * Change the 'author' slug from the URL base (for each author) to the type of User
+	 *
+	 */
+	public static function authorRewriteRules() {
+		add_action('init', function () {
+			global $wp_rewrite;
+			$authorLevels = User::getValidTypes();
+			// Define the tag and use it in the rewrite rule
+			add_rewrite_tag('%author_type%', '(' . implode('|', $authorLevels) . ')');
+			$wp_rewrite->author_base = '%author_type%';
+		});
+
+		add_filter('author_rewrite_rules', function ($author_rewrite_rules) {
+			foreach ( $author_rewrite_rules as $pattern => $substitution ) {
+				if (false === strpos($substitution, 'author_name')) {
+					unset($author_rewrite_rules[$pattern]);
+				}
+			}
+			return $author_rewrite_rules;
+		});
+
+		add_filter('author_link', function ($link, $author_id) {
+			$user = User::find($author_id);
+			return str_replace('%author_type%', $user->getType(), $link);
+		}, 100, 2);
+	}
+
+	/**
 	 * Override the get_avatar by default from WP
 	 *
-	 * @return string
 	 */
 	public static function getAvatar() {
 		/*
