@@ -107,6 +107,15 @@ class HomeController extends BaseController {
 	}
 
 	/**
+	 * index.php
+	 */
+	public function getIndex() {
+		return $this->get404();
+	}
+
+
+
+	/**
 	 * 404.php
 	 */
 	public function get404() {
