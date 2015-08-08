@@ -60,49 +60,51 @@ abstract class BaseController {
 	 *
 	 * @param array $templateVars
 	 */
-	private function addGlobalVariables(&$templateVars = []) {
+	private function getGlobalVariables() {
+		$globalVars = [ ];
 		/*
 		 * Active
 		 */
-		$templateVars['sidebar']['active'] = ($u = User::getCurrent()) ? $u->isWithSidebar() : User::WITH_SIDEBAR_DEFAULT;
+
+		$globalVars['sidebar']['active'] = ($u = User::getCurrent()) ? $u->isWithSidebar() : User::WITH_SIDEBAR_DEFAULT;
 
 		/*
 		 * Sidebar items
 		 */
-		$templateVars[Template::SIDEBAR_RIGHT_TOP]['widgets'] = $this->widgets[Template::SIDEBAR_RIGHT_TOP];
-		$templateVars[Template::SIDEBAR_RIGHT_BOTTOM]['widgets'] = $this->widgets[Template::SIDEBAR_RIGHT_BOTTOM];
-		$templateVars[Template::FOOTER_TOP]['widgets'] = $this->widgets[Template::FOOTER_TOP];
-		$templateVars[Template::FOOTER_BOTTOM]['widgets'] = $this->widgets[Template::FOOTER_BOTTOM];
+		$globalVars[Template::SIDEBAR_RIGHT_TOP]['widgets'] = $this->widgets[Template::SIDEBAR_RIGHT_TOP];
+		$globalVars[Template::SIDEBAR_RIGHT_BOTTOM]['widgets'] = $this->widgets[Template::SIDEBAR_RIGHT_BOTTOM];
+		$globalVars[Template::FOOTER_TOP]['widgets'] = $this->widgets[Template::FOOTER_TOP];
+		$globalVars[Template::FOOTER_BOTTOM]['widgets'] = $this->widgets[Template::FOOTER_BOTTOM];
 
 		/*
 		 * Archives
 		 */
-		$templateVars['archives'] = Archive::getMonthly();
+		$globalVars['archives'] = Archive::getMonthly();
 
 		/*
 		 * Pages
 		 */
-		$templateVars['pages'] = Post::getAllPages($this->configParams['pages']);
+		$globalVars['pages'] = Post::getAllPages($this->configParams['pages']);
 
 		/*
 		 * Categories
 		 */
-		$templateVars['categories'] = Term::getCategories();
+		$globalVars['categories'] = Term::getCategories();
 
 		/*
 		 * Tags
 		 */
-		$templateVars['tags'] = Term::getTags();
+		$globalVars['tags'] = Term::getTags();
 
 		/*
 		 * Current User
 		 */
-		$templateVars['currentUser'] = $this->currentUser;
+		$globalVars['currentUser'] = $this->currentUser;
 
 		/*
 		 * Generics variables
 		 */
-		return array_merge($templateVars, $this->configParams['templateVars']);
+		return array_merge($globalVars, $this->configParams['templateVars']);
 	}
 
 	/**
@@ -114,13 +116,14 @@ abstract class BaseController {
 	 *        	Parameters to template
 	 */
 	public function renderPage($templateName, $templateVars = []) {
-		$this->addGlobalVariables($templateVars);
-		echo $this->render('head', $templateVars);
+		$templateVars = array_merge($templateVars, $this->getGlobalVariables());
+		$addGlobalVariablesToVars = false; // cause we already did it.
+		echo $this->render('head', $templateVars, $addGlobalVariablesToVars);
 		wp_head();
 		echo '</head>';
-		echo $this->render($templateName, $templateVars);
+		echo $this->render($templateName, $templateVars, $addGlobalVariablesToVars);
 		wp_footer();
-		echo $this->render('footer', $templateVars);
+		echo $this->render('footer', $templateVars, $addGlobalVariablesToVars);
 	}
 
 	/**
@@ -129,7 +132,10 @@ abstract class BaseController {
 	 * @param string $templateName
 	 * @param array $templateVars
 	 */
-	public function render($templateName, $templateVars = []) {
-		return $this->renderEngine->render($templateName, $this->addGlobalVariables($templateVars));
+	public function render($templateName, $templateVars = [], $addGlobalVariables = true) {
+		if ($addGlobalVariables) {
+			$templateVars = array_merge($templateVars, $this->getGlobalVariables());
+		}
+		return $this->renderEngine->render($templateName, $templateVars);
 	}
 }
