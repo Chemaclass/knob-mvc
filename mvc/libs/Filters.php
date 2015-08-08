@@ -19,12 +19,14 @@ class Filters {
 	 * 2) Revert the settings to original.
 	 */
 	public static function authorRewriteRules() {
-		add_action('init', function () {
+		$AUTHOR_TYPE = '%author_type%';
+
+		add_action('init', function () use($AUTHOR_TYPE) {
 			global $wp_rewrite;
 			$authorLevels = User::getValidTypes();
 			// Define the tag and use it in the rewrite rule
-			add_rewrite_tag('%author_type%', '(' . implode('|', $authorLevels) . ')');
-			$wp_rewrite->author_base = '%author_type%';
+			add_rewrite_tag($AUTHOR_TYPE, '(' . implode('|', $authorLevels) . ')');
+			$wp_rewrite->author_base = $AUTHOR_TYPE;
 		});
 
 		add_filter('author_rewrite_rules', function ($author_rewrite_rules) {
@@ -36,9 +38,12 @@ class Filters {
 			return $author_rewrite_rules;
 		});
 
-		add_filter('author_link', function ($link, $author_id) {
+		add_filter('author_link', function ($link, $author_id) use($AUTHOR_TYPE) {
 			$user = User::find($author_id);
-			return str_replace('%author_type%', $user->getType(), $link);
+			if (!$user) {
+				return;
+			}
+			return str_replace($AUTHOR_TYPE, $user->getType(), $link);
 		}, 100, 2);
 	}
 
