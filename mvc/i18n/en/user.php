@@ -49,6 +49,7 @@ return [
 
 	// S
 	'select_your' => 'select your :what',
+	'show_profile' => 'show profile',
 	'social_networks' => 'social networks',
 
 	// T
