@@ -29,10 +29,40 @@ abstract class BaseController {
 	 * Constructor
 	 */
 	public function __construct() {
+		/*
+		 * Params.
+		 */
 		$this->configParams = Params::all();
+
+		/*
+		 * Current User.
+		 */
 		$this->currentUser = User::getCurrent();
+
+		/*
+		 * Template Render Engine.
+		 */
 		$this->template = Template::getInstance()->getRenderEngine();
+
+		/*
+		 * Widgets.
+		 */
 		$this->widgets = [ ];
+		ob_start();
+		dynamic_sidebar('sidebar_right_top');
+		$this->widgets['sidebar_right_top'] = ob_get_clean();
+
+		ob_start();
+		dynamic_sidebar('sidebar_right_bottom');
+		$this->widgets['sidebar_right_bottom'] = ob_get_clean();
+
+		ob_start();
+		dynamic_sidebar('footer_top');
+		$this->widgets['footer_top'] = ob_get_clean();
+
+		ob_start();
+		dynamic_sidebar('footer_bottom');
+		$this->widgets['footer_bottom'] = ob_get_clean();
 	}
 
 	/**
