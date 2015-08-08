@@ -665,4 +665,18 @@ class User extends Image {
 		$langToTrans = ($currentLang = $this->getLang()) ? $currentLang : Utils::getLangBrowser();
 		return I18n::transu('lang_' . $langToTrans);
 	}
+
+	/**
+	 * Return the total of publish posts
+	 *
+	 * @return integer
+	 */
+	public function getTotalPosts() {
+		global $wpdb;
+		return $wpdb->get_var($wpdb->prepare('SELECT COUNT(*)
+				FROM wp_posts
+				WHERE post_author = %d
+				AND post_type = %s
+				AND post_status = %s', $this->ID, Post::TYPE_POST, Post::STATUS_PUBLISH));
+	}
 }
