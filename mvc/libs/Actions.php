@@ -181,7 +181,7 @@ class Actions {
 		 */
 		$activeWidgets = [
 			[
-				'id' => 'sidebar_right_top',
+				'id' => Template::SIDEBAR_RIGHT_TOP,
 				'name' => 'Sidebar right top',
 				'classBeforeWidget' => 'sidebar-right-top',
 				'beforeWidget' => '<div class="widget sidebar-right-top">',
@@ -190,13 +190,13 @@ class Actions {
 				'afterTitle' => '</span>'
 			],
 			[
-				'id' => 'sidebar_right_bottom'
+				'id' => Template::SIDEBAR_RIGHT_BOTTOM
 			],
 			[
-				'id' => 'footer_top'
+				'id' => Template::FOOTER_TOP
 			],
 			[
-				'id' => 'footer_bottom'
+				'id' => Template::FOOTER_BOTTOM
 			]
 		];
 

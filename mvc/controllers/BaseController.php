@@ -20,10 +20,10 @@ abstract class BaseController {
 	/*
 	 * Members
 	 */
-	protected $configParams;
-	protected $currentUser;
-	protected $template;
-	protected $widgets;
+	protected $configParams = [ ];
+	protected $currentUser = null;
+	protected $template = null;
+	protected $widgets = [ ];
 
 	/**
 	 * Constructor
@@ -42,27 +42,17 @@ abstract class BaseController {
 		/*
 		 * Template Render Engine.
 		 */
-		$this->template = Template::getInstance()->getRenderEngine();
+		$this->template = Template::getInstance();
+		$this->renderEngine = $this->template->getRenderEngine();
 
 		/*
 		 * Widgets.
 		 */
-		$this->widgets = [ ];
-		ob_start();
-		dynamic_sidebar('sidebar_right_top');
-		$this->widgets['sidebar_right_top'] = ob_get_clean();
-
-		ob_start();
-		dynamic_sidebar('sidebar_right_bottom');
-		$this->widgets['sidebar_right_bottom'] = ob_get_clean();
-
-		ob_start();
-		dynamic_sidebar('footer_top');
-		$this->widgets['footer_top'] = ob_get_clean();
-
-		ob_start();
-		dynamic_sidebar('footer_bottom');
-		$this->widgets['footer_bottom'] = ob_get_clean();
+		foreach ( Template::getDinamicSidebarActive() as $s ) {
+			ob_start();
+			dynamic_sidebar($s);
+			$this->widgets[$s] = ob_get_clean();
+		}
 	}
 
 	/**
@@ -79,10 +69,10 @@ abstract class BaseController {
 		/*
 		 * Sidebar items
 		 */
-		$templateVars['sidebar_right_top']['widgets'] = $this->widgets['sidebar_right_top'];
-		$templateVars['sidebar_right_bottom']['widgets'] = $this->widgets['sidebar_right_bottom'];
-		$templateVars['footer_top']['widgets'] = $this->widgets['footer_top'];
-		$templateVars['footer_bottom']['widgets'] = $this->widgets['footer_bottom'];
+		$templateVars[Template::SIDEBAR_RIGHT_TOP]['widgets'] = $this->widgets[Template::SIDEBAR_RIGHT_TOP];
+		$templateVars[Template::SIDEBAR_RIGHT_BOTTOM]['widgets'] = $this->widgets[Template::SIDEBAR_RIGHT_BOTTOM];
+		$templateVars[Template::FOOTER_TOP]['widgets'] = $this->widgets[Template::FOOTER_TOP];
+		$templateVars[Template::FOOTER_BOTTOM]['widgets'] = $this->widgets[Template::FOOTER_BOTTOM];
 
 		/*
 		 * Archives
@@ -140,6 +130,6 @@ abstract class BaseController {
 	 * @param array $templateVars
 	 */
 	public function render($templateName, $templateVars = []) {
-		return $this->template->render($templateName, $this->addGlobalVariables($templateVars));
+		return $this->renderEngine->render($templateName, $this->addGlobalVariables($templateVars));
 	}
 }

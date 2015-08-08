@@ -23,6 +23,14 @@ class Template {
 	const STRICT_CALLABLES = true;
 
 	/*
+	 * Widgets
+	 */
+	const SIDEBAR_RIGHT_TOP = 'sidebar_right_top';
+	const SIDEBAR_RIGHT_BOTTOM = 'sidebar_right_bottom';
+	const FOOTER_TOP = 'footer_top';
+	const FOOTER_BOTTOM = 'footer_bottom';
+
+	/*
 	 * Singleton
 	 */
 	private static $instance = null;
@@ -71,6 +79,20 @@ class Template {
 	 */
 	private static function getTemplatesFolderLocation() {
 		return str_replace('//', '/', dirname(__FILE__) . '/') . '../templates';
+	}
+
+	/**
+	 * Return a list with the dinamic sidebar for widgets active
+	 *
+	 * @return array<string>
+	 */
+	public static function getDinamicSidebarActive() {
+		return [
+			Template::SIDEBAR_RIGHT_TOP,
+			Template::SIDEBAR_RIGHT_BOTTOM,
+			Template::FOOTER_TOP,
+			Template::FOOTER_BOTTOM
+		];
 	}
 
 	/**
