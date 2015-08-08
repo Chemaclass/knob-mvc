@@ -86,6 +86,31 @@ class User extends Image {
 	}
 
 	/**
+	 *
+	 * @param string $type
+	 * @return boolean
+	 */
+	private function isType($type) {
+		return ($this->getType() == $type);
+	}
+
+	/**
+	 *
+	 * @return boolean
+	 */
+	public function isTypeAuthor() {
+		return $this->isType(self::TYPE_AUTHOR);
+	}
+
+	/**
+	 *
+	 * @return boolean
+	 */
+	public function isTypeUser() {
+		return $this->isType(self::TYPE_USER);
+	}
+
+	/**
 	 * (non-PHPdoc)
 	 *
 	 * @see \Models\Image::getImageSizesToDelete()
