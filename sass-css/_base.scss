@@ -31,6 +31,10 @@ $body-color: #000;
 	}
 }
 
+%bold {
+	font-weight: bold;
+}
+
 %post-home {
 	.post {
 		border-bottom: 1px solid #ccc;
