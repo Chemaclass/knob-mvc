@@ -35,7 +35,7 @@ class Params {
 			 * Params to all templates
 			 * ====================================
 			 */
-			'templateVars' => [
+			'globalVars' => [
 				'adminEmail' => ADMIN_EMAIL,
 				'atomUrl' => get_bloginfo('atom_url'),
 

@@ -104,7 +104,7 @@ abstract class BaseController {
 		/*
 		 * Generics variables
 		 */
-		return array_merge($globalVars, $this->configParams['templateVars']);
+		return array_merge($globalVars, $this->configParams['globalVars']);
 	}
 
 	/**
