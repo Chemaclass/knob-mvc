@@ -25,6 +25,7 @@ class Params {
 			 */
 			'pages' => [
 				'excludeSlugs' => [
+					'ajax',
 					'lang',
 					'random'
 				]
