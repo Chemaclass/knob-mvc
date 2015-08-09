@@ -77,9 +77,10 @@ class Params {
 				'isEnvLoc' => Env::isLoc(),
 				'isUserLoggedIn' => is_user_logged_in(),
 
-				'publicDir' => PUBLIC_DIR
-			]
+				'publicDir' => PUBLIC_DIR,
 
+				'tagBase' => ($t = get_option('tag_base')) ? $t : Post::TAG_BASE_DEFAULT
+			]
 		];
 	}
 }
