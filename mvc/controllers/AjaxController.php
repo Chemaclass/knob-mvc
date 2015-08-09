@@ -22,7 +22,7 @@ class AjaxController extends BaseController {
 	 * Members
 	 */
 	public $err;
-	public $without_permissions;
+	public $withoutPermissions;
 
 	/**
 	 * Constructor
@@ -30,7 +30,7 @@ class AjaxController extends BaseController {
 	public function __construct() {
 		parent::__construct();
 		$this->err = I18n::transu('error');
-		$this->without_permissions = I18n::transu('without_permissions');
+		$this->withoutPermissions = I18n::transu('without_permissions');
 	}
 
 	/**
@@ -94,6 +94,5 @@ class AjaxController extends BaseController {
 		echo json_encode($json);
 	}
 }
-
 $ajax = new AjaxController();
 $ajax->main();
