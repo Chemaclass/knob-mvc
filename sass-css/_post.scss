@@ -7,6 +7,11 @@
 	border: 1px solid #ccc;
 	overflow: hidden;
 
+	img {
+		height: auto;
+		max-width: 100%;
+	}
+
 	#comment-form {
 		border-top: 1px solid #eee;
 		margin: 6px 0px;
