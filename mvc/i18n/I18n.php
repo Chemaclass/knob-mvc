@@ -62,7 +62,7 @@ class I18n {
 	/**
 	 * Return the fullname of the lang by current user.
 	 *
-	 * @return string|boolean Lang from the current user
+	 * @return string Lang from the current user
 	 */
 	public static function getLangFullnameBrowserByCurrentUser($forceLang = false) {
 		$lang = static::getLangBrowserByCurrentUser($forceLang);
@@ -198,7 +198,7 @@ class I18n {
 	}
 
 	/**
-	 * /**
+	 *
 	 * Return the translated word with the first letter in uppercase.
 	 *
 	 * @param string $key
