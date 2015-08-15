@@ -1,0 +1,12 @@
+<span class="info col-xs-12">
+	<meta itemprop="datePublished" content="{{getDate | date.xmlschema}}"/>
+	<i class="fa fa-calendar"></i> <span class="date">{{getDate | date.string}}</span>
+	{{#trans}}post.by{{/trans}}
+	<span class="author"><a href="{{getAuthor.getPostsUrl}}">{{getAuthor.getDisplayName}}</a></span>
+	{{# getCategories | count }}
+		{{#trans}}in{{/trans}} 
+		<span class="categories">
+			{{> post/_categories }}
+		</span>
+	{{/ getCategories }} 
+</span>

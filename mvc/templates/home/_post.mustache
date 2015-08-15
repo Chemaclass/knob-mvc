@@ -8,27 +8,22 @@
 
 	<div class="col-xs-12 {{# getThumbnail }} col-sm-10 {{/ getThumbnail }}">
 
-		
-		<span class="col-xs-12 date">
-			<span class="date">{{getDate | date.string}}</span> {{#trans}}post.by{{/trans}} 
-			<a class="author-url" href="{{getAuthor.getPostsUrl}}">{{getAuthor.getDisplayName}}</a>
-		</span>
-
+		{{> post/_info }}
 
 		<span class="col-xs-12 title">
 			<a class="permalink" href="{{getPermalink}}">{{getTitle}}</a>
 
-			{{# getComments | count}}
+			{{# getComments | count }}
 				<span class="total-comments" title="{{#transu}}comments{{/transu}}">
 					{{# getComments | moreThan1}}
 							<i class="fa fa-comments-o"></i>
-					{{/ getComments | moreThan1}}	
+					{{/ getComments }}	
 					{{^ getComments | moreThan1}}
 							<i class="fa fa-comment-o"></i> 
-					{{/ getComments | moreThan1}}
+					{{/ getComments }}
 					<span class="total">{{getComments | count}}</span>
 				</span>	
-			{{/ getComments | count}}
+			{{/ getComments }}
 
 			{{> post/_edit_control }}
 
