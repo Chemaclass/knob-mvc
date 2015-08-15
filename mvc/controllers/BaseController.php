@@ -23,6 +23,7 @@ abstract class BaseController {
 	protected $configParams = [ ];
 	protected $currentUser = null;
 	protected $template = null;
+	protected $renderEngine = null;
 	protected $widgets = [ ];
 
 	/**

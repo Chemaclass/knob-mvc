@@ -97,7 +97,7 @@ class I18n {
 			$file = "global";
 		}
 		// List with all keys/values with current lang
-		$langArray = self::getFicheroIdioma($file, $dir);
+		$langArray = self::getLangFile($file, $dir);
 		$key = trim($key);
 		$value = isset($langArray[$key]) ? $langArray[$key] : $key;
 		if (is_numeric(strpos($value, ':')) && !empty($params) && is_array($params)) {
@@ -114,7 +114,7 @@ class I18n {
 	 * @param string $file
 	 *        	Filename language
 	 */
-	public static function getFicheroIdioma($file, $lang = false) {
+	public static function getLangFile($file, $lang = false) {
 		if (!$lang) {
 			$lang = static::getLangBrowserByCurrentUser();
 			if (!$lang) {

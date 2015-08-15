@@ -125,8 +125,9 @@ class Template {
 	}
 
 	/**
+	 * List of helpers for our templates
 	 *
-	 * @return multitype:NULL multitype:NULL |string|boolean
+	 * @return array<function>
 	 */
 	private function getHelpers() {
 		return [
