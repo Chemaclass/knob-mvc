@@ -2,6 +2,8 @@
 
 namespace Controllers;
 
+use Widgets\HelloWidget;
+
 /**
  * Widget Controller
  *
@@ -10,9 +12,10 @@ namespace Controllers;
 class WidgetController extends BaseController {
 
 	/**
-	 * construct
+	 * Setup
 	 */
-	public function __construct() {
-		parent::__construct();
+	public static function setup() {
+		HelloWidget::register();
+
 	}
 }
