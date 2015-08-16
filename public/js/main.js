@@ -5,7 +5,13 @@
 var MINIMUM_HEIGHT_FOR_TO_LOAD = 200;
 
 $(document).ready(function() {
-
+	
+	/*
+	 * Widget styles
+	 */
+	$('table').addClass('table table-hover table-condensed')
+	$('.widget').addClass('sidebar-item')
+	
 });
 
 /**
