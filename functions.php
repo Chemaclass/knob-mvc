@@ -4,6 +4,7 @@ require_once 'mvc/libs/Helpers.php';
 
 use Libs\Actions;
 use Libs\Filters;
+use Config\Ini;
 
 // --------------------------------------------------------------
 // Some constants
@@ -46,6 +47,11 @@ Actions::widgetsInit();
 // --------------------------------------------------------------
 Filters::authorRewriteRules();
 Filters::getAvatar();
+
+// --------------------------------------------------------------
+// Ini
+// --------------------------------------------------------------
+Ini::setup();
 
 /**
  * Remove the admin bar in prod
