@@ -20,7 +20,8 @@
 	        "Controllers": "mvc/",
             "I18n": "mvc/",
             "Libs": "mvc/",
-	        "Models": "mvc/"
+	        "Models": "mvc/",
+	        "Widgets": "mvc/"
 	    },
 		"classmap" : [
 			"mvc/"
