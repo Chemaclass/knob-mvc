@@ -20,6 +20,7 @@ class Ini {
 		/*
 		 * Widgets
 		 */
-		WidgetController::setup();
+		$widgetController = new WidgetController();
+		$widgetController->setup();
 	}
 }
