@@ -3,6 +3,8 @@
 namespace Controllers;
 
 use Widgets\HelloWidget;
+use Widgets\LangWidget;
+use Widgets\WidgetBase;
 
 /**
  * Widget Controller
@@ -14,8 +16,14 @@ class WidgetController extends BaseController {
 	/**
 	 * Setup
 	 */
-	public static function setup() {
-		HelloWidget::register();
+	public function setup() {
+		$widgets = [
+			new HelloWidget(),
+			new LangWidget()
+		];
 
+		foreach ( $widgets as $w ) {
+			$w->register();
+		}
 	}
 }
