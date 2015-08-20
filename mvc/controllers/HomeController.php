@@ -16,13 +16,6 @@ use Models\Archive;
 class HomeController extends BaseController {
 
 	/**
-	 * construct
-	 */
-	public function __construct() {
-		parent::__construct();
-	}
-
-	/**
 	 * author.php
 	 */
 	public function getAuthor() {
