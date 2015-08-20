@@ -2,14 +2,12 @@
 
 namespace Controllers;
 
-use Libs\Utils;
-use Models\User;
-use Models\Post;
-use I18n\I18n;
-use Models\Term;
-use Models\Archive;
-use Libs\Template;
 use Config\Params;
+use Libs\Template;
+use Models\Archive;
+use Models\Post;
+use Models\Term;
+use Models\User;
 
 /**
  *
@@ -22,9 +20,8 @@ abstract class BaseController {
 	 */
 	protected $configParams = [ ];
 	protected $currentUser = null;
-	protected $template = null;
-	protected $renderEngine = null;
 	protected $widgets = [ ];
+	protected $template = null;
 
 	/**
 	 * Constructor
@@ -41,19 +38,18 @@ abstract class BaseController {
 		$this->currentUser = User::getCurrent();
 
 		/*
-		 * Template Render Engine.
-		 */
-		$this->template = Template::getInstance();
-		$this->renderEngine = $this->template->getRenderEngine();
-
-		/*
-		 * Widgets.
+		 * Sidebar.
 		 */
 		foreach ( Template::getDinamicSidebarActive() as $s ) {
 			ob_start();
 			dynamic_sidebar($s);
 			$this->widgets[$s] = ob_get_clean();
 		}
+
+		/*
+		 * Template Render Engine.
+		 */
+		$this->template = Template::getInstance();
 	}
 
 	/**
@@ -61,21 +57,19 @@ abstract class BaseController {
 	 *
 	 * @param array $templateVars
 	 */
-	private function getGlobalVariables() {
+	public function getGlobalVariables() {
 		$globalVars = [ ];
+
 		/*
 		 * Active
 		 */
-
 		$globalVars['sidebar']['active'] = ($u = User::getCurrent()) ? $u->isWithSidebar() : User::WITH_SIDEBAR_DEFAULT;
 
 		/*
 		 * Sidebar items
 		 */
-		$globalVars[Template::SIDEBAR_RIGHT_TOP]['widgets'] = $this->widgets[Template::SIDEBAR_RIGHT_TOP];
-		$globalVars[Template::SIDEBAR_RIGHT_BOTTOM]['widgets'] = $this->widgets[Template::SIDEBAR_RIGHT_BOTTOM];
-		$globalVars[Template::FOOTER_TOP]['widgets'] = $this->widgets[Template::FOOTER_TOP];
-		$globalVars[Template::FOOTER_BOTTOM]['widgets'] = $this->widgets[Template::FOOTER_BOTTOM];
+		$globalVars[Template::SIDEBAR_RIGHT] = $this->widgets[Template::SIDEBAR_RIGHT];
+		$globalVars[Template::FOOTER] = $this->widgets[Template::FOOTER];
 
 		/*
 		 * Archives
@@ -109,6 +103,19 @@ abstract class BaseController {
 	}
 
 	/**
+	 * Render a partial
+	 *
+	 * @param string $templateName
+	 * @param array $templateVars
+	 */
+	public function render($templateName, $templateVars = [], $addGlobalVariables = true) {
+		if ($addGlobalVariables) {
+			$templateVars = array_merge($templateVars, $this->getGlobalVariables());
+		}
+		return $this->template->getRenderEngine()->render($templateName, $templateVars);
+	}
+
+	/**
 	 * Print head + template + footer
 	 *
 	 * @param string $templateName
@@ -125,18 +132,5 @@ abstract class BaseController {
 		echo $this->render($templateName, $templateVars, $addGlobalVariablesToVars);
 		wp_footer();
 		echo $this->render('footer', $templateVars, $addGlobalVariablesToVars);
-	}
-
-	/**
-	 * Render a partial
-	 *
-	 * @param string $templateName
-	 * @param array $templateVars
-	 */
-	public function render($templateName, $templateVars = [], $addGlobalVariables = true) {
-		if ($addGlobalVariables) {
-			$templateVars = array_merge($templateVars, $this->getGlobalVariables());
-		}
-		return $this->renderEngine->render($templateName, $templateVars);
 	}
 }
