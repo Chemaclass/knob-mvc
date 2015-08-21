@@ -18,12 +18,22 @@ abstract class WidgetBase extends \WP_Widget {
 
 	/**
 	 *
-	 * @param unknown $id
-	 * @param unknown $title
-	 * @param unknown $widgetOps
-	 * @param unknown $controlOps
+	 * @param string $id
+	 * @param string $title
+	 * @param array $widgetOps
+	 * @param array $controlOps
 	 */
-	public function __construct($id, $title, $widgetOps, $controlOps) {
+	public function __construct($id = '', $title = '', $widgetOps = [], $controlOps = []) {
+		$className = get_called_class();
+		$className = substr($className, strrpos($className, '\\') + 1);
+		$className = substr($className, 0, strpos($className, 'Widget'));
+
+		$id = (strlen($id)) ? $id : $className . '_Widget';
+		$title = (strlen($title)) ? $title : $className . ' Widget';
+		$widgetOps = (count($widgetOps)) ? $widgetOps : [
+			'classname' => strtolower($className) . '-widget',
+			'description' => $className . ' widget'
+		];
 		parent::__construct($id, $title, $widgetOps, $controlOps);
 		$this->template = Template::getInstance();
 	}
