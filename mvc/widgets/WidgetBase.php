@@ -60,4 +60,28 @@ abstract class WidgetBase extends \WP_Widget {
 			register_widget($id);
 		}
 	}
+
+	/**
+	 * Render form
+	 *
+	 * @param unknown $instance
+	 */
+	protected function renderBackForm($instance, array $fields) {
+		$fieldIds = [ ];
+		$fieldNames = [ ];
+		foreach ( $fields as $f ) {
+			$fieldIds = array_merge($fieldIds, [
+				$f => $this->get_field_id($f)
+			]);
+			$fieldNames = array_merge($fieldIds, [
+				$f => $this->get_field_name($f)
+			]);
+		}
+		return $this->template->getRenderEngine()->render('widget/' . strtolower($this->className) . '/back', [
+			'instance' => array_merge($instance, [
+				'fieldId' => $fieldIds,
+				'fieldName' => $fieldNames
+			])
+		]);
+	}
 }

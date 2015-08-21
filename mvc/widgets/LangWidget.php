@@ -25,16 +25,10 @@ class LangWidget extends WidgetBase {
 	 * @param unknown $instance
 	 */
 	public function form($instance) {
-		echo $this->template->getRenderEngine()->render('widget/lang/back', [
-			'instance' => array_merge($instance, [
-				'fieldId' => [
-					'title' => $this->get_field_id('title')
-				],
-				'fieldName' => [
-					'title' => $this->get_field_name('title')
-				]
-			])
-		]);
+		$fields = [
+			'title'
+		];
+		echo $this->renderBackForm($instance, $fields);
 	}
 
 	/**
