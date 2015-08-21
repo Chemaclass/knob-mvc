@@ -9,18 +9,18 @@
 
 		{{> navbar }}
 
-	    <div id="content" class="col-xs-12 {{# sidebar.active }}col-sm-10{{/ sidebar.active }}">
+	    <div id="content" class="col-xs-12 {{# sidebar_right.active }}col-sm-10{{/ sidebar_right.active }}">
 	    	{{$ content }}
 	    		You don't have to see this text, cause you have to override this 
             	tag's "content" in your child template.
 	    	{{/content }}
 		</div>
-		
-		{{# sidebar.active }}
-		<div id="sidebar" class="col-xs-12 col-sm-2">
-		    {{> sidebar }}
+
+		{{# sidebar_right.active }}
+		<div id="sidebar_right" class="col-xs-12 col-sm-2">
+		    {{{ widgets_sidebar_right }}}
 		</div>
-		{{/ sidebar.active }}
+		{{/ sidebar_right.active }}
 
 	</div>
 

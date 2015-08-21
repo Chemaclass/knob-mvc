@@ -6,6 +6,7 @@ use Mustache_Engine;
 use Mustache_Loader_FilesystemLoader;
 use Mustache_Logger_StreamLogger;
 use I18n\I18n;
+use Config\Params;
 
 /**
  * Template singleton
@@ -25,10 +26,8 @@ class Template {
 	/*
 	 * Widgets
 	 */
-	const SIDEBAR_RIGHT_TOP = 'sidebar_right_top';
-	const SIDEBAR_RIGHT_BOTTOM = 'sidebar_right_bottom';
-	const FOOTER_TOP = 'footer_top';
-	const FOOTER_BOTTOM = 'footer_bottom';
+	const SIDEBAR_RIGHT = 'widgets_sidebar_right';
+	const FOOTER = 'widgets_footer';
 
 	/*
 	 * Singleton
@@ -38,12 +37,15 @@ class Template {
 	/*
 	 * Members
 	 */
-	private $renderEngine = null;
+	protected $renderEngine = null;
 
 	/**
 	 * Constructor
 	 */
 	private function __construct() {
+		/*
+		 * Render Engine.
+		 */
 		$templatesFolder = static::getTemplatesFolderLocation();
 		$this->renderEngine = new Mustache_Engine([
 			'charset' => static::CHARSET,
@@ -54,7 +56,7 @@ class Template {
 			'partials_loader' => new Mustache_Loader_FilesystemLoader($templatesFolder),
 			'logger' => new Mustache_Logger_StreamLogger('php://stderr'),
 			'helpers' => self::getHelpers(),
-			'pragmas' => static::getPragmas(),
+			'pragmas' => self::getPragmas(),
 			'escape' => function ($value) {
 				return htmlspecialchars($value, ENT_COMPAT, static::CHARSET);
 			}
@@ -73,6 +75,14 @@ class Template {
 	}
 
 	/**
+	 *
+	 * @return \Mustache_Engine
+	 */
+	public function getRenderEngine(){
+		return $this->renderEngine;
+	}
+
+	/**
 	 * Return the relative path location where are the templates.
 	 *
 	 * @return string
@@ -88,29 +98,9 @@ class Template {
 	 */
 	public static function getDinamicSidebarActive() {
 		return [
-			Template::SIDEBAR_RIGHT_TOP,
-			Template::SIDEBAR_RIGHT_BOTTOM,
-			Template::FOOTER_TOP,
-			Template::FOOTER_BOTTOM
+			Template::SIDEBAR_RIGHT,
+			Template::FOOTER
 		];
-	}
-
-	/**
-	 *
-	 * @return \Mustache_Engine
-	 */
-	public function getRenderEngine() {
-		return $this->renderEngine;
-	}
-
-	/**
-	 *
-	 * @param \Mustache_Engine $renderEngine
-	 * @return Template
-	 */
-	public function setRenderEngine($renderEngine) {
-		$this->renderEngine = $renderEngine;
-		return $this;
 	}
 
 	/**

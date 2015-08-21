@@ -63,7 +63,7 @@ abstract class BaseController {
 		/*
 		 * Active
 		 */
-		$globalVars['sidebar']['active'] = ($u = User::getCurrent()) ? $u->isWithSidebar() : User::WITH_SIDEBAR_DEFAULT;
+		$globalVars['sidebar_right']['active'] = ($u = User::getCurrent()) ? $u->isWithSidebar() : User::WITH_SIDEBAR_DEFAULT;
 
 		/*
 		 * Sidebar items
