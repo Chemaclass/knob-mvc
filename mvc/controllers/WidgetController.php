@@ -2,9 +2,7 @@
 
 namespace Controllers;
 
-use Widgets\HelloWidget;
 use Widgets\LangWidget;
-use Widgets\WidgetBase;
 
 /**
  * Widget Controller
@@ -18,7 +16,6 @@ class WidgetController extends BaseController {
 	 */
 	public function setup() {
 		$widgets = [
-			new HelloWidget(),
 			new LangWidget()
 		];
 
