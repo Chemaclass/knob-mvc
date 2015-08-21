@@ -12,9 +12,15 @@ use Libs\Template;
 abstract class WidgetBase extends \WP_Widget {
 
 	/*
-	 * Members
+	 * Some const.
+	 */
+	const PREFIX = 'Knob ';
+
+	/*
+	 * Members.
 	 */
 	protected $template;
+	protected $className;
 
 	/**
 	 *
@@ -26,13 +32,13 @@ abstract class WidgetBase extends \WP_Widget {
 	public function __construct($id = '', $title = '', $widgetOps = [], $controlOps = []) {
 		$className = get_called_class();
 		$className = substr($className, strrpos($className, '\\') + 1);
-		$className = substr($className, 0, strpos($className, 'Widget'));
+		$this->className = substr($className, 0, strpos($className, 'Widget'));
 
-		$id = (strlen($id)) ? $id : $className . '_Widget';
-		$title = (strlen($title)) ? $title : $className . ' Widget';
+		$id = (strlen($id)) ? $id : $this->className . '_Widget';
+		$title = (strlen($title)) ? $title : self::PREFIX . $this->className . ' Widget';
 		$widgetOps = (count($widgetOps)) ? $widgetOps : [
-			'classname' => strtolower($className) . '-widget',
-			'description' => $className . ' widget'
+			'classname' => strtolower($this->className) . '-widget',
+			'description' => $this->className . ' widget'
 		];
 		parent::__construct($id, $title, $widgetOps, $controlOps);
 		$this->template = Template::getInstance();
