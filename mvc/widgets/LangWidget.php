@@ -8,39 +8,11 @@ namespace Widgets;
  *
  */
 class LangWidget extends WidgetBase {
-
-	/**
-	 * Creating widget front-end
-	 */
-	public function widget($args, $instance) {
-		echo $this->template->getRenderEngine()->render('widget/lang/front', [
-			'args' => $args,
-			'instance' => $instance
-		]);
-	}
-
-	/**
-	 * Widget Backend
+	/*
+	 * All variables what we need are in Params.globalVars, and
+	 * these are autoimplement in every template.
 	 *
-	 * @param unknown $instance
-	 */
-	public function form($instance) {
-		$fields = [
-			'title'
-		];
-		echo $this->renderBackForm($instance, $fields);
-	}
-
-	/**
-	 * Updating widget replacing old instances with new
+	 * So this widget it's done :-)
 	 *
-	 * @param unknown $newInstance
-	 * @param unknown $oldInstance
-	 * @return multitype:string
 	 */
-	public function update($newInstance, $oldInstance) {
-		$instance = array ();
-		$instance['title'] = (!empty($newInstance['title'])) ? strip_tags($newInstance['title']) : '';
-		return $instance;
-	}
 }

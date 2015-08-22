@@ -9,6 +9,7 @@ use Config\Params;
  *
  * @author José María Valera Reales
  *
+ * @see https://codex.wordpress.org/es:API_de_Widget
  */
 abstract class WidgetBase extends \WP_Widget {
 
@@ -20,7 +21,7 @@ abstract class WidgetBase extends \WP_Widget {
 	/*
 	 * Members.
 	 */
-	protected $className;
+	protected $className, $classNameLower;
 	protected $configParams;
 	protected $template;
 
@@ -30,11 +31,14 @@ abstract class WidgetBase extends \WP_Widget {
 	 * @param string $title
 	 * @param array $widgetOps
 	 * @param array $controlOps
+	 *
+	 * @see https://developer.wordpress.org/reference/classes/wp_widget/__construct/
 	 */
 	public function __construct($id = '', $title = '', $widgetOps = [], $controlOps = []) {
 		$className = get_called_class();
 		$className = substr($className, strrpos($className, '\\') + 1);
 		$this->className = substr($className, 0, strpos($className, 'Widget'));
+		$this->classNameLower = strtolower($this->className);
 
 		$id = (strlen($id)) ? $id : $this->className . '_Widget';
 		$title = (strlen($title)) ? $title : self::PREFIX . $this->className . ' Widget';
@@ -67,7 +71,45 @@ abstract class WidgetBase extends \WP_Widget {
 	}
 
 	/**
-	 * Render form
+	 * Creating widget front-end
+	 *
+	 * @see https://codex.wordpress.org/es:API_de_Widget
+	 */
+	public function widget($args, $instance) {
+		echo $this->renderFrontendWidget($args, $instance);
+	}
+
+	/**
+	 * Widget Backend
+	 *
+	 * @param unknown $instance
+	 *
+	 * @see https://codex.wordpress.org/es:API_de_Widget
+	 */
+	public function form($instance) {
+		$fields = [
+			'title'
+		];
+		echo $this->renderBackForm($instance, $fields);
+	}
+
+	/**
+	 * Updating widget replacing old instances with new
+	 *
+	 * @param unknown $newInstance
+	 * @param unknown $oldInstance
+	 * @return multitype:string
+	 *
+	 * @see https://codex.wordpress.org/es:API_de_Widget
+	 */
+	public function update($newInstance, $oldInstance) {
+		$instance = array ();
+		$instance['title'] = (!empty($newInstance['title'])) ? strip_tags($newInstance['title']) : '';
+		return $instance;
+	}
+
+	/**
+	 * Render backend form
 	 *
 	 * @param unknown $instance
 	 */
@@ -82,11 +124,26 @@ abstract class WidgetBase extends \WP_Widget {
 				$f => $this->get_field_name($f)
 			]);
 		}
-		return $this->template->getRenderEngine()->render('widget/' . strtolower($this->className) . '/back', [
+		return $this->template->getRenderEngine()->render('widget/' . $this->classNameLower . '/back', [
 			'instance' => array_merge($instance, [
 				'fieldId' => $fieldIds,
 				'fieldName' => $fieldNames
 			])
+		]);
+	}
+
+	/**
+	 * Render fronted widget.
+	 *
+	 * @param unknown $args
+	 * @param unknown $instance
+	 */
+	protected function renderFrontendWidget($args, $instance) {
+		$instance = array_merge($instance, $this->configParams['globalVars']);
+
+		return $this->template->getRenderEngine()->render('widget/' . $this->classNameLower . '/front', [
+			'args' => $args,
+			'instance' => $instance
 		]);
 	}
 }
