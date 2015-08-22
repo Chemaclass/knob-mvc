@@ -12,39 +12,20 @@ use Models\Post;
 class PagesWidget extends WidgetBase {
 
 	/**
-	 * Creating widget front-end
+	 * (non-PHPdoc)
+	 *
+	 * @see \Widgets\WidgetBase::widget()
 	 */
 	public function widget($args, $instance) {
+
+		/*
+		 * Put the pages to show into the instance var.
+		 */
 		$instance['pages'] = Post::getAllPages($this->configParams['pages']);
 
-		echo $this->template->getRenderEngine()->render('widget/pages/front', [
-			'args' => $args,
-			'instance' => $instance
-		]);
-	}
-
-	/**
-	 * Widget Backend
-	 *
-	 * @param unknown $instance
-	 */
-	public function form($instance) {
-		$fields = [
-			'title'
-		];
-		echo $this->renderBackForm($instance, $fields);
-	}
-
-	/**
-	 * Updating widget replacing old instances with new
-	 *
-	 * @param unknown $newInstance
-	 * @param unknown $oldInstance
-	 * @return multitype:string
-	 */
-	public function update($newInstance, $oldInstance) {
-		$instance = array ();
-		$instance['title'] = (!empty($newInstance['title'])) ? strip_tags($newInstance['title']) : '';
-		return $instance;
+		/*
+		 * And call the widget func from the parent class WidgetBase.
+		 */
+		parent::widget($args, $instance);
 	}
 }
