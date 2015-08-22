@@ -41,7 +41,7 @@ abstract class WidgetBase extends \WP_Widget {
 		$this->classNameLower = strtolower($this->className);
 
 		$id = (strlen($id)) ? $id : $this->className . '_Widget';
-		$title = (strlen($title)) ? $title : self::PREFIX . $this->className . ' Widget';
+		$title = (strlen($title)) ? $title : self::PREFIX . $this->className;
 		$widgetOps = (count($widgetOps)) ? $widgetOps : [
 			'classname' => strtolower($this->className) . '-widget',
 			'description' => $this->className . ' widget'
