@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Widgets\LangWidget;
+use Widgets\PagesWidget;
 
 /**
  * Widget Controller
@@ -16,7 +17,8 @@ class WidgetController extends BaseController {
 	 */
 	public function setup() {
 		$widgets = [
-			new LangWidget()
+			new LangWidget(),
+			new PagesWidget()
 		];
 
 		foreach ( $widgets as $w ) {

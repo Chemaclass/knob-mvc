@@ -3,6 +3,7 @@
 namespace Widgets;
 
 use Libs\Template;
+use Config\Params;
 
 /**
  *
@@ -19,8 +20,9 @@ abstract class WidgetBase extends \WP_Widget {
 	/*
 	 * Members.
 	 */
-	protected $template;
 	protected $className;
+	protected $configParams;
+	protected $template;
 
 	/**
 	 *
@@ -41,7 +43,10 @@ abstract class WidgetBase extends \WP_Widget {
 			'description' => $this->className . ' widget'
 		];
 		parent::__construct($id, $title, $widgetOps, $controlOps);
+
 		$this->template = Template::getInstance();
+
+		$this->configParams = Params::all();
 	}
 
 	/**
