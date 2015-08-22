@@ -6,7 +6,49 @@ use I18n\I18n;
 use Models\Post;
 use Libs\Env;
 
+/**
+ * Singleton Params class
+ *
+ * @author José María Valera Reales
+ *
+ */
 class Params {
+
+	/*
+	 * Singleton.
+	 */
+	private static $instance;
+
+	/*
+	 * Members.
+	 */
+	private $allParams;
+
+	/**
+	 * Constructor.
+	 */
+	private function __construct() {
+		$this->allParams = $this->mountAll();
+	}
+
+	/**
+	 * Get instance.
+	 */
+	public static function getInstance() {
+		if (static::$instance == null) {
+			static::$instance = new Params();
+		}
+		return static::$instance;
+	}
+
+	/**
+	 * Get all params.
+	 *
+	 * @return array
+	 */
+	public function getAll() {
+		return $this->allParams;
+	}
 
 	/**
 	 * Return all params.
@@ -15,7 +57,7 @@ class Params {
 	 *
 	 * @return array
 	 */
-	public static function all() {
+	private function mountAll() {
 		return [
 
 			/*

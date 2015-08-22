@@ -30,7 +30,7 @@ abstract class BaseController {
 		/*
 		 * Params.
 		 */
-		$this->configParams = Params::all();
+		$this->configParams = Params::getInstance()->getAll();
 
 		/*
 		 * Current User.
@@ -70,31 +70,6 @@ abstract class BaseController {
 		 */
 		$globalVars[Template::SIDEBAR_RIGHT] = $this->widgets[Template::SIDEBAR_RIGHT];
 		$globalVars[Template::FOOTER] = $this->widgets[Template::FOOTER];
-
-		/*
-		 * Archives
-		 */
-		$globalVars['archives'] = Archive::getMonthly();
-
-		/*
-		 * Pages
-		 */
-		$globalVars['pages'] = Post::getAllPages($this->configParams['pages']);
-
-		/*
-		 * Categories
-		 */
-		$globalVars['categories'] = Term::getCategories();
-
-		/*
-		 * Tags
-		 */
-		$globalVars['tags'] = Term::getTags();
-
-		/*
-		 * Current User
-		 */
-		$globalVars['currentUser'] = $this->currentUser;
 
 		/*
 		 * Generics variables
