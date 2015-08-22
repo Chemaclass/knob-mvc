@@ -4,7 +4,9 @@
 		{{# tags | count }}
 		
 			<div class="title">
-				{{#transu}}{{title}}{{/transu}} ({{tags | count }})
+				{{# title }}{{.}}{{/ title }}
+				{{^ title }}{{#transu}}tags{{/transu}}{{/ title }}
+				 ({{tags | count }})
 			</div>
 		
 			<ul class="tags col-xs-12">

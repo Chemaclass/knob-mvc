@@ -4,7 +4,9 @@
 		{{# categories | count }}
 		
 			<div class="title">
-				{{#transu}}{{title}}{{/transu}} ({{categories | count }})
+				{{# title }}{{.}}{{/ title }}
+				{{^ title }}{{#transu}}categories{{/transu}}{{/ title }}
+				({{categories | count }})
 			</div>
 		
 			<ul class="list-group">

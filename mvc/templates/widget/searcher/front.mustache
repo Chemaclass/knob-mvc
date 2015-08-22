@@ -1,7 +1,10 @@
 {{# instance }}
 	<div class="sidebar-item searcher row">
 
-		<div class="title ">{{#transu}}{{title}}{{/transu}}</div>
+		<div class="title ">
+			{{# title }}{{.}}{{/ title }}
+			{{^ title }}{{#transu}}searcher{{/transu}}{{/ title }}
+		</div>
 	
 		<form action="/" method="get" class="" role="search">
 	

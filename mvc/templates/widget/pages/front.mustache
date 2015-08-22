@@ -3,9 +3,11 @@
 	<div class="sidebar-item pages row">
 		{{# pages | count }}
 	
-			<span class="title">
-				{{#transu}}{{title}}{{/transu}} ({{pages | count }})
-			</span>
+			<div class="title">
+				{{# title }}{{.}}{{/ title }}
+				{{^ title }}{{#transu}}pages{{/transu}}{{/ title }}
+				 ({{pages | count }})
+			</div>
 	
 			<ul class="list-group">
 				{{# pages }}

@@ -4,7 +4,9 @@
 		{{# archives | count }}
 		
 			<div class="title">
-				{{#transu}}{{title}}{{/transu}} ({{archives | count }})
+				{{# title }}{{.}}{{/ title }}
+				{{^ title }}{{#transu}}archives{{/transu}}{{/ title }}
+				({{archives | count }})
 			</div>
 		
 			<ul class="list-group">

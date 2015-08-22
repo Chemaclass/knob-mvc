@@ -1,7 +1,11 @@
 {{# instance }}
 	<div class="sidebar-item row language dropdown">
 	
-		<span class="title">{{#transu}}{{title}}{{/transu}}</span>
+		<div class="title">
+				{{# title }}{{.}}{{/ title }}
+				{{^ title }}{{#transu}}language{{/transu}}{{/ title }}
+				{{#transu}}{{title}}{{/transu}}
+		</div>
 	
 		<button class="col-xs-12 btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" 
 				data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
