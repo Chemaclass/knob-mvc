@@ -1,27 +1,27 @@
 {{# instance }}
 
-	{{# tags | count }}
 	<div class="sidebar-item tags row">
-	
-		<span class="title">
-			{{#transu}}{{title}}{{/transu}} ({{tags | count }})
-		</span>
-	
-		<ul class="tags col-xs-12">
-			{{# tags }}
-				<li>
-					<a href="/{{tagBase}}/{{getSlug}}" title="{{getTotal}}">{{getName}}</a>
-				</li>
-			{{/ tags }}
-		</ul>
-	
+		{{# tags | count }}
+		
+			<div class="title">
+				{{#transu}}{{title}}{{/transu}} ({{tags | count }})
+			</div>
+		
+			<ul class="tags col-xs-12">
+				{{# tags }}
+					<li>
+						<a href="/{{tagBase}}/{{getSlug}}" title="{{getTotal}}">{{getName}}</a>
+					</li>
+				{{/ tags }}
+			</ul>
+		
+		{{/ tags }}
+		
+		{{^ tags | count }}
+			
+			{{#transu}}empty{{/transu}}
+			
+		{{/ tags }}
 	</div>
-	{{/ tags }}
-	
-	{{^ tags | count }}
-		
-		{{#transu}}empty{{/transu}}
-		
-	{{/ tags }}
 
 {{/ instance }}
