@@ -6,7 +6,11 @@
 	//border: 1px solid #000;
 
 	.sidebar-item {
+
+		margin-bottom: 3px;
+		
 		.pages {}
+		
 		.tags {
 			list-style:none;
 			li {
@@ -14,9 +18,15 @@
 				margin-right: 8px;
 			}			
 		}
+		
 		.title {
 			margin: 6px;
 			padding: 6px;
+			
+			&:first-letter {
+			    text-transform: uppercase;
+			}			
 		}
+		
 	}
 }

@@ -7,6 +7,7 @@ use Widgets\PagesWidget;
 use Widgets\ArchivesWidget;
 use Widgets\CategoriesWidget;
 use Widgets\TagsWidget;
+use Widgets\SearcherWidget;
 
 /**
  * Widget Controller
@@ -24,6 +25,7 @@ class WidgetController extends BaseController {
 			new CategoriesWidget(),
 			new LangWidget(),
 			new PagesWidget(),
+			new SearcherWidget(),
 			new TagsWidget()
 		];
 
