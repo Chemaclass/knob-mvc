@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Widgets\LangWidget;
 use Widgets\PagesWidget;
+use Widgets\ArchivesWidget;
 
 /**
  * Widget Controller
@@ -17,6 +18,7 @@ class WidgetController extends BaseController {
 	 */
 	public function setup() {
 		$widgets = [
+			new ArchivesWidget(),
 			new LangWidget(),
 			new PagesWidget()
 		];
