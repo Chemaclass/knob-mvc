@@ -1,0 +1,17 @@
+{{# instance }}
+	{{# pages | count }}
+	<div class="sidebar-item pages row">
+	
+		<div class="title">
+			{{#transu}}pages{{/transu}} ({{pages | count }})
+		</div>
+	
+		<ul class="list-group">
+			{{# pages }}
+				<li class="list-group-item"><a href="{{getPermalink}}">{{getTitle}}</a></li>
+			{{/ pages }}
+		</ul>
+	
+	</div>
+	{{/ pages }}
+{{/ instance }}
