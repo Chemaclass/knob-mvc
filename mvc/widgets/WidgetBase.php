@@ -16,7 +16,10 @@ abstract class WidgetBase extends \WP_Widget {
 	/*
 	 * Some const.
 	 */
-	const TITLE_PREFIX = 'Knob ';
+	const PREFIX_TITLE = 'Knob ';
+	const DIR_WIDGET_TEMPLATE = 'widget';
+	const DIR_BACK = 'back';
+	const DIR_FRONT = 'front';
 
 	/*
 	 * Members.
@@ -34,14 +37,14 @@ abstract class WidgetBase extends \WP_Widget {
 	 *
 	 * @see https://developer.wordpress.org/reference/classes/wp_widget/__construct/
 	 */
-	public function __construct($id = '', $title = '', $widgetOps = [], $controlOps = []) {
+	public function __construct($id = '', $title = '', array $widgetOps = [], array $controlOps = []) {
 		$className = static::getId();
 		$className = substr($className, strrpos($className, '\\') + 1);
 		$this->className = substr($className, 0, strpos($className, 'Widget'));
 		$this->classNameLower = strtolower($this->className);
 
-		$id = (strlen($id)) ? $id : $this->className . '_Widget';
-		$title = (strlen($title)) ? $title : self::TITLE_PREFIX . $this->className;
+		$id = ($id && strlen($id)) ? $id : $this->className . '_Widget';
+		$title = ($title && strlen($title)) ? $title : self::PREFIX_TITLE . $this->className;
 		$widgetOps = (count($widgetOps)) ? $widgetOps : [
 			'classname' => strtolower($this->className) . '-widget',
 			'description' => $this->className . ' widget'
@@ -114,6 +117,8 @@ abstract class WidgetBase extends \WP_Widget {
 	 * @param unknown $instance
 	 */
 	protected function renderBackForm($instance, array $fields) {
+		$instance = array_merge($instance, $this->configParams['globalVars']);
+
 		$fieldIds = [ ];
 		$fieldNames = [ ];
 		foreach ( $fields as $f ) {
@@ -124,7 +129,7 @@ abstract class WidgetBase extends \WP_Widget {
 				$f => $this->get_field_name($f)
 			]);
 		}
-		return $this->template->getRenderEngine()->render('widget/' . $this->classNameLower . '/back', [
+		return $this->template->getRenderEngine()->render($this->getTemplateName(self::DIR_BACK), [
 			'instance' => array_merge($instance, [
 				'fieldId' => $fieldIds,
 				'fieldName' => $fieldNames
@@ -141,9 +146,19 @@ abstract class WidgetBase extends \WP_Widget {
 	protected function renderFrontendWidget($args, $instance) {
 		$instance = array_merge($instance, $this->configParams['globalVars']);
 
-		return $this->template->getRenderEngine()->render('widget/' . $this->classNameLower . '/front', [
+		return $this->template->getRenderEngine()->render($this->getTemplateName(self::DIR_FRONT), [
 			'args' => $args,
 			'instance' => $instance
 		]);
+	}
+
+	/**
+	 * Create the template name string
+	 *
+	 * @param string $dir
+	 * @return string
+	 */
+	private function getTemplateName($dir) {
+		return self::DIR_WIDGET_TEMPLATE . '/' . $this->classNameLower . '/' . $dir;
 	}
 }
