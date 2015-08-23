@@ -120,7 +120,7 @@ abstract class WidgetBase extends \WP_Widget {
 			$fieldIds = array_merge($fieldIds, [
 				$f => $this->get_field_id($f)
 			]);
-			$fieldNames = array_merge($fieldIds, [
+			$fieldNames = array_merge($fieldNames, [
 				$f => $this->get_field_name($f)
 			]);
 		}
