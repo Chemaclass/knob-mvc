@@ -9,7 +9,7 @@ use Config\Params;
  *
  * @author José María Valera Reales
  *
- * @see https://codex.wordpress.org/es:API_de_Widget
+ * @see https://codex.wordpress.org/Widgets_API
  */
 abstract class WidgetBase extends \WP_Widget {
 
@@ -76,7 +76,7 @@ abstract class WidgetBase extends \WP_Widget {
 	/**
 	 * Creating widget front-end
 	 *
-	 * @see https://codex.wordpress.org/es:API_de_Widget
+	 * @see https://codex.wordpress.org/Widgets_API
 	 */
 	public function widget($args, $instance) {
 		echo $this->renderFrontendWidget($args, $instance);
@@ -87,7 +87,7 @@ abstract class WidgetBase extends \WP_Widget {
 	 *
 	 * @param unknown $instance
 	 *
-	 * @see https://codex.wordpress.org/es:API_de_Widget
+	 * @see https://codex.wordpress.org/Widgets_API
 	 */
 	public function form($instance) {
 		$fields = [
@@ -103,7 +103,7 @@ abstract class WidgetBase extends \WP_Widget {
 	 * @param unknown $oldInstance
 	 * @return multitype:string
 	 *
-	 * @see https://codex.wordpress.org/es:API_de_Widget
+	 * @see https://codex.wordpress.org/Widgets_API
 	 */
 	public function update($newInstance, $oldInstance) {
 		$instance = array ();
