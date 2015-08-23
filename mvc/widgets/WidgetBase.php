@@ -16,7 +16,7 @@ abstract class WidgetBase extends \WP_Widget {
 	/*
 	 * Some const.
 	 */
-	const PREFIX = 'Knob ';
+	const TITLE_PREFIX = 'Knob ';
 
 	/*
 	 * Members.
@@ -35,13 +35,13 @@ abstract class WidgetBase extends \WP_Widget {
 	 * @see https://developer.wordpress.org/reference/classes/wp_widget/__construct/
 	 */
 	public function __construct($id = '', $title = '', $widgetOps = [], $controlOps = []) {
-		$className = get_called_class();
+		$className = static::getId();
 		$className = substr($className, strrpos($className, '\\') + 1);
 		$this->className = substr($className, 0, strpos($className, 'Widget'));
 		$this->classNameLower = strtolower($this->className);
 
 		$id = (strlen($id)) ? $id : $this->className . '_Widget';
-		$title = (strlen($title)) ? $title : self::PREFIX . $this->className;
+		$title = (strlen($title)) ? $title : self::TITLE_PREFIX . $this->className;
 		$widgetOps = (count($widgetOps)) ? $widgetOps : [
 			'classname' => strtolower($this->className) . '-widget',
 			'description' => $this->className . ' widget'
