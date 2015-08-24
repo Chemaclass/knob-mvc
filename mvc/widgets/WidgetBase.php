@@ -57,14 +57,14 @@ abstract class WidgetBase extends \WP_Widget {
 	}
 
 	/**
-	 * getId
+	 * getId.
 	 */
 	public static function getId() {
 		return get_called_class();
 	}
 
 	/**
-	 * Register the widget
+	 * Register the widget.
 	 */
 	public function register() {
 		$id = static::getId();
@@ -74,7 +74,7 @@ abstract class WidgetBase extends \WP_Widget {
 	}
 
 	/**
-	 * Creating widget front-end
+	 * Creating widget front-end.
 	 *
 	 * @see https://codex.wordpress.org/Widgets_API
 	 */
@@ -83,7 +83,7 @@ abstract class WidgetBase extends \WP_Widget {
 	}
 
 	/**
-	 * Widget Backend
+	 * Widget Backend.
 	 *
 	 * @param unknown $instance
 	 *
@@ -93,11 +93,11 @@ abstract class WidgetBase extends \WP_Widget {
 		$fields = [
 			'title'
 		];
-		echo $this->renderBackForm($instance, $fields);
+		echo $this->renderBackendForm($instance, $fields);
 	}
 
 	/**
-	 * Updating widget replacing old instances with new
+	 * Updating widget replacing old instances with new.
 	 *
 	 * @param unknown $newInstance
 	 * @param unknown $oldInstance
@@ -112,13 +112,14 @@ abstract class WidgetBase extends \WP_Widget {
 	}
 
 	/**
-	 * Render backend form
+	 * Render backend form.
 	 *
 	 * @param unknown $instance
 	 */
-	protected function renderBackForm($instance, array $fields) {
-		$instance = array_merge($instance, $this->configParams['globalVars']);
-
+	protected function renderBackendForm($instance, array $fields) {
+		/*
+		 * Prepare all names & ids
+		 */
 		$fieldIds = [ ];
 		$fieldNames = [ ];
 		foreach ( $fields as $f ) {
@@ -129,11 +130,18 @@ abstract class WidgetBase extends \WP_Widget {
 				$f => $this->get_field_name($f)
 			]);
 		}
+		$instance = array_merge($instance, [
+			'fieldId' => $fieldIds,
+			'fieldName' => $fieldNames
+		]);
+
+		/*
+		 * Merge with glovalVars
+		 */
+		$instance = array_merge($instance, $this->configParams['globalVars']);
+
 		return $this->template->getRenderEngine()->render($this->getTemplateName(self::DIR_BACK), [
-			'instance' => array_merge($instance, [
-				'fieldId' => $fieldIds,
-				'fieldName' => $fieldNames
-			])
+			'instance' => $instance
 		]);
 	}
 
@@ -144,6 +152,9 @@ abstract class WidgetBase extends \WP_Widget {
 	 * @param unknown $instance
 	 */
 	protected function renderFrontendWidget($args, $instance) {
+		/*
+		 * Merge with glovalVars
+		 */
 		$instance = array_merge($instance, $this->configParams['globalVars']);
 
 		return $this->template->getRenderEngine()->render($this->getTemplateName(self::DIR_FRONT), [
@@ -153,7 +164,7 @@ abstract class WidgetBase extends \WP_Widget {
 	}
 
 	/**
-	 * Create the template name string
+	 * Create the template name string.
 	 *
 	 * @param string $dir
 	 * @return string
