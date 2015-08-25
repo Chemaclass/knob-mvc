@@ -1,23 +1,23 @@
 <?php
 return [
 	// A
-	'about' => 'about',
-	'avatar' => 'avatar image',
-	'another_info' => 'another info',
+	'about' => 'über',
+	'avatar' => 'Avatar-Bild',
+	'another_info' => 'eine weitere Infos',
 
 	// B
 
 	// C
 
 	// D
-	'display_name' => 'nickname',
+	'display_name' => 'Nickname',
 
 	// E
-	'enter' => 'enter',
-	'enter_your_what' => 'enter your :what',
+	'enter' => 'Geben',
+	'enter_your_what' => 'Geben Sie deine :what',
 
 	// F
-	'full_name' => 'full name',
+	'full_name' => 'vollständigen Name',
 
 	// G
 
@@ -39,22 +39,22 @@ return [
 	// O
 
 	// P
-	'put_your' => 'put your :what',
+	'put_your' => 'stellen Sie Ihre :what',
 
 	// Q
 
 	// R
-	'recommended_sizes' => 'recommended sizes',
-	'rol' => 'rol',
+	'recommended_sizes' => 'Größen empfohlen',
+	'rol' => 'Rolle',
 
 	// S
-	'select_your' => 'select your :what',
-	'show_profile' => 'show profile',
-	'social_networks' => 'social networks',
+	'select_your' => 'Wählen Sie eine :what',
+	'show_profile' => 'Profil',
+	'social_networks' => 'soziale Netzwerke',
 
 	// T
-	'total_publish_posts' => 'publish posts',
-	'total_comments' => 'comments',
+	'total_publish_posts' => 'veröffentlichen Beiträge',
+	'total_comments' => 'Kommentare',
 
 	// U
 
@@ -62,7 +62,7 @@ return [
 
 	// W
 	'web' => 'web',
-	'without_description' => 'without description',
+	'without_description' => 'ohne Beschereibung',
 
 	// X
 

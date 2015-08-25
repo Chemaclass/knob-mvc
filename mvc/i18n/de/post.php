@@ -3,7 +3,7 @@ return [
 	// A
 
 	// B
-	'by' => 'by',
+	'by' => 'durch',
 
 	// C
 
@@ -38,7 +38,7 @@ return [
 	// R
 
 	// S
-	'share_comment' => 'share comment',
+	'share_comment' => 'share Kommentar',
 
 	// T
 

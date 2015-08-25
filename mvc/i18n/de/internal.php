@@ -1,5 +1,5 @@
 <?php
 return [
-	'blog_description' => 'Knob is a PHP MVC Framework for creating Wordpress
-		templates easier and funnier than ever before.'
+	'blog_description' => 'Knob ist ein PHP MVC-Framework für die Erstellung
+		von Wordpress Templates einfacher und lustiger als je zuvor.'
 ];

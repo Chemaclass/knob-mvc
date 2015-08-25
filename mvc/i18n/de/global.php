@@ -1,28 +1,28 @@
 <?php
 return [
 	// A
-	'archive' => 'archive',
-	'archives' => 'archives',
+	'archive' => 'Archive',
+	'archives' => 'Archiven',
 
 	// B
-	'by' => 'by',
+	'by' => 'durch',
 
 	// C
-	'category' => 'category',
+	'category' => 'Kategorie',
 	'categories' => 'categories',
-	'comment' => 'comment',
-	'comments' => 'comments',
-	'current' => 'current',
-	'current_lang' => 'current language',
+	'comment' => 'Kommentar',
+	'comments' => 'Kommentare',
+	'current' => 'aktuallen',
+	'current_lang' => 'aktuelle Sprache',
 
 	// D
-	'delete' => 'delete',
+	'delete' => 'löschen',
 
 	// E
-	'english' => 'english',
-	'email' => 'email',
-	'edit' => 'edit',
-	'error' => 'error',
+	'english' => 'English',
+	'email' => 'E-Mail',
+	'edit' => 'Bearbeiten',
+	'error' => 'Fehler',
 
 	// F
 
@@ -39,40 +39,40 @@ return [
 	// K
 
 	// L
-	'lang_en' => 'english',
-	'lang_es' => 'spanish',
-	'language' => 'language',
+	'lang_en' => 'Englisch',
+	'lang_es' => 'Spanisch',
+	'language' => 'Sprache',
 
 	// M
 
 	// N
 	'name' => 'name',
-	'not_found' => 'not found',
+	'not_found' => 'nicht gefunden',
 
 	// O
 
 	// P
-	'page' => 'page',
-	'pages' => 'pages',
+	'page' => 'Seite',
+	'pages' => 'Seiten',
 	'post' => 'post',
-	'posts' => 'posts',
+	'posts' => 'Beiträge',
 
 	// Q
 
 	// R
-	'random' => 'random',
+	'random' => 'zufällige',
 
 	// S
-	'search' => 'search',
-	'searcher' => 'searcher',
-	'see_more' => 'see more',
-	'share_comment' => 'share comment',
-	'show_more' => 'show more',
-	'spanish' => 'spanish',
+	'search' => 'suchen',
+	'searcher' => 'Sucher',
+	'see_more' => 'mehr zu sehen',
+	'share_comment' => 'share Kommentar',
+	'show_more' => 'weitere',
+	'spanish' => 'Spanisch',
 
 	// T
-	'tag' => 'tag',
-	'tags' => 'tags',
+	'tag' => 'Tag',
+	'tags' => 'Tags',
 	'total' => 'total',
 
 	// U
@@ -80,10 +80,10 @@ return [
 	// V
 
 	// W
-	'website' => 'website',
-	'welcome' => 'welcome',
-	'width' => 'width',
-	'without_permissions' => 'without permissions',
+	'website' => 'Website',
+	'welcome' => 'Willkommen',
+	'width' => 'Breite',
+	'without_permissions' => 'ohne Berechtigungen',
 
 	// X
 
