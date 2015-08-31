@@ -29,6 +29,7 @@ return [
 	// G
 
 	// H
+	'header_menu' => 'header menu',
 	'high' => 'high',
 
 	// I
