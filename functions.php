@@ -48,6 +48,7 @@ Actions::widgetsInit();
 // --------------------------------------------------------------
 Filters::authorRewriteRules();
 Filters::getAvatar();
+Filters::navMenuCssClass();
 
 // --------------------------------------------------------------
 // Ini

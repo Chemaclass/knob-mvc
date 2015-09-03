@@ -74,4 +74,18 @@ class Filters {
 			return $img;
 		}, 10, 5);
 	}
+
+	/**
+	 * A filter hook called by the WordPress Walker_Nav_Menu class.
+	 *
+	 * @see http://codex.wordpress.org/Plugin_API/Filter_Reference/nav_menu_css_class
+	 */
+	public static function navMenuCssClass() {
+		add_filter('nav_menu_css_class', function ($classes, $item) {
+			//if (is_single() && $item->title == "Blog") { // Notice you can change the conditional from is_single() and $item->title
+				$classes[] = "dropdown";
+			//}
+			return $classes;
+		}, 10, 2);
+	}
 }
