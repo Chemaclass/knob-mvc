@@ -4,6 +4,7 @@ namespace Libs;
 
 use Controllers\BackendController;
 use Models\User;
+use I18n\I18n;
 
 /**
  * Actions for Wordpress
@@ -47,6 +48,19 @@ class Actions {
 		});
 		add_filter('login_headertitle', function () {
 			return BLOG_TITLE;
+		});
+	}
+
+	/**
+	 * Register Nav Menus.
+	 *
+	 * @see http://codex.wordpress.org/Navigation_Menus
+	 */
+	public static function registerNavMenus() {
+		add_action('init', function () {
+			register_nav_menus(array (
+				Template::MENU_HEADER => I18n::transu('header_menu')
+			));
 		});
 	}
 

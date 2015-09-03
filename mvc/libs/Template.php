@@ -30,6 +30,11 @@ class Template {
 	const FOOTER = 'widgets_footer';
 
 	/*
+	 * Menus
+	 */
+	const MENU_HEADER = 'menu_header';
+
+	/*
 	 * Singleton
 	 */
 	private static $instance = null;
@@ -100,6 +105,15 @@ class Template {
 		return [
 			Template::SIDEBAR_RIGHT,
 			Template::FOOTER
+		];
+	}
+
+	/**
+	 * Return a list with the active menus
+	 */
+	public static function getMenusActive(){
+		return [
+			Template::MENU_HEADER,
 		];
 	}
 
