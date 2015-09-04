@@ -8,6 +8,7 @@ use Models\Archive;
 use Models\Post;
 use Models\Term;
 use Models\User;
+use Libs\WalkerNavMenu;
 
 /**
  *
@@ -21,6 +22,7 @@ abstract class BaseController {
 	protected $configParams = [ ];
 	protected $currentUser = null;
 	protected $widgets = [ ];
+	protected $menus = [ ];
 	protected $template = null;
 
 	/**
@@ -47,6 +49,18 @@ abstract class BaseController {
 		}
 
 		/*
+		 * Menus.
+		 */
+		foreach ( Template::getMenusActive() as $s ) {
+			$this->menus[$s] = wp_nav_menu([
+				'echo' => false,
+				'theme_location' => $s,
+				'menu_class' => 'nav navbar-nav menu ' . str_replace('_', '-', $s),
+				'walker' => new WalkerNavMenu()
+			]);
+		}
+
+		/*
 		 * Template Render Engine.
 		 */
 		$this->template = Template::getInstance();
@@ -70,6 +84,11 @@ abstract class BaseController {
 		 */
 		$globalVars[Template::SIDEBAR_RIGHT] = $this->widgets[Template::SIDEBAR_RIGHT];
 		$globalVars[Template::FOOTER] = $this->widgets[Template::FOOTER];
+
+		/*
+		 * Menus
+		 */
+		$globalVars[Template::MENU_HEADER] = $this->menus[Template::MENU_HEADER];
 
 		/*
 		 * Generics variables
