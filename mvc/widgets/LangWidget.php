@@ -21,20 +21,7 @@ class LangWidget extends WidgetBase {
 		/*
 		 * Put all languages available to show into the instance var.
 		 */
-		$instance['languages'] = [ ];
-		foreach ( I18n::getAllLangAvailable() as $l ) {
-			$instance['languages'][] = [
-				'key' => $l,
-				'value' => I18n::getLangFullnameBrowser($l)
-			];
-		}
-
-		/*
-		 * Sort by key
-		 */
-		usort($instance['languages'], function ($a, $b) {
-			return strcasecmp($a['key'], $b['key']);
-		});
+		$instance['languages'] = I18n::getAllLangAvailableKeyValue();
 
 		/*
 		 * And call the widget func from the parent class WidgetBase.

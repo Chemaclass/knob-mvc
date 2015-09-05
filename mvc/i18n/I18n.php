@@ -96,6 +96,28 @@ class I18n {
 	}
 
 	/**
+	 *
+	 * @return array
+	 */
+	public static function getAllLangAvailableKeyValue() {
+		$languages = [ ];
+		foreach ( I18n::getAllLangAvailable() as $l ) {
+			$languages[] = [
+				'key' => $l,
+				'value' => I18n::getLangFullnameBrowser($l)
+			];
+		}
+
+		/*
+		 * Sort by key
+		 */
+		usort($languages, function ($a, $b) {
+			return strcasecmp($a['key'], $b['key']);
+		});
+		return $languages;
+	}
+
+	/**
 	 * Return the translate word by key
 	 *
 	 * @param string $key
