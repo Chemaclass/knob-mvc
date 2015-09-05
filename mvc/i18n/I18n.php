@@ -62,10 +62,11 @@ class I18n {
 	/**
 	 * Return the fullname of the lang by current user.
 	 *
+	 * @param $lang string
+	 *
 	 * @return string Lang from the current user
 	 */
-	public static function getLangFullnameBrowserByCurrentUser($forceLang = false) {
-		$lang = static::getLangBrowserByCurrentUser($forceLang);
+	public static function getLangFullnameBrowser($lang) {
 		switch ($lang) {
 			case self::LANG_ES :
 				return I18n::trans('spanish');
@@ -73,6 +74,17 @@ class I18n {
 			default :
 				return I18n::trans('english');
 		}
+	}
+
+	/**
+	 * Return the fullname of the lang by current user.
+	 *
+	 * @param $forceLang boolean
+	 * @return string Lang from the current user
+	 */
+	public static function getLangFullnameBrowserByCurrentUser($forceLang = false) {
+		$lang = static::getLangBrowserByCurrentUser($forceLang);
+		return static::getLangFullnameBrowser($lang);
 	}
 
 	/**
