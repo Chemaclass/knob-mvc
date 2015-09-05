@@ -16,6 +16,8 @@ class I18n {
 	const LANG_EN = 'en';
 	// Spanish
 	const LANG_ES = 'es';
+	// German
+	const LANG_DE = 'de';
 	// Default
 	const LANG_DEFAULT = self::LANG_EN;
 	// Current language
@@ -29,6 +31,7 @@ class I18n {
 	public static function getAllLangAvailable() {
 		return [
 			self::LANG_ES,
+			self::LANG_DE,
 			self::LANG_EN
 		];
 	}
@@ -70,6 +73,8 @@ class I18n {
 		switch ($lang) {
 			case self::LANG_ES :
 				return I18n::trans('spanish');
+			case self::LANG_DE :
+				return I18n::trans('german');
 			case self::LANG_EN :
 			default :
 				return I18n::trans('english');
