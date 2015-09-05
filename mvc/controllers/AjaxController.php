@@ -6,6 +6,8 @@ use Libs\Ajax;
 use I18n\I18n;
 use Libs\KeysRequest;
 use Models\Post;
+use Models\Term;
+use Models\Archive;
 
 // Load WP.
 // We have to require this file, in other case we cant call to the WP functions
@@ -59,6 +61,28 @@ class AjaxController extends BaseController {
 	}
 
 	/**
+	 * Response the menu
+	 *
+	 * @param array $_datas
+	 * @return array JSON
+	 */
+	private function jsonMenu($_datas) {
+		$type = $_datas['type'];
+		$args = [
+			'archives' => Archive::getMonthly(),
+			'categories' => Term::getCategories(),
+			'languages' => I18n::getAllLangAvailableKeyValue(),
+			'pages' => Post::getAllPages(),
+			'tags' => Term::getTags()
+		];
+		$type = str_replace('-', '_', $type);
+		$content = $this->render('menu/' . $type, $args);
+		$json['content'] = $content;
+		$json['code'] = KeysRequest::OK;
+		return $json;
+	}
+
+	/**
 	 *
 	 * @param string $submit
 	 */
@@ -66,6 +90,8 @@ class AjaxController extends BaseController {
 		switch ($submit) {
 			case 'show-more' :
 				return $this->jsonShowMore($_datas);
+			case 'menu' :
+				return $this->jsonMenu($_datas);
 		}
 	}
 
