@@ -72,7 +72,7 @@ class AjaxController extends BaseController {
 			'archives' => Archive::getMonthly(),
 			'categories' => Term::getCategories(),
 			'languages' => I18n::getAllLangAvailableKeyValue(),
-			'pages' => Post::getAllPages(),
+			'pages' => Post::getAllPages($this->configParams['pages']),
 			'tags' => Term::getTags()
 		];
 		$type = str_replace('-', '_', $type);
