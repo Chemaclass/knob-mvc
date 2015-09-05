@@ -30,6 +30,13 @@ class LangWidget extends WidgetBase {
 		}
 
 		/*
+		 * Sort by key
+		 */
+		usort($instance['languages'], function ($a, $b) {
+			return strcasecmp($a['key'], $b['key']);
+		});
+
+		/*
 		 * And call the widget func from the parent class WidgetBase.
 		 */
 		parent::widget($args, $instance);

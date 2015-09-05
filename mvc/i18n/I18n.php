@@ -14,10 +14,13 @@ class I18n {
 
 	// English
 	const LANG_EN = 'en';
+	const LANG_EN_NAME = 'english';
 	// Spanish
 	const LANG_ES = 'es';
+	const LANG_ES_NAME = 'español';
 	// German
 	const LANG_DE = 'de';
+	const LANG_DE_NAME = 'deutsch';
 	// Default
 	const LANG_DEFAULT = self::LANG_EN;
 	// Current language
@@ -72,12 +75,12 @@ class I18n {
 	public static function getLangFullnameBrowser($lang) {
 		switch ($lang) {
 			case self::LANG_ES :
-				return I18n::trans('spanish');
+				return self::LANG_ES_NAME;
 			case self::LANG_DE :
-				return I18n::trans('german');
+				return self::LANG_DE_NAME;
 			case self::LANG_EN :
 			default :
-				return I18n::trans('english');
+				return self::LANG_EN_NAME;
 		}
 	}
 
