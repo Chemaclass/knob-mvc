@@ -1,8 +1,13 @@
-
 		<div id="footer" class="row">
-			{{# widgets_footer }}
-				{{> widget/_widgets }}
-			{{/ widgets_footer }}			
+
+			{{# widgets.footer.active }}
+				{{# widgets.footer.content }}
+				<div class="col-xs-12 widgets sidebar-item">
+					{{{ widgets.footer.content }}}
+				</div>
+				{{/ widgets.footer.content }}
+			{{/ widgets.footer.active }}
+
 			<div class="col-xs-12">
 				{{blogTitle}} - Created with <a href="https://github.com/Chemaclass/knob-mvc">Knob MVC Framework</a>
 			</div>
