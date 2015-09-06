@@ -7,44 +7,22 @@
 
 	<div id="page" class="row" ajax-url="{{templateUrl}}/ajax">
 		
-		<nav class="navbar navbar-default" role="navigation">
-			<div class="container-fluid">
-			    <div class="navbar-header">
-			      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-			        <span class="sr-only">Toggle navigation</span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			      </button>
+		{{> menu/menu_header }}
 
-			      <a class="navbar-brand" href="{{homeUrl}}">
-			      	<i class="fa fa-wordpress"></i>
-			      </a>
-			    </div>
-
-				<div class="collapse navbar-collapse" id="menu-header">
-					{{^ menu_header }}
-						{{!> menu/menu_header }}
-					{{/ menu_header }}
-					{{# menu_header }}
-						{{{ menu_header }}}
-					{{/ menu_header }}
-				</div>
-			</div>		
-		</nav>
-
-	    <div id="content" class="col-xs-12 {{# sidebar_right.active }}col-sm-10{{/ sidebar_right.active }}">
+	    <div id="content" class="col-xs-12 {{# widgets.right.active }}col-sm-10{{/ widgets.right.active }}">
 	    	{{$ content }}
 	    		You don't have to see this text, cause you have to override this 
             	tag's "content" in your child template.
 	    	{{/content }}
 		</div>
 
-		{{# sidebar_right.active }}
-		<div id="sidebar_right" class="col-xs-12 col-sm-2 sidebar">
-		    {{{ widgets_sidebar_right }}}
+		{{# widgets.right.active }}
+		<div id="sidebar-right" class="col-xs-12 col-sm-2 sidebar">
+		    {{{ widgets.right.content }}}
 		</div>
-		{{/ sidebar_right.active }}
+		{{/ widgets.right.active }}
+
+		{{> menu/menu_footer }}
 
 	</div>
 

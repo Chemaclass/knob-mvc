@@ -43,7 +43,7 @@ function doScroll() {
 
 function loadMenus() {
 	function load(menuType){
-		var menu = $('#'+menuType);
+		var menu = $('#'+menuType+'-ajax');
 		if(menu.length==0) return; // If the element doesn't exist do nothing
 		var url = $('#page').attr('ajax-url');
 		var data = {
@@ -68,6 +68,7 @@ function loadMenus() {
 		});
 	}
 	load('menu-header');
+	load('menu-footer');
 }
 
 $(document).on('click', '.show-more', function(e) {
