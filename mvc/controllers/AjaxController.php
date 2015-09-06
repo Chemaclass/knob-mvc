@@ -76,7 +76,7 @@ class AjaxController extends BaseController {
 			'tags' => Term::getTags()
 		];
 		$type = str_replace('-', '_', $type);
-		$content = $this->render('menu/' . $type, $args);
+		$content = $this->render('menu/' . $type . '_default', $args);
 		$json['content'] = $content;
 		$json['code'] = KeysRequest::OK;
 		return $json;

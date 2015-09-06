@@ -94,11 +94,11 @@ abstract class BaseController {
 		 */
 		$globalVars['menu'] = [
 			'header' => [
-				'active' => true,
+				'active' => has_nav_menu(Template::MENU_HEADER) ,
 				'content' => $this->menus[Template::MENU_HEADER]
 			],
 			'footer' => [
-				'active' => true,
+				'active' =>  has_nav_menu(Template::MENU_FOOTER),
 				'content' => $this->menus[Template::MENU_FOOTER]
 			]
 		];
