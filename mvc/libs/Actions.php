@@ -58,9 +58,10 @@ class Actions {
 	 */
 	public static function registerNavMenus() {
 		add_action('init', function () {
-			register_nav_menus(array (
-				Template::MENU_HEADER => I18n::transu('header_menu')
-			));
+			foreach ( Template::getMenusActive() as $menu ) {
+				$menus[$menu] = I18n::transu($menu);
+			}
+			register_nav_menus($menus);
 		});
 	}
 
@@ -195,7 +196,7 @@ class Actions {
 		 */
 		$activeWidgets = [
 			[
-				'id' => Template::SIDEBAR_RIGHT,
+				'id' => Template::WIDGETS_RIGHT,
 				'name' => 'Sidebar right',
 				'classBeforeWidget' => 'sidebar-right',
 				'beforeWidget' => '<div class="widget sidebar">',
@@ -204,7 +205,7 @@ class Actions {
 				'afterTitle' => '</span>'
 			],
 			[
-				'id' => Template::FOOTER,
+				'id' => Template::WIDGETS_FOOTER,
 				'name' => 'Footer'
 			]
 		];
