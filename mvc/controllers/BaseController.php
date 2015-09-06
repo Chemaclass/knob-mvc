@@ -75,20 +75,33 @@ abstract class BaseController {
 		$globalVars = [ ];
 
 		/*
-		 * Active
-		 */
-		$globalVars['sidebar_right']['active'] = ($u = User::getCurrent()) ? $u->isWithSidebar() : User::WITH_SIDEBAR_DEFAULT;
-
-		/*
 		 * Sidebar items
 		 */
-		$globalVars[Template::SIDEBAR_RIGHT] = $this->widgets[Template::SIDEBAR_RIGHT];
-		$globalVars[Template::FOOTER] = $this->widgets[Template::FOOTER];
+		$active = ($u = User::getCurrent()) ? $u->isWithSidebar() : User::WITH_SIDEBAR_DEFAULT;
+		$globalVars['widgets'] = [
+			'right' => [
+				'active' => $active,
+				'content' => $this->widgets[Template::WIDGETS_RIGHT]
+			],
+			'footer' => [
+				'active' => $active,
+				'content' => $this->widgets[Template::WIDGETS_FOOTER]
+			]
+		];
 
 		/*
 		 * Menus
 		 */
-		$globalVars[Template::MENU_HEADER] = $this->menus[Template::MENU_HEADER];
+		$globalVars['menu'] = [
+			'header' => [
+				'active' => true,
+				'content' => $this->menus[Template::MENU_HEADER]
+			],
+			'footer' => [
+				'active' => true,
+				'content' => $this->menus[Template::MENU_FOOTER]
+			]
+		];
 
 		/*
 		 * Generics variables
