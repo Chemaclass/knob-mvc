@@ -26,13 +26,14 @@ class Template {
 	/*
 	 * Widgets
 	 */
-	const SIDEBAR_RIGHT = 'widgets_sidebar_right';
-	const FOOTER = 'widgets_footer';
+	const WIDGETS_RIGHT = 'widgets_right';
+	const WIDGETS_FOOTER = 'widgets_footer';
 
 	/*
 	 * Menus
 	 */
 	const MENU_HEADER = 'menu_header';
+	const MENU_FOOTER = 'menu_footer';
 
 	/*
 	 * Singleton
@@ -83,7 +84,7 @@ class Template {
 	 *
 	 * @return \Mustache_Engine
 	 */
-	public function getRenderEngine(){
+	public function getRenderEngine() {
 		return $this->renderEngine;
 	}
 
@@ -103,17 +104,18 @@ class Template {
 	 */
 	public static function getDinamicSidebarActive() {
 		return [
-			Template::SIDEBAR_RIGHT,
-			Template::FOOTER
+			Template::WIDGETS_RIGHT,
+			Template::WIDGETS_FOOTER
 		];
 	}
 
 	/**
 	 * Return a list with the active menus
 	 */
-	public static function getMenusActive(){
+	public static function getMenusActive() {
 		return [
 			Template::MENU_HEADER,
+			Template::MENU_FOOTER
 		];
 	}
 
