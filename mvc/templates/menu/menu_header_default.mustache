@@ -1,0 +1,76 @@
+<ul class="nav navbar-nav">
+
+	<li class=""><a href="/random">{{#transu}}random{{/transu}}</a></li>
+
+	<li class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="{{archives |count}} {{#transu}}total{{/transu}}"
+				role="button" aria-haspopup="true" aria-expanded="false">
+			{{#transu}}archives{{/transu}} <span class="caret"></span>
+		</a>
+		<ul class="dropdown-menu">
+			{{# archives }}
+				<li><a href="{{getUrl}}" title="{{getTotal}}">{{getText}}</a></li>
+			{{/ archives }}
+		</ul>
+	</li>
+
+	<li class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="{{pages |count}} {{#transu}}total{{/transu}}"
+				role="button" aria-haspopup="true" aria-expanded="false">
+			{{#transu}}pages{{/transu}} <span class="caret"></span>
+		</a>
+		<ul class="dropdown-menu">
+			{{# pages }}
+				<li><a href="{{getPermalink}}">{{getTitle}}</a></li>
+			{{/ pages }}
+		</ul>
+	</li>
+
+	<li class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="{{categories |count}} {{#transu}}total{{/transu}}"
+				role="button" aria-haspopup="true" aria-expanded="false">
+			{{#transu}}categories{{/transu}} <span class="caret"></span>
+		</a>
+		<ul class="dropdown-menu">
+			{{# categories }}
+				<li><a href="/{{categoryBase}}/{{getSlug}}" title="{{getTotal}}">{{getName}} ({{getTotal}})</a></li>
+			{{/ categories }}
+		</ul>
+	</li>
+
+	<li class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+			{{#transu}}tags{{/transu}} <span class="caret"></span>
+		</a>
+		<ul class="dropdown-menu">
+			{{# tags }}
+				<li><a href="/{{tagBase}}/{{getSlug}}" title="{{getTotal}}">{{getName}} ({{getTotal}})</a></li>
+			{{/ tags }}
+		</ul>
+	</li>
+
+	<li class="">
+		<form action="/" method="get" class="navbar-form form-horizontal" role="search">
+			<div class="input-group">
+				<input type="text" name="s" class="form-control">
+				<span class="input-group-btn ">
+					<button class="btn btn-default" type="submit">
+						<i class="fa fa-search"></i> <span class="hidden-sm">{{#transu}}search{{/transu}}</span>
+					</button>
+				</span>
+			</div>
+		</form>
+	</li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+	<li>
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			<i class="fa fa-flag"></i> {{currentLang}}
+		</a>
+		<ul class="dropdown-menu" role="menu">
+			{{# languages }}
+				<li><a href="/lang?lang={{key}}" class="url-redirect">[{{key | case.upper}}] {{value | ucfirst}}</a></li>
+			{{/ languages }}
+		</ul>
+	</li>
+</ul>
