@@ -92,7 +92,6 @@ class Params {
 				'blogLoginUrl' => wp_login_url($_SERVER['REQUEST_URI']),
 				'blogKeywords' => 'knob, wordpress, framework, mvc, template, mustache, php',
 				'blogPingbackUrl' => get_bloginfo('pingback_url'),
-				'blogPostsPerPage' => get_option('posts_per_page'),
 				'blogName' => get_bloginfo('name'),
 				'blogRdfUrl' => get_bloginfo('rdf_url'),
 				'blogRss2Url' => get_bloginfo('rss2_url'),
@@ -100,14 +99,12 @@ class Params {
 				'blogTitle' => BLOG_TITLE,
 				'blogStylesheetDirectory' => get_bloginfo('stylesheet_directory'),
 				'blogStylesheetUrl' => get_bloginfo('stylesheet_url'),
-				'blogTagBase' => ($t = get_option('tag_base')) ? $t : Post::TAG_BASE_DEFAULT,
 				'blogTemplateDirectory' => get_bloginfo('template_directory'),
 				'blogTemplateUrl' => get_bloginfo('template_url'),
 				'blogTextDirection' => get_bloginfo('text_direction'),
 				'blogVersion' => get_bloginfo('version'),
 				'blogWpurl' => get_bloginfo('wpurl'),
 
-				'categoryBase' => ($c = get_option('category_base')) ? $c : Post::CATEGORY_BASE_DEFAULT,
 				'componentsDir' => COMPONENTS_DIR,
 				'currentLang' => I18n::getLangBrowserByCurrentUser(),
 				'currentLangFullname' => I18n::getLangFullnameBrowserByCurrentUser(),
@@ -119,10 +116,13 @@ class Params {
 				'isEnvLoc' => Env::isLoc(),
 				'isUserLoggedIn' => is_user_logged_in(),
 
-				'publicDir' => PUBLIC_DIR,
+				'optionPostsPerPage' => get_option('posts_per_page'),
+				'optionCategoryBase' => ($c = get_option('category_base')) ? $c : Post::CATEGORY_BASE_DEFAULT,
+				'optionTagBase' => ($t = get_option('tag_base')) ? $t : Post::TAG_BASE_DEFAULT,
 
-				'tagBase' => ($t = get_option('tag_base')) ? $t : Post::TAG_BASE_DEFAULT
+				'publicDir' => PUBLIC_DIR
 			]
-		];
+		]
+		;
 	}
 }
