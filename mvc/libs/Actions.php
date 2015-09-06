@@ -180,7 +180,11 @@ class Actions {
 	}
 
 	/**
-	 * Add widgetsInit
+	 * Builds the definition for a single sidebar and returns the ID.
+	 * Call on "widgets_init" action.
+	 *
+	 * @see https://codex.wordpress.org/Function_Reference/register_sidebar
+	 * @see https://developer.wordpress.org/reference/hooks/widgets_init/
 	 */
 	public static function widgetsInit() {
 		/*
@@ -197,7 +201,7 @@ class Actions {
 		$activeWidgets = [
 			[
 				'id' => Template::WIDGETS_RIGHT,
-				'name' => 'Sidebar right',
+				'name' => 'Widgets right',
 				'classBeforeWidget' => 'sidebar-right',
 				'beforeWidget' => '<div class="widget sidebar">',
 				'afterWidget' => '</div>',
@@ -205,8 +209,7 @@ class Actions {
 				'afterTitle' => '</span>'
 			],
 			[
-				'id' => Template::WIDGETS_FOOTER,
-				'name' => 'Footer'
+				'id' => Template::WIDGETS_FOOTER
 			]
 		];
 
