@@ -29,7 +29,6 @@ return [
 	// G
 
 	// H
-	'header_menu' => 'header menu',
 	'high' => 'high',
 
 	// I
@@ -45,6 +44,8 @@ return [
 	'language' => 'language',
 
 	// M
+	'menu_header' => 'menu header',
+	'menu_footer' => 'menu footer',
 
 	// N
 	'name' => 'name',

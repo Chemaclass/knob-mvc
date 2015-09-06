@@ -45,6 +45,8 @@ return [
 	'language' => 'Sprache',
 
 	// M
+	'menu_header' => 'Kopfzeilenmenü',
+	'menu_footer' => 'Fußzeilenmenü',
 
 	// N
 	'name' => 'name',

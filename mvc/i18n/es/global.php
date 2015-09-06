@@ -29,7 +29,6 @@ return [
 	// G
 
 	// H
-	'header_menu' => 'menú de cabecera',
 	'high' => 'alto',
 
 	// I
@@ -45,6 +44,8 @@ return [
 	'language' => 'idioma',
 
 	// M
+	'menu_header' => 'menú de cabecera',
+	'menu_footer' => 'menú de pié de página',
 
 	// N
 	'name' => 'nombre',
