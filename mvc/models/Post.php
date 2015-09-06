@@ -5,6 +5,7 @@ namespace Models;
 use I18n\I18n;
 use Libs\Utils;
 use Libs\Ajax;
+use Libs\IteratorPresenter;
 
 /**
  * Post Model
@@ -121,7 +122,7 @@ class Post extends Image {
 			$category->category_link = get_category_link($category->term_id);
 			$array[] = $category;
 		}
-		return $array;
+		return new IteratorPresenter($array);
 	}
 
 	/**
