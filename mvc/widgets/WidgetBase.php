@@ -18,6 +18,7 @@ abstract class WidgetBase extends \WP_Widget {
 	 */
 	const PREFIX_TITLE = 'Knob ';
 	const DIR_WIDGET_TEMPLATE = 'widget';
+	const DIR_WIDGET_TEMPLATE_DEFAULT = '_default';
 	const DIR_BACK = 'back';
 	const DIR_FRONT = 'front';
 
@@ -153,7 +154,12 @@ abstract class WidgetBase extends \WP_Widget {
 	 */
 	protected function renderFrontendWidget($args, $instance) {
 		/*
-		 * Merge with glovalVars
+		 * Add the widget name.
+		 */
+		$instance['widgetName'] = $this->className;
+
+		/*
+		 * Merge with glovalVars.
 		 */
 		$instance = array_merge($instance, $this->configParams['globalVars']);
 
@@ -169,7 +175,12 @@ abstract class WidgetBase extends \WP_Widget {
 	 * @param string $dir
 	 * @return string
 	 */
-	private function getTemplateName($dir) {
-		return self::DIR_WIDGET_TEMPLATE . '/' . $this->classNameLower . '/' . $dir;
+	private function getTemplateName($fileName) {
+		$path = self::DIR_WIDGET_TEMPLATE . '/' . $this->classNameLower . '/' . $fileName;
+		$pathToCheck = __DIR__ . '/../templates/' . $path . '.mustache';
+		if (!file_exists($pathToCheck)) {
+			$path = self::DIR_WIDGET_TEMPLATE . '/' . self::DIR_WIDGET_TEMPLATE_DEFAULT . '/' . $fileName;
+		}
+		return $path;
 	}
 }
