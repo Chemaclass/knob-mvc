@@ -43,6 +43,9 @@ return [
 	'lang_en' => 'Englisch',
 	'lang_es' => 'Spanisch',
 	'language' => 'Sprache',
+	'logged_as' => 'Du bist angemeldet als',
+	'login' => 'Einloggen',
+	'logout' => 'abmelden',
 
 	// M
 	'menu_header' => 'Kopfzeilenmenü',
@@ -57,13 +60,17 @@ return [
 	// P
 	'page' => 'Seite',
 	'pages' => 'Seiten',
+	'password' => 'Passwort',
 	'post' => 'post',
 	'posts' => 'Beiträge',
+	'profile' => 'Profil',
 
 	// Q
 
 	// R
 	'random' => 'zufällige',
+	'register' => 'registrieren',
+	'remember_me' => 'erinnere dich an mich',
 
 	// S
 	'search' => 'suchen',
@@ -79,6 +86,7 @@ return [
 	'total' => 'total',
 
 	// U
+	'username' => 'Benutzernamen',
 
 	// V
 
