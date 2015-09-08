@@ -25,6 +25,7 @@ class LoginWidget extends WidgetBase {
 		$instance['loginUrl'] = wp_login_url();
 		$instance['registrationUrl'] = wp_registration_url();
 		$instance['lostPasswordUrl'] = wp_lostpassword_url();
+		$instance['postsUrl'] = 'wp-admin/edit.php';
 
 		/*
 		 * And call the widget func from the parent class WidgetBase.

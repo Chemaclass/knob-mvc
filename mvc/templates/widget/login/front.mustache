@@ -11,11 +11,19 @@
 			{{# isUserLoggedIn }}
 				{{# currentUser }}
 					<div class="col-xs-12">
-						Estás logueado como <a href="{{getPerfilUrl}}">{{getDisplayName}}</a>
+
+						{{#transu}}logged_as{{/transu}} <a href="{{getPerfilUrl}}">{{getDisplayName}}</a>
+
 						<a href="{{getPostsUrl}}">
 							<img alt="{{getDisplayName}}" src="{{getAvatarProfile}}" >
 						</a>
-						<a href="{{{logoutUrl}}}">Cerrar sesion</a>
+
+						<ul class=" col-xs-12 list-group">
+						  <a href="{{getEditUrl}}"><li class="list-group-item">{{#transu}}profile{{/transu}}</li></a>
+						  <a href="{{postsUrl}}"><li class="list-group-item">{{#transu}}posts{{/transu}}</li></a>
+						  <a href="{{{logoutUrl}}}"><li class="list-group-item">{{#transu}}logout{{/transu}}</li></a>
+						</ul>
+
 					</div>
 				{{/ currentUser }}
 			{{/ isUserLoggedIn }}
@@ -24,15 +32,15 @@
 					method="post" role="form" class="form">
 					<div class="col-xs-12 ">
 						<input type="text" name="log" id="user_login"
-							class="form-control" value="" size="20" placeholder="{{#transu}}usuario{{/transu}}">
+							class="form-control" value="" size="20" placeholder="{{#transu}}username{{/transu}}">
 					</div>
 					<div class="col-xs-12">
 					 <input type="password" name="pwd" id="user_pass"
-					 	class="form-control" value="" size="20" placeholder="{{#transu}}contrasena{{/transu}}">
+					 	class="form-control" value="" size="20" placeholder="{{#transu}}password{{/transu}}">
 					</div>
 					<div class="login-submit col-xs-12 ">
 						<input type="submit" name="wp-submit" id="wp-submit"
-							class="btn btn-info form-control" value="{{#transu}}acceder{{/transu}}" >
+							class="btn btn-info form-control" value="{{#transu}}login{{/transu}}" >
 					</div>
 					 <div class="checkbox col-xs-12 ">
 					 	<label><input name="rememberme" type="checkbox" id="rememberme" 
@@ -40,11 +48,11 @@
 					</div>
 					<div class="col-xs-12 "> 
 						<a class="form-control btn btn-default" href="{{{registrationUrl}}}">
-						<i class="fa fa-mail-forward"></i> {{#transu}}registrarse{{/transu}}</a>
+						<i class="fa fa-mail-forward"></i> {{#transu}}register{{/transu}}</a>
 					</div>
 					<div class="col-xs-12 "> 
 						<a class="form-control btn btn-default" href="{{{lostPasswordUrl}}}">
-						<i class="fa fa-question-circle "></i> {{#transu}}contrasena{{/transu}}?</a>
+						<i class="fa fa-question-circle "></i> {{#transu}}password{{/transu}}?</a>
 					</div>
 				</form>
 			{{/ isUserLoggedIn }}
