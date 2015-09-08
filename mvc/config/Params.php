@@ -5,6 +5,7 @@ namespace Config;
 use I18n\I18n;
 use Models\Post;
 use Libs\Env;
+use Models\User;
 
 /**
  * Singleton Params class
@@ -108,6 +109,7 @@ class Params {
 				'componentsDir' => COMPONENTS_DIR,
 				'currentLang' => I18n::getLangBrowserByCurrentUser(),
 				'currentLangFullname' => I18n::getLangFullnameBrowserByCurrentUser(),
+				'currentUser' => User::getCurrent(),
 
 				'homeUrl' => get_home_url(),
 
@@ -122,7 +124,6 @@ class Params {
 
 				'publicDir' => PUBLIC_DIR
 			]
-		]
-		;
+		];
 	}
 }
