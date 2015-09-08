@@ -10,10 +10,25 @@ use I18n\I18n;
  *
  */
 class LoginWidget extends WidgetBase {
-	/*
-	 * All variables what we need are in Params.globalVars, and
-	 * these are autoimplement in every template.
+
+	/**
+	 * (non-PHPdoc)
 	 *
-	 * So this widget is done :-)
+	 * @see \Widgets\WidgetBase::widget()
 	 */
+	public function widget($args, $instance) {
+
+		/*
+		 * Put all special URLs
+		 */
+		$instance['logoutUrl'] = wp_logout_url(home_url());
+		$instance['loginUrl'] = wp_login_url();
+		$instance['registrationUrl'] = wp_registration_url();
+		$instance['lostPasswordUrl'] = wp_lostpassword_url();
+
+		/*
+		 * And call the widget func from the parent class WidgetBase.
+		 */
+		parent::widget($args, $instance);
+	}
 }
