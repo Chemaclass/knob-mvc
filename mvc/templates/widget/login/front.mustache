@@ -6,6 +6,48 @@
 			{{^ title }}{{#transu}}login{{/transu}}{{/ title }}
 			{{#transu}}{{title}}{{/transu}}
 		</div>
-
+		
+		<div class="row">
+			{{# isUserLoggedIn }}
+				{{# currentUser }}
+					<div class="col-xs-12">
+						Estás logueado como <a href="{{getPerfilUrl}}">{{getDisplayName}}</a>
+						<a href="{{getPostsUrl}}">
+							<img alt="{{getDisplayName}}" src="{{getAvatarProfile}}" >
+						</a>
+						<a href="{{{logoutUrl}}}">Cerrar sesion</a>
+					</div>
+				{{/ currentUser }}
+			{{/ isUserLoggedIn }}
+			{{^ isUserLoggedIn }}
+				<form name="loginform" id="loginform" action="{{loginUrl}}"
+					method="post" role="form" class="form">
+					<div class="col-xs-12 ">
+						<input type="text" name="log" id="user_login"
+							class="form-control" value="" size="20" placeholder="{{#transu}}usuario{{/transu}}">
+					</div>
+					<div class="col-xs-12">
+					 <input type="password" name="pwd" id="user_pass"
+					 	class="form-control" value="" size="20" placeholder="{{#transu}}contrasena{{/transu}}">
+					</div>
+					<div class="login-submit col-xs-12 ">
+						<input type="submit" name="wp-submit" id="wp-submit"
+							class="btn btn-info form-control" value="{{#transu}}acceder{{/transu}}" >
+					</div>
+					 <div class="checkbox col-xs-12 ">
+					 	<label><input name="rememberme" type="checkbox" id="rememberme" 
+					    	 value="forever"> {{#transu}}remember_me{{/transu}}</label>
+					</div>
+					<div class="col-xs-12 "> 
+						<a class="form-control btn btn-default" href="{{{registrationUrl}}}">
+						<i class="fa fa-mail-forward"></i> {{#transu}}registrarse{{/transu}}</a>
+					</div>
+					<div class="col-xs-12 "> 
+						<a class="form-control btn btn-default" href="{{{lostPasswordUrl}}}">
+						<i class="fa fa-question-circle "></i> {{#transu}}contrasena{{/transu}}?</a>
+					</div>
+				</form>
+			{{/ isUserLoggedIn }}
+		</div>
 	</div>
 {{/ instance }}
