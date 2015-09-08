@@ -2,12 +2,13 @@
 
 namespace Controllers;
 
-use Widgets\LangWidget;
-use Widgets\PagesWidget;
 use Widgets\ArchivesWidget;
 use Widgets\CategoriesWidget;
-use Widgets\TagsWidget;
+use Widgets\LangWidget;
+use Widgets\LoginWidget;
+use Widgets\PagesWidget;
 use Widgets\SearcherWidget;
+use Widgets\TagsWidget;
 
 /**
  * Widget Controller
@@ -24,6 +25,7 @@ class WidgetController extends BaseController {
 			new ArchivesWidget(),
 			new CategoriesWidget(),
 			new LangWidget(),
+			new LoginWidget(),
 			new PagesWidget(),
 			new SearcherWidget(),
 			new TagsWidget()
