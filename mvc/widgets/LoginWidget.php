@@ -22,7 +22,7 @@ class LoginWidget extends WidgetBase {
 		 * Put all special URLs
 		 */
 		$instance['logoutUrl'] = wp_logout_url(home_url());
-		$instance['loginUrl'] = wp_login_url();
+		$instance['loginUrl'] = wp_login_url(home_url());
 		$instance['registrationUrl'] = wp_registration_url();
 		$instance['lostPasswordUrl'] = wp_lostpassword_url();
 		$instance['postsUrl'] = 'wp-admin/edit.php';
