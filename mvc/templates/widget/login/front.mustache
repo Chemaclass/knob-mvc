@@ -1,26 +1,18 @@
 {{# instance }}
 	<div class="sidebar-item row login">
 
-		<div class="title">
-			{{# title }}{{.}}{{/ title }}
-			{{^ title }}{{#transu}}login{{/transu}}{{/ title }}
-			{{#transu}}{{title}}{{/transu}}
-		</div>
-		
 		<div class="row">
 			{{# isUserLoggedIn }}
 				{{# currentUser }}
-					<div class="col-xs-12">
-
-						{{#transu}}logged_as{{/transu}} <a href="{{getPostsUrl}}">{{getDisplayName}}</a>
+					<div class="col-xs-12 logged">
 
 						<a href="{{getPostsUrl}}">
-							<img alt="{{getDisplayName}}" src="{{getAvatarProfile}}" >
+							<img alt="{{getDisplayName}}" src="{{getAvatarProfile}}" title="{{#transu}}logged_as{{/transu}} {{getDisplayName}}">
 						</a>
 
-						<ul class=" col-xs-12 list-group">
-						  <a href="{{getEditUrl}}"><li class="list-group-item">{{#transu}}profile{{/transu}}</li></a>
-						  <a href="{{postsUrl}}"><li class="list-group-item">{{#transu}}posts{{/transu}}</li></a>
+						<ul class="list-group">
+						  <a href="{{getEditUrl}}" target="_blank"><li class="list-group-item">{{#transu}}profile{{/transu}}</li></a>
+						  <a href="{{postsUrl}}" target="_blank"><li class="list-group-item">{{#transu}}posts{{/transu}}</li></a>
 						  <a href="{{{logoutUrl}}}"><li class="list-group-item">{{#transu}}logout{{/transu}}</li></a>
 						</ul>
 
@@ -28,6 +20,13 @@
 				{{/ currentUser }}
 			{{/ isUserLoggedIn }}
 			{{^ isUserLoggedIn }}
+
+				<div class="title">
+					{{# title }}{{.}}{{/ title }}
+					{{^ title }}{{#transu}}login{{/transu}}{{/ title }}
+					{{#transu}}{{title}}{{/transu}}
+				</div>
+
 				<form name="loginform" id="loginform" action="{{loginUrl}}"
 					method="post" role="form" class="form">
 					<div class="col-xs-12 ">
