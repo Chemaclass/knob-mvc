@@ -39,6 +39,7 @@ return [
 	// K
 
 	// L
+	'lang_de' => 'german',
 	'lang_en' => 'english',
 	'lang_es' => 'spanish',
 	'language' => 'language',
