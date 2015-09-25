@@ -1,0 +1,24 @@
+{{< base }}
+
+	{{$ content }}
+	
+		{{# page }}
+		<div id="post" class="col-xs-12 post-content">
+			<div class="col-xs-12 category-{{getFirstCategory.slug}}" itemscope itemType="http://schema.org/BlogPosting">
+
+				<h1 class="page-header titular" itemprop="headline">
+					{{{getTitle}}}
+					{{> post/_edit_control }}
+				</h1>
+
+				<div class="col-xs-12 text-left content" itemprop="articleBody">
+					{{{ getContent }}}
+				</div>
+				
+			</div>
+		</div>
+		{{/ page }}
+		
+	{{/ content }}
+
+{{/ base }}

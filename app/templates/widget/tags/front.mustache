@@ -1,0 +1,29 @@
+{{# instance }}
+
+	<div class="sidebar-item tags row">
+		{{# tags | count }}
+		
+			<div class="title">
+				{{# title }}{{.}}{{/ title }}
+				{{^ title }}{{#transu}}tags{{/transu}}{{/ title }}
+				 ({{tags | count }})
+			</div>
+		
+			<ul class="tags col-xs-12">
+				{{# tags }}
+					<li>
+						<a href="/{{optionTagBase}}/{{getSlug}}" title="{{getTotal}}">{{getName}}</a>
+					</li>
+				{{/ tags }}
+			</ul>
+		
+		{{/ tags }}
+		
+		{{^ tags | count }}
+			
+			{{#transu}}empty{{/transu}}
+			
+		{{/ tags }}
+	</div>
+
+{{/ instance }}

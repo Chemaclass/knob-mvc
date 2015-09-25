@@ -1,0 +1,31 @@
+<body class="tooltips container" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+
+	<header id="blog-title" class="row">	
+		<a class="col-xs-12" href="{{homeUrl}}">{{blogTitle}}</a>
+		<span class="col-xs-12">{{blogDescription}}</span>
+	</header>
+
+	<div id="page" class="row" ajax-url="{{templateUrl}}/ajax">
+		
+		{{> menu/menu_header }}
+
+	    <div id="content" class="col-xs-12 {{# widgets.right.active }}col-sm-10{{/ widgets.right.active }}">
+	    	{{$ content }}
+	    		You don't have to see this text, cause you have to override this 
+            	tag's "content" in your child template.
+	    	{{/content }}
+		</div>
+
+		{{# widgets.right.active }}
+		<div id="sidebar-right" class="col-xs-12 col-sm-2 sidebar">
+		    {{{ widgets.right.content }}}
+		</div>
+		{{/ widgets.right.active }}
+
+		{{> menu/menu_footer }}
+
+	</div>
+
+	{{$ js }} {{/ js }}
+
+{{! close body tag automatically after executing wp_footer function }}

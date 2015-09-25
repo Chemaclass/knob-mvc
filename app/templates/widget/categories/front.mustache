@@ -1,0 +1,29 @@
+{{# instance }}
+
+	<div class="sidebar-item categories row">
+		{{# categories | count }}
+		
+			<div class="title">
+				{{# title }}{{.}}{{/ title }}
+				{{^ title }}{{#transu}}categories{{/transu}}{{/ title }}
+				({{categories | count }})
+			</div>
+		
+			<ul class="list-group">
+				{{# categories }}
+					<li class="list-group-item">
+						<a href="/{{optionCategoryBase}}/{{getSlug}}" title="{{getTotal}}">{{getName}}</a>
+					</li>
+				{{/ categories }}
+			</ul>
+		
+		{{/ categories }}
+		
+		{{^ categories | count }}
+			
+			{{#transu}}empty{{/transu}}
+			
+		{{/ categories }}
+	</div>
+
+{{/ instance }}

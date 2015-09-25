@@ -1,0 +1,19 @@
+{{#user}}
+<h3 id="language">{{#transu}}language{{/transu}}</h3>
+<table class="form-table">
+	<tr>
+		<th><label for="{{KEY_LANGUAGE}}">{{#transu}}language{{/transu}}</label></th>
+		<td>
+			<select id="{{KEY_LANGUAGE}}" name="{{KEY_LANGUAGE}}">
+				{{# languages }}
+					<option value="{{value}}" {{#selected}}selected{{/selected}}>{{text}}</option>
+				{{/ languages }}
+			</select>
+			<br><span class="description">{{#transu}}user.select_your [what:{{#trans}}language{{/trans}}]{{/transu}}</span>
+		</td>
+		{{# getLang }}
+		<td>{{#transu}}current_lang{{/transu}}: {{getLangTransFull}} ({{getLang | case.upper}})</td>
+		{{/ getLang }}
+	</tr>	
+</table>
+{{/user}}

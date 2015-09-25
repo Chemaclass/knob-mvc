@@ -1,0 +1,42 @@
+{{< base }}
+
+	{{$ content }}
+	
+		{{# post }}
+		<div id="post" class="col-xs-12 post-content">
+			<div class="col-xs-12 category-{{getFirstCategory.slug}}" itemscope itemType="http://schema.org/BlogPosting">
+
+				<h1 class="page-header titular" itemprop="headline">
+					{{{getTitle}}}
+					{{> post/_edit_control }}
+				</h1>
+
+				{{> post/_info }}
+
+				<div class="col-xs-12 text-left content" itemprop="articleBody">
+					{{{ getContent }}}
+				</div>
+				
+				{{> post/_previous_next_post }}
+				
+				{{> post/_meta_author }}
+
+				<div id="comment-form" class="col-xs-12"> 
+					{{{ getFormComments }}}
+				</div>
+
+				{{# getComments | count }}
+				<div id="comments" class="col-xs-12 comments">
+					<h3 class="col-xs-12 titular">{{#transu}}comments{{/transu}}</h3>
+					{{# getComments }}
+						{{> post/_comment }}
+					{{/ getComments }}
+				</div>
+				{{/ getComments | count }}
+			</div>
+
+		</div>
+		{{/ post }}
+	{{/ content }}
+
+{{/ base }}

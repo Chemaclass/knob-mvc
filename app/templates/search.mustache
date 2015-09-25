@@ -1,0 +1,20 @@
+{{< base }}	
+
+	{{$ content }}
+		
+		<div id="search" class="col-xs-12 list-posts">
+		
+			{{# thingType }}
+				<h1>{{thingType}}: "{{thingToSearch}}"</h1>
+			{{/ thingType }}
+			{{^ thingType }}
+				<h1>{{#transu}}search{{/transu}}: "{{thingToSearch}}"</h1>
+			{{/ thingType }}
+			
+			{{> home/_home_posts_show_more }}
+			
+		</div>
+		
+	{{/ content }}
+	
+{{/ base }}

@@ -1,0 +1,23 @@
+{{# instance }}
+	<div class="sidebar-item row language dropdown">
+
+		<div class="title">
+				{{# title }}{{.}}{{/ title }}
+				{{^ title }}{{#transu}}language{{/transu}}{{/ title }}
+				{{#transu}}{{title}}{{/transu}}
+		</div>
+
+		<button class="col-xs-12 btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" 
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			<i class="fa fa-flag"></i> {{currentLangFullname | ucfirst}}
+			<span class="caret"></span>
+		</button>
+
+		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+			{{# languages }}
+				<li><a href="/lang?lang={{key}}" class="url-redirect">[{{key | case.upper}}] {{value | ucfirst}}</a></li>
+			{{/ languages }}
+		</ul>
+
+	</div>
+{{/ instance }}
