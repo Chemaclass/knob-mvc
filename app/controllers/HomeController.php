@@ -2,18 +2,19 @@
 
 namespace Controllers;
 
-use Models\Post;
-use Models\User;
-use I18n\I18n;
-use Libs\Ajax;
-use Models\Archive;
+use Knob\Controllers\HomeControllerInterface;
+use Knob\Models\Archive;
+use Knob\Models\Post;
+use Knob\Models\User;
+use Knob\I18n\I18n;
+use Knob\Libs\Ajax;
 
 /**
  * Home Controller
  *
  * @author José María Valera Reales
  */
-class HomeController extends BaseController {
+class HomeController extends BaseController implements HomeControllerInterface {
 
 	/**
 	 * author.php
@@ -89,8 +90,6 @@ class HomeController extends BaseController {
 	public function getIndex() {
 		return $this->get404();
 	}
-
-
 
 	/**
 	 * 404.php

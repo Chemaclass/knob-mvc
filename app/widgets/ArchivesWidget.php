@@ -2,7 +2,7 @@
 
 namespace Widgets;
 
-use Models\Archive;
+use Knob\Models\Archive;
 
 /**
  *

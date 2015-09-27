@@ -2,7 +2,7 @@
 
 namespace Config;
 
-use ConfigBase\Ini as IniBase;
+use Controllers\WidgetController;
 
 /**
  * Ini Class
@@ -16,7 +16,7 @@ class Ini {
 	 * Setup
 	 */
 	public static function setup() {
-		error_log("Config/Ini::setup()");
-		IniBase::setup();
+		$widgetController = new WidgetController();
+		$widgetController->setup();
 	}
 }

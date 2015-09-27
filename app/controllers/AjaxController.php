@@ -2,12 +2,12 @@
 
 namespace Controllers;
 
-use Libs\Ajax;
-use I18n\I18n;
-use Libs\KeysRequest;
-use Models\Post;
-use Models\Term;
-use Models\Archive;
+use Knob\Libs\Ajax;
+use Knob\I18n\I18n;
+use Knob\Libs\KeysRequest;
+use Knob\Models\Post;
+use Knob\Models\Term;
+use Knob\Models\Archive;
 
 // Load WP.
 // We have to require this file, in other case we cant call to the WP functions

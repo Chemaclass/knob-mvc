@@ -2,7 +2,7 @@
 
 namespace Widgets;
 
-use Libs\Template;
+use Knob\Libs\Template;
 use Config\Params;
 
 /**

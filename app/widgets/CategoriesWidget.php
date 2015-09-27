@@ -2,7 +2,7 @@
 
 namespace Widgets;
 
-use Models\Term;
+use Knob\Models\Term;
 
 /**
  *

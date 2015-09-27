@@ -2,7 +2,7 @@
 
 namespace Widgets;
 
-use Models\Post;
+use Knob\Models\Post;
 
 /**
  *

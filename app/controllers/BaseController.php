@@ -2,45 +2,35 @@
 
 namespace Controllers;
 
-use Config\Params;
-use Libs\Template;
-use Models\Archive;
-use Models\Post;
-use Models\Term;
-use Models\User;
-use Libs\WalkerNavMenu;
+use Knob\Controllers\BaseController as KnobBaseController;
+use Knob\Config\Params;
+use Knob\Models\Archive;
+use Knob\Models\Post;
+use Knob\Models\Term;
+use Knob\Models\User;
+use Knob\Libs\Template;
+use Knob\Libs\WalkerNavMenu;
 
 /**
  *
  * @author José María Valera Reales
  */
-abstract class BaseController {
+abstract class BaseController extends KnobBaseController {
 
 	/*
 	 * Members
 	 */
-	protected $configParams = [ ];
-	protected $currentUser = null;
 	protected $widgets = [ ];
 	protected $menus = [ ];
-	protected $template = null;
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		/*
-		 * Params.
-		 */
-		$this->configParams = Params::getInstance()->getAll();
+		parent::__construct();
 
 		/*
-		 * Current User.
-		 */
-		$this->currentUser = User::getCurrent();
-
-		/*
-		 * Sidebar.
+		 * Widgets.
 		 */
 		foreach ( Template::getDinamicSidebarActive() as $s ) {
 			ob_start();
@@ -59,11 +49,6 @@ abstract class BaseController {
 				'walker' => new WalkerNavMenu()
 			]);
 		}
-
-		/*
-		 * Template Render Engine.
-		 */
-		$this->template = Template::getInstance();
 	}
 
 	/**
@@ -94,11 +79,11 @@ abstract class BaseController {
 		 */
 		$globalVars['menu'] = [
 			'header' => [
-				'active' => has_nav_menu(Template::MENU_HEADER) ,
+				'active' => has_nav_menu(Template::MENU_HEADER),
 				'content' => $this->menus[Template::MENU_HEADER]
 			],
 			'footer' => [
-				'active' =>  has_nav_menu(Template::MENU_FOOTER),
+				'active' => has_nav_menu(Template::MENU_FOOTER),
 				'content' => $this->menus[Template::MENU_FOOTER]
 			]
 		];
@@ -107,37 +92,5 @@ abstract class BaseController {
 		 * Generics variables
 		 */
 		return array_merge($globalVars, $this->configParams['globalVars']);
-	}
-
-	/**
-	 * Render a partial
-	 *
-	 * @param string $templateName
-	 * @param array $templateVars
-	 */
-	public function render($templateName, $templateVars = [], $addGlobalVariables = true) {
-		if ($addGlobalVariables) {
-			$templateVars = array_merge($templateVars, $this->getGlobalVariables());
-		}
-		return $this->template->getRenderEngine()->render($templateName, $templateVars);
-	}
-
-	/**
-	 * Print head + template + footer
-	 *
-	 * @param string $templateName
-	 *        	Template name to print
-	 * @param array $templateVars
-	 *        	Parameters to template
-	 */
-	public function renderPage($templateName, $templateVars = []) {
-		$templateVars = array_merge($templateVars, $this->getGlobalVariables());
-		$addGlobalVariablesToVars = false; // cause we already did it.
-		echo $this->render('head', $templateVars, $addGlobalVariablesToVars);
-		wp_head();
-		echo '</head>';
-		echo $this->render($templateName, $templateVars, $addGlobalVariablesToVars);
-		wp_footer();
-		echo $this->render('footer', $templateVars, $addGlobalVariablesToVars);
 	}
 }
