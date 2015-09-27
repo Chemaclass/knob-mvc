@@ -1,6 +1,6 @@
 <?php
 require_once 'vendor/autoload.php';
-require_once 'mvc/libs/Helpers.php';
+// require_once 'app/libs/Helpers.php';
 
 use Libs\Actions;
 use Libs\Filters;
@@ -10,7 +10,13 @@ use Config\Ini;
 // Some constants
 // --------------------------------------------------------------
 
-// URL_ENVEROMENTS
+// BASE DIRECTORIES
+$baseDir = dirname(__FILE__);
+define(BASE_DIR, dirname(__FILE__));
+define(VENDOR_DIR, $baseDir . '/vendor');
+define(APP_DIR, $baseDir . '/app');
+
+// URL ENVEROMENTS
 define(URL_PRO, 'knob.chemaclass.com');
 define(URL_DEV, 'knob.chemaclass.com');
 define(URL_LOC, 'knob.chemaclass.local');

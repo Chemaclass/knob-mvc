@@ -4,8 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d4a21a71522d2ea8ece6e8fa2a83bf75",
+    "hash": "37cb604cdbe19ce8f29a66720ad4b938",
+    "content-hash": "16732e2781d87111ad0b8246f39aca0d",
     "packages": [
+        {
+            "name": "chemaclass/knob-base",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Chemaclass/knob-base.git",
+                "reference": "17d45fb36ddf962654a3a61804c6590329c39877"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Chemaclass/knob-base/zipball/17d45fb36ddf962654a3a61804c6590329c39877",
+                "reference": "17d45fb36ddf962654a3a61804c6590329c39877",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "phpmailer/phpmailer": "5.2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Knob\\Controllers": "src/",
+                    "Knob\\I18n": "src/",
+                    "Knob\\Libs": "src/",
+                    "Knob\\Models": "src/",
+                    "Knob\\Widgets": "src/"
+                },
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "José María Valera Reales",
+                    "email": "chemaclass@outlook.es",
+                    "homepage": "https://chemaclass.com"
+                }
+            ],
+            "description": "Project base to use Knob MVC PHP Framework.",
+            "homepage": "https://knob.chemaclass.com",
+            "keywords": [
+                "knob",
+                "mvc",
+                "wordpress"
+            ],
+            "time": "2015-09-27 10:00:03"
+        },
         {
             "name": "components/bootstrap",
             "version": "3.3.5",
@@ -200,16 +252,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v5.2.12",
+            "version": "v5.2.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "5dd754112d07ab7480824c2916689ce06f83a842"
+                "reference": "45df3a88f7f46071e10d0b600f228d19f95911b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/5dd754112d07ab7480824c2916689ce06f83a842",
-                "reference": "5dd754112d07ab7480824c2916689ce06f83a842",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/45df3a88f7f46071e10d0b600f228d19f95911b3",
+                "reference": "45df3a88f7f46071e10d0b600f228d19f95911b3",
                 "shasum": ""
             },
             "require": {
@@ -217,7 +269,7 @@
             },
             "require-dev": {
                 "phpdocumentor/phpdocumentor": "*",
-                "phpunit/phpunit": "4.3.*"
+                "phpunit/phpunit": "4.7.*"
             },
             "suggest": {
                 "league/oauth2-client": "Needed for Gmail's XOAUTH2 authentication system"
@@ -227,7 +279,7 @@
                 "classmap": [
                     "class.phpmailer.php",
                     "class.phpmaileroauth.php",
-                    "class.oauth.php",
+                    "class.phpmaileroauthgoogle.php",
                     "class.smtp.php",
                     "class.pop3.php",
                     "extras/EasyPeasyICS.php",
@@ -256,15 +308,19 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2015-09-02 10:40:37"
+            "time": "2015-09-14 09:18:12"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "chemaclass/knob-base": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=5.4"
+    },
     "platform-dev": []
 }

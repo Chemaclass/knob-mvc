@@ -1,5 +1,5 @@
 <?php
-use Models\Post;
+use Knob\Models\Post;
 
 /**
  * NOTE:

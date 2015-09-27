@@ -1,5 +1,5 @@
 <?php
-use I18n\I18n;
+use Knob\I18n\I18n;
 
 /**
  * NOTE:

@@ -1,2 +1,2 @@
 <?php
-require_once 'mvc/controllers/AjaxController.php';
+require_once APP_DIR . '/controllers/AjaxController.php';
