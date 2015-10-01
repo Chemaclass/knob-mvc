@@ -12,9 +12,11 @@ use Config\Ini;
 
 // BASE DIRECTORIES
 $baseDir = dirname(__FILE__);
-define(BASE_DIR, dirname(__FILE__));
-define(VENDOR_DIR, $baseDir . '/vendor');
-define(APP_DIR, $baseDir . '/app');
+define('BASE_DIR', dirname(__FILE__));
+define('VENDOR_DIR', $baseDir . '/vendor');
+define('APP_DIR', $baseDir . '/app');
+define('PAGES_DIR', APP_DIR . '/pages/');
+define('VENDOR_KNOB_BASE_DIR', VENDOR_DIR . '/chemaclass/knob-base/');
 
 // URL ENVEROMENTS
 define(URL_PRO, 'knob.chemaclass.com');
