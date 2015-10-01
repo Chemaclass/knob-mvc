@@ -91,6 +91,6 @@ abstract class BaseController extends KnobBaseController {
 		/*
 		 * Generics variables
 		 */
-		return array_merge($globalVars, $this->configParams['globalVars']);
+		return array_merge($globalVars, $this->configParams);
 	}
 }

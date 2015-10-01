@@ -139,7 +139,7 @@ abstract class WidgetBase extends \WP_Widget {
 		/*
 		 * Merge with glovalVars
 		 */
-		$instance = array_merge($instance, $this->configParams['globalVars']);
+		$instance = array_merge($instance, $this->configParams);
 
 		return $this->template->getRenderEngine()->render($this->getTemplateName(self::DIR_BACK), [
 			'instance' => $instance
@@ -161,7 +161,7 @@ abstract class WidgetBase extends \WP_Widget {
 		/*
 		 * Merge with glovalVars.
 		 */
-		$instance = array_merge($instance, $this->configParams['globalVars']);
+		$instance = array_merge($instance, $this->configParams);
 
 		return $this->template->getRenderEngine()->render($this->getTemplateName(self::DIR_FRONT), [
 			'args' => $args,
