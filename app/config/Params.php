@@ -19,22 +19,6 @@ class Params extends KnobParams {
 	/**
 	 */
 	protected function mountAll() {
-		$this->allParams = array_merge(parent::getAll(), [
-
-			/*
-			 * ====================================
-			 * Params to pages
-			 * ====================================
-			 */
-			'pages' => [
-				'excludeSlugs' => [
-					'ajax',
-					'lang',
-					'random'
-				]
-			]
-		]);
-
 		$this->allParams['globalVars'] = array_merge($this->allParams['globalVars'], [
 			'blogAuthor' => 'Chemaclass'
 		]);
