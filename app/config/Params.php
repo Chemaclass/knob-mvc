@@ -19,8 +19,9 @@ class Params extends KnobParams {
 	/**
 	 */
 	protected function mountAll() {
-		$this->allParams['globalVars'] = array_merge($this->allParams['globalVars'], [
-			'blogAuthor' => 'Chemaclass'
+		$this->allParams = array_merge($this->allParams, [
+			'blogAuthor' => 'Chemaclass',
+			'blogKeywords' => 'knob, wordpress, framework, mvc, template, mustache, php'
 		]);
 	}
 }
