@@ -21,7 +21,7 @@ class PagesWidget extends WidgetBase {
 		/*
 		 * Put the pages to show into the instance var.
 		 */
-		$instance['pages'] = Post::getAllPages($this->configParams['pages']);
+		$instance['pages'] = Post::getPages();
 
 		/*
 		 * And call the widget func from the parent class WidgetBase.
