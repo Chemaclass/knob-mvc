@@ -2,8 +2,8 @@
 
 namespace Controllers;
 
+use Config\Params;
 use Knob\Controllers\BaseController as KnobBaseController;
-use Knob\Config\Params;
 use Knob\Models\Archive;
 use Knob\Models\Post;
 use Knob\Models\Term;
@@ -28,6 +28,11 @@ abstract class BaseController extends KnobBaseController {
 	 */
 	public function __construct() {
 		parent::__construct();
+
+		/*
+		 * Params.
+		 */
+		$this->configParams = Params::getInstance()->getAll();
 
 		/*
 		 * Widgets.
