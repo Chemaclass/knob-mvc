@@ -15,7 +15,7 @@
 		"components/bootstrap": "3.3.*",
 		"components/jquery": "2.1.*",
 		"components/font-awesome": "4.*",
-		"chemaclass/knob-base": "0.*"
+		"chemaclass/knob-base": "dev-master"
 	},
 	"autoload": {
 		"psr-0": {
