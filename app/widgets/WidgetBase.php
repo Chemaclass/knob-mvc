@@ -4,6 +4,7 @@ namespace Widgets;
 
 use Knob\Libs\Template;
 use Config\Params;
+use Knob\Libs\Utils;
 
 /**
  *
@@ -54,7 +55,7 @@ abstract class WidgetBase extends \WP_Widget {
 
 		$this->template = Template::getInstance();
 
-		$this->configParams = Params::getInstance()->getAll();
+		$this->configParams = Utils::getParams();
 	}
 
 	/**

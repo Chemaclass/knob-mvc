@@ -10,6 +10,7 @@ use Knob\Models\Term;
 use Knob\Models\User;
 use Knob\Libs\Template;
 use Knob\Libs\WalkerNavMenu;
+use Knob\Libs\Utils;
 
 /**
  *
@@ -32,7 +33,7 @@ abstract class BaseController extends KnobBaseController {
 		/*
 		 * Params.
 		 */
-		$this->configParams = Params::getInstance()->getAll();
+		$this->configParams = Utils::getParams();
 
 		/*
 		 * Widgets.
@@ -47,12 +48,13 @@ abstract class BaseController extends KnobBaseController {
 		 * Menus.
 		 */
 		foreach ( Template::getMenusActive() as $s ) {
-			$this->menus[$s] = wp_nav_menu([
-				'echo' => false,
-				'theme_location' => $s,
-				'menu_class' => 'nav navbar-nav menu ' . str_replace('_', '-', $s),
-				'walker' => new WalkerNavMenu()
-			]);
+			$this->menus[$s] = wp_nav_menu(
+					[
+						'echo' => false,
+						'theme_location' => $s,
+						'menu_class' => 'nav navbar-nav menu ' . str_replace('_', '-', $s),
+						'walker' => new WalkerNavMenu()
+					]);
 		}
 	}
 

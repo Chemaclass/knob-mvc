@@ -2,26 +2,7 @@
 
 namespace Config;
 
-use I18n\I18n;
-use Models\Post;
-use Libs\Env;
-use Models\User;
-use Knob\Config\Params as KnobParams;
-
-/**
- * Singleton Params class
- *
- * @author José María Valera Reales
- *
- */
-class Params extends KnobParams {
-
-	/**
-	 */
-	protected function mountAll() {
-		$this->allParams = array_merge($this->allParams, [
-			'blogAuthor' => 'Chemaclass',
-			'blogKeywords' => 'knob, wordpress, framework, mvc, template, mustache, php'
-		]);
-	}
-}
+return [
+	'blogAuthor' => 'Chemaclass',
+	'blogKeywords' => 'knob, wordpress, framework, mvc, template, mustache, php'
+];
