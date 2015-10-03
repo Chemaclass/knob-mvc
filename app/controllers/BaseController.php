@@ -2,7 +2,6 @@
 
 namespace Controllers;
 
-use Config\Params;
 use Knob\Controllers\BaseController as KnobBaseController;
 use Knob\Models\Archive;
 use Knob\Models\Post;
@@ -29,11 +28,6 @@ abstract class BaseController extends KnobBaseController {
 	 */
 	public function __construct() {
 		parent::__construct();
-
-		/*
-		 * Params.
-		 */
-		$this->configParams = Utils::getParams();
 
 		/*
 		 * Widgets.
@@ -95,9 +89,6 @@ abstract class BaseController extends KnobBaseController {
 			]
 		];
 
-		/*
-		 * Generics variables
-		 */
-		return array_merge($globalVars, $this->configParams);
+		return array_merge($this->configParams, $globalVars);
 	}
 }
