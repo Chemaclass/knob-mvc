@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Chemaclass/knob-base.git",
-                "reference": "0a01f7991cc0e91bf4bd37abd46d077d1d50d785"
+                "reference": "12237b490c58584b0fba7ae5c06a6f00e517ecaa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Chemaclass/knob-base/zipball/0a01f7991cc0e91bf4bd37abd46d077d1d50d785",
-                "reference": "0a01f7991cc0e91bf4bd37abd46d077d1d50d785",
+                "url": "https://api.github.com/repos/Chemaclass/knob-base/zipball/12237b490c58584b0fba7ae5c06a6f00e517ecaa",
+                "reference": "12237b490c58584b0fba7ae5c06a6f00e517ecaa",
                 "shasum": ""
             },
             "require": {
@@ -56,7 +56,7 @@
                 "mvc",
                 "wordpress"
             ],
-            "time": "2015-10-01 21:15:06"
+            "time": "2015-10-03 10:47:47"
         },
         {
             "name": "components/bootstrap",
