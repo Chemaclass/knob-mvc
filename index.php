@@ -32,7 +32,7 @@ if (file_exists($fileName)) {
 	require_once $fileNameInBase;
 } else if ('page' == $kindFile) {
 	// get the file from the "knob-base/page.php"
-	require_once VENDOR_KNOB_BASE_DIR . 'page.php';
+	require_once VENDOR_KNOB_BASE_DIR . '/page.php';
 } else {
 	// the file doesnt exists
 	die('the file doesnt exists');
