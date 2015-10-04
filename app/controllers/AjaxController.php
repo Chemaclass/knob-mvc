@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Knob\Controllers\AjaxController as KnobAjaxController;
 use Knob\Libs\Ajax;
 use Knob\I18n\I18n;
 use Knob\Libs\KeysRequest;
@@ -9,31 +10,12 @@ use Knob\Models\Post;
 use Knob\Models\Term;
 use Knob\Models\Archive;
 
-// Load WP.
-// We have to require this file, in other case we cant call to the WP functions
-require_once dirname(__FILE__) . '/../../../../../wp-load.php';
-
 /**
  * AJAX Controller
  *
  * @author José María Valera Reales
  */
-class AjaxController extends BaseController {
-
-	/*
-	 * Members
-	 */
-	public $err;
-	public $withoutPermissions;
-
-	/**
-	 * Constructor
-	 */
-	public function __construct() {
-		parent::__construct();
-		$this->err = I18n::transu('error');
-		$this->withoutPermissions = I18n::transu('without_permissions');
-	}
+class AjaxController extends KnobAjaxController {
 
 	/**
 	 * Listen the home petition
@@ -83,8 +65,9 @@ class AjaxController extends BaseController {
 	}
 
 	/**
+	 * (non-PHPdoc)
 	 *
-	 * @param string $submit
+	 * @see \Knob\Controllers\AjaxController::getJsonBySubmit()
 	 */
 	public function getJsonBySubmit($submit, $_datas) {
 		switch ($submit) {
@@ -94,31 +77,7 @@ class AjaxController extends BaseController {
 				return $this->jsonMenu($_datas);
 		}
 	}
-
-	/**
-	 * -------------------------------------
-	 * Main Controller for AJAX request
-	 * -------------------------------------
-	 */
-	public function main() {
-		$json = [
-			'code' => 504
-		]; // Error default
-
-		$submit = $_REQUEST['submit'];
-		$post_id = $_REQUEST['post'];
-
-		// check if we don't have any submit
-		if (!$submit) {
-			die('');
-		}
-
-		$json = $this->getJsonBySubmit($submit, $_REQUEST);
-
-		// cast the content to UTF-8
-		$json['content'] = mb_convert_encoding($json['content'], "UTF-8");
-		echo json_encode($json);
-	}
 }
+
 $ajax = new AjaxController();
 $ajax->main();
