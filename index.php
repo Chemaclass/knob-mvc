@@ -11,7 +11,7 @@ $query = $wp_the_query->query;
 
 if (isset($query) && isset($query['pagename'])) {
 	$kindFile = 'page';
-	$fileName = PAGES_DIR . $query['pagename'] . '.php';
+	$fileName = PAGES_DIR . '/' . $query['pagename'] . '.php';
 } else {
 	foreach ( $wp_the_query as $k => $v ) {
 		if ((substr($k, 0, 3) == 'is_') && $v) {
@@ -22,7 +22,7 @@ if (isset($query) && isset($query['pagename'])) {
 	}
 }
 
-$fileNameInBase = VENDOR_KNOB_BASE_DIR . $fileName;
+$fileNameInBase = VENDOR_KNOB_BASE_DIR . '/' . $fileName;
 
 if (file_exists($fileName)) {
 	// get the file from the "knob-mvc/app/pages/$fileName"
