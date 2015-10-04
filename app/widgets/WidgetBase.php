@@ -55,7 +55,7 @@ abstract class WidgetBase extends \WP_Widget {
 
 		$this->template = Template::getInstance();
 
-		$this->configParams = Utils::getParams();
+		$this->configParams = Utils::getMustacheParams();
 	}
 
 	/**
