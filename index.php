@@ -35,5 +35,5 @@ if (file_exists($fileName)) {
 	require_once VENDOR_KNOB_BASE_DIR . '/page.php';
 } else {
 	// the file doesnt exists
-	die('the file doesnt exists');
+	die('the file doesn\'t exists');
 }
