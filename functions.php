@@ -5,6 +5,7 @@ require_once 'vendor/autoload.php';
 use Libs\Actions;
 use Libs\Filters;
 use Config\Ini;
+use Controllers\WidgetController;
 
 // --------------------------------------------------------------
 // Some constants
@@ -59,9 +60,10 @@ Filters::getAvatar();
 Filters::navMenuCssClass();
 
 // --------------------------------------------------------------
-// Ini
+// WidgetController
 // --------------------------------------------------------------
-Ini::setup();
+$widgetController = new WidgetController();
+$widgetController->setup();
 
 /**
  * Remove the admin bar in prod
