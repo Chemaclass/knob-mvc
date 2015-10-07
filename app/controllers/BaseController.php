@@ -1,5 +1,4 @@
 <?php
-
 namespace Controllers;
 
 use Knob\Models\Archive;
@@ -14,123 +13,114 @@ use Knob\Libs\Utils;
  *
  * @author José María Valera Reales
  */
-abstract class BaseController {
+abstract class BaseController
+{
 
-	/*
-	 * Members
-	 */
-	protected $configParams = [ ];
-	protected $currentUser = null;
-	protected $template = null;
-	protected $widgets = [ ];
-	protected $menus = [ ];
+    private $configParams = [];
 
-	/**
-	 * Constructor
-	 */
-	public function __construct() {
-		/**
-		 *
-		 * @var array
-		 */
-		$this->configParams = Utils::getMustacheParams();
+    protected $currentUser = null;
 
-		/**
-		 *
-		 * @var User
-		 */
-		$this->currentUser = User::getCurrent();
+    protected $template = null;
 
-		/**
-		 *
-		 * @var Template
-		 */
-		$this->template = Template::getInstance();
+    protected $widgets = [];
 
-		// Widgets
-		foreach ( Template::getDinamicSidebarActive() as $s ) {
-			ob_start();
-			dynamic_sidebar($s);
-			$this->widgets[$s] = ob_get_clean();
-		}
+    protected $menus = [];
 
-		// Menus
-		foreach ( Template::getMenusActive() as $s ) {
-			$this->menus[$s] = wp_nav_menu(
-					[
-						'echo' => false,
-						'theme_location' => $s,
-						'menu_class' => 'nav navbar-nav menu ' . str_replace('_', '-', $s),
-						'walker' => new WalkerNavMenu()
-					]);
-		}
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->configParams = Utils::getMustacheParams();
+        $this->currentUser = User::getCurrent();
+        $this->template = Template::getInstance();
 
-	/**
-	 * Add the global variables for all controllers
-	 *
-	 * @param array $templateVars
-	 */
-	public function getGlobalVariables() {
-		$globalVars = [ ];
+        // Widgets
+        foreach (Template::getDinamicSidebarActive() as $s) {
+            ob_start();
+            dynamic_sidebar($s);
+            $this->widgets[$s] = ob_get_clean();
+        }
 
-		// Sidebar items
-		$active = ($u = User::getCurrent()) ? $u->isWithSidebar() : User::WITH_SIDEBAR_DEFAULT;
-		$globalVars['widgets'] = [
-			'right' => [
-				'active' => $active,
-				'content' => $this->widgets[Template::WIDGETS_RIGHT]
-			],
-			'footer' => [
-				'active' => $active,
-				'content' => $this->widgets[Template::WIDGETS_FOOTER]
-			]
-		];
+        // Menus
+        foreach (Template::getMenusActive() as $s) {
+            $this->menus[$s] = wp_nav_menu([
+                'echo' => false,
+                'theme_location' => $s,
+                'menu_class' => 'nav navbar-nav menu ' . str_replace('_', '-', $s),
+                'walker' => new WalkerNavMenu()
+            ]);
+        }
+    }
 
-		// Menus
-		$globalVars['menu'] = [
-			'header' => [
-				'active' => has_nav_menu(Template::MENU_HEADER),
-				'content' => $this->menus[Template::MENU_HEADER]
-			],
-			'footer' => [
-				'active' => has_nav_menu(Template::MENU_FOOTER),
-				'content' => $this->menus[Template::MENU_FOOTER]
-			]
-		];
+    /**
+     * Add the global variables for all controllers
+     *
+     * @return array $templateVars
+     */
+    public function getGlobalVariables()
+    {
+        $globalVars = [];
 
-		return ($this->configParams + $globalVars);
-	}
+        // Sidebar items
+        $active = ($u = User::getCurrent()) ? $u->isWithSidebar() : User::WITH_SIDEBAR_DEFAULT;
+        $globalVars['widgets'] = [
+            'right' => [
+                'active' => $active,
+                'content' => $this->widgets[Template::WIDGETS_RIGHT]
+            ],
+            'footer' => [
+                'active' => $active,
+                'content' => $this->widgets[Template::WIDGETS_FOOTER]
+            ]
+        ];
 
-	/**
-	 * Render a partial
-	 *
-	 * @param string $templateName
-	 * @param array $templateVars
-	 */
-	public function render($templateName, $templateVars = [], $addGlobalVariables = true) {
-		if ($addGlobalVariables) {
-			$templateVars = array_merge($templateVars, $this->getGlobalVariables());
-		}
-		return $this->template->getRenderEngine()->render($templateName, $templateVars);
-	}
+        // Menus
+        $globalVars['menu'] = [
+            'header' => [
+                'active' => has_nav_menu(Template::MENU_HEADER),
+                'content' => $this->menus[Template::MENU_HEADER]
+            ],
+            'footer' => [
+                'active' => has_nav_menu(Template::MENU_FOOTER),
+                'content' => $this->menus[Template::MENU_FOOTER]
+            ]
+        ];
 
-	/**
-	 * Print head + template + footer
-	 *
-	 * @param string $templateName
-	 *        	Template name to print
-	 * @param array $templateVars
-	 *        	Parameters to template
-	 */
-	public function renderPage($templateName, $templateVars = []) {
-		$templateVars = array_merge($templateVars, $this->getGlobalVariables());
-		$addGlobalVariablesToVars = false; // cause we already did it.
-		echo $this->render('head', $templateVars, $addGlobalVariablesToVars);
-		wp_head();
-		echo '</head>';
-		echo $this->render($templateName, $templateVars, $addGlobalVariablesToVars);
-		wp_footer();
-		echo $this->render('footer', $templateVars, $addGlobalVariablesToVars);
-	}
+        return ($this->configParams + $globalVars);
+    }
+
+    /**
+     * Render a partial
+     *
+     * @param string $templateName
+     * @param array $templateVars
+     */
+    public function render($templateName, $templateVars = [], $addGlobalVariables = true)
+    {
+        if ($addGlobalVariables) {
+            $templateVars = array_merge($templateVars, $this->getGlobalVariables());
+        }
+        return $this->template->getRenderEngine()->render($templateName, $templateVars);
+    }
+
+    /**
+     * Print head + template + footer
+     *
+     * @param string $templateName
+     *            Template name to print
+     * @param array $templateVars
+     *            Parameters to template
+     */
+    public function renderPage($templateName, $templateVars = [])
+    {
+        $templateVars = array_merge($templateVars, $this->getGlobalVariables());
+        $addGlobalVariablesToVars = false; // cause we already did it.
+        echo $this->render('head', $templateVars, $addGlobalVariablesToVars);
+        wp_head();
+        echo '</head>';
+        echo $this->render($templateName, $templateVars, $addGlobalVariablesToVars);
+        wp_footer();
+        echo $this->render('footer', $templateVars, $addGlobalVariablesToVars);
+    }
 }
