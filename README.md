@@ -4,9 +4,12 @@
 
 * Knob MVC
 * This is a PHP MVC Framework for creating Wordpress templates easier and with more fun than ever before.
-* Version: 1.0
+* Version: 2.0
 * Author José María Valera Reales
 
+### You'll need [Knob-base](https://github.com/Chemaclass/knob-base/)
+
+You will need install via [Composer](https://getcomposer.org/) the Knob core structure. 
 
 ### Views based on Mustache templates
 
@@ -19,7 +22,7 @@ Here is an example of a header template that displays the above data.
   <html lang="{{currentLang}}">
   <head>
     <title>{{{blogTitle}}}</title>
-    <meta charset="{{charset}}">
+    <meta charset="{{blogCharset}}">
     <link rel="icon" type="image/x-icon" href="{{publicDir}}/img/favicon.ico">    
     <link media="all" rel="stylesheet" href="{{publicDir}}/css/main.css">
     <script src="{{publicDir}}/js/main.js"></script>
@@ -47,12 +50,24 @@ public function getHome() {
 
 All controllers are inside mvc/controllers.
 
-* AjaxController
-* BaseController
-* BackendController
-* HomeController
+* BaseController -> All controller should extend from this one
 
-### Calling a controller from a WordPress template page
+* AjaxController: Controller for ajax petitions.
+* BackendController: Controller  for backend stuff.
+* HomeController: Controller for all files from WP:
+	- author.php -> getAuthor()
+	- archive.php -> getArchive()
+	- category.php -> getCategory()
+	- home.php -> getHome()
+	- index.php -> getIndex()
+	- search.php -> getSearch()
+	- single.php -> getSingle()
+	- tag.php -> getTag()
+	
+* WidgetController: Controller for register all wigdets using the setup() function. 
+
+### Calling a controller from a WordPress template page.
+All this files are already created by Knob-base. So you just need to override the function in your HomeController.
 
 [Create a template for WordPress](http://codex.wordpress.org/Template_Hierarchy), for example single.php which is used when a Post is loaded.
 
@@ -70,7 +85,7 @@ Controllers should extend BaseController. This then provides access to the templ
 ```php
 namespace Controllers;
 
-use Models\Post;
+use Knob\Models\Post;
 
 class HomeController extends BaseController {
 
@@ -88,38 +103,6 @@ class HomeController extends BaseController {
 		return $this->renderPage($type, [ 
 			$type => $post 
 		]);
-	}
-}
-```
-
-### renderPage function
-
-We'll use this function for to render our Mustache templates:
-
-```php
-BaseController->renderPage(templateName, varsToTemplate)
-```
-
-Implementation:
-
-```php
-class BaseController {
-	// ...
-
-	/**
-	 * Print head + template + footer
-	 */
-	public function renderPage($templateName, $templateVars = []) {
-
-		// Add the global variables for all templates.	
-		$this->addGlobalVariables($templateVars);
-
-		echo $this->render('head', $templateVars);
-		wp_head();
-		echo '</head>';
-		echo $this->render($templateName, $templateVars);
-		wp_footer();
-		echo $this->render('footer', $templateVars);
 	}
 }
 ```
@@ -150,7 +133,7 @@ Here is an example template showing a post:
 {{/ base }}
 ```
 
-### Loading templates with automatically included Header and footer feature
+### Loading templates with automatically included header and footer feature
 
 The 3 first most important templates are:
 
@@ -159,6 +142,19 @@ The 3 first most important templates are:
 * footer.mustache 
 
 `head` should include `<!DOCTYPE html>` until the first `<body class="...">` tag.
+ Something like this:
+`
+<!DOCTYPE html>
+<html lang="{{currentLang}}">
+<head>
+	<title>{{{blogTitle}}}</title>
+	<meta charset="{{blogCharset}}">
+	<link rel="icon" type="image/x-icon" href="{{publicDir}}/img/favicon.ico">
+	<link media="all" rel="stylesheet" href="{{publicDir}}/css/main.css">
+	<script src="{{publicDir}}/js/main.js"></script>
+	
+{{! close head tag automatically after executing wp_head function }}
+`
 
 `footer` should include just the footer content and `</body></html>`
 
