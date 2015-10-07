@@ -50,8 +50,7 @@ public function getHome() {
 
 All controllers are inside mvc/controllers.
 
-* BaseController -> All controller should extend from this one
-
+* BaseController: All controller should extend from this one.
 * AjaxController: Controller for ajax petitions.
 * BackendController: Controller  for backend stuff.
 * HomeController: Controller for all files from WP:
@@ -64,10 +63,10 @@ All controllers are inside mvc/controllers.
 	- single.php -> getSingle()
 	- tag.php -> getTag()
 	
-* WidgetController: Controller for register all wigdets using the setup() function. 
+* WidgetController: Controller for register all widgets using the setup() function. 
 
 ### Calling a controller from a WordPress template page.
-All this files are already created by Knob-base. So you just need to override the function in your HomeController.
+All this files are already created by [Knob-base](https://github.com/Chemaclass/knob-base/). So you just need to override the function in your HomeController.
 
 [Create a template for WordPress](http://codex.wordpress.org/Template_Hierarchy), for example single.php which is used when a Post is loaded.
 
