@@ -16,7 +16,7 @@ use Knob\Libs\Utils;
 abstract class BaseController
 {
 
-    private $configParams = [];
+    private $mustacheParams = [];
 
     protected $currentUser = null;
 
@@ -31,7 +31,7 @@ abstract class BaseController
      */
     public function __construct()
     {
-        $this->configParams = Utils::getMustacheParams();
+        $this->mustacheParams = Utils::getMustacheParams();
         $this->currentUser = User::getCurrent();
         $this->template = Template::getInstance();
 
@@ -87,7 +87,7 @@ abstract class BaseController
             ]
         ];
 
-        return ($this->configParams + $globalVars);
+        return array_merge($this->mustacheParams, $globalVars);
     }
 
     /**
