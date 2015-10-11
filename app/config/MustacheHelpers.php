@@ -1,5 +1,4 @@
 <?php
-
 namespace Config;
 
 use Knob\I18n\I18n;
@@ -30,12 +29,14 @@ use Knob\I18n\I18n;
  * @link https://github.com/bobthecow/mustache.php/wiki/FILTERS-pragma
  */
 return [
-	'case' => [
-		'lower' => function ($value) {
-			return strtolower((string) $value);
-		},
-		'upper' => function ($value) {
-			return strtoupper((string) $value);
-		}
-	]
+    'case' => [
+        'lower' => function ($value)
+        {
+            return strtolower((string) $value);
+        },
+        'upper' => function ($value)
+        {
+            return strtoupper((string) $value);
+        }
+    ]
 ];
