@@ -11,10 +11,10 @@ use Knob\Models\Post;
  */
 
 $posts = get_posts([
-	'post_status' => Post::STATUS_PUBLISH,
-	'post_type' => Post::TYPE_POST,
-	'showposts' => 1,
-	'orderby' => 'rand'
+    'post_status' => Post::STATUS_PUBLISH,
+    'post_type' => Post::TYPE_POST,
+    'showposts' => 1,
+    'orderby' => 'rand'
 ]);
 
 $post = Post::find($posts[0]->ID);
