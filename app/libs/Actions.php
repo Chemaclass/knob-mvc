@@ -1,5 +1,4 @@
 <?php
-
 namespace Libs;
 
 use Controllers\BackendController;
@@ -12,108 +11,123 @@ use Knob\Libs\Actions as KnobActions;
  *
  * @author José María Valera Reales
  */
-class Actions extends KnobActions {
-	/**
-	 * Add img avatar and header to user profile
-	 */
-	public static function userProfileAddImgAvatarAndHeader() {
-		/*
-		 * We need it if we can activate the img into the forms
-		 */
-		add_action('user_edit_form_tag', function () {
-			echo 'enctype="multipart/form-data"';
-		});
+class Actions extends KnobActions
+{
 
-		$profileAddImg = function ($user) {
-			$controller = new BackendController();
-			echo $controller->getRenderProfileImg(User::KEY_AVATAR, $user->ID);
-			echo $controller->getRenderProfileImg(User::KEY_HEADER, $user->ID);
-		};
-		add_action('show_user_profile', $profileAddImg);
-		add_action('edit_user_profile', $profileAddImg);
-		/*
-		 * Add the avatar to user profile
-		 */
-		$updateImg = function ($user_ID, $keyUserImg) {
-			try {
-				// 1st check if the user has the enought permission and the key exists on the FILES
-				if (current_user_can('edit_user', $user_ID) && isset($_FILES[$keyUserImg])) {
-					// Later check if the file have a defined name
-					$img = $_FILES[$keyUserImg];
-					if ($img['name']) {
-						$user = User::find($user_ID);
-						switch ($keyUserImg) {
-							case User::KEY_AVATAR :
-								$user->setAvatar($img);
-								break;
-							case User::KEY_HEADER :
-								$user->setHeader($img);
-								break;
-						}
-					}
-				}
-			} catch ( \Exception $e ) {
-				// Add the error message to the WP notifications
-				add_action('user_profile_update_errors', function ($errors) use($e, $keyUserImg) {
-					$errors->add($keyUserImg, $e->getMessage());
-				});
-			}
-		};
+    /**
+     * Add img avatar and header to user profile
+     */
+    public static function userProfileAddImgAvatarAndHeader()
+    {
+        /*
+         * We need it if we can activate the img into the forms
+         */
+        add_action('user_edit_form_tag', function ()
+        {
+            echo 'enctype="multipart/form-data"';
+        });
 
-		$updateImgAvatar = function ($user_ID) use($updateImg) {
-			$updateImg($user_ID, User::KEY_AVATAR);
-		};
-		$updateImgHeader = function ($user_ID) use($updateImg) {
-			$updateImg($user_ID, User::KEY_HEADER);
-		};
+        $profileAddImg = function ($user)
+        {
+            $controller = new BackendController();
+            echo $controller->getRenderProfileImg(User::KEY_AVATAR, $user->ID);
+            echo $controller->getRenderProfileImg(User::KEY_HEADER, $user->ID);
+        };
+        add_action('show_user_profile', $profileAddImg);
+        add_action('edit_user_profile', $profileAddImg);
+        /*
+         * Add the avatar to user profile
+         */
+        $updateImg = function ($user_ID, $keyUserImg)
+        {
+            try {
+                // 1st check if the user has the enought permission and the key exists on the FILES
+                if (current_user_can('edit_user', $user_ID) && isset($_FILES[$keyUserImg])) {
+                    // Later check if the file have a defined name
+                    $img = $_FILES[$keyUserImg];
+                    if ($img['name']) {
+                        $user = User::find($user_ID);
+                        switch ($keyUserImg) {
+                            case User::KEY_AVATAR:
+                                $user->setAvatar($img);
+                                break;
+                            case User::KEY_HEADER:
+                                $user->setHeader($img);
+                                break;
+                        }
+                    }
+                }
+            } catch (\Exception $e) {
+                // Add the error message to the WP notifications
+                add_action('user_profile_update_errors', function ($errors) use($e, $keyUserImg)
+                {
+                    $errors->add($keyUserImg, $e->getMessage());
+                });
+            }
+        };
 
-		add_action('personal_options_update', $updateImgAvatar);
-		add_action('edit_user_profile_update', $updateImgAvatar);
-		add_action('personal_options_update', $updateImgHeader);
-		add_action('edit_user_profile_update', $updateImgHeader);
-	}
+        $updateImgAvatar = function ($user_ID) use($updateImg)
+        {
+            $updateImg($user_ID, User::KEY_AVATAR);
+        };
+        $updateImgHeader = function ($user_ID) use($updateImg)
+        {
+            $updateImg($user_ID, User::KEY_HEADER);
+        };
 
-	/**
-	 * Add Social networks to user
-	 */
-	public static function userProfileAddSocialNetworks() {
-		$addSocialNetworks = function ($user) {
-			$c = new BackendController();
-			echo $c->getRenderSocialNetworks($user->ID);
-		};
-		add_action('show_user_profile', $addSocialNetworks);
-		add_action('edit_user_profile', $addSocialNetworks);
+        add_action('personal_options_update', $updateImgAvatar);
+        add_action('edit_user_profile_update', $updateImgAvatar);
+        add_action('personal_options_update', $updateImgHeader);
+        add_action('edit_user_profile_update', $updateImgHeader);
+    }
 
-		$updateSocialNetworks = function ($user_ID) {
-			if (current_user_can('edit_user', $user_ID)) {
-				$user = User::find($user_ID);
-				$user->setTwitter($_POST[User::KEY_TWITTER]);
-				$user->setFacebook($_POST[User::KEY_FACEBOOK]);
-				$user->setGooglePlus($_POST[User::KEY_GOOGLE_PLUS]);
-			}
-		};
-		add_action('personal_options_update', $updateSocialNetworks);
-		add_action('edit_user_profile_update', $updateSocialNetworks);
-	}
+    /**
+     * Add Social networks to user
+     */
+    public static function userProfileAddSocialNetworks()
+    {
+        $addSocialNetworks = function ($user)
+        {
+            $c = new BackendController();
+            echo $c->getRenderSocialNetworks($user->ID);
+        };
+        add_action('show_user_profile', $addSocialNetworks);
+        add_action('edit_user_profile', $addSocialNetworks);
 
-	/**
-	 * Add language to user profile
-	 */
-	public static function userProfileAddLanguage() {
-		$addLang = function ($user) {
-			$c = new BackendController();
-			echo $c->getRenderLanguage($user->ID);
-		};
-		add_action('show_user_profile', $addLang);
-		add_action('edit_user_profile', $addLang);
+        $updateSocialNetworks = function ($user_ID)
+        {
+            if (current_user_can('edit_user', $user_ID)) {
+                $user = User::find($user_ID);
+                $user->setTwitter($_POST[User::KEY_TWITTER]);
+                $user->setFacebook($_POST[User::KEY_FACEBOOK]);
+                $user->setGooglePlus($_POST[User::KEY_GOOGLE_PLUS]);
+            }
+        };
+        add_action('personal_options_update', $updateSocialNetworks);
+        add_action('edit_user_profile_update', $updateSocialNetworks);
+    }
 
-		$updateLang = function ($user_ID) {
-			if (current_user_can('edit_user', $user_ID)) {
-				$user = User::find($user_ID);
-				$user->setLang($_POST[User::KEY_LANGUAGE]);
-			}
-		};
-		add_action('personal_options_update', $updateLang);
-		add_action('edit_user_profile_update', $updateLang);
-	}
+    /**
+     * Add language to user profile
+     */
+    public static function userProfileAddLanguage()
+    {
+        $addLang = function ($user)
+        {
+            $c = new BackendController();
+            echo $c->getRenderLanguage($user->ID);
+        };
+        add_action('show_user_profile', $addLang);
+        add_action('edit_user_profile', $addLang);
+
+        $updateLang = function ($user_ID)
+        {
+            if (current_user_can('edit_user', $user_ID)) {
+                $user = User::find($user_ID);
+                $user->setLang($_POST[User::KEY_LANGUAGE]);
+            }
+        };
+        add_action('personal_options_update', $updateLang);
+        add_action('edit_user_profile_update', $updateLang);
+    }
 }

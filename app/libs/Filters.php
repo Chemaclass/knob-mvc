@@ -1,5 +1,4 @@
 <?php
-
 namespace Libs;
 
 use Knob\Libs\Filters as KnobFilters;
@@ -9,5 +8,6 @@ use Knob\Libs\Filters as KnobFilters;
  *
  * @author José María Valera Reales
  */
-class Filters extends KnobFilters {
+class Filters extends KnobFilters
+{
 }
