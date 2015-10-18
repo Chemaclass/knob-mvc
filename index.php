@@ -10,30 +10,28 @@ $wp_the_query = $GLOBALS['wp_the_query'];
 $query = $wp_the_query->query;
 
 if (isset($query) && isset($query['pagename'])) {
-	$kindFile = 'page';
-	$fileName = PAGES_DIR . '/' . $query['pagename'] . '.php';
+    $kindFile = 'page';
+    $fileName = PAGES_DIR . '/' . $query['pagename'] . '.php';
 } else {
-	foreach ( $wp_the_query as $k => $v ) {
-		if ((substr($k, 0, 3) == 'is_') && $v) {
-			$kindFile = substr($k, 3);
-			$fileName = $kindFile . '.php';
-			break;
-		}
-	}
+    foreach ($wp_the_query as $k => $v) {
+        if ((substr($k, 0, 3) == 'is_') && $v) {
+            $kindFile = substr($k, 3);
+            $fileName = $kindFile . '.php';
+            break;
+        }
+    }
 }
 
-$fileNameInBase = VENDOR_KNOB_BASE_DIR . '/' . $fileName;
-
 if (file_exists($fileName)) {
-	// get the file from the "knob-mvc/app/pages/$fileName"
-	require_once $fileName;
-} else if (file_exists($fileNameInBase)) {
-	// get the file from the "knob-base/$fileNameInBase"
-	require_once $fileNameInBase;
+    // get the file from the "knob-mvc/app/pages/$fileName"
+    require_once $fileName;
+} else if (file_exists($fileNameInBase = VENDOR_KNOB_BASE_DIR . '/wp/' . $fileName)) {
+    // get the file from the "knob-base/wp/$fileNameInBase"
+    require_once $fileNameInBase;
 } else if ('page' == $kindFile) {
-	// get the file from the "knob-base/page.php"
-	require_once VENDOR_KNOB_BASE_DIR . '/page.php';
+    // get the file from the "knob-base/page.php"
+    require_once VENDOR_KNOB_BASE_DIR . '/page.php';
 } else {
-	// the file doesnt exists
-	die('the file doesn\'t exists');
+    // the file doesn't exists
+    die('the file doesn\'t exists');
 }
