@@ -115,15 +115,20 @@ abstract class BaseController
     public function renderPage($templateName, $templateVars = [])
     {
         $templateVars = array_merge($templateVars, $this->getGlobalVariables());
-        $addGlobalVariablesToVars = false; // cause we already did it.
 
-        echo $this->render('base/head', $templateVars, $addGlobalVariablesToVars);
+        // HEAD
+        ob_start();
         wp_head();
-        echo '</head>';
+        $wpHead = ob_get_clean();
 
-        echo $this->render($templateName, $templateVars, $addGlobalVariablesToVars);
-
+        // FOOTER
+        ob_start();
         wp_footer();
-        echo $this->render('base/footer', $templateVars, $addGlobalVariablesToVars);
+        $wpFooter = ob_get_clean();
+
+        echo $this->render($templateName, array_merge($templateVars, [
+            'wp_head' => $wpHead,
+            'wp_footer' => $wpFooter
+        ]), $addGlobalVariablesToVars = false);
     }
 }

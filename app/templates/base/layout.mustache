@@ -1,31 +1,67 @@
-<body class="tooltips container" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+<!DOCTYPE html>
+<html lang="{{currentLang}}">
+	<head>
+		<title>{{{blogTitle}}}</title>
+		<meta charset="{{blogCharset}}">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="{{blogAuthor}}">
+		<meta name="description" content="{{blogDescription}}">
+		<meta name="keywords" content="{{blogKeywords}}">
+		<link rel="icon" type="image/x-icon" href="{{publicDir}}/img/favicon.ico">
+		<link media="all" rel="stylesheet" href="{{componentsDir}}/bootstrap/css/bootstrap.min.css">
+		<link media="all" rel="stylesheet" href="{{componentsDir}}/font-awesome/css/font-awesome.min.css">
+		<link media="all" rel="stylesheet" href="{{publicDir}}/css/main.css">
+		<script src="{{componentsDir}}/jquery/jquery.min.js"></script>
+		<script src="{{componentsDir}}/bootstrap/js/bootstrap.min.js"></script>
+		<script src="{{publicDir}}/js/main.js"></script>
 
-	<header id="blog-title" class="row">	
-		<a class="col-xs-12" href="{{homeUrl}}">{{blogTitle}}</a>
-		<span class="col-xs-12">{{blogDescription}}</span>
-	</header>
+		{{{ wp_head }}}
+	</head>
+	<body class="tooltips container" itemscope="itemscope" itemtype="http://schema.org/WebPage">
 
-	<div id="page" class="row" ajax-url="{{templateUrl}}/ajax">
+		<header id="blog-title" class="row">	
+			<a class="col-xs-12" href="{{homeUrl}}">{{blogTitle}}</a>
+			<span class="col-xs-12">{{blogDescription}}</span>
+		</header>
 
-		{{> menu/menu_header }}
+		<div id="page" class="row" ajax-url="{{templateUrl}}/ajax">
 
-	    <div id="content" class="col-xs-12 {{# widgets.right.active }}col-sm-10{{/ widgets.right.active }}">
-	    	{{$ content }}
-	    		You don't have to see this text, cause you have to override this 
-            	tag's "content" in your child template.
-	    	{{/content }}
+			{{> menu/menu_header }}
+
+		    <div id="content" class="col-xs-12 {{# widgets.right.active }}col-sm-10{{/ widgets.right.active }}">
+		    	{{$ content }}
+		    		You don't have to see this text, cause you have to override this 
+	            	tag's "content" in your child template.
+		    	{{/content }}
+			</div>
+
+			{{# widgets.right.active }}
+			<div id="sidebar-right" class="col-xs-12 col-sm-2 sidebar">
+			    {{{ widgets.right.content }}}
+			</div>
+			{{/ widgets.right.active }}
+
+			{{> menu/menu_footer }}
+
 		</div>
 
-		{{# widgets.right.active }}
-		<div id="sidebar-right" class="col-xs-12 col-sm-2 sidebar">
-		    {{{ widgets.right.content }}}
+		{{$ js }} {{/ js }}
+
+		<div id="footer" class="row">
+
+			{{# widgets.footer.active }}
+				{{# widgets.footer.content }}
+				<div class="col-xs-12 widgets sidebar-item">
+					{{{ widgets.footer.content }}}
+				</div>
+				{{/ widgets.footer.content }}
+			{{/ widgets.footer.active }}
+	
+			<div class="col-xs-12">
+				{{blogTitle}} - Created with <a href="https://github.com/Chemaclass/knob-mvc">Knob MVC Framework</a>
+			</div>
 		</div>
-		{{/ widgets.right.active }}
 
-		{{> menu/menu_footer }}
-
-	</div>
-
-	{{$ js }} {{/ js }}
-
-{{! close body tag automatically after executing wp_footer function }}
+	</body>
+</html>
