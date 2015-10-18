@@ -31,7 +31,7 @@ class HomeController extends BaseController implements HomeControllerInterface
             'postsWhereValue' => $user->ID,
             'user' => $user
         ];
-        return $this->renderPage('author', $args);
+        return $this->renderPage('base/author', $args);
     }
 
     /**
@@ -57,7 +57,7 @@ class HomeController extends BaseController implements HomeControllerInterface
             'postsWhereValue' => $wp_query->query['year'] . Archive::DELIMITER . $wp_query->query['monthnum'],
             'posts' => Post::getByArchive('', false, false, $postsArgs)
         ];
-        return $this->renderPage('search', $args);
+        return $this->renderPage('base/search', $args);
     }
 
     /**
@@ -73,7 +73,7 @@ class HomeController extends BaseController implements HomeControllerInterface
             'postsWhereValue' => $cat->term_id,
             'posts' => Post::getByCategory($cat->term_id)
         ];
-        return $this->renderPage('search', $args);
+        return $this->renderPage('base/search', $args);
     }
 
     /**
@@ -85,7 +85,7 @@ class HomeController extends BaseController implements HomeControllerInterface
             'postsWhereKey' => Ajax::HOME,
             'posts' => Post::getAll(get_option('posts_per_page'))
         ];
-        return $this->renderPage('home', $args);
+        return $this->renderPage('base/home', $args);
     }
 
     /**
@@ -101,7 +101,7 @@ class HomeController extends BaseController implements HomeControllerInterface
      */
     public function get404()
     {
-        return $this->renderPage('error_404');
+        return $this->renderPage('base/error_404');
     }
 
     /**
@@ -116,7 +116,7 @@ class HomeController extends BaseController implements HomeControllerInterface
             'thingToSearch' => $searchQuery,
             'posts' => Post::getBySearch($searchQuery)
         ];
-        return $this->renderPage('search', $args);
+        return $this->renderPage('base/search', $args);
     }
 
     /**
@@ -131,7 +131,7 @@ class HomeController extends BaseController implements HomeControllerInterface
         if (! isset($post)) {
             return $this->get404();
         }
-        return $this->renderPage($type, [
+        return $this->renderPage('base/' . $type, [
             $type => $post
         ]);
     }
@@ -149,6 +149,6 @@ class HomeController extends BaseController implements HomeControllerInterface
             'thingToSearch' => $tag->name,
             'posts' => Post::getByTag($tag->term_id)
         ];
-        return $this->renderPage('search', $args);
+        return $this->renderPage('base/search', $args);
     }
 }

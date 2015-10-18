@@ -116,11 +116,14 @@ abstract class BaseController
     {
         $templateVars = array_merge($templateVars, $this->getGlobalVariables());
         $addGlobalVariablesToVars = false; // cause we already did it.
-        echo $this->render('head', $templateVars, $addGlobalVariablesToVars);
+
+        echo $this->render('base/head', $templateVars, $addGlobalVariablesToVars);
         wp_head();
         echo '</head>';
+
         echo $this->render($templateName, $templateVars, $addGlobalVariablesToVars);
+
         wp_footer();
-        echo $this->render('footer', $templateVars, $addGlobalVariablesToVars);
+        echo $this->render('base/footer', $templateVars, $addGlobalVariablesToVars);
     }
 }
