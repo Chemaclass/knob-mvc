@@ -1,6 +1,7 @@
 <?php
 namespace Controllers;
 
+use Knob\Controllers\BaseController;
 use Knob\Libs\Ajax;
 use Knob\I18n\I18n;
 use Knob\Libs\KeysRequest;

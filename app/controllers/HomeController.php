@@ -1,6 +1,7 @@
 <?php
 namespace Controllers;
 
+use Knob\Controllers\BaseController;
 use Knob\Controllers\HomeControllerInterface;
 use Knob\Models\Archive;
 use Knob\Models\Post;

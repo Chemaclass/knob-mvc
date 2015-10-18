@@ -1,6 +1,7 @@
 <?php
 namespace Controllers;
 
+use Knob\Controllers\BaseController;
 use Widgets\ArchivesWidget;
 use Widgets\CategoriesWidget;
 use Widgets\LangWidget;
