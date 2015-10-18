@@ -2,11 +2,11 @@
 namespace Widgets;
 
 use Knob\Models\Term;
+use Knob\Widgets\WidgetBase;
 
 /**
  *
  * @author José María Valera Reales
- *
  */
 class CategoriesWidget extends WidgetBase
 {

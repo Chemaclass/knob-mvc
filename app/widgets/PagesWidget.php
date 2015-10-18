@@ -2,11 +2,11 @@
 namespace Widgets;
 
 use Knob\Models\Post;
+use Knob\Widgets\WidgetBase;
 
 /**
  *
  * @author José María Valera Reales
- *
  */
 class PagesWidget extends WidgetBase
 {

@@ -2,11 +2,11 @@
 namespace Widgets;
 
 use Knob\I18n\I18n;
+use Knob\Widgets\WidgetBase;
 
 /**
  *
  * @author José María Valera Reales
- *
  */
 class LoginWidget extends WidgetBase
 {
@@ -18,7 +18,6 @@ class LoginWidget extends WidgetBase
      */
     public function widget($args, $instance)
     {
-
         /*
          * Put all special URLs
          */

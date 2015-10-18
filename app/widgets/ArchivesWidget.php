@@ -2,11 +2,11 @@
 namespace Widgets;
 
 use Knob\Models\Archive;
+use Knob\Widgets\WidgetBase;
 
 /**
  *
  * @author José María Valera Reales
- *
  */
 class ArchivesWidget extends WidgetBase
 {
