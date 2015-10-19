@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the Knob-mvc package.
+ *
+ * (c) José María Valera Reales <chemaclass@outlook.es>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace Controllers;
 
 use Knob\Controllers\BaseController;
@@ -20,7 +28,7 @@ class BackendController extends BaseController
      */
     public function getRenderProfileImg($keyUserImg, $user_ID = false)
     {
-        if (! $user_ID) {
+        if (!$user_ID) {
             global $user_ID;
         }
         $user = User::find($user_ID);
@@ -49,7 +57,7 @@ class BackendController extends BaseController
      */
     public function getRenderSocialNetworks($user_ID = false)
     {
-        if (! $user_ID) {
+        if (!$user_ID) {
             global $user_ID;
         }
         $user = User::find($user_ID);
@@ -68,7 +76,7 @@ class BackendController extends BaseController
      */
     public function getRenderLanguage($user_ID = false)
     {
-        if (! $user_ID) {
+        if (!$user_ID) {
             global $user_ID;
         }
         $user = User::find($user_ID);

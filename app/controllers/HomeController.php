@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the Knob-mvc package.
+ *
+ * (c) José María Valera Reales <chemaclass@outlook.es>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace Controllers;
 
 use Knob\Controllers\BaseController;
@@ -24,7 +32,7 @@ class HomeController extends BaseController implements HomeControllerInterface
     {
         $author = get_queried_object();
         $user = User::find($author->ID);
-        if (! $user) {
+        if (!$user) {
             return $this->get404();
         }
         $args = [
@@ -129,7 +137,7 @@ class HomeController extends BaseController implements HomeControllerInterface
             the_post();
             $post = Post::find(get_the_ID());
         }
-        if (! isset($post)) {
+        if (!isset($post)) {
             return $this->get404();
         }
         return $this->renderPage('base/' . $type, [
