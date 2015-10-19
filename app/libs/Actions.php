@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the Knob-mvc package.
+ *
+ * (c) José María Valera Reales <chemaclass@outlook.es>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace Libs;
 
 use Controllers\BackendController;
@@ -59,10 +67,11 @@ class Actions extends KnobActions
                 }
             } catch (\Exception $e) {
                 // Add the error message to the WP notifications
-                add_action('user_profile_update_errors', function ($errors) use($e, $keyUserImg)
-                {
-                    $errors->add($keyUserImg, $e->getMessage());
-                });
+                add_action('user_profile_update_errors',
+                    function ($errors) use($e, $keyUserImg)
+                    {
+                        $errors->add($keyUserImg, $e->getMessage());
+                    });
             }
         };
 
