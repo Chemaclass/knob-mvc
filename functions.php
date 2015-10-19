@@ -1,4 +1,12 @@
 <?php
+/*
+ * This file is part of the Knob-mvc package.
+ *
+ * (c) José María Valera Reales <chemaclass@outlook.es>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 require_once 'vendor/autoload.php';
 // require_once 'app/libs/Helpers.php';
 
@@ -29,12 +37,13 @@ define(PUBLIC_DIR, get_template_directory_uri() . '/public');
 define(COMPONENTS_DIR, get_template_directory_uri() . '/vendor/components');
 
 // BLOG_INFO
-function getBlogTitle() {
-	if (is_home()) {
-		return get_bloginfo('name');
-	} else {
-		return wp_title("-", false, "right") . " " . get_bloginfo('name');
-	}
+function getBlogTitle()
+{
+    if (is_home()) {
+        return get_bloginfo('name');
+    } else {
+        return wp_title("-", false, "right") . " " . get_bloginfo('name');
+    }
 }
 define(BLOG_TITLE, getBlogTitle());
 define(ADMIN_EMAIL, get_bloginfo('admin_email'));
