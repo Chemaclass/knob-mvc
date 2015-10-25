@@ -23,6 +23,19 @@ class Actions extends KnobActions
 {
 
     /**
+     * Setup the actions
+     *
+     * @see KnobActions::setup()
+     */
+    public static function setup()
+    {
+        parent::setup();
+        Actions::userProfileAddImgAvatarAndHeader();
+        Actions::userProfileAddSocialNetworks();
+        Actions::userProfileAddLanguage();
+    }
+
+    /**
      * Add img avatar and header to user profile
      */
     public static function userProfileAddImgAvatarAndHeader()

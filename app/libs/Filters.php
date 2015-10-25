@@ -18,4 +18,15 @@ use Knob\Libs\Filters as KnobFilters;
  */
 class Filters extends KnobFilters
 {
+
+    /**
+     * Setup the filters
+     *
+     * @see KnobFilters::setup()
+     */
+    public static function setup()
+    {
+        parent::setup();
+        // your filters
+    }
 }
