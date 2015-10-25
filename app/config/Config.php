@@ -28,7 +28,7 @@ return [
 
     /**
      * ====================
-     * Languages by default
+     * Language by default
      * ====================
      */
     'langDefault' => 'en'

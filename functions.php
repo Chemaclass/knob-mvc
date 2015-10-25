@@ -22,6 +22,7 @@ $baseDir = dirname(__FILE__);
 define('BASE_DIR', dirname(__FILE__));
 define('VENDOR_DIR', $baseDir . '/vendor');
 define('VENDOR_KNOB_BASE_DIR', VENDOR_DIR . '/chemaclass/knob-base');
+define('VENDOR_KNOB_BASE_WP_DIR', VENDOR_KNOB_BASE_DIR . '/wp');
 define('APP_DIR', $baseDir . '/app');
 define('PAGES_DIR', APP_DIR . '/pages');
 define('CONFIG_DIR', APP_DIR . '/config');

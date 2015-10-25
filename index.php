@@ -34,12 +34,12 @@ if (isset($query) && isset($query['pagename'])) {
 if (file_exists($fileName)) {
     // get the file from the "knob-mvc/app/pages/$fileName"
     require_once $fileName;
-} else if (file_exists($fileNameInBase = VENDOR_KNOB_BASE_DIR . '/wp/' . $fileName)) {
+} else if (file_exists($fileNameInBase = VENDOR_KNOB_BASE_WP_DIR . $fileName)) {
     // get the file from the "knob-base/wp/$fileNameInBase"
     require_once $fileNameInBase;
 } else if ('page' == $kindFile) {
     // get the file from the "knob-base/page.php"
-    require_once VENDOR_KNOB_BASE_DIR . '/page.php';
+    require_once VENDOR_KNOB_BASE_WP_DIR . '/page.php';
 } else {
     // the file doesn't exists
     die('the file doesn\'t exists');
