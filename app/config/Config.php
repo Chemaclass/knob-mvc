@@ -15,10 +15,21 @@ namespace Config;
  * ============================
  */
 return [
+    /**
+     * ====================
+     * Languages available
+     * ====================
+     */
     'langAvailable' => [
         'en' => 'english',
         'es' => 'español',
         'de' => 'deutsch'
     ],
+
+    /**
+     * ====================
+     * Languages by default
+     * ====================
+     */
     'langDefault' => 'en'
 ];

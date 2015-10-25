@@ -8,7 +8,6 @@
  * file that was distributed with this source code.
  */
 require_once 'vendor/autoload.php';
-// require_once 'app/libs/Helpers.php';
 
 use Libs\Actions;
 use Libs\Filters;
@@ -22,9 +21,10 @@ use Libs\Widgets;
 $baseDir = dirname(__FILE__);
 define('BASE_DIR', dirname(__FILE__));
 define('VENDOR_DIR', $baseDir . '/vendor');
+define('VENDOR_KNOB_BASE_DIR', VENDOR_DIR . '/chemaclass/knob-base');
 define('APP_DIR', $baseDir . '/app');
 define('PAGES_DIR', APP_DIR . '/pages');
-define('VENDOR_KNOB_BASE_DIR', VENDOR_DIR . '/chemaclass/knob-base');
+define('CONFIG_DIR', APP_DIR . '/config');
 
 // URL ENVEROMENTS
 define('URL_PRO', 'knob.chemaclass.com');
@@ -44,8 +44,8 @@ function getBlogTitle()
         return wp_title("-", false, "right") . " " . get_bloginfo('name');
     }
 }
-define(BLOG_TITLE, getBlogTitle());
-define(ADMIN_EMAIL, get_bloginfo('admin_email'));
+define('BLOG_TITLE', getBlogTitle());
+define('ADMIN_EMAIL', get_bloginfo('admin_email'));
 
 // --------------------------------------------------------------
 // Actions
@@ -61,7 +61,6 @@ Filters::setup();
 // WidgetController
 // --------------------------------------------------------------
 Widgets::setup();
-
 /**
  * Remove the admin bar in prod
  */
