@@ -12,8 +12,7 @@ require_once 'vendor/autoload.php';
 
 use Libs\Actions;
 use Libs\Filters;
-use Config\Ini;
-use Controllers\WidgetController;
+use Libs\Widgets;
 
 // --------------------------------------------------------------
 // Some constants
@@ -28,13 +27,13 @@ define('PAGES_DIR', APP_DIR . '/pages');
 define('VENDOR_KNOB_BASE_DIR', VENDOR_DIR . '/chemaclass/knob-base');
 
 // URL ENVEROMENTS
-define(URL_PRO, 'knob.chemaclass.com');
-define(URL_DEV, 'knob.chemaclass.com');
-define(URL_LOC, 'knob.chemaclass.local');
+define('URL_PRO', 'knob.chemaclass.com');
+define('URL_DEV', 'knob.chemaclass.com');
+define('URL_LOC', 'knob.chemaclass.local');
 
 // SOME DIRECTORIES
-define(PUBLIC_DIR, get_template_directory_uri() . '/public');
-define(COMPONENTS_DIR, get_template_directory_uri() . '/vendor/components');
+define('PUBLIC_DIR', get_template_directory_uri() . '/public');
+define('COMPONENTS_DIR', get_template_directory_uri() . '/vendor/components');
 
 // BLOG_INFO
 function getBlogTitle()
@@ -51,28 +50,17 @@ define(ADMIN_EMAIL, get_bloginfo('admin_email'));
 // --------------------------------------------------------------
 // Actions
 // --------------------------------------------------------------
-Actions::adminPrintScripts();
-Actions::adminPrintStyles();
-Actions::loginView();
-Actions::registerNavMenus();
-Actions::wpBeforeAdminBarRender();
-Actions::userProfileAddImgAvatarAndHeader();
-Actions::userProfileAddSocialNetworks();
-Actions::userProfileAddLanguage();
-Actions::widgetsInit();
+Actions::setup();
 
 // --------------------------------------------------------------
 // Filters
 // --------------------------------------------------------------
-Filters::authorRewriteRules();
-Filters::getAvatar();
-Filters::navMenuCssClass();
+Filters::setup();
 
 // --------------------------------------------------------------
 // WidgetController
 // --------------------------------------------------------------
-$widgetController = new WidgetController();
-$widgetController->setup();
+Widgets::setup();
 
 /**
  * Remove the admin bar in prod
