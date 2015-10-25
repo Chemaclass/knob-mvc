@@ -31,10 +31,14 @@ if (isset($query) && isset($query['pagename'])) {
     }
 }
 
+$fileNameInBase = VENDOR_KNOB_BASE_WP_DIR . '/' . $fileName;
 if (file_exists($fileName)) {
+    // get the file from the "knob-mvc/$fileName"
+    require_once $fileName;
+} else if (file_exists($fileName = PAGES_DIR . $fileName)) {
     // get the file from the "knob-mvc/app/pages/$fileName"
     require_once $fileName;
-} else if (file_exists($fileNameInBase = VENDOR_KNOB_BASE_WP_DIR . $fileName)) {
+} else if (file_exists($fileNameInBase)) {
     // get the file from the "knob-base/wp/$fileNameInBase"
     require_once $fileNameInBase;
 } else if ('page' == $kindFile) {

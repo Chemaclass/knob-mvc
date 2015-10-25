@@ -47,11 +47,28 @@ class AjaxController extends BaseController
             die('');
         }
 
-        $json = $this->getJsonBySubmit($submit, $_REQUEST);
+        $json = array_merge($json, $this->getJsonBySubmit($submit, $_REQUEST));
 
         // cast the content to UTF-8
         $json['content'] = mb_convert_encoding($json['content'], "UTF-8");
         echo json_encode($json);
+    }
+
+    /**
+     * (non-PHPdoc)
+     *
+     * @see \Knob\Controllers\AjaxController::getJsonBySubmit()
+     */
+    public function getJsonBySubmit($submit, $_datas)
+    {
+        switch ($submit) {
+            case 'show-more':
+                return $this->jsonShowMore($_datas);
+            case 'menu':
+                return $this->jsonMenu($_datas);
+            default:
+                return [];
+        }
     }
 
     /**
@@ -100,22 +117,8 @@ class AjaxController extends BaseController
         $content = $this->render('menu/' . $type . '_default', $args);
         $json['content'] = $content;
         $json['code'] = KeysRequest::OK;
-        return $json;
-    }
 
-    /**
-     * (non-PHPdoc)
-     *
-     * @see \Knob\Controllers\AjaxController::getJsonBySubmit()
-     */
-    public function getJsonBySubmit($submit, $_datas)
-    {
-        switch ($submit) {
-            case 'show-more':
-                return $this->jsonShowMore($_datas);
-            case 'menu':
-                return $this->jsonMenu($_datas);
-        }
+        return $json;
     }
 }
 
