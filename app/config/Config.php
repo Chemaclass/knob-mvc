@@ -9,6 +9,11 @@
  */
 namespace Config;
 
+/**
+ * ============================
+ * Your global config file
+ * ============================
+ */
 return [
     'langAvailable' => [
         'en' => 'english',

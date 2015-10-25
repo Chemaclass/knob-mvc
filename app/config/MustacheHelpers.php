@@ -15,23 +15,18 @@ use Knob\I18n\I18n;
  * ============================
  * Your Mustache helpers
  * ============================
- * Helpers already implemented on the core:
  *
- * trans, transu, case.lower, case.upper
- * count, moreThan1, toArray, ucfirst
- * date.xmlschema date.string date.format
+ * @see knob-base/src/config/MustacheHelpers.php -> Parent file
  *
+ *      ----------------------------
+ *      For example:
+ *      ----------------------------
+ *      $lower_text = 'lower text to upper'; // var from PHP code
  *
- * ----------------------------
- * For example:
- * ----------------------------
- * $lower_text = 'lower text to upper'; // var from PHP code
+ *      {{#case.upper}} lower_text {{/case.upper}} -> LOWER TEXT TO UPPER
+ *      Or
+ *      {{ lower_text | case.upper}} -> LOWER TEXT TO UPPER
  *
- * {{#case.upper}} lower_text {{/case.uppper}} -> LOWER TEXT TO UPPER
- * Or
- * {{ lower_text | case.uppper}} -> LOWER TEXT TO UPPER
- *
- * Some links:
  *
  * @link https://github.com/bobthecow/mustache.php#usage
  * @link https://github.com/bobthecow/mustache.php/wiki/FILTERS-pragma

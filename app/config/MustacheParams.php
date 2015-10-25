@@ -10,6 +10,14 @@
 namespace Config;
 
 use Knob\I18n\I18n;
+
+/**
+ * ============================
+ * Your Mustache params
+ * ============================
+ *
+ * @see knob-base/src/config/MustacheParams.php -> Parent file
+ */
 return [
     'blogAuthor' => 'José María Valera Reales',
     'blogDescription' => ($d = I18n::trans('internal.blog_description')) ? $d : get_bloginfo('description'),
