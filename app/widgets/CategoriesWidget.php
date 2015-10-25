@@ -9,32 +9,13 @@
  */
 namespace Widgets;
 
-use Knob\Models\Term;
-use Knob\Widgets\WidgetBase;
+use Knob\Widgets\CategoriesWidget as KnobCategoriesWidget;
 
 /**
  *
  * @author José María Valera Reales
+ * @see KnobCategoriesWidget::widget()
  */
-class CategoriesWidget extends WidgetBase
+class CategoriesWidget extends KnobCategoriesWidget
 {
-
-    /**
-     * (non-PHPdoc)
-     *
-     * @see \Widgets\WidgetBase::widget()
-     */
-    public function widget($args, $instance)
-    {
-
-        /*
-         * Put the categories to show into the instance var.
-         */
-        $instance['categories'] = Term::getCategories();
-
-        /*
-         * And call the widget func from the parent class WidgetBase.
-         */
-        parent::widget($args, $instance);
-    }
 }

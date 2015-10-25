@@ -9,32 +9,13 @@
  */
 namespace Widgets;
 
-use Knob\I18n\I18n;
-use Knob\Widgets\WidgetBase;
+use Knob\Widgets\LangWidget as KnobLangWidget;
 
 /**
  *
  * @author José María Valera Reales
+ * @see KnobLangWidget::widget()
  */
-class LangWidget extends WidgetBase
+class LangWidget extends KnobLangWidget
 {
-
-    /**
-     * (non-PHPdoc)
-     *
-     * @see \Widgets\WidgetBase::widget()
-     */
-    public function widget($args, $instance)
-    {
-
-        /*
-         * Put all languages available to show into the instance var.
-         */
-        $instance['languages'] = I18n::getAllLangAvailableKeyValue();
-
-        /*
-         * And call the widget func from the parent class WidgetBase.
-         */
-        parent::widget($args, $instance);
-    }
 }

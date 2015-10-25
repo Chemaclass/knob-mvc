@@ -9,17 +9,13 @@
  */
 namespace Widgets;
 
-use Knob\Widgets\WidgetBase;
+use Knob\Widgets\SearcherWidget as KnobSearcherWidget;
 
 /**
  *
  * @author José María Valera Reales
+ * @see KnobSearcherWidget::widget()
  */
-class SearcherWidget extends WidgetBase
+class SearcherWidget extends KnobSearcherWidget
 {
-    /*
-     * All variables what we need are in Params.globalVars, and
-     * these are autoimplement in every template.
-     * So this widget is done :-)
-     */
 }
