@@ -98,11 +98,13 @@ $(document).on('click', '.show-more', function(e) {
 		data : data,
 		dataType : "json",
 		beforeSend: function() {
-			$this.find('i .fa-spinner').removeClass('hidden');
-			$this.find('i .fa-plus').addClass('hidden');
+			$this.find('.fa-refresh').removeClass('hidden');
+			$this.find('.fa-plus').addClass('hidden');
 			$this.attr("disabled", true);
 		},
 		success : function(json) {
+			$this.find('.fa-refresh').addClass('hidden');
+			$this.find('.fa-plus').removeClass('hidden');
 			if(json.code == 200 ) {
 				content = json.content;
 				posts.append(content);
