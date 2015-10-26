@@ -138,7 +138,7 @@ Here is an example template showing a post:
 The most important template is:
 
 * base/layout.mustache [as Decorator pattern]
-```
+```html
 <!DOCTYPE html>
 <html lang="{{currentLang}}">
 	<head>
