@@ -50,25 +50,25 @@ public function getHome() {
 
 All controllers are inside mvc/controllers.
 
-* BaseController: All controller should extend from this one.
 * AjaxController: Controller for ajax petitions.
 * BackendController: Controller  for backend stuff.
 * HomeController: Controller for all files from WP:
-	- author.php -> getAuthor()
-	- archive.php -> getArchive()
-	- category.php -> getCategory()
-	- home.php -> getHome()
-	- index.php -> getIndex()
-	- search.php -> getSearch()
-	- single.php -> getSingle()
-	- tag.php -> getTag()
-	
-* WidgetController: Controller for register all widgets using the setup() function. 
+	- author.php -> getAuthor() -> render the base/author.mustache template
+	- archive.php -> getArchive() -> render the base/search.mustache template
+	- category.php -> getCategory() -> render the base/search.mustache template
+	- home.php -> getHome() -> render the base/home.mustache template
+	- index.php -> getIndex() -> render the base/error_404.mustache template
+	- search.php -> getSearch() -> render the base/author.mustache template
+	- single.php -> getSingle() -> render the base/[single|page].mustache template
+	- tag.php -> getTag() -> render the base/search.mustache template
+	- 404.php -> get404() -> render the base/error_404.mustache template
 
 ### Calling a controller from a WordPress template page.
-All this files are already created by [Knob-base](https://github.com/Chemaclass/knob-base/). So you just need to override the function in your HomeController.
+All this files are already created by [Knob-base](https://github.com/Chemaclass/knob-base/). 
+So you just need to override the function in your HomeController, or extend by ´´´use Knob\Controllers\HomeController´´´
 
-[Create a template for WordPress](http://codex.wordpress.org/Template_Hierarchy), for example single.php which is used when a Post is loaded.
+[Create a template for WordPress](http://codex.wordpress.org/Template_Hierarchy), 
+for example single.php which is used when a Post is loaded.
 
 ```php
 use Controllers\HomeController;
@@ -85,8 +85,9 @@ Controllers should extend BaseController. This then provides access to the templ
 namespace Controllers;
 
 use Knob\Models\Post;
+use Knob\Controllers\HomeController as KnobHomeController;
 
-class HomeController extends BaseController {
+class HomeController extends KnobHomeController {
 
 	/**
 	 * single.php
@@ -134,58 +135,45 @@ Here is an example template showing a post:
 
 ### Loading templates with automatically included header and footer feature
 
-The 3 first most important templates are:
+The most important template is:
 
-* head.mustache
-* base.mustache
-* footer.mustache 
-
-`head` should include `<!DOCTYPE html>` until the first `<body class="...">` tag.
- Something like this:
+* base/layout.mustache [as Decorator pattern]
 `
 <!DOCTYPE html>
 <html lang="{{currentLang}}">
-<head>
-	<title>{{{blogTitle}}}</title>
-	<meta charset="{{blogCharset}}">
-	<link rel="icon" type="image/x-icon" href="{{publicDir}}/img/favicon.ico">
-	<link media="all" rel="stylesheet" href="{{publicDir}}/css/main.css">
-	<script src="{{publicDir}}/js/main.js"></script>
+	<head>
+		<title>{{{blogTitle}}}</title>
+		<meta charset="{{blogCharset}}">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="{{blogAuthor}}">
+		<meta name="description" content="{{blogDescription}}">		
+		<script src="{{publicDir}}/js/main.js"></script>
+		<!-- more sentences -->
+		{{{ wp_head }}}
+	</head>
 	
-{{! close head tag automatically after executing wp_head function }}
+	<body>		
+		<header>	
+			<a class="col-xs-12" href="{{homeUrl}}">{{blogTitle}}</a>
+			<span class="col-xs-12">{{blogDescription}}</span>
+		</header>
+
+	    <div id="content">
+	    	{{$ content }}
+	    		You don't have to see this text, cause you have to override this 
+            	tag's "content" in your child template.
+	    	{{/content }}
+		</div>
+
+		{{$ js }} {{/ js }}
+	</body>
+</html>
 `
 
-`footer` should include just the footer content and `</body></html>`
-
-* We use the `base.mustache` as Decorator pattern:
-
-```html
-<header id="top" class="container">	
-
-	<div id="blog-title" class="row">
-		<a class="col-xs-12" href="{{homeUrl}}">{{blogTitle}}</a>
-		<span class="col-xs-12">{{blogDescription}}</span>
-	</div>
-	
-</header>
-
-<section id="page" class="container">	
-
-    <article id="content" class="row">
-    	{{$ content }} 
-    		You don't have to see this text, cause you can override this 
-    		tag's "content" in your child template.
-    	{{/content }}
-	</article>
-	
-</section>
-
-{{$ js }} {{/ js }}
-```
 And then we have `home.mustache`:
 
 ```html
-{{< base }}	
+{{< base/layout }}
 
 	{{$ content }}
 
@@ -201,7 +189,7 @@ And then we have `home.mustache`:
 
 	{{/ content }}
 
-{{/ base }}
+{{/ base/layout }}
 ```
 
 And we have the partial `home/_post.mustache`:
