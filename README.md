@@ -58,8 +58,8 @@ All controllers are inside mvc/controllers.
 	- category.php -> getCategory() -> render the base/search.mustache template
 	- home.php -> getHome() -> render the base/home.mustache template
 	- index.php -> getIndex() -> render the base/error_404.mustache template
-	- search.php -> getSearch() -> render the base/author.mustache template
-	- single.php -> getSingle() -> render the base/[single|page].mustache template
+	- search.php -> getSearch() -> render the base/search.mustache template
+	- single.php -> getSingle($type = 'post') -> render the base/[post|page].mustache template
 	- tag.php -> getTag() -> render the base/search.mustache template
 	- 404.php -> get404() -> render the base/error_404.mustache template
 
@@ -138,7 +138,7 @@ Here is an example template showing a post:
 The most important template is:
 
 * base/layout.mustache [as Decorator pattern]
-`
+```
 <!DOCTYPE html>
 <html lang="{{currentLang}}">
 	<head>
@@ -168,7 +168,7 @@ The most important template is:
 		{{$ js }} {{/ js }}
 	</body>
 </html>
-`
+```
 
 And then we have `home.mustache`:
 
