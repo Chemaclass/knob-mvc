@@ -166,6 +166,10 @@ The most important template is:
 		</div>
 
 		{{$ js }} {{/ js }}
+		
+		<div id="footer">
+			{{{ wp_footer }}}			
+		</div>
 	</body>
 </html>
 ```
