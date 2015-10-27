@@ -84,9 +84,8 @@ Controllers should extend BaseController. This then provides access to the templ
 namespace Controllers;
 
 use Knob\Models\Post;
-use Knob\Controllers\HomeController as KnobHomeController;
 
-class HomeController extends KnobHomeController {
+class HomeController extends BaseController {
 
 	/**
 	 * single.php
@@ -119,7 +118,7 @@ Here is an example template showing a post:
 
 	{{$ content }}	
 
-		<div id="post" class="col-xs-12">
+		<div id="post">
 			
 			<h1 class="title">{{ post.getTitle }}</h1>
 			<div class="content">
@@ -159,11 +158,11 @@ The most important template is:
 			<span class="col-xs-12">{{blogDescription}}</span>
 		</header>
 
-	    <div id="content">
-	    	{{$ content }}
-	    		You don't have to see this text, cause you have to override this 
-            	tag's "content" in your child template.
-	    	{{/content }}
+		<div id="content">
+			{{$ content }}
+				You don't have to see this text, cause you have to override this 
+			tag's "content" in your child template.
+			{{/content }}
 		</div>
 
 		{{$ js }} {{/ js }}
