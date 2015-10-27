@@ -23,7 +23,6 @@ Here is an example of a header template that displays the above data.
   <head>
     <title>{{{blogTitle}}}</title>
     <meta charset="{{blogCharset}}">
-    <link rel="icon" type="image/x-icon" href="{{publicDir}}/img/favicon.ico">    
     <link media="all" rel="stylesheet" href="{{publicDir}}/css/main.css">
     <script src="{{publicDir}}/js/main.js"></script>
 ```
@@ -116,21 +115,22 @@ Create your mustache template within mvc/templates.
 Here is an example template showing a post:
 
 ```html
-{{< base }}
+{{< base/layout.mustache }}
 
 	{{$ content }}	
 
 		<div id="post" class="col-xs-12">
 			
 			<h1 class="title">{{ post.getTitle }}</h1>
-			
-			{{{ post.getContent }}}
+			<div class="content">
+				{{{ post.getContent }}}
+			</div>
 			
 		</div>
 
 	{{/ content }}
 
-{{/ base }}
+{{/ base/layout.mustache }}
 ```
 
 ### Loading templates with automatically included header and footer feature
@@ -138,6 +138,7 @@ Here is an example template showing a post:
 The most important template is:
 
 * base/layout.mustache [as Decorator pattern]
+
 ```html
 <!DOCTYPE html>
 <html lang="{{currentLang}}">
@@ -180,40 +181,22 @@ And then we have `home.mustache`:
 {{< base/layout }}
 
 	{{$ content }}
-
-		<div id="home" class="col-xs-12">
-
+	
+		<div id="home">
 			<section class="all-posts">
 				{{# posts }}
-					{{> home/_post}}
-				{{/ posts }}		
+					<article class="post">
+						<span class="post-time">{{getDate | date.string}}</span>
+						<a class="permalink" href="{{getPermalink}}">{{getTitle}}</a>
+						<span class="excerpt">{{{ getExcerpt }}}</span>
+					</article>
+				{{/ posts }}
 			</section>
-
 		</div>
-
+		
 	{{/ content }}
-
+	
 {{/ base/layout }}
-```
-
-And we have the partial `home/_post.mustache`:
-
-```html
-<article class="col-xs-12 post">
-
-	<span class="col-xs-12">
-		<span class="post-time">{{getDate | date.string}}</span>
-	</span>
-
-	<span class="col-xs-12">
-		<a href="{{getPermalink}}">{{getTitle}}</a>
-	</span>
-
-	<span class="col-xs-12">
-		{{{ getExcerpt }}}
-	</span>
-
-</article>
 ```
 
 # Before the start... you'll need! #
