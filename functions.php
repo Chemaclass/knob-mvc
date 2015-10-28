@@ -1,12 +1,12 @@
 <?php
 /*
- * This file is part of the Knob-mvc package.
- *
- * (c) José María Valera Reales <chemaclass@outlook.es>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+* This file is part of the Knob-mvc package.
+*
+* (c) José María Valera Reales <chemaclass@outlook.es>
+*
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*/
 require_once 'vendor/autoload.php';
 
 use Libs\Actions;
@@ -18,19 +18,22 @@ use Libs\Widgets;
 // --------------------------------------------------------------
 
 // BASE DIRECTORIES
-$baseDir = dirname(__FILE__);
-define('BASE_DIR', dirname(__FILE__));
-define('VENDOR_DIR', $baseDir . '/vendor');
+define('PROJECT_DIR', dirname(__FILE__));
+define('VENDOR_DIR', PROJECT_DIR . '/vendor');
 define('VENDOR_KNOB_BASE_DIR', VENDOR_DIR . '/chemaclass/knob-base');
 define('VENDOR_KNOB_BASE_WP_DIR', VENDOR_KNOB_BASE_DIR . '/wp');
-define('APP_DIR', $baseDir . '/app');
+define('APP_DIR', PROJECT_DIR . '/app');
 define('PAGES_DIR', APP_DIR . '/pages');
 define('CONFIG_DIR', APP_DIR . '/config');
 
+$configFile = require CONFIG_DIR . '/config.php';
+
+$env = isset($configFile['env']) ? $configFile['env'] : [];
+$siteUrl = get_site_url();
 // URL ENVEROMENTS
-define('URL_PRO', 'knob.chemaclass.com');
-define('URL_DEV', 'knob.chemaclass.com');
-define('URL_LOC', 'knob.chemaclass.local');
+define('URL_PRO', isset($env['pro']) ? $env['pro'] : $siteUrl);
+define('URL_DEV', isset($env['dev']) ? $env['dev'] : $siteUrl);
+define('URL_LOC', isset($env['loc']) ? $env['loc'] : $siteUrl);
 
 // SOME DIRECTORIES
 define('PUBLIC_DIR', get_template_directory_uri() . '/public');
@@ -63,8 +66,8 @@ Filters::setup();
 // --------------------------------------------------------------
 Widgets::setup();
 /**
- * Remove the admin bar in prod
- */
+* Remove the admin bar in prod
+*/
 show_admin_bar(false);
 
 @include_once 'test.php';
