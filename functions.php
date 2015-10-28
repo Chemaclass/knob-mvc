@@ -65,9 +65,5 @@ Filters::setup();
 // WidgetController
 // --------------------------------------------------------------
 Widgets::setup();
-/**
-* Remove the admin bar in prod
-*/
-show_admin_bar(false);
 
 @include_once 'test.php';
