@@ -9,7 +9,6 @@
  */
 namespace Controllers;
 
-use Knob\Controllers\BaseController;
 use Knob\Models\User;
 use Knob\I18n\I18n;
 
