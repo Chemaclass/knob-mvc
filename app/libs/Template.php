@@ -18,11 +18,6 @@ use Knob\Libs\Template as KnobTemplate;
  */
 class Template extends KnobTemplate
 {
-
-    static $mustacheHelpersFile = 'mustache_helpers';
-
-    static $templatesDir = 'templates';
-
     /*
      * Widgets
      */
@@ -36,14 +31,6 @@ class Template extends KnobTemplate
     static $menuHeader = 'menuHeader';
 
     static $menuFooter = 'menuFooter';
-
-    /**
-     * Constructor
-     */
-    private function __construct()
-    {
-        parent::__construct();
-    }
 
     /**
      * Return a list with the dinamic sidebar for widgets active
