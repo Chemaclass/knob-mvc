@@ -12,9 +12,9 @@ namespace Controllers;
 use Knob\Controllers\HomeControllerInterface;
 use Knob\I18n\I18n;
 use Knob\Libs\Ajax;
-use Knob\Models\Archive;
-use Knob\Models\Post;
-use Knob\Models\User;
+use Models\Archive;
+use Models\Post;
+use Models\User;
 
 /**
  * Home Controller
