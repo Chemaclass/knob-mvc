@@ -10,7 +10,7 @@
 namespace Libs;
 
 use Controllers\BackendController;
-use Knob\Models\User;
+use Models\User;
 use Knob\I18n\I18n;
 use Knob\Libs\Actions as KnobActions;
 
@@ -30,9 +30,63 @@ class Actions extends KnobActions
     public static function setup()
     {
         parent::setup();
-        Actions::userProfileAddImgAvatarAndHeader();
-        Actions::userProfileAddSocialNetworks();
-        Actions::userProfileAddLanguage();
+        static::registerNavMenus();
+        static::userProfileAddImgAvatarAndHeader();
+        static::userProfileAddSocialNetworks();
+        static::userProfileAddLanguage();
+        static::widgetsInit();
+    }
+
+    /**
+     * Register Sidebar using register_sidebar from WP.
+     *
+     * @see KnobActions::widgetsInit($activeWidgets)
+     */
+    public static function widgetsInit()
+    {
+        /*
+         * List with your active widgets.
+         * 'id': His id. We'll use it later for get it and put in his correct place.
+         * 'name': Sidebar name. Optional
+         * 'classBeforeWidget': Class for 'beforeWidget'. Optional
+         * 'beforeWidget': HTML to place before every widge. Optional
+         * 'afterWidget': HTML to place after every widget. Optional
+         * 'beforeTitle': HTML to place before every title. Optional
+         * 'afterTitle': HTML to place after every title. Optional
+         */
+        $activeWidgets = [
+            [
+                'id' => Widgets::$widgetsRight,
+                'name' => 'Widgets right',
+                'classBeforeWidget' => 'sidebar-right',
+                'beforeWidget' => '<div class="widget sidebar">',
+                'afterWidget' => '</div>',
+                'beforeTitle' => '<span class="title">',
+                'afterTitle' => '</span>'
+            ],
+            [
+                'id' => Widgets::$widgetsFooter
+            ]
+        ];
+
+        parent::widgetsInit($activeWidgets);
+    }
+
+    /**
+     * Register Nav Menus.
+     *
+     * @see http://codex.wordpress.org/Navigation_Menus
+     */
+    public static function registerNavMenus()
+    {
+        add_action('init',
+            function ()
+            {
+                foreach (Menu::getMenusActive() as $menu) {
+                    $menus[$menu] = I18n::transu($menu);
+                }
+                register_nav_menus($menus);
+            });
     }
 
     /**
