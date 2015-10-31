@@ -10,9 +10,10 @@
 namespace Controllers;
 
 use Knob\Controllers\BaseController as KnobBaseController;
-use Knob\Models\User;
-use Libs\Template;
 use Libs\WalkerNavMenu;
+use Libs\Menu;
+use Libs\Widgets;
+use Models\User;
 
 /**
  * Base Controller
@@ -26,72 +27,60 @@ class BaseController extends KnobBaseController
 
     protected $menus = [];
 
-    protected $template = null;
-
     public function __construct()
     {
         parent::__construct();
 
-        $this->template = Template::getInstance();
-
         // Widgets
-        foreach (Template::getDinamicSidebarActive() as $s) {
+        foreach (Widgets::getDinamicSidebarActive() as $sidebarActive) {
             ob_start();
-            dynamic_sidebar($s);
-            $this->widgets[$s] = ob_get_clean();
+            dynamic_sidebar($sidebarActive);
+            $this->widgets[$sidebarActive] = ob_get_clean();
         }
 
         // Menus
-        foreach (Template::getMenusActive() as $s) {
-            $this->menus[$s] = wp_nav_menu(
+        foreach (Menu::getMenusActive() as $menuActive) {
+            $this->menus[$menuActive] = wp_nav_menu(
                 [
                     'echo' => false,
-                    'theme_location' => $s,
-                    'menu_class' => 'nav navbar-nav menu ' . str_replace('_', '-', $s),
+                    'theme_location' => $menuActive,
+                    'menu_class' => 'nav navbar-nav menu ' . str_replace('_', '-', $menuActive),
                     'walker' => new WalkerNavMenu()
                 ]);
         }
     }
 
     /**
-     * Return the template
-     */
-    public function getTemplate()
-    {
-        return $this->template;
-    }
-
-    /**
      * Add the global variables for all controllers
      *
-     * @return array $templateVars
+     * @return array
      */
     public function getGlobalVariables()
     {
         $globalVars = [];
 
         // Sidebar items
-        $active = ($u = User::getCurrent()) ? $u->isWithSidebar() : User::WITH_SIDEBAR_DEFAULT;
+        $active = ($u = $this->currentUser) ? $u->isWithSidebar() : User::WITH_SIDEBAR_DEFAULT;
         $globalVars['widgets'] = [
             'right' => [
                 'active' => $active,
-                'content' => $this->widgets[Template::$widgetsRight]
+                'content' => $this->widgets[Widgets::$widgetsRight]
             ],
             'footer' => [
                 'active' => $active,
-                'content' => $this->widgets[Template::$widgetsFooter]
+                'content' => $this->widgets[Widgets::$widgetsFooter]
             ]
         ];
 
         // Menus
         $globalVars['menu'] = [
             'header' => [
-                'active' => has_nav_menu(Template::$menuHeader),
-                'content' => $this->menus[Template::$menuHeader]
+                'active' => has_nav_menu(Menu::$menuHeader),
+                'content' => $this->menus[Menu::$menuHeader]
             ],
             'footer' => [
-                'active' => has_nav_menu(Template::$menuFooter),
-                'content' => $this->menus[Template::$menuFooter]
+                'active' => has_nav_menu(Menu::$menuFooter),
+                'content' => $this->menus[Menu::$menuFooter]
             ]
         ];
 
