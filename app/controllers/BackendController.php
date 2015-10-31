@@ -9,8 +9,8 @@
  */
 namespace Controllers;
 
-use Knob\Models\User;
 use Knob\I18n\I18n;
+use Models\User;
 
 /**
  * Backend Controller
