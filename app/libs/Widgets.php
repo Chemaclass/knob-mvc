@@ -9,24 +9,59 @@
  */
 namespace Libs;
 
-use Knob\Libs\Widgets as KnobWidgets;
+use Knob\Libs\WidgetsInterface;
+use Widgets\ArchivesWidget;
+use Widgets\CategoriesWidget;
+use Widgets\LangWidget;
+use Widgets\LoginWidget;
+use Widgets\PagesWidget;
+use Widgets\SearcherWidget;
+use Widgets\TagsWidget;
 
 /**
- * Widgets to Wordpress
+ * Widget Controller
  *
  * @author José María Valera Reales
  */
-class Widgets extends KnobWidgets
+class Widgets implements WidgetsInterface
 {
+    /*
+     * Widgets
+     */
+    static $widgetsRight = 'widgets_right';
+
+    static $widgetsFooter = 'widgets_footer';
 
     /**
-     * Setup the widgets
+     * Return a list with the dinamic sidebar for widgets active
      *
-     * @see KnobWidgets::setup()
+     * @return array<string>
+     */
+    public static function getDinamicSidebarActive()
+    {
+        return [
+            static::$widgetsRight,
+            static::$widgetsFooter
+        ];
+    }
+
+    /**
+     * Setup
      */
     public static function setup()
     {
-        parent::setup();
-        // your widgets
+        $widgets = [
+            new ArchivesWidget(),
+            new CategoriesWidget(),
+            new LangWidget(),
+            new LoginWidget(),
+            new PagesWidget(),
+            new SearcherWidget(),
+            new TagsWidget()
+        ];
+
+        foreach ($widgets as $w) {
+            $w->register();
+        }
     }
 }
