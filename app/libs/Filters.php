@@ -11,6 +11,7 @@ namespace Libs;
 
 use Knob\Libs\Filters as KnobFilters;
 use Models\User;
+use Knob\Libs\Utils;
 
 /**
  * Filters from Wordpress
