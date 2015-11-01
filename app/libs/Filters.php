@@ -10,8 +10,8 @@
 namespace Libs;
 
 use Knob\Libs\Filters as KnobFilters;
-use Models\User;
 use Knob\Libs\Utils;
+use Models\User;
 
 /**
  * Filters from Wordpress
