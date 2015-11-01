@@ -4,7 +4,7 @@
 
 * Knob MVC
 * This is a PHP MVC Framework for creating Wordpress templates easier and with more fun than ever before.
-* Version: 1.9
+* Version: 1.0
 * Author José María Valera Reales
 
 ### You'll need [Knob-base](https://github.com/Chemaclass/knob-base/)
