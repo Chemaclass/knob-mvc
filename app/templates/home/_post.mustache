@@ -17,12 +17,12 @@
 				<span class="total-comments" title="{{#transu}}comments{{/transu}}">
 					{{# getComments | moreThan1}}
 							<i class="fa fa-comments-o"></i>
-					{{/ getComments }}	
+					{{/ getComments }}
 					{{^ getComments | moreThan1}}
-							<i class="fa fa-comment-o"></i> 
+							<i class="fa fa-comment-o"></i>
 					{{/ getComments }}
 					<span class="total">{{getComments | count}}</span>
-				</span>	
+				</span>
 			{{/ getComments }}
 
 			{{> post/_edit_control }}

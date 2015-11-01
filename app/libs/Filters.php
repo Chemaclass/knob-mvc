@@ -25,7 +25,7 @@ class Filters extends KnobFilters
      */
     public static function setup()
     {
-        KnobFilters::setup();
+        parent::setup();
         static::authorRewriteRules();
         static::getAvatar();
     }
