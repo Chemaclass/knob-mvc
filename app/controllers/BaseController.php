@@ -84,6 +84,6 @@ class BaseController extends KnobBaseController
             ]
         ];
 
-        return array_merge(parent::getGlobalVariables(), $globalVars);
+        return $globalVars;
     }
 }
