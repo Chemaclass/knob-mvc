@@ -10,10 +10,11 @@
 namespace Controllers;
 
 use Knob\Controllers\HomeControllerInterface;
-use Knob\I18n\I18n;
 use Knob\Libs\Ajax;
+use Knob\I18n\I18n;
 use Models\Archive;
 use Models\Post;
+use Models\Option;
 use Models\User;
 
 /**
@@ -91,7 +92,7 @@ class HomeController extends BaseController implements HomeControllerInterface
     {
         $args = [
             'postsWhereKey' => Ajax::HOME,
-            'posts' => Post::getAll(get_option('posts_per_page'))
+            'posts' => Post::getAll(Option::get('posts_per_page'))
         ];
         return $this->renderPage('base/home', $args);
     }
