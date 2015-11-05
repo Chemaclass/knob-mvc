@@ -19,11 +19,17 @@ $wp_the_query = $GLOBALS['wp_the_query'];
 $query = $wp_the_query->query;
 
 if (isset($query) && isset($query['pagename'])) {
+    // =============== Page ======================
     $kindFile = 'page';
     $fileName = PAGES_DIR . '/' . $query['pagename'] . '.php';
+} elseif (isset($wp_the_query->is_author) && $wp_the_query->is_author) {
+    // =============== Author ====================
+    $kindFile = 'author';
+    $fileName = 'author.php';
 } else {
+    // =============== Others ====================
     foreach ($wp_the_query as $k => $v) {
-        if ((substr($k, 0, 3) == 'is_') && $v) {
+        if ('is_' == (substr($k, 0, 3)) && $v) {
             $kindFile = substr($k, 3);
             $fileName = $kindFile . '.php';
             break;
