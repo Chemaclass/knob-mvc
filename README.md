@@ -34,13 +34,15 @@ A controller talks to the data helpers, loads the mustache template and can then
 Here's a sample function from a controller that loads all posts, limited by 'posts per page', into the home template.
 
 ```php
+
 /**
  * home.php
  */
 public function getHome() {
 	$args = [
-		'posts' => Post::getAll(get_option('posts_per_page'))
+		'posts' => Post::getAll(Option::get('posts_per_page'))
 	];
+	
 	return $this->renderPage('home', $args);
 }
 ```
@@ -74,7 +76,7 @@ use Controllers\HomeController;
 
 $controller = new HomeController();
 $controller->getSingle('post');
-```    
+```
 
 ### Creating a controller
 
@@ -91,13 +93,13 @@ class HomeController extends BaseController {
 	 * single.php
 	 */
 	public function getSingle($type = 'post') {
-		if (have_posts()) {
-			the_post();
-			$post = Post::find(get_the_ID());
-		}
-		if (!isset($post)) {
+		if (!have_posts()) {
 			return $this->get404();
 		}
+		
+		the_post();
+		$post = Post::find(get_the_ID());
+		
 		return $this->renderPage($type, [ 
 			$type => $post 
 		]);
