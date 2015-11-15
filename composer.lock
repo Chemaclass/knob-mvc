@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c8d14c60d365eb9b0df2d2eaa8e1e846",
-    "content-hash": "16732e2781d87111ad0b8246f39aca0d",
+    "hash": "80926ddd72e0c83f4b480edd86e68a93",
+    "content-hash": "55ea540d9c6eb8ac7351e614a4f6511b",
     "packages": [
         {
             "name": "chemaclass/knob-base",
-            "version": "dev-master",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Chemaclass/knob-base.git",
-                "reference": "517a1876a67e8669cb9f8982a7049a53e40d2fa5"
+                "reference": "24683ecb8e20cd5bdf68f4d7061811901d8f0689"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Chemaclass/knob-base/zipball/517a1876a67e8669cb9f8982a7049a53e40d2fa5",
-                "reference": "517a1876a67e8669cb9f8982a7049a53e40d2fa5",
+                "url": "https://api.github.com/repos/Chemaclass/knob-base/zipball/24683ecb8e20cd5bdf68f4d7061811901d8f0689",
+                "reference": "24683ecb8e20cd5bdf68f4d7061811901d8f0689",
                 "shasum": ""
             },
             "require": {
@@ -56,7 +56,7 @@
                 "mvc",
                 "wordpress"
             ],
-            "time": "2015-11-01 14:21:20"
+            "time": "2015-11-15 15:42:59"
         },
         {
             "name": "components/bootstrap",
@@ -315,9 +315,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "chemaclass/knob-base": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
