@@ -43,6 +43,7 @@ class AjaxController extends BaseController
 
         // check if we don't have any submit
         if (!$submit) {
+            header("Location: /");
             die('');
         }
 
