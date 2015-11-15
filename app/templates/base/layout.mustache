@@ -25,7 +25,9 @@
 			<span class="col-xs-12">{{blogDescription}}</span>
 		</header>
 
-		<div id="page" class="row" ajax-url="{{templateUrl}}/ajax">
+		<div id="page" class="row" 
+			{{#ajaxUrl}}ajax-url="{{.}}"{{/ajaxUrl}}
+			{{^ajaxUrl}}ajax-url="/ajax"{{/ajaxUrl}}>
 
 			{{> menu/menu_header }}
 
