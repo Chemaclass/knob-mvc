@@ -10,13 +10,13 @@
 var MINIMUM_HEIGHT_FOR_TO_LOAD = 200;
 
 $(document).ready(function() {
-	
+
 	/*
 	 * Widget styles
 	 */
 	$('table').addClass('table table-hover table-condensed')
 	$('.widget').addClass('sidebar-item')
-	
+
 	loadMenus();
 });
 
@@ -34,22 +34,26 @@ $(window).on("resize", function() {
 	doScroll();
 });
 
-function doScroll() {	
+function doScroll() {
 	var scroll = $(window).scrollTop();
-	var windowHeight = $( window ).height();
+	var windowHeight = $(window).height();
 	var documentHeight = $(document).height();
 
-	var heightLessScroll = (documentHeight - windowHeight)-scroll;
+	var heightLessScroll = (documentHeight - windowHeight) - scroll;
 
 	if (heightLessScroll <= MINIMUM_HEIGHT_FOR_TO_LOAD) {
-		//$('.show-more').trigger('click');
+		// $('.show-more').trigger('click');
 	}
 }
-
+/**
+ * Load the menus by AJAX
+ */
 function loadMenus() {
-	function load(menuType){
-		var menu = $('#'+menuType+'-ajax');
-		if(menu.length==0) return; // If the element doesn't exist do nothing
+	function load(menuType) {
+		var menu = $('#' + menuType + '-ajax');
+		if (menu.length == 0){
+			return; // If the element doesn't exist do nothing
+		}
 		var url = $('#page').attr('ajax-url');
 		var data = {
 			submit : 'menu',
@@ -60,16 +64,16 @@ function loadMenus() {
 			type : "POST",
 			data : data,
 			dataType : "json",
-			beforeSend: function() {
+			beforeSend : function() {
 				menu.find('.fa-spin').removeClass('hidden');
 			},
 			success : function(json) {
-				menu.html(json.content);	
+				menu.html(json.content);
 			},
-			error: function (xhr, ajaxOptions, thrownError) {
-				console.log("status: "+xhr.status + ",\n responseText: "+xhr.responseText 
-				+ ",\n thrownError "+thrownError);
-		     }
+			error : function(xhr, ajaxOptions, thrownError) {
+				console.log("status: " + xhr.status + ",\n responseText: "
+						+ xhr.responseText + ",\n thrownError " + thrownError);
+			}
 		});
 	}
 	load('menu-header');
@@ -87,17 +91,17 @@ $(document).on('click', '.show-more', function(e) {
 	var url = $('#page').attr('ajax-url');
 	var data = {
 		submit : 'show-more',
-		postsWhereKey: postsWhereKey,
-		postsWhereValue: postsWhereValue,
-		limit: limit,
-		offset: offset
+		postsWhereKey : postsWhereKey,
+		postsWhereValue : postsWhereValue,
+		limit : limit,
+		offset : offset
 	};
 	$.ajax({
 		url : url,
 		type : "POST",
 		data : data,
 		dataType : "json",
-		beforeSend: function() {
+		beforeSend : function() {
 			$this.find('.fa-refresh').removeClass('hidden');
 			$this.find('.fa-plus').addClass('hidden');
 			$this.attr("disabled", true);
@@ -105,25 +109,27 @@ $(document).on('click', '.show-more', function(e) {
 		success : function(json) {
 			$this.find('.fa-refresh').addClass('hidden');
 			$this.find('.fa-plus').removeClass('hidden');
-			if(json.code == 200 ) {
+			if (json.code == 200) {
 				content = json.content;
 				posts.append(content);
-				if( content.length == 0 || json.limit < limit ) {
+				if (content.length == 0 || json.limit < limit) {
 					$this.text("No more");
 					return;
 				}
 			}
 			$this.attr("disabled", false);
 		},
-		error: function (xhr, ajaxOptions, thrownError) {
-			 console.log("status: "+xhr.status + ",\n responseText: "+xhr.responseText 
-			 + ",\n thrownError "+thrownError);
+		error : function(xhr, ajaxOptions, thrownError) {
+			console.log("status: " + xhr.status + ",\n responseText: "
+					+ xhr.responseText + ",\n thrownError "
+					+ thrownError);
 			$this.addClass("hidden");
-	     }
+		}
 	});
 });
 
-$(document).on('click','.url-redirect', function(e) {
+$(document).on('click', '.url-redirect', function(e) {
 	e.preventDefault();
-	window.location.replace($(this).attr('href')+'&redirect='+window.location.pathname);
+	window.location.replace($(this).attr('href') + '&redirect='
+			+ window.location.pathname);
 });
