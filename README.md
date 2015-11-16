@@ -3,7 +3,7 @@
 ### What's this repository? ###
 
 * Knob MVC
-* This is a PHP MVC Framework for creating Wordpress templates easier and with more fun than ever before.
+* Knob is a PHP MVC Framework for creating Wordpress templates easier and funnier than ever before.
 * Version: 1.0
 * Author: José María Valera Reales
 
@@ -203,18 +203,18 @@ And then we have `home.mustache`:
 # Before the start... you'll need! #
 
 ### Install ruby and compass ###
-* $ sudo apt-get install ruby
-* $ sudo gem update --system
-* $ sudo apt-get install ruby1.9.1-dev
-* $ sudo gem install compass
-* $ sudo gem install rake
+* sudo apt-get install ruby
+* sudo gem update --system
+* sudo apt-get install ruby1.9.1-dev
+* sudo gem install compass
+* sudo gem install rake
 
 ### Then, you will be able to compile the scss in the directory of your project: ###
 * /knob-mvc $> rake watch_scss
 
 ### You'll need a PHP graphics library to be able to use the image editor: ###
-* $ apt-get install php5-imagick php5-gd
-* $ service apache2 reload 
+* apt-get install php5-imagick php5-gd
+* service apache2 reload 
 
 ### To configure:
 * Go to your panel admin.
@@ -225,5 +225,5 @@ And then we have `home.mustache`:
 * Select your Theme.
 * Enjoy!
 
-## Any PR is wellcome!
-* Please feel free to fork this project and commit your Pull request. Here or into the [Kernel-base](https://github.com/Chemaclass/knob-base/).
+## Any PR are welcome!
+* Please, feel free to fork this project and commit your Pull Request. Here or into the [Kernel-base](https://github.com/Chemaclass/knob-base/).
