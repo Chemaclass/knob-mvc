@@ -5,7 +5,7 @@
 * Knob MVC
 * This is a PHP MVC Framework for creating Wordpress templates easier and with more fun than ever before.
 * Version: 1.0
-* Author José María Valera Reales
+* Author: José María Valera Reales
 
 ### You'll need [Knob-base](https://github.com/Chemaclass/knob-base/)
 
@@ -203,28 +203,27 @@ And then we have `home.mustache`:
 # Before the start... you'll need! #
 
 ### Install ruby and compass ###
-* sudo apt-get install ruby
-* sudo gem update --system
-* sudo apt-get install ruby1.9.1-dev
-* sudo gem install compass
-* sudo gem install rake
+* $ sudo apt-get install ruby
+* $ sudo gem update --system
+* $ sudo apt-get install ruby1.9.1-dev
+* $ sudo gem install compass
+* $ sudo gem install rake
 
 ### Then, you will be able to compile the scss in the directory of your project: ###
 * /knob-mvc $> rake watch_scss
 
 ### You'll need a PHP graphics library to be able to use the image editor: ###
-* apt-get install php5-imagick php5-gd
-* service apache2 reload 
+* $ apt-get install php5-imagick php5-gd
+* $ service apache2 reload 
 
+### To configure:
+* Go to your panel admin.
+* Click into Settings > Permalinks.
+* I recommend select "Common Settings" using "Post name".
+* Copy the new ```.htaccess``` content file and update it. That file will be in your worpress root directory.
+* Go into your Appearance > Themes.
+* Select your Theme.
+* Enjoy!
 
-## Way to work (Recommended) ##
-
-### Local branch ###
-The best way to work with a team is working in one "local branch", and then when we finished
-our task to do a `merge --squash` on the "dev branch" for at the end have just one commit with all
-changes together. Then once tested in dev we can do a merge with master for to push all on production.
-
-## TODO:
-* Improve the code. Always.
-* Drink a beer :-)
-
+## Any PR is wellcome!
+* Please feel free to fork this project and commit your Pull request. Here or into the [Kernel-base](https://github.com/Chemaclass/knob-base/).
