@@ -155,7 +155,7 @@ The most important template is:
 	</head>
 	
 	<body>		
-		<header>	
+		<header id="header">	
 			<a class="col-xs-12" href="{{homeUrl}}">{{blogTitle}}</a>
 			<span class="col-xs-12">{{blogDescription}}</span>
 		</header>
