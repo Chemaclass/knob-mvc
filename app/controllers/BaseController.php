@@ -20,7 +20,7 @@ use Models\User;
  *
  * @author José María Valera Reales
  */
-class BaseController extends KnobBaseController
+abstract class BaseController extends KnobBaseController
 {
 
     protected $widgets = [];
