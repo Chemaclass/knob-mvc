@@ -22,7 +22,7 @@ class WalkerNavMenu extends \Walker_Nav_Menu
      * @param unknown $output
      * @param unknown $depth
      */
-    function start_lvl(&$output, $depth)
+    public function start_lvl(&$output, $depth = 0, $args = array())
     {
         $indent = str_repeat("\t", $depth);
         $output .= "\n$indent";
@@ -42,7 +42,7 @@ class WalkerNavMenu extends \Walker_Nav_Menu
      * @param unknown $output
      * @param unknown $depth
      */
-    function end_lvl(&$output, $depth)
+    public function end_lvl(&$output, $depth = 0, $args = array())
     {
         $indent = str_repeat("\t", $depth);
         $output .= "$indent</ul>";
@@ -56,7 +56,7 @@ class WalkerNavMenu extends \Walker_Nav_Menu
      * @param int $depth Depth of menu item. May be used for padding.
      * @param array $args Additional strings.
      */
-    function start_el(&$output, $item, $depth = 0, $args = [], $id = 0)
+    public function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0)
     {
         $classes = empty($item->classes) ? array() : (array) $item->classes;
 
@@ -78,8 +78,7 @@ class WalkerNavMenu extends \Walker_Nav_Menu
 
         $title = apply_filters('the_title', $item->title, $item->ID);
 
-        $item_output = $args->before . "<a $attributes>" . $args->link_before . $title . '</a> ' . $args->link_after . $description .
-             $args->after;
+        $item_output = $args->before . "<a $attributes>" . $args->link_before . $title . '</a> ' . $args->link_after . $description . $args->after;
 
         // Since $output is called by reference we don't need to return anything.
         $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);

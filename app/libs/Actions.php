@@ -42,7 +42,7 @@ class Actions extends KnobActions
      *
      * @see KnobActions::widgetsInit($activeWidgets)
      */
-    public static function widgetsInit()
+    public static function widgetsInit($activeWidgets = [])
     {
         /*
          * List with your active widgets.
