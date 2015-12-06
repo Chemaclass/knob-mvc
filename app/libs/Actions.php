@@ -67,7 +67,7 @@ class Actions extends KnobActions
             [
                 'id' => Widgets::$widgetsFooter
             ]
-        ];
+        ] + $activeWidgets;
 
         parent::widgetsInit($activeWidgets);
     }
