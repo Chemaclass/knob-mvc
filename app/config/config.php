@@ -1,24 +1,24 @@
 <?php
 /*
-* This file is part of the Knob-mvc package.
-*
-* (c) José María Valera Reales <chemaclass@outlook.es>
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
+ * This file is part of the Knob-mvc package.
+ *
+ * (c) José María Valera Reales <chemaclass@outlook.es>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 /**
-* ============================
-* Your global config file
-* ============================
-*/
+ * ============================
+ * Your global config file
+ * ============================
+ */
 return [
     /**
-    * ====================
-    * Environments
-    * ====================
-    */
+     * ====================
+     * Environments
+     * ====================
+     */
     'env' => [
         'prod' => 'knob.chemaclass.com',
         'dev' => 'knob.chemaclass.dev',
@@ -26,10 +26,10 @@ return [
     ],
 
     /**
-    * ====================
-    * Languages available
-    * ====================
-    */
+     * ====================
+     * Languages available
+     * ====================
+     */
     'langAvailable' => [
         'en' => 'english',
         'es' => 'español',
@@ -37,10 +37,20 @@ return [
     ],
 
     /**
-    * ====================
-    * Language by default
-    * ====================
-    */
+     * ====================
+     * Language by default
+     * ====================
+     */
     'langDefault' => 'en',
 
+    /**
+     * ====================
+     * Mailer
+     * ====================
+     */
+    'mailer' => [
+        'host' => '%mailer_host%',
+        'username' => '%mailer_username%',
+        'password' => '%mailer_password%'
+    ]
 ];
