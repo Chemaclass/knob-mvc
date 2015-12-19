@@ -17,3 +17,6 @@ vendor
 
 # css
 # main.css
+
+# Parameters file in config/parameters
+parameters.php
