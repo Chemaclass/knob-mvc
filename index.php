@@ -26,6 +26,14 @@ if (isset($query) && isset($query['pagename'])) {
     // =============== Author ====================
     $kindFile = 'author';
     $fileName = 'author.php';
+}  elseif (isset($wp_the_query->is_tag) && $wp_the_query->is_tag) {
+    // =============== Author ====================
+    $kindFile = 'tag';
+    $fileName = 'tag.php';
+} elseif (isset($wp_the_query->is_category) && $wp_the_query->is_category) {
+    // =============== Author ====================
+    $kindFile = 'category';
+    $fileName = 'category.php';
 } else {
     // =============== Others ====================
     foreach ($wp_the_query as $k => $v) {
