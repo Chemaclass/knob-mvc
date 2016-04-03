@@ -116,7 +116,7 @@ Create your mustache template within mvc/templates.
 Here is an example template showing a post:
 
 ```html
-{{< base/layout.mustache }}
+{{< base/layout }}
 
 	{{$ content }}	
 
@@ -131,7 +131,7 @@ Here is an example template showing a post:
 
 	{{/ content }}
 
-{{/ base/layout.mustache }}
+{{/ base/layout }}
 ```
 
 ### Loading templates with automatically included header and footer feature
@@ -162,8 +162,8 @@ The most important template is:
 
 		<div id="content">
 			{{$ content }}
-				You don't have to see this text, cause you have to override this 
-			tag's "content" in your child template.
+				You shouln't see this text, because you should override this 
+				"content" tag in your child template.
 			{{/content }}
 		</div>
 
@@ -200,7 +200,7 @@ And then we have `home.mustache`:
 {{/ base/layout }}
 ```
 
-# Before the start... you'll need! #
+# Before start... you will need this! #
 
 ### Install ruby and compass ###
 * sudo apt-get install ruby
