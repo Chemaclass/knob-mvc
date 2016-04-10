@@ -21,12 +21,12 @@ $query = $wp_the_query->query;
 if (isset($query) && isset($query['pagename'])) {
     // =============== Page ======================
     $kindFile = 'page';
-    $fileName = PAGES_DIR . '/' . $query['pagename'] . '.php';
+    $fileName = $query['pagename'] . '.php';
 } elseif (isset($wp_the_query->is_author) && $wp_the_query->is_author) {
     // =============== Author ====================
     $kindFile = 'author';
     $fileName = 'author.php';
-}  elseif (isset($wp_the_query->is_tag) && $wp_the_query->is_tag) {
+} elseif (isset($wp_the_query->is_tag) && $wp_the_query->is_tag) {
     // =============== Author ====================
     $kindFile = 'tag';
     $fileName = 'tag.php';
@@ -46,16 +46,18 @@ if (isset($query) && isset($query['pagename'])) {
 }
 
 $fileNameInBase = VENDOR_KNOB_BASE_WP_DIR . '/' . $fileName;
+$fileNameInPages = PAGES_DIR . '/' . $fileName;
+
 if (file_exists($fileName)) {
     // get the file from the "knob-mvc/$fileName"
     require_once $fileName;
-} else if (file_exists($fileName = PAGES_DIR . $fileName)) {
+} elseif (file_exists($fileNameInPages)) {
     // get the file from the "knob-mvc/app/pages/$fileName"
-    require_once $fileName;
-} else if (file_exists($fileNameInBase)) {
+    require_once $fileNameInPages;
+} elseif (file_exists($fileNameInBase)) {
     // get the file from the "knob-base/wp/$fileNameInBase"
     require_once $fileNameInBase;
-} else if ('page' == $kindFile) {
+} elseif ('page' == $kindFile) {
     // get the file from the "knob-base/page.php"
     require_once VENDOR_KNOB_BASE_WP_DIR . '/page.php';
 } else {

@@ -85,7 +85,7 @@ Controllers should extend BaseController. This then provides access to the templ
 ```php
 namespace Controllers;
 
-use Knob\Models\Post;
+use Models\Post;
 
 class HomeController extends BaseController {
 
@@ -162,8 +162,7 @@ The most important template is:
 
 		<div id="content">
 			{{$ content }}
-				You shouln't see this text, because you should override this 
-				"content" tag in your child template.
+				This could be your content section
 			{{/content }}
 		</div>
 
