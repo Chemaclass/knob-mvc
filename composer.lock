@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "chemaclass/knob-base",
-            "version": "1.0.7",
+            "version": "1.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Chemaclass/knob-base.git",
-                "reference": "a72ab1b0d34592c0274b81b2cf39a8a6c753d963"
+                "reference": "2b7f027d3f9e7c91b118b9f3f4e1fe874347444d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Chemaclass/knob-base/zipball/a72ab1b0d34592c0274b81b2cf39a8a6c753d963",
-                "reference": "a72ab1b0d34592c0274b81b2cf39a8a6c753d963",
+                "url": "https://api.github.com/repos/Chemaclass/knob-base/zipball/2b7f027d3f9e7c91b118b9f3f4e1fe874347444d",
+                "reference": "2b7f027d3f9e7c91b118b9f3f4e1fe874347444d",
                 "shasum": ""
             },
             "require": {
@@ -56,7 +56,7 @@
                 "mvc",
                 "wordpress"
             ],
-            "time": "2016-03-25 20:24:21"
+            "time": "2016-04-02 13:52:45"
         },
         {
             "name": "components/bootstrap",
