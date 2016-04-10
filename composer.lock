@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "80926ddd72e0c83f4b480edd86e68a93",
+    "hash": "13ff722e1381c721dfed2beda8ed0069",
     "content-hash": "55ea540d9c6eb8ac7351e614a4f6511b",
     "packages": [
         {
             "name": "chemaclass/knob-base",
-            "version": "1.0.9",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Chemaclass/knob-base.git",
-                "reference": "2b7f027d3f9e7c91b118b9f3f4e1fe874347444d"
+                "reference": "cf277ce6b9675112c7e2b6e757f8cc4e00314194"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Chemaclass/knob-base/zipball/2b7f027d3f9e7c91b118b9f3f4e1fe874347444d",
-                "reference": "2b7f027d3f9e7c91b118b9f3f4e1fe874347444d",
+                "url": "https://api.github.com/repos/Chemaclass/knob-base/zipball/cf277ce6b9675112c7e2b6e757f8cc4e00314194",
+                "reference": "cf277ce6b9675112c7e2b6e757f8cc4e00314194",
                 "shasum": ""
             },
             "require": {
@@ -56,7 +56,7 @@
                 "mvc",
                 "wordpress"
             ],
-            "time": "2016-04-02 13:52:45"
+            "time": "2016-04-10 15:29:53"
         },
         {
             "name": "components/bootstrap",

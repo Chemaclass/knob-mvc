@@ -28,6 +28,9 @@
 		},
 		"classmap": [
 			"app/"
+		],
+		"files": [
+			"app/config/helpers.php"
 		]
 	}
 }
