@@ -49,7 +49,7 @@ public function getHome() {
 
 ## Creating basic controllers and views
 
-All controllers are inside mvc/controllers.
+All controllers are inside app/controllers.
 
 * AjaxController: Controller for ajax petitions.
 * BackendController: Controller  for backend stuff.
@@ -109,7 +109,7 @@ class HomeController extends BaseController {
 
 ### Creating mustache templates
 
-Create your mustache template within mvc/templates.
+Create your mustache template within app/templates.
 
 [The Mustache manual](http://mustache.github.com/mustache.5.html) will be your guide.
 
