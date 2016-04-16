@@ -27,12 +27,10 @@ abstract class BaseController extends KnobBaseController
 
     protected $menus = [];
 
-    protected $currentUser = null;
     
     public function __construct()
     {
         parent::__construct();
-        $this->currentUser = User::getCurrent();
 
         // Widgets
         foreach (Widgets::getDinamicSidebarActive() as $sidebarActive) {
