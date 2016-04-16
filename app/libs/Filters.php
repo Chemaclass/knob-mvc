@@ -92,9 +92,8 @@ class Filters extends KnobFilters
                 } elseif (is_object($id_or_email) && !empty($id_or_email->user_id)) {
                     $user_id = (int) $id_or_email->user_id;
                 }
-                $user = User::find($user_id);
-                if (!$user) {
-                    return Utils::getUrlAvatarDefault($size);
+                if (!$user = User::find($user_id)) {
+                    $user = new User();
                 }
                 if (!Utils::isValidStr($alt)) {
                     $alt = $user->getDisplayName() . ' avatar';
