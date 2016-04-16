@@ -21,4 +21,19 @@ class User extends KnobUser
      * Sidebar
      */
     const WITH_SIDEBAR_DEFAULT = true;
+    
+    /**
+     * Return the instance of the current user, or null if they're not logged
+     *
+     * @return User
+     */
+    public static function getCurrent()
+    {
+        $user = wp_get_current_user();
+        if ($user->ID) {
+            return User::find($user->ID);
+        }
+    
+        return null;
+    }
 }
