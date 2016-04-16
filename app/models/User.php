@@ -17,11 +17,15 @@ use Knob\Models\User as KnobUser;
  */
 class User extends KnobUser
 {
+
+    /** @var User $currentUser Singleton */
+    private static $currentUser = null;
+
     /*
      * Sidebar
      */
     const WITH_SIDEBAR_DEFAULT = true;
-    
+
     /**
      * Return the instance of the current user, or null if they're not logged
      *
@@ -31,9 +35,13 @@ class User extends KnobUser
     {
         $user = wp_get_current_user();
         if ($user->ID) {
-            return User::find($user->ID);
+            if (null === static::$currentUser) {
+                static::$currentUser = User::find($user->ID);
+            }
+            
+            return static::$currentUser;
         }
-    
+        
         return null;
     }
 }
