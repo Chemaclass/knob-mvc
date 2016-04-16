@@ -58,9 +58,7 @@ abstract class BaseController extends KnobBaseController
      */
     public function getGlobalVariables()
     {
-        $globalVars = [
-            'currentUser' => $this->currentUser
-        ];
+        $globalVars = [];
 
         // Sidebar items
         $active = ($u = $this->currentUser) ? $u->isWithSidebar() : User::WITH_SIDEBAR_DEFAULT;
