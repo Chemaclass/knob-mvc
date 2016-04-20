@@ -26,6 +26,9 @@ Here is an example of a header template that displays the above data.
     <link media="all" rel="stylesheet" href="{{publicDir}}/css/main.css">
     <script src="{{publicDir}}/js/main.js"></script>
 ```
+### index.php has the power
+
+- index.php -> has the logic to redirect the request to the correct WP Template file depend on the WP request params
 
 ### Controllers to pull everything together
 
@@ -52,20 +55,29 @@ public function getHome() {
 All controllers are inside app/controllers.
 
 * AjaxController: Controller for ajax petitions.
-* BackendController: Controller  for backend stuff.
+* BackendController: Controller for backend stuff.
 * HomeController: Controller for all files from WP:
-	- author.php -> getAuthor() -> render the base/author.mustache template
-	- archive.php -> getArchive() -> render the base/search.mustache template
-	- category.php -> getCategory() -> render the base/search.mustache template
-	- home.php -> getHome() -> render the base/home.mustache template
-	- index.php -> getIndex() -> render the base/error_404.mustache template
-	- search.php -> getSearch() -> render the base/search.mustache template
-	- single.php -> getSingle($type = 'post') -> render the base/[post|page].mustache template
-	- tag.php -> getTag() -> render the base/search.mustache template
-	- 404.php -> get404() -> render the base/error_404.mustache template
+	- getAuthor() -> render the base/author.mustache template -> from "author.php"
+	- getArchive() -> render the base/search.mustache template -> from "archive.php"
+	- getCategory() -> render the base/search.mustache template -> from "category.php"
+	- getHome() -> render the base/home.mustache template -> from "home.php"
+	- getSearch() -> render the base/search.mustache template -> from "search.php"
+	- getSingle($type = 'post') -> render the base/[post|page].mustache template -> from "single.php"
+	- getTag() -> render the base/search.mustache template -> from "tag.php"
+	- get404() -> render the base/error_404.mustache template -> from "404.php"
 
 ### Calling a controller from a WordPress template page.
-All this files are already created by [Knob-base](https://github.com/Chemaclass/knob-base/). 
+
+All this files are already created by [Knob-base](https://github.com/Chemaclass/knob-base/):
+	- author.php -> getAuthor() 
+	- archive.php -> getArchive()
+	- category.php -> getCategory() -
+	- home.php -> getHome() 
+	- search.php -> getSearch() 
+	- single.php -> getSingle($type = 'post') 
+	- tag.php -> getTag()
+	- 404.php -> get404() 
+	
 So you just need to override the function in your HomeController, or extend by ´´´use Knob\Controllers\HomeController´´´
 
 [Create a template for WordPress](http://codex.wordpress.org/Template_Hierarchy), 
