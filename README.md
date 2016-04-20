@@ -28,16 +28,14 @@ Here is an example of a header template that displays the above data.
 ```
 ### index.php has the power
 
-- index.php -> has the logic to redirect the request to the correct WP Template file depend on the WP request params
+- index.php -> this file has the logic to redirect the request to the correct ["WP template file"](http://codex.wordpress.org/Template_Hierarchy) depend on the WP request params.
 
 ### Controllers to pull everything together
 
 A controller talks to the data helpers, loads the mustache template and can then be called from your WordPress template files.
 
 Here's a sample function from a controller that loads all posts, limited by 'posts per page', into the home template.
-
 ```php
-
 /**
  * home.php
  */
@@ -69,15 +67,15 @@ All controllers are inside app/controllers.
 ### Calling a controller from a WordPress template page.
 
 All this files are already created by [Knob-base](https://github.com/Chemaclass/knob-base/):
-	- author.php -> getAuthor() 
+	- author.php -> getAuthor()
 	- archive.php -> getArchive()
-	- category.php -> getCategory() -
-	- home.php -> getHome() 
-	- search.php -> getSearch() 
-	- single.php -> getSingle($type = 'post') 
+	- category.php -> getCategory()
+	- home.php -> getHome()
+	- search.php -> getSearch()
+	- single.php -> getSingle($type = 'post')
 	- tag.php -> getTag()
-	- 404.php -> get404() 
-	
+	- 404.php -> get404()
+
 So you just need to override the function in your HomeController, or extend by ´´´use Knob\Controllers\HomeController´´´
 
 [Create a template for WordPress](http://codex.wordpress.org/Template_Hierarchy), 
