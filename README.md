@@ -55,6 +55,7 @@ All controllers are inside app/controllers.
 * AjaxController: Controller for ajax petitions.
 * BackendController: Controller for backend stuff.
 * HomeController: Controller for all files from WP:
+
 	- getAuthor() -> render the base/author.mustache template -> from "author.php"
 	- getArchive() -> render the base/search.mustache template -> from "archive.php"
 	- getCategory() -> render the base/search.mustache template -> from "category.php"
@@ -66,7 +67,8 @@ All controllers are inside app/controllers.
 
 ### Calling a controller from a WordPress template page.
 
-All this files are already created by [Knob-base](https://github.com/Chemaclass/knob-base/):
+* All this files are already created by [Knob-base](https://github.com/Chemaclass/knob-base/):
+
 	- author.php -> getAuthor()
 	- archive.php -> getArchive()
 	- category.php -> getCategory()
