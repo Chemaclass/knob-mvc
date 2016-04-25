@@ -33,10 +33,9 @@ class User extends KnobUser
      */
     public static function getCurrent()
     {
-        $user = wp_get_current_user();
-        if ($user->ID) {
+        if ($user_ID = get_current_user_id()) {
             if (null === static::$currentUser) {
-                static::$currentUser = User::find($user->ID);
+                static::$currentUser = User::find($user_ID);
             }
             
             return static::$currentUser;
