@@ -79,14 +79,13 @@ class Actions extends KnobActions
      */
     public static function registerNavMenus()
     {
-        add_action('init',
-            function ()
-            {
-                foreach (Menu::getMenusActive() as $menu) {
-                    $menus[$menu] = I18n::transu($menu);
-                }
-                register_nav_menus($menus);
-            });
+        add_action('init', function ()
+        {
+            foreach (Menu::getMenusActive() as $menu) {
+                $menus[$menu] = I18n::transu($menu);
+            }
+            register_nav_menus($menus);
+        });
     }
 
     /**
