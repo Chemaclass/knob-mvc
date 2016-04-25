@@ -101,7 +101,8 @@ class Actions extends KnobActions
         {
             echo 'enctype="multipart/form-data"';
         });
-
+        
+        /** @var WP_User $user */
         $profileAddImg = function ($user)
         {
             $controller = new BackendController();
@@ -162,6 +163,7 @@ class Actions extends KnobActions
      */
     public static function userProfileAddSocialNetworks()
     {
+        /** @var WP_User $user */
         $addSocialNetworks = function ($user)
         {
             $c = new BackendController();
@@ -188,6 +190,7 @@ class Actions extends KnobActions
      */
     public static function userProfileAddLanguage()
     {
+        /** @var WP_User $user */
         $addLang = function ($user)
         {
             $c = new BackendController();
