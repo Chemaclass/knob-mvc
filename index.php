@@ -13,7 +13,7 @@
  * Search the kind of file we are looking for.
  * ==============================================
  * If we're in this file means the original file doesn't exists
- * on the root directory. So come on to looking for on Knob default files.
+ * on the root directory. So come on and looking into Knob default files.
  */
 $wp_the_query = $GLOBALS['wp_the_query'];
 $query = $wp_the_query->query;
@@ -27,11 +27,11 @@ if (isset($query) && isset($query['pagename'])) {
     $kindFile = 'author';
     $fileName = 'author.php';
 } elseif (isset($wp_the_query->is_tag) && $wp_the_query->is_tag) {
-    // =============== Author ====================
+    // =============== Tag =======================
     $kindFile = 'tag';
     $fileName = 'tag.php';
 } elseif (isset($wp_the_query->is_category) && $wp_the_query->is_category) {
-    // =============== Author ====================
+    // =============== Category ==================
     $kindFile = 'category';
     $fileName = 'category.php';
 } else {
