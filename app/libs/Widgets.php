@@ -25,9 +25,12 @@ use Widgets\TagsWidget;
  */
 class Widgets implements WidgetsInterface
 {
+
     /*
      * Widgets
      */
+    static $widgetsLeft = 'widgets_left';
+
     static $widgetsRight = 'widgets_right';
 
     static $widgetsFooter = 'widgets_footer';
@@ -40,8 +43,9 @@ class Widgets implements WidgetsInterface
     public static function getDinamicSidebarActive()
     {
         return [
-            static::$widgetsRight,
-            static::$widgetsFooter
+            'left' => static::$widgetsLeft,
+            'right' => static::$widgetsRight,
+            'footer' => static::$widgetsFooter
         ];
     }
 
@@ -59,7 +63,7 @@ class Widgets implements WidgetsInterface
             new SearcherWidget(),
             new TagsWidget()
         ];
-
+        
         foreach ($widgets as $w) {
             $w->register();
         }

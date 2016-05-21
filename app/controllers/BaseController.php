@@ -27,27 +27,25 @@ abstract class BaseController extends KnobBaseController
 
     protected $menus = [];
 
-    
     public function __construct()
     {
         parent::__construct();
-
+        
         // Widgets
-        foreach (Widgets::getDinamicSidebarActive() as $sidebarActive) {
+        foreach (Widgets::getDinamicSidebarActive() as $key => $sidebarActive) {
             ob_start();
             dynamic_sidebar($sidebarActive);
             $this->widgets[$sidebarActive] = ob_get_clean();
         }
-
+        
         // Menus
-        foreach (Menu::getMenusActive() as $menuActive) {
-            $this->menus[$menuActive] = wp_nav_menu(
-                [
-                    'echo' => false,
-                    'theme_location' => $menuActive,
-                    'menu_class' => 'nav navbar-nav menu ' . str_replace('_', '-', $menuActive),
-                    'walker' => new WalkerNavMenu()
-                ]);
+        foreach (Menu::getMenusActive() as $key => $menuActive) {
+            $this->menus[$menuActive] = wp_nav_menu([
+                'echo' => false,
+                'theme_location' => $menuActive,
+                'menu_class' => 'nav navbar-nav menu ' . str_replace('_', '-', $menuActive),
+                'walker' => new WalkerNavMenu()
+            ]);
         }
     }
 
@@ -59,32 +57,21 @@ abstract class BaseController extends KnobBaseController
     public function getGlobalVariables()
     {
         $globalVars = [];
-
         // Sidebar items
-        $active = ($u = $this->currentUser) ? $u->isWithSidebar() : User::WITH_SIDEBAR_DEFAULT;
-        $globalVars['widgets'] = [
-            'right' => [
-                'active' => $active,
-                'content' => $this->widgets[Widgets::$widgetsRight]
-            ],
-            'footer' => [
-                'active' => $active,
-                'content' => $this->widgets[Widgets::$widgetsFooter]
-            ]
-        ];
-
+        foreach (Widgets::getDinamicSidebarActive() as $key => $sidebarActive) {
+            $globalVars['widgets'][$key] = [
+                'active' => is_active_sidebar($sidebarActive),
+                'content' => $this->widgets[$sidebarActive]
+            ];
+        }
         // Menus
-        $globalVars['menu'] = [
-            'header' => [
-                'active' => has_nav_menu(Menu::$menuHeader),
-                'content' => $this->menus[Menu::$menuHeader]
-            ],
-            'footer' => [
-                'active' => has_nav_menu(Menu::$menuFooter),
-                'content' => $this->menus[Menu::$menuFooter]
-            ]
-        ];
-
+        foreach (Menu::getMenusActive() as $key => $menuActive) {
+            $globalVars['menu'][$key] = [
+                'active' => has_nav_menu($menuActive),
+                'content' => $this->menus[$menuActive]
+            ];
+        }
+        
         return $globalVars;
     }
 }

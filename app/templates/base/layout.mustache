@@ -31,10 +31,23 @@
 
 			{{> menu/menu_header }}
 
-		    <div id="content" class="col-xs-12 {{# widgets.right.active }}col-sm-10{{/ widgets.right.active }}">
+			{{# widgets.left.active }}
+			<div id="sidebar-left" class="col-xs-12 col-sm-2 sidebar">
+			    {{{ widgets.left.content }}}
+			</div>
+			{{/ widgets.left.active }}
+			
+		    <div id="content" class="col-xs-12 
+			    {{# widgets.right.active }} 
+			    	{{# widgets.left.active }} col-sm-8{{/ widgets.left.active }} 
+			    	{{^ widgets.left.active }} col-sm-10{{/ widgets.left.active }} 
+			    {{/ widgets.right.active }}
+			    {{^ widgets.right.active }} 
+			    	{{# widgets.left.active }} col-sm-10{{/ widgets.left.active }} 
+			    {{/ widgets.right.active }}
+			">
 		    	{{$ content }}
-		    		You don't have to see this text, cause you have to override this 
-	            	tag's "content" in your child template.
+		    		This could be your content section
 		    	{{/content }}
 			</div>
 

@@ -37,38 +37,29 @@ class Actions extends KnobActions
         static::widgetsInit();
     }
 
-    /**
+      /**
      * Register Sidebar using register_sidebar from WP.
+     *
+     * List with your active widgets.
+     * 'id': His id. We'll use it later for get it and put in his correct place.
+     * 'name': Sidebar name. Optional
+     * 'classBeforeWidget': Class for 'beforeWidget'. Optional
+     * 'beforeWidget': HTML to place before every widge. Optional
+     * 'afterWidget': HTML to place after every widget. Optional
+     * 'beforeTitle': HTML to place before every title. Optional
+     * 'afterTitle': HTML to place after every title. Optional
      *
      * @see KnobActions::widgetsInit($activeWidgets)
      */
     public static function widgetsInit($activeWidgets = [])
     {
-        /*
-         * List with your active widgets.
-         * 'id': His id. We'll use it later for get it and put in his correct place.
-         * 'name': Sidebar name. Optional
-         * 'classBeforeWidget': Class for 'beforeWidget'. Optional
-         * 'beforeWidget': HTML to place before every widge. Optional
-         * 'afterWidget': HTML to place after every widget. Optional
-         * 'beforeTitle': HTML to place before every title. Optional
-         * 'afterTitle': HTML to place after every title. Optional
-         */
-        $activeWidgets = [
-            [
-                'id' => Widgets::$widgetsRight,
-                'name' => 'Widgets right',
-                'classBeforeWidget' => 'sidebar-right',
-                'beforeWidget' => '<div class="widget sidebar">',
-                'afterWidget' => '</div>',
-                'beforeTitle' => '<span class="title">',
-                'afterTitle' => '</span>'
-            ],
-            [
-                'id' => Widgets::$widgetsFooter
-            ]
-        ] + $activeWidgets;
-
+        // Widgets
+        foreach (Widgets::getDinamicSidebarActive() as $key => $sidebarActive) {
+            $activeWidgets[] = [
+                'id' => $sidebarActive
+            ];
+        }
+        
         parent::widgetsInit($activeWidgets);
     }
 

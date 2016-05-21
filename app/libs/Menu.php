@@ -29,8 +29,8 @@ class Menu implements MenuInterface
     public static function getMenusActive()
     {
         return [
-            static::$menuHeader,
-            static::$menuFooter
+            'header' => static::$menuHeader,
+            'footer' => static::$menuFooter
         ];
     }
 }
