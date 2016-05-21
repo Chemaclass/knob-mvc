@@ -2,59 +2,59 @@
 	<div class="sidebar-item row login">
 
 		<div class="row">
-			{{# isUserLoggedIn }}
-				{{# currentUser }}
-					<div class="col-xs-12 logged">
-
-						<a href="{{getPostsUrl}}">
-							<img alt="{{getDisplayName}}" src="{{getAvatarProfile}}" title="{{#transu}}logged_as{{/transu}} {{getDisplayName}}">
-						</a>
-
-						<ul class="list-group">
-						  <a href="{{getEditUrl}}" target="_blank"><li class="list-group-item">{{#transu}}profile{{/transu}}</li></a>
-						  <a href="{{postsUrl}}" target="_blank"><li class="list-group-item">{{#transu}}posts{{/transu}}</li></a>
-						  <a href="{{{logoutUrl}}}"><li class="list-group-item">{{#transu}}logout{{/transu}}</li></a>
-						</ul>
-
-					</div>
-				{{/ currentUser }}
-			{{/ isUserLoggedIn }}
-			{{^ isUserLoggedIn }}
-
+			<div class="col-xs-12">
 				<div class="title">
 					{{# title }}{{.}}{{/ title }}
 					{{^ title }}{{#transu}}login{{/transu}}{{/ title }}
-					{{#transu}}{{title}}{{/transu}}
 				</div>
-
-				<form name="loginform" id="loginform" action="{{loginUrl}}"
-					method="post" role="form" class="form">
-					<div class="col-xs-12 ">
-						<input type="text" name="log" id="user_login"
-							class="form-control" value="" size="20" placeholder="{{#transu}}username{{/transu}}">
-					</div>
-					<div class="col-xs-12">
-					 <input type="password" name="pwd" id="user_pass"
-					 	class="form-control" value="" size="20" placeholder="{{#transu}}password{{/transu}}">
-					</div>
-					<div class="login-submit col-xs-12 ">
-						<input type="submit" name="wp-submit" id="wp-submit"
-							class="btn btn-info form-control" value="{{#transu}}login{{/transu}}" >
-					</div>
-					 <div class="checkbox col-xs-12 ">
-					 	<label><input name="rememberme" type="checkbox" id="rememberme" 
-					    	 value="forever"> {{#transu}}remember_me{{/transu}}</label>
-					</div>
-					<div class="col-xs-12 "> 
-						<a class="form-control btn btn-default" href="{{{registrationUrl}}}">
-						<i class="fa fa-mail-forward"></i> {{#transu}}register{{/transu}}</a>
-					</div>
-					<div class="col-xs-12 "> 
-						<a class="form-control btn btn-default" href="{{{lostPasswordUrl}}}">
-						<i class="fa fa-question-circle "></i> {{#transu}}password{{/transu}}?</a>
-					</div>
-				</form>
-			{{/ isUserLoggedIn }}
+				{{# isUserLoggedIn }}
+					{{# currentUser }}
+						<div class="logged">
+	
+							<a href="{{getPostsUrl}}">
+								<img alt="{{getDisplayName}}" src="{{getAvatarProfile}}" title="{{#transu}}logged_as{{/transu}} {{getDisplayName}}">
+							</a>
+	
+							<ul class="list-group">
+							  <a href="{{getEditUrl}}" target="_blank"><li class="list-group-item">{{#transu}}profile{{/transu}}</li></a>
+							  <a href="{{postsUrl}}" target="_blank"><li class="list-group-item">{{#transu}}posts{{/transu}}</li></a>
+							  <a href="{{{logoutUrl}}}"><li class="list-group-item">{{#transu}}logout{{/transu}}</li></a>
+							</ul>
+	
+						</div>
+					{{/ currentUser }}
+				{{/ isUserLoggedIn }}
+				{{^ isUserLoggedIn }}
+	
+					<form name="loginform" id="loginform" action="{{loginUrl}}"
+						method="post" role="form" class="form">
+						<div class="col-xs-12 ">
+							<input type="text" name="log" id="user_login"
+								class="form-control" value="" size="20" placeholder="{{#transu}}username{{/transu}}">
+						</div>
+						<div class="col-xs-12">
+						 <input type="password" name="pwd" id="user_pass"
+						 	class="form-control" value="" size="20" placeholder="{{#transu}}password{{/transu}}">
+						</div>
+						<div class="login-submit col-xs-12 ">
+							<input type="submit" name="wp-submit" id="wp-submit"
+								class="btn btn-info form-control" value="{{#transu}}login{{/transu}}" >
+						</div>
+						 <div class="checkbox col-xs-12 ">
+						 	<label><input name="rememberme" type="checkbox" id="rememberme" 
+						    	 value="forever"> {{#transu}}remember_me{{/transu}}</label>
+						</div>
+						<div class="col-xs-12 "> 
+							<a class="form-control btn btn-default" href="{{{registrationUrl}}}">
+							<i class="fa fa-mail-forward"></i> {{#transu}}register{{/transu}}</a>
+						</div>
+						<div class="col-xs-12 "> 
+							<a class="form-control btn btn-default" href="{{{lostPasswordUrl}}}">
+							<i class="fa fa-question-circle "></i> {{#transu}}password{{/transu}}?</a>
+						</div>
+					</form>
+				{{/ isUserLoggedIn }}
+			</div>
 		</div>
 	</div>
 {{/ instance }}
