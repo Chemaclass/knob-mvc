@@ -13,7 +13,6 @@ use Knob\Controllers\BaseController as KnobBaseController;
 use Libs\WalkerNavMenu;
 use Libs\Menu;
 use Libs\Widgets;
-use Models\User;
 
 /**
  * Base Controller
@@ -58,17 +57,17 @@ abstract class BaseController extends KnobBaseController
     {
         $globalVars = [];
         // Sidebar items
-        foreach (Widgets::getDinamicSidebarActive() as $key => $sidebarActive) {
+        foreach (Widgets::getDinamicSidebarActive() as $key => $sidebarActiveId) {
             $globalVars['widgets'][$key] = [
-                'active' => is_active_sidebar($sidebarActive),
-                'content' => $this->widgets[$sidebarActive]
+                'active' => is_active_sidebar($sidebarActiveId),
+                'content' => $this->widgets[$sidebarActiveId]
             ];
         }
         // Menus
-        foreach (Menu::getMenusActive() as $key => $menuActive) {
+        foreach (Menu::getMenusActive() as $key => $menuActiveId) {
             $globalVars['menu'][$key] = [
-                'active' => has_nav_menu($menuActive),
-                'content' => $this->menus[$menuActive]
+                'active' => has_nav_menu($menuActiveId),
+                'content' => $this->menus[$menuActiveId]
             ];
         }
         
