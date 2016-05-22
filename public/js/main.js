@@ -49,7 +49,7 @@ function doScroll() {
  * Load the menus by AJAX
  */
 function loadMenus() {
-	function load(menuType) {
+	function load(menuType, withData) {
 		var menu = $('#' + menuType + '-ajax');
 		if (menu.length == 0){
 			return; // If the element doesn't exist do nothing
@@ -57,7 +57,8 @@ function loadMenus() {
 		var url = $('#page').attr('ajax-url');
 		var data = {
 			submit : 'menu',
-			type : menuType
+			type : menuType,
+			withData: withData
 		};
 		$.ajax({
 			url : url,
@@ -76,7 +77,7 @@ function loadMenus() {
 			}
 		});
 	}
-	load('menu-header');
+	load('menu-header', ['archives','categories','languages','pages','tags']);
 	load('menu-footer');
 }
 
