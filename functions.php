@@ -26,9 +26,10 @@ define('APP_DIR', PROJECT_DIR . '/app');
 define('PAGES_DIR', APP_DIR . '/pages');
 define('CONFIG_DIR', APP_DIR . '/config');
 
-$configFile = require CONFIG_DIR . '/config.php';
+$configPath = CONFIG_DIR . '/config.php';
+$config = file_exists($configPath) ? require $configPath : [];
 
-$env = isset($configFile['env']) ? $configFile['env'] : [];
+$env = isset($config['env']) ? $config['env'] : [];
 $siteUrl = get_site_url();
 // URL ENVEROMENTS
 define('URL_PRO', isset($env['pro']) ? $env['pro'] : $siteUrl);
