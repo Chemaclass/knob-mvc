@@ -59,7 +59,7 @@ class Actions extends KnobActions
                 'id' => $sidebarActive
             ];
         }
-        
+
         parent::widgetsInit($activeWidgets);
     }
 
@@ -70,8 +70,7 @@ class Actions extends KnobActions
      */
     public static function registerNavMenus()
     {
-        add_action('init', function ()
-        {
+        add_action('init', function () {
             foreach (Menu::getMenusActive() as $menu) {
                 $menus[$menu] = I18n::transu($menu);
             }
@@ -87,14 +86,12 @@ class Actions extends KnobActions
         /*
          * We need it if we can activate the img into the forms
          */
-        add_action('user_edit_form_tag', function ()
-        {
+        add_action('user_edit_form_tag', function () {
             echo 'enctype="multipart/form-data"';
         });
-        
+
         /** @var WP_User $user */
-        $profileAddImg = function ($user)
-        {
+        $profileAddImg = function ($user) {
             $controller = new BackendController();
             echo $controller->getRenderProfileImg(User::KEY_AVATAR, $user->ID);
             echo $controller->getRenderProfileImg(User::KEY_HEADER, $user->ID);
@@ -104,8 +101,7 @@ class Actions extends KnobActions
         /*
          * Add the avatar to user profile
          */
-        $updateImg = function ($user_ID, $keyUserImg)
-        {
+        $updateImg = function ($user_ID, $keyUserImg) {
             try {
                 // 1st check if the user has the enought permission and the key exists on the FILES
                 if (current_user_can('edit_user', $user_ID) && isset($_FILES[$keyUserImg])) {
@@ -126,19 +122,16 @@ class Actions extends KnobActions
             } catch (\Exception $e) {
                 // Add the error message to the WP notifications
                 add_action('user_profile_update_errors',
-                    function ($errors) use($e, $keyUserImg)
-                    {
+                    function ($errors) use ($e, $keyUserImg) {
                         $errors->add($keyUserImg, $e->getMessage());
                     });
             }
         };
 
-        $updateImgAvatar = function ($user_ID) use($updateImg)
-        {
+        $updateImgAvatar = function ($user_ID) use ($updateImg) {
             $updateImg($user_ID, User::KEY_AVATAR);
         };
-        $updateImgHeader = function ($user_ID) use($updateImg)
-        {
+        $updateImgHeader = function ($user_ID) use ($updateImg) {
             $updateImg($user_ID, User::KEY_HEADER);
         };
 
@@ -154,16 +147,14 @@ class Actions extends KnobActions
     public static function userProfileAddSocialNetworks()
     {
         /** @var WP_User $user */
-        $addSocialNetworks = function ($user)
-        {
+        $addSocialNetworks = function ($user) {
             $c = new BackendController();
             echo $c->getRenderSocialNetworks($user->ID);
         };
         add_action('show_user_profile', $addSocialNetworks);
         add_action('edit_user_profile', $addSocialNetworks);
 
-        $updateSocialNetworks = function ($user_ID)
-        {
+        $updateSocialNetworks = function ($user_ID) {
             if (current_user_can('edit_user', $user_ID)) {
                 $user = User::find($user_ID);
                 $user->setTwitter($_POST[User::KEY_TWITTER]);
@@ -181,16 +172,14 @@ class Actions extends KnobActions
     public static function userProfileAddLanguage()
     {
         /** @var WP_User $user */
-        $addLang = function ($user)
-        {
+        $addLang = function ($user) {
             $c = new BackendController();
             echo $c->getRenderLanguage($user->ID);
         };
         add_action('show_user_profile', $addLang);
         add_action('edit_user_profile', $addLang);
 
-        $updateLang = function ($user_ID)
-        {
+        $updateLang = function ($user_ID) {
             if (current_user_can('edit_user', $user_ID)) {
                 $user = User::find($user_ID);
                 $user->setLang($_POST[User::KEY_LANGUAGE]);

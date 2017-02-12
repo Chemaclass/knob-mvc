@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "13ff722e1381c721dfed2beda8ed0069",
+    "hash": "e92e2cb6556eae80856a4210689cba75",
     "content-hash": "55ea540d9c6eb8ac7351e614a4f6511b",
     "packages": [
         {
             "name": "chemaclass/knob-base",
-            "version": "1.1.4",
+            "version": "1.1.4.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Chemaclass/knob-base.git",
-                "reference": "715510a855fccc749bb42bfb7af82226487dc099"
+                "reference": "6ebc646a2a4fc8b028060b6f649b05a018cd7eae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Chemaclass/knob-base/zipball/715510a855fccc749bb42bfb7af82226487dc099",
-                "reference": "715510a855fccc749bb42bfb7af82226487dc099",
+                "url": "https://api.github.com/repos/Chemaclass/knob-base/zipball/6ebc646a2a4fc8b028060b6f649b05a018cd7eae",
+                "reference": "6ebc646a2a4fc8b028060b6f649b05a018cd7eae",
                 "shasum": ""
             },
             "require": {
@@ -56,24 +56,24 @@
                 "mvc",
                 "wordpress"
             ],
-            "time": "2016-05-22 11:34:31"
+            "time": "2017-02-12 20:42:38"
         },
         {
             "name": "components/bootstrap",
-            "version": "3.3.6",
+            "version": "3.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/components/bootstrap.git",
-                "reference": "fb4923919c620b8b2aa8a11eda16b49b0a9e8a27"
+                "reference": "fe6e7683be66ba45a725816efdb51d4566733043"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/components/bootstrap/zipball/fb4923919c620b8b2aa8a11eda16b49b0a9e8a27",
-                "reference": "fb4923919c620b8b2aa8a11eda16b49b0a9e8a27",
+                "url": "https://api.github.com/repos/components/bootstrap/zipball/fe6e7683be66ba45a725816efdb51d4566733043",
+                "reference": "fe6e7683be66ba45a725816efdb51d4566733043",
                 "shasum": ""
             },
             "require": {
-                "components/jquery": "1.9.1 - 2"
+                "components/jquery": "1.9.1 - 3"
             },
             "suggest": {
                 "components/bootstrap-default": "Provide a theme for Bootstrap as components/bootstrap only provides the CSS as file assets"
@@ -124,20 +124,20 @@
                 "responsive",
                 "web"
             ],
-            "time": "2015-11-24 20:19:41"
+            "time": "2016-07-26 05:59:20"
         },
         {
             "name": "components/font-awesome",
-            "version": "4.6.3",
+            "version": "4.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/components/font-awesome.git",
-                "reference": "daa3ef598620217085dcb13ad11149e89a20a925"
+                "reference": "885308b939369d147bec93174722786bc2c4eedd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/components/font-awesome/zipball/daa3ef598620217085dcb13ad11149e89a20a925",
-                "reference": "daa3ef598620217085dcb13ad11149e89a20a925",
+                "url": "https://api.github.com/repos/components/font-awesome/zipball/885308b939369d147bec93174722786bc2c4eedd",
+                "reference": "885308b939369d147bec93174722786bc2c4eedd",
                 "shasum": ""
             },
             "type": "component",
@@ -159,7 +159,7 @@
                 "OFL-1.1"
             ],
             "description": "The iconic font designed for use with Twitter Bootstrap.",
-            "time": "2016-05-18 10:46:59"
+            "time": "2016-10-25 10:56:23"
         },
         {
             "name": "components/jquery",
@@ -250,16 +250,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v5.2.15",
+            "version": "v5.2.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "d0186171b28af4f06ac2ad8a84a8f3d6cbc3ba6c"
+                "reference": "b18cb98131bd83103ccb26a888fdfe3177b8a663"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/d0186171b28af4f06ac2ad8a84a8f3d6cbc3ba6c",
-                "reference": "d0186171b28af4f06ac2ad8a84a8f3d6cbc3ba6c",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/b18cb98131bd83103ccb26a888fdfe3177b8a663",
+                "reference": "b18cb98131bd83103ccb26a888fdfe3177b8a663",
                 "shasum": ""
             },
             "require": {
@@ -306,7 +306,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2016-05-10 18:39:36"
+            "time": "2017-01-09 09:33:47"
         }
     ],
     "packages-dev": [],
