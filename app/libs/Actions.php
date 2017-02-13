@@ -30,11 +30,60 @@ class Actions extends KnobActions
     public static function setup()
     {
         parent::setup();
+
+        static::adminPrintScripts();
+        static::adminPrintStyles();
+        static::loginView();
         static::registerNavMenus();
         static::userProfileAddImgAvatarAndHeader();
         static::userProfileAddSocialNetworks();
         static::userProfileAddLanguage();
         static::widgetsInit();
+        static::wpBeforeAdminBarRender();
+    }
+
+    /**
+     * Put scripts into the admin view
+     */
+    public static function adminPrintScripts()
+    {
+        add_action('admin_print_scripts',
+            function () {
+                wp_enqueue_script('jquery-plugin', COMPONENTS_DIR . '/jquery/jquery.min.js');
+                wp_enqueue_script('bootstrap-plugin', COMPONENTS_DIR . '/bootstrap/js/bootstrap.min.js');
+                wp_enqueue_script('main', PUBLIC_DIR . '/js/main.js');
+            });
+    }
+
+    /**
+     * Put styles into the admin view.
+     */
+    public static function adminPrintStyles()
+    {
+        add_action('admin_print_styles',
+            function () {
+                // wp_enqueue_style('knob-bootstrap', COMPONENTS_DIR .
+                // '/bootstrap/css/bootstrap.css'); // conflicts with WP
+                wp_enqueue_style('knob-font-awesome', COMPONENTS_DIR . '/font-awesome/css/font-awesome.min.css');
+                wp_enqueue_style('knob-main', PUBLIC_DIR . '/css/main.css');
+            });
+    }
+
+    /**
+     * Load the styles, headerurl and headertitle in the login section.
+     */
+    public static function loginView()
+    {
+        add_action('login_enqueue_scripts', function () {
+            wp_enqueue_style('main', PUBLIC_DIR . '/css/main.css');
+        });
+
+        add_filter('login_headerurl', function () {
+            return home_url();
+        });
+        add_filter('login_headertitle', function () {
+            return BLOG_TITLE;
+        });
     }
 
       /**
@@ -53,7 +102,6 @@ class Actions extends KnobActions
      */
     public static function widgetsInit($activeWidgets = [])
     {
-        // Widgets
         foreach (Widgets::getDinamicSidebarActive() as $key => $sidebarActive) {
             $activeWidgets[] = [
                 'id' => $sidebarActive
@@ -61,6 +109,18 @@ class Actions extends KnobActions
         }
 
         parent::widgetsInit($activeWidgets);
+    }
+
+    /**
+     * Delete the WP logo from the admin bar
+     */
+    public static function wpBeforeAdminBarRender()
+    {
+        add_action('wp_before_admin_bar_render',
+            function () {
+                global $wp_admin_bar;
+                $wp_admin_bar->remove_menu('wp-logo');
+            });
     }
 
     /**
