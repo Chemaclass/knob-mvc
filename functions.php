@@ -9,6 +9,10 @@
 */
 require_once 'vendor/autoload.php';
 
+if (!isset($_SESSION)) {
+    session_start();
+}
+
 use Libs\Actions;
 use Libs\Filters;
 use Libs\Widgets;
