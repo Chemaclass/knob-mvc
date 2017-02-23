@@ -17,6 +17,9 @@
 		"components/font-awesome": "4.*",
 		"chemaclass/knob-base": "1.*"
 	},
+	"require-dev": {
+		"symfony/var-dumper": "v3.2.*"
+	},
 	"autoload": {
 		"psr-0": {
 			"Config": "app/",
