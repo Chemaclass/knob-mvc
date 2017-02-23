@@ -13,14 +13,6 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-use Libs\Actions;
-use Libs\Filters;
-use Libs\Widgets;
-
-// --------------------------------------------------------------
-// Some constants
-// --------------------------------------------------------------
-
 // BASE DIRECTORIES
 define('PROJECT_DIR', dirname(__FILE__));
 define('VENDOR_DIR', PROJECT_DIR . '/vendor');
@@ -49,26 +41,48 @@ function getBlogTitle()
 {
     if (is_home()) {
         return get_bloginfo('name');
-    } else {
-        return wp_title("-", false, "right") . " " . get_bloginfo('name');
     }
+    return wp_title("-", false, "right") . " " . get_bloginfo('name');
 }
+
 define('BLOG_TITLE', getBlogTitle());
 define('ADMIN_EMAIL', get_bloginfo('admin_email'));
+
+use \Knob\Libs\Utils;
+use \Knob\I18n\I18n;
+use \Knob\App;
+
+$i18n = new I18n(new Utils(APP_DIR, [
+    Utils::AVAILABLE_LANGUAGES => [
+        Utils::LANG_KEY => Utils::LANG_VALUE,
+    ],
+    Utils::DEFAULT_LANGUAGE => Utils::DEFAULT_LANG,
+    Utils::DEFAULT_LANGUAGE_FILE => Utils::DEFAULT_LANG_FILE,
+]));
+App::register('i18n', $i18n);
+
+// --------------------------------------------------------------
+// Widgets
+// --------------------------------------------------------------
+$widgets = new Libs\Widgets($i18n);
+App::register('widgets', $widgets);
+
+// --------------------------------------------------------------
+// Menus
+// --------------------------------------------------------------
+$menus = new Libs\Menus();
+App::register('menus', $menus);
 
 // --------------------------------------------------------------
 // Actions
 // --------------------------------------------------------------
-Actions::setup();
+$actions = new Libs\Actions($i18n, $widgets, $menus);
+App::register('actions', $actions);
 
 // --------------------------------------------------------------
 // Filters
 // --------------------------------------------------------------
-Filters::setup();
-
-// --------------------------------------------------------------
-// WidgetController
-// --------------------------------------------------------------
-Widgets::setup();
+$filters = new Libs\Filters($i18n);
+App::register('filters', $filters);
 
 @include_once 'test.php';
