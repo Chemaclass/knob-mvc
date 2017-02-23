@@ -9,7 +9,9 @@
  */
 namespace Libs;
 
+use Knob\I18n\I18n;
 use Knob\Libs\WidgetsInterface;
+use Knob\Widgets\WidgetBase;
 use Widgets\ArchivesWidget;
 use Widgets\CategoriesWidget;
 use Widgets\LangWidget;
@@ -25,35 +27,28 @@ use Widgets\TagsWidget;
  */
 class Widgets implements WidgetsInterface
 {
+    /** @var I18n */
+    private $i18n;
 
-    /*
-     * Widgets
-     */
-    static $widgetsLeft = 'widgets_left';
+    /** @var string */
+    private $widgetsLeft;
 
-    static $widgetsRight = 'widgets_right';
+    /** @var string */
+    private $widgetsRight;
 
-    static $widgetsFooter = 'widgets_footer';
-
-    /**
-     * Return a list with the dinamic sidebar for widgets active
-     *
-     * @return array<string>
-     */
-    public static function getDinamicSidebarActive()
-    {
-        return [
-            'left' => static::$widgetsLeft,
-            'right' => static::$widgetsRight,
-            'footer' => static::$widgetsFooter
-        ];
-    }
+    /** @var string */
+    private $widgetsFooter;
 
     /**
-     * Setup
+     * @param I18n $i18n
      */
-    public static function setup()
+    public function __construct(I18n $i18n)
     {
+        $this->i18n = $i18n;
+        $this->widgetsLeft = 'widgets_left';
+        $this->widgetsRight = 'widgets_right';
+        $this->widgetsFooter = 'widgets_footer';
+
         $widgets = [
             new ArchivesWidget(),
             new CategoriesWidget(),
@@ -61,11 +56,25 @@ class Widgets implements WidgetsInterface
             new LoginWidget(),
             new PagesWidget(),
             new SearcherWidget(),
-            new TagsWidget()
+            new TagsWidget(),
         ];
-        
+        /** @var WidgetBase $w */
         foreach ($widgets as $w) {
-            $w->register();
+            $w->register($this->i18n);
         }
+    }
+
+    /**
+     * Return a list with the dynamic sidebar for widgets active
+     *
+     * @return string[]
+     */
+    public function dynamicSidebarActive()
+    {
+        return [
+            'left' => $this->widgetsLeft,
+            'right' => $this->widgetsRight,
+            'footer' => $this->widgetsFooter,
+        ];
     }
 }

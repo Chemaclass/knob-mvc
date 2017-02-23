@@ -9,8 +9,6 @@
 */
 namespace Config;
 
-use Knob\I18n\I18n;
-
 /**
 * ============================
 * Your Mustache helpers
@@ -33,12 +31,10 @@ use Knob\I18n\I18n;
 */
 return [
     'case' => [
-        'lower' => function ($value)
-        {
+        'lower' => function ($value) {
             return strtolower((string) $value);
         },
-        'upper' => function ($value)
-        {
+        'upper' => function ($value) {
             return strtoupper((string) $value);
         }
     ]

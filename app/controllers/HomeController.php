@@ -11,7 +11,6 @@ namespace Controllers;
 
 use Knob\Controllers\HomeControllerInterface;
 use Knob\Libs\Ajax;
-use Knob\I18n\I18n;
 use Models\Archive;
 use Models\Post;
 use Models\Option;
@@ -38,7 +37,7 @@ class HomeController extends BaseController implements HomeControllerInterface
         $args = [
             'postsWhereKey' => Ajax::AUTHOR,
             'postsWhereValue' => $user->ID,
-            'user' => $user
+            'user' => $user,
         ];
 
         return $this->renderPage('base/author', $args);
@@ -53,19 +52,20 @@ class HomeController extends BaseController implements HomeControllerInterface
 
         $keys = array_keys($wp_query->query);
         $postsArgs = [];
+        $thingToSearch = '';
         foreach ($keys as $k) {
             $postsArgs['date_query'][] = [
-                $k => $wp_query->query[$k]
+                $k => $wp_query->query[$k],
             ];
             $thingToSearch .= '/' . $wp_query->query[$k];
         }
 
         $args = [
-            'thingType' => I18n::transu('archive'),
+            'thingType' => $this->transU('archive'),
             'thingToSearch' => $thingToSearch,
             'postsWhereKey' => Ajax::ARCHIVE,
             'postsWhereValue' => $wp_query->query['year'] . Archive::DELIMITER . $wp_query->query['monthnum'],
-            'posts' => Post::getByArchive('', false, false, $postsArgs)
+            'posts' => Post::getByArchive($thingToSearch, false, false, $postsArgs),
         ];
 
         return $this->renderPage('base/search', $args);
@@ -78,11 +78,11 @@ class HomeController extends BaseController implements HomeControllerInterface
     {
         $cat = get_queried_object();
         $args = [
-            'thingType' => I18n::transu('category'),
+            'thingType' => $this->i18n->transU('category'),
             'thingToSearch' => $cat->name,
             'postsWhereKey' => Ajax::CATEGORY,
             'postsWhereValue' => $cat->term_id,
-            'posts' => Post::getByCategory($cat->term_id)
+            'posts' => Post::getByCategory($cat->term_id),
         ];
 
         return $this->renderPage('base/search', $args);
@@ -95,7 +95,7 @@ class HomeController extends BaseController implements HomeControllerInterface
     {
         $args = [
             'postsWhereKey' => Ajax::HOME,
-            'posts' => Post::getAll(Option::get('posts_per_page'))
+            'posts' => Post::getAll(Option::get('posts_per_page')),
         ];
 
         return $this->renderPage('base/home', $args);
@@ -127,7 +127,7 @@ class HomeController extends BaseController implements HomeControllerInterface
             'postsWhereKey' => Ajax::SEARCH,
             'postsWhereValue' => $searchQuery,
             'thingToSearch' => $searchQuery,
-            'posts' => Post::getBySearch($searchQuery)
+            'posts' => Post::getBySearch($searchQuery),
         ];
 
         return $this->renderPage('base/search', $args);
@@ -136,8 +136,8 @@ class HomeController extends BaseController implements HomeControllerInterface
     /**
      * single.php
      *
-     * @param string $type post | page
-     *        Default: post
+     * @param string $type
+     * @return string
      */
     public function getSingle($type = 'post')
     {
@@ -149,7 +149,7 @@ class HomeController extends BaseController implements HomeControllerInterface
         $post = Post::find(get_the_ID());
 
         return $this->renderPage('base/' . $type, [
-            $type => $post
+            $type => $post,
         ]);
     }
 
@@ -162,9 +162,9 @@ class HomeController extends BaseController implements HomeControllerInterface
         $args = [
             'postsWhereKey' => Ajax::TAG,
             'postsWhereValue' => $tag->term_id,
-            'thingType' => I18n::transu('tag'),
+            'thingType' => $this->transU('tag'),
             'thingToSearch' => $tag->name,
-            'posts' => Post::getByTag($tag->term_id)
+            'posts' => Post::getByTag($tag->term_id),
         ];
 
         return $this->renderPage('base/search', $args);

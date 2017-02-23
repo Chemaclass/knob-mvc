@@ -9,6 +9,7 @@
  */
 namespace Libs;
 
+use Knob\I18n\I18n;
 use Knob\Libs\Filters as KnobFilters;
 use Knob\Libs\Utils;
 use Models\User;
@@ -20,16 +21,17 @@ use Models\User;
  */
 class Filters extends KnobFilters
 {
-
     /**
-     * Setup the filters
+     * @param I18n $i18n
      */
-    public static function setup()
+    public function __construct(I18n $i18n)
     {
-        parent::setup();
-        static::authorRewriteRules();
-        static::getAvatar();
+        parent::__construct($i18n);
+
+        $this->authorRewriteRules();
+        $this->getAvatar();
     }
+
 
     /**
      * Change the 'author' slug from the URL base (for each author) to the type of User.
@@ -38,7 +40,7 @@ class Filters extends KnobFilters
      * 1) Settings -> Permalinks -> choose default -> Save
      * 2) Revert the settings to original.
      */
-    protected static function authorRewriteRules()
+    protected function authorRewriteRules()
     {
         $AUTHOR_TYPE = '%author_type%';
 
@@ -77,7 +79,7 @@ class Filters extends KnobFilters
     /**
      * Override the get_avatar by default from WP
      */
-    protected static function getAvatar()
+    protected function getAvatar()
     {
         /*
          * We will get the avatar from our models

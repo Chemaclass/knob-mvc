@@ -4,12 +4,9 @@
  * Helpers
  */
 
-/**
- *
- * @param mixed $value            
- */
-function dd($value)
-{
-    var_dump($value);
-    die();
+if (!function_exists('dd')) {
+    function dd($value)
+    {
+        die(var_dump($value));
+    }
 }

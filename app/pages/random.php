@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use Knob\Models\Post;
+use Models\Post;
 
 /**
  * NOTE:
@@ -22,9 +22,10 @@ $posts = get_posts([
     'post_status' => Post::STATUS_PUBLISH,
     'post_type' => Post::TYPE_POST,
     'showposts' => 1,
-    'orderby' => 'rand'
+    'orderby' => 'rand',
 ]);
 
+/** @var Post $post */
 $post = Post::find($posts[0]->ID);
 
 header("Location: {$post->getPermalink()}");

@@ -32,7 +32,7 @@ class BackendController extends BaseController
         }
         $user = User::find($user_ID);
         $args = [
-            'user' => $user
+            'user' => $user,
         ];
         switch ($keyUserImg) {
             case User::KEY_AVATAR:
@@ -64,7 +64,7 @@ class BackendController extends BaseController
             'user' => $user,
             'KEY_TWITTER' => User::KEY_TWITTER,
             'KEY_FACEBOOK' => User::KEY_FACEBOOK,
-            'KEY_GOOGLE_PLUS' => User::KEY_GOOGLE_PLUS
+            'KEY_GOOGLE_PLUS' => User::KEY_GOOGLE_PLUS,
         ];
         return $this->render('backend/user/_social_networks', $args);
     }
@@ -84,14 +84,14 @@ class BackendController extends BaseController
         foreach (I18n::getAllLangAvailable() as $t) {
             $languages[] = [
                 'value' => $t,
-                'text' => I18n::transu('lang_' . $t),
-                'selected' => ($userLang == $t)
+                'text' => I18n::transU('lang_' . $t),
+                'selected' => ($userLang == $t),
             ];
         }
         $args = [
             'user' => $user,
             'KEY_LANGUAGE' => User::KEY_LANGUAGE,
-            'languages' => $languages
+            'languages' => $languages,
         ];
         return $this->render('backend/user/_lang', $args);
     }

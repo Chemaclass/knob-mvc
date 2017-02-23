@@ -12,7 +12,7 @@ use Knob\I18n\I18n;
 /**
  * NOTE:
  * For to use this page remember that you have to create your own
- * page through the backend from Wordpress.
+ * page through the backend from WordPress.
  *
  * @example yoursite.com/lang?lang=en
  */
@@ -23,7 +23,7 @@ $redirect = $_GET['redirect'];
 /*
  * Check if the lang is available
  */
-if (in_array($lang, I18n::getAllLangAvailable())) {
+if (in_array($lang, \Knob\App::get('i18n')->availableLanguages())) {
     session_start();
     $_SESSION[I18n::CURRENT_LANG] = $lang;
 }
