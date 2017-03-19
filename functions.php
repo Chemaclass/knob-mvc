@@ -48,9 +48,13 @@ function getBlogTitle()
 define('BLOG_TITLE', getBlogTitle());
 define('ADMIN_EMAIL', get_bloginfo('admin_email'));
 
-use \Knob\Libs\Utils;
-use \Knob\I18n\I18n;
-use \Knob\App;
+use Knob\App;
+use Knob\I18n\I18n;
+use Knob\Libs\Mustache\MustacheEngineFactory;
+use Knob\Libs\Mustache\MustacheRender;
+use Knob\Libs\Utils;
+use Libs\WidgetsRegister;
+use Repository\UserRepository;
 
 $i18n = new I18n(new Utils(APP_DIR, [
     Utils::AVAILABLE_LANGUAGES => [
@@ -59,30 +63,34 @@ $i18n = new I18n(new Utils(APP_DIR, [
     Utils::DEFAULT_LANGUAGE => Utils::DEFAULT_LANG,
     Utils::DEFAULT_LANGUAGE_FILE => Utils::DEFAULT_LANG_FILE,
 ]));
-App::register('i18n', $i18n);
 
-// --------------------------------------------------------------
-// Widgets
-// --------------------------------------------------------------
-$widgets = new Libs\Widgets($i18n);
-App::register('widgets', $widgets);
+App::register(I18n::class, $i18n);
+App::register(
+    Knob\Repository\UserRepository::class,
+    new UserRepository()
+);
 
-// --------------------------------------------------------------
-// Menus
-// --------------------------------------------------------------
-$menus = new Libs\Menus();
-App::register('menus', $menus);
 
-// --------------------------------------------------------------
-// Actions
-// --------------------------------------------------------------
-$actions = new Libs\Actions($i18n, $widgets, $menus);
-App::register('actions', $actions);
+App::register(
+    MustacheRender::class,
+    new MustacheRender((new MustacheEngineFactory())
+        ->createMustacheEngine())
+);
 
-// --------------------------------------------------------------
-// Filters
-// --------------------------------------------------------------
-$filters = new Libs\Filters($i18n);
-App::register('filters', $filters);
+App::register(
+    Knob\Libs\Widgets::class,
+    new WidgetsRegister([
+        new Widgets\ArchivesWidget(),
+        new Widgets\CategoriesWidget(),
+        new Widgets\LangWidget(),
+        new Widgets\LoginWidget(),
+        new Widgets\PagesWidget(),
+        new Widgets\SearcherWidget(),
+        new Widgets\TagsWidget(),
+    ])
+);
+App::register(Knob\Libs\Menus::class, new Libs\Menus());
+App::register(Knob\Libs\Actions::class, new Libs\Actions());
+App::register(Knob\Libs\Filters::class, new Libs\Filters());
 
 @include_once 'test.php';

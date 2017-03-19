@@ -1,39 +1,40 @@
 {
-	"name": "chemaclass/knob-mvc",
-	"description": "Knob is a PHP MVC Framework to create Wordpress templates easier and funnier than ever before.",
-	"authors": [
-		{
-			"name": "José María Valera Reales",
-			"email": "chemaclass@outlook.es",
-			"homepage": "http://chemaclass.com"
-		}
-	],
-	"require": {
-		"php": ">=5.4",
-		"phpmailer/phpmailer": "5.2.*",
-		"mustache/mustache" : "2.7.*",
-		"components/bootstrap": "3.3.*",
-		"components/jquery": "2.1.*",
-		"components/font-awesome": "4.*",
-		"chemaclass/knob-base": "1.*"
-	},
-	"require-dev": {
-		"symfony/var-dumper": "v3.2.*"
-	},
-	"autoload": {
-		"psr-0": {
-			"Config": "app/",
-			"Controllers": "app/",
-			"I18n": "app/",
-			"Libs": "app/",
-			"Models": "app/",
-			"Widgets": "app/"
-		},
-		"classmap": [
-			"app/"
-		],
-		"files": [
-			"app/config/helpers.php"
-		]
-	}
+  "name": "chemaclass/knob-mvc",
+  "description": "Knob is a PHP MVC Framework to create Wordpress templates easier and funnier than ever before.",
+  "authors": [
+    {
+      "name": "José María Valera Reales",
+      "email": "chemaclass@outlook.es",
+      "homepage": "http://chemaclass.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4",
+    "phpmailer/phpmailer": "5.2.*",
+    "mustache/mustache": "2.7.*",
+    "components/bootstrap": "3.3.*",
+    "components/jquery": "2.1.*",
+    "components/font-awesome": "4.*",
+    "chemaclass/knob-base": "1.*"
+  },
+  "require-dev": {
+    "symfony/var-dumper": "v3.2.*"
+  },
+  "autoload": {
+    "psr-0": {
+      "Config": "app/",
+      "Controllers": "app/",
+      "I18n": "app/",
+      "Libs": "app/",
+      "Models": "app/",
+      "Repository": "app/",
+      "Widgets": "app/"
+    },
+    "classmap": [
+      "app/"
+    ],
+    "files": [
+      "app/config/helpers.php"
+    ]
+  }
 }
