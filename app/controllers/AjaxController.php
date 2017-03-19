@@ -11,13 +11,13 @@ namespace Controllers;
 
 use Knob\I18n\I18n;
 use Knob\Libs\KeysRequest;
+use Models\Archive;
 use Models\Post;
 use Models\Term;
-use Models\Archive;
 
 // Load WP.
 // We have to require this file, in other case we cant call to the WP functions
-require_once (APP_DIR . '/../../../../wp-load.php');
+require_once(APP_DIR . '/../../../../wp-load.php');
 
 /**
  * AJAX Controller
@@ -35,19 +35,19 @@ class AjaxController extends BaseController
     public function main()
     {
         $json = [
-            'code' => 504
+            'code' => 504,
         ]; // Error default
-        
+
         $submit = $_REQUEST['submit'];
-        
+
         // check if we don't have any submit
-        if (! $submit) {
+        if (!$submit) {
             header("Location: /");
             die('');
         }
-        
+
         $json = array_merge($json, $this->getJsonBySubmit($submit, $_REQUEST));
-        
+
         // cast the content to UTF-8
         $json['content'] = mb_convert_encoding($json['content'], "UTF-8");
         echo json_encode($json);
@@ -73,7 +73,7 @@ class AjaxController extends BaseController
     /**
      * Listen the home petition
      *
-     * @param array $_datas            
+     * @param array $_datas
      * @return array JSON
      */
     private function jsonShowMore($_datas)
@@ -82,24 +82,24 @@ class AjaxController extends BaseController
         $postsWhereValue = $_datas['postsWhereValue'];
         $limit = $_datas['limit'];
         $offset = $_datas['offset'];
-        
+
         $getPostsBy = Post::getFuncBy($postsWhereKey);
         $posts = $getPostsBy($postsWhereValue, $limit, $offset);
-        
+
         $content = $this->render('home/_all_posts', [
-            'posts' => $posts
+            'posts' => $posts,
         ]);
         $json['limit'] = count($posts);
         $json['content'] = $content;
         $json['code'] = KeysRequest::OK;
-        
+
         return $json;
     }
 
     /**
      * Response the menu
      *
-     * @param array $_datas            
+     * @param array $_datas
      * @return array JSON
      */
     private function jsonMenu($_datas)
@@ -107,7 +107,7 @@ class AjaxController extends BaseController
         $type = $_datas['type'];
         $withData = isset($_datas['withData']) ? $_datas['withData'] : [];
         $args = [];
-        
+
         if (in_array('archives', $withData)) {
             $args['archives'] = Archive::getMonthly();
         }
@@ -123,12 +123,12 @@ class AjaxController extends BaseController
         if (in_array('tags', $withData)) {
             $args['tags'] = Term::getTags();
         }
-        
+
         $type = str_replace('-', '_', $type);
         $content = $this->render('menu/' . $type . '_default', $args);
         $json['content'] = $content;
         $json['code'] = KeysRequest::OK;
-        
+
         return $json;
     }
 }

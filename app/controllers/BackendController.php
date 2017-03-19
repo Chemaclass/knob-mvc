@@ -23,7 +23,9 @@ class BackendController extends BaseController
     /**
      * Return the view to change img from User
      *
-     * @param integer $user_ID
+     * @param $keyUserImg
+     * @param bool|int $user_ID
+     * @return string
      */
     public function getRenderProfileImg($keyUserImg, $user_ID = false)
     {
@@ -34,6 +36,7 @@ class BackendController extends BaseController
         $args = [
             'user' => $user,
         ];
+        $template = '';
         switch ($keyUserImg) {
             case User::KEY_AVATAR:
                 $template = 'backend/user/_img_avatar';
@@ -81,10 +84,10 @@ class BackendController extends BaseController
         $user = User::find($user_ID);
         // Format the list
         $userLang = $user->getLang();
-        foreach (I18n::getAllLangAvailable() as $t) {
+        foreach ($this->i18n->availableLanguages() as $t) {
             $languages[] = [
                 'value' => $t,
-                'text' => I18n::transU('lang_' . $t),
+                'text' => $this->i18n->transU('lang_' . $t),
                 'selected' => ($userLang == $t),
             ];
         }

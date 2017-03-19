@@ -10,9 +10,6 @@
 namespace Controllers;
 
 use Knob\Controllers\BaseController as KnobBaseController;
-use Knob\I18n\I18n;
-use Knob\Libs\MenusInterface;
-use Knob\Libs\WidgetsInterface;
 use Libs\WalkerNavMenu;
 
 /**
@@ -23,15 +20,9 @@ abstract class BaseController extends KnobBaseController
     protected $widgetsContent = [];
     protected $menusContent = [];
 
-    /**
-     * @param I18n $i18n
-     * @param WidgetsInterface $widgets
-     * @param MenusInterface $menus
-     */
-    public function __construct(I18n $i18n, WidgetsInterface $widgets, MenusInterface $menus)
+    public function __construct()
     {
-        parent::__construct($i18n, $widgets, $menus);
-
+        parent::__construct();
         $this->loadWidgets();
         $this->loadMenus();
     }

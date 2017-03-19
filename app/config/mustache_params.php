@@ -15,12 +15,15 @@
  *
  * @see knob-base/src/config/mustache_params.php -> Parent file
  */
+use Knob\App;
+use Knob\I18n\I18n;
+
+$blogDescription = App::get(I18n::class)->trans('internal.blog_description');
 
 return [
     'ajaxUrl' => '/ajax',
 
     'blogAuthor' => 'José María Valera Reales',
-    'blogDescription' => ($description = $i18n->trans('internal.blog_description'))
-        ? $description : get_bloginfo('description'),
+    'blogDescription' => !empty($blogDescription) ? $blogDescription : get_bloginfo('description'),
     'blogKeywords' => 'knob, wordpress, framework, mvc, template, mustache, php',
 ];

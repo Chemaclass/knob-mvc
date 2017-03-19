@@ -1,106 +1,106 @@
 <?php
 return [
-	// A
-	'archive' => 'Archive',
-	'archives' => 'Archiven',
+    // A
+    'archive' => 'Archive',
+    'archives' => 'Archiven',
 
-	// B
-	'by' => 'durch',
+    // B
+    'by' => 'durch',
 
-	// C
-	'category' => 'Kategorie',
-	'categories' => 'categories',
-	'comment' => 'Kommentar',
-	'comments' => 'Kommentare',
-	'current' => 'aktuallen',
-	'current_lang' => 'aktuelle Sprache',
+    // C
+    'category' => 'Kategorie',
+    'categories' => 'categories',
+    'comment' => 'Kommentar',
+    'comments' => 'Kommentare',
+    'current' => 'aktuallen',
+    'current_lang' => 'aktuelle Sprache',
 
-	// D
-	'delete' => 'löschen',
+    // D
+    'delete' => 'löschen',
 
-	// E
-	'english' => 'English',
-	'email' => 'E-Mail',
-	'edit' => 'Bearbeiten',
-	'error' => 'Fehler',
+    // E
+    'english' => 'English',
+    'email' => 'E-Mail',
+    'edit' => 'Bearbeiten',
+    'error' => 'Fehler',
 
-	// F
+    // F
 
-	// G
+    // G
 
-	// H
-	'header_menu' => 'Kopfzeilenmenü',
-	'high' => 'high',
+    // H
+    'header_menu' => 'Kopfzeilenmenü',
+    'high' => 'high',
 
-	// I
-	'in' => 'in',
+    // I
+    'in' => 'in',
 
-	// J
+    // J
 
-	// K
+    // K
 
-	// L
-	'lang_de' => 'Deutsch',
-	'lang_en' => 'Englisch',
-	'lang_es' => 'Spanisch',
-	'language' => 'Sprache',
-	'logged_as' => 'Du bist angemeldet als',
-	'login' => 'Einloggen',
-	'logout' => 'abmelden',
+    // L
+    'lang_de' => 'Deutsch',
+    'lang_en' => 'Englisch',
+    'lang_es' => 'Spanisch',
+    'language' => 'Sprache',
+    'logged_as' => 'Du bist angemeldet als',
+    'login' => 'Einloggen',
+    'logout' => 'abmelden',
 
-	// M
-	'menu_header' => 'Kopfzeilenmenü',
-	'menu_footer' => 'Fußzeilenmenü',
+    // M
+    'menu_header' => 'Kopfzeilenmenü',
+    'menu_footer' => 'Fußzeilenmenü',
 
-	// N
-	'name' => 'name',
-	'not_found' => 'nicht gefunden',
+    // N
+    'name' => 'name',
+    'not_found' => 'nicht gefunden',
 
-	// O
+    // O
 
-	// P
-	'page' => 'Seite',
-	'pages' => 'Seiten',
-	'password' => 'Passwort',
-	'post' => 'post',
-	'posts' => 'Beiträge',
-	'profile' => 'Profil',
+    // P
+    'page' => 'Seite',
+    'pages' => 'Seiten',
+    'password' => 'Passwort',
+    'post' => 'post',
+    'posts' => 'Beiträge',
+    'profile' => 'Profil',
 
-	// Q
+    // Q
 
-	// R
-	'random' => 'zufällige',
-	'register' => 'registrieren',
-	'remember_me' => 'erinnere dich an mich',
+    // R
+    'random' => 'zufällige',
+    'register' => 'registrieren',
+    'remember_me' => 'erinnere dich an mich',
 
-	// S
-	'search' => 'suchen',
-	'searcher' => 'Sucher',
-	'see_more' => 'mehr zu sehen',
-	'share_comment' => 'share Kommentar',
-	'show_more' => 'weitere',
-	'spanish' => 'Spanisch',
+    // S
+    'search' => 'suchen',
+    'searcher' => 'Sucher',
+    'see_more' => 'mehr zu sehen',
+    'share_comment' => 'share Kommentar',
+    'show_more' => 'weitere',
+    'spanish' => 'Spanisch',
 
-	// T
-	'tag' => 'Tag',
-	'tags' => 'Tags',
-	'total' => 'total',
+    // T
+    'tag' => 'Tag',
+    'tags' => 'Tags',
+    'total' => 'total',
 
-	// U
-	'username' => 'Benutzernamen',
+    // U
+    'username' => 'Benutzernamen',
 
-	// V
+    // V
 
-	// W
-	'website' => 'Website',
-	'welcome' => 'Willkommen',
-	'width' => 'Breite',
-	'without_permissions' => 'ohne Berechtigungen',
+    // W
+    'website' => 'Website',
+    'welcome' => 'Willkommen',
+    'width' => 'Breite',
+    'without_permissions' => 'ohne Berechtigungen',
 
-	// X
+    // X
 
-	// Y
+    // Y
 
-	// Z
-	'z' => 'z'
+    // Z
+    'z' => 'z',
 ];

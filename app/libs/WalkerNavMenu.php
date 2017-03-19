@@ -21,7 +21,7 @@ class WalkerNavMenu extends \Walker_Nav_Menu
      * @param unknown $output
      * @param unknown $depth
      */
-    public function start_lvl(&$output, $depth = 0, $args = array())
+    public function start_lvl(&$output, $depth = 0, $args = [])
     {
         $indent = str_repeat("\t", $depth);
         $output .= "\n$indent";
@@ -41,7 +41,7 @@ class WalkerNavMenu extends \Walker_Nav_Menu
      * @param unknown $output
      * @param unknown $depth
      */
-    public function end_lvl(&$output, $depth = 0, $args = array())
+    public function end_lvl(&$output, $depth = 0, $args = [])
     {
         $indent = str_repeat("\t", $depth);
         $output .= "$indent</ul>";
@@ -55,9 +55,9 @@ class WalkerNavMenu extends \Walker_Nav_Menu
      * @param int $depth Depth of menu item. May be used for padding.
      * @param array $args Additional strings.
      */
-    public function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0)
+    public function start_el(&$output, $item, $depth = 0, $args = [], $id = 0)
     {
-        $classes = empty($item->classes) ? [] : (array) $item->classes;
+        $classes = empty($item->classes) ? [] : (array)$item->classes;
 
         $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item));
 

@@ -9,27 +9,16 @@
  */
 namespace Libs;
 
-use Knob\I18n\I18n;
-use Knob\Libs\WidgetsInterface;
+use Knob\Libs\Widgets as KnobWidgets;
 use Knob\Widgets\WidgetBase;
-use Widgets\ArchivesWidget;
-use Widgets\CategoriesWidget;
-use Widgets\LangWidget;
-use Widgets\LoginWidget;
-use Widgets\PagesWidget;
-use Widgets\SearcherWidget;
-use Widgets\TagsWidget;
 
 /**
  * Widget Controller
  *
  * @author José María Valera Reales
  */
-class Widgets implements WidgetsInterface
+class WidgetsRegister implements KnobWidgets
 {
-    /** @var I18n */
-    private $i18n;
-
     /** @var string */
     private $widgetsLeft;
 
@@ -40,27 +29,18 @@ class Widgets implements WidgetsInterface
     private $widgetsFooter;
 
     /**
-     * @param I18n $i18n
+     * @param array $widgets
+     * @internal param I18n $i18n
      */
-    public function __construct(I18n $i18n)
+    public function __construct(array $widgets)
     {
-        $this->i18n = $i18n;
         $this->widgetsLeft = 'widgets_left';
         $this->widgetsRight = 'widgets_right';
         $this->widgetsFooter = 'widgets_footer';
 
-        $widgets = [
-            new ArchivesWidget(),
-            new CategoriesWidget(),
-            new LangWidget(),
-            new LoginWidget(),
-            new PagesWidget(),
-            new SearcherWidget(),
-            new TagsWidget(),
-        ];
         /** @var WidgetBase $w */
         foreach ($widgets as $w) {
-            $w->register($this->i18n);
+            $w->register();
         }
     }
 

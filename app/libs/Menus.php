@@ -9,14 +9,14 @@
  */
 namespace Libs;
 
-use Knob\Libs\MenusInterface;
+use Knob\Libs\Menus as KnobMenus;
 
 /**
  * Menu
  *
  * @author José María Valera Reales
  */
-class Menus implements MenusInterface
+class Menus implements KnobMenus
 {
     /**
      * Return a list with the active menus

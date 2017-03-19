@@ -10,11 +10,8 @@
 namespace Libs;
 
 use Controllers\BackendController;
-use Knob\Libs\MenusInterface;
-use Models\User;
-use Knob\I18n\I18n;
 use Knob\Libs\Actions as KnobActions;
-use Knob\Libs\WidgetsInterface;
+use Models\User;
 
 /**
  * Actions for Wordpress
@@ -24,15 +21,9 @@ use Knob\Libs\WidgetsInterface;
 class Actions extends KnobActions
 {
 
-    /**
-     * @param I18n $i18n
-     * @param WidgetsInterface $widgets
-     * @param MenusInterface $menus
-     */
-    public function __construct(I18n $i18n, WidgetsInterface $widgets, MenusInterface $menus)
+    public function __construct()
     {
-        parent::__construct($i18n, $widgets, $menus);
-
+        parent::__construct();
         $this->adminPrintScripts();
         $this->adminPrintStyles();
         $this->loginView();
@@ -181,6 +172,7 @@ class Actions extends KnobActions
 
         $updateSocialNetworks = function ($user_ID) {
             if (current_user_can('edit_user', $user_ID)) {
+                /** @var User $user */
                 $user = User::find($user_ID);
                 $user->setTwitter($_POST[User::KEY_TWITTER]);
                 $user->setFacebook($_POST[User::KEY_FACEBOOK]);

@@ -9,11 +9,12 @@
  */
 namespace Controllers;
 
+use Knob\App;
 use Knob\Controllers\HomeControllerInterface;
 use Knob\Libs\Ajax;
 use Models\Archive;
-use Models\Post;
 use Models\Option;
+use Models\Post;
 use Models\User;
 
 /**
@@ -44,6 +45,14 @@ class HomeController extends BaseController implements HomeControllerInterface
     }
 
     /**
+     * 404.php
+     */
+    public function get404()
+    {
+        return $this->renderPage('base/error_404');
+    }
+
+    /**
      * archive.php
      */
     public function getArchive()
@@ -53,11 +62,11 @@ class HomeController extends BaseController implements HomeControllerInterface
         $keys = array_keys($wp_query->query);
         $postsArgs = [];
         $thingToSearch = '';
-        foreach ($keys as $k) {
+        foreach ($keys as $key) {
             $postsArgs['date_query'][] = [
-                $k => $wp_query->query[$k],
+                $key => $wp_query->query[$key],
             ];
-            $thingToSearch .= '/' . $wp_query->query[$k];
+            $thingToSearch .= '/' . $wp_query->query[$key];
         }
 
         $args = [
@@ -107,14 +116,6 @@ class HomeController extends BaseController implements HomeControllerInterface
     public function getIndex()
     {
         return $this->get404();
-    }
-
-    /**
-     * 404.php
-     */
-    public function get404()
-    {
-        return $this->renderPage('base/error_404');
     }
 
     /**

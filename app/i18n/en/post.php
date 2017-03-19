@@ -1,57 +1,57 @@
 <?php
 return [
-	// A
+    // A
 
-	// B
-	'by' => 'by',
+    // B
+    'by' => 'by',
 
-	// C
+    // C
 
-	// D
+    // D
 
-	// E
+    // E
 
-	// F
+    // F
 
-	// G
+    // G
 
-	// H
+    // H
 
-	// I
+    // I
 
-	// J
+    // J
 
-	// K
+    // K
 
-	// L
+    // L
 
-	// M
+    // M
 
-	// N
+    // N
 
-	// O
+    // O
 
-	// P
+    // P
 
-	// Q
+    // Q
 
-	// R
+    // R
 
-	// S
-	'share_comment' => 'share comment',
+    // S
+    'share_comment' => 'share comment',
 
-	// T
+    // T
 
-	// U
+    // U
 
-	// V
+    // V
 
-	// W
+    // W
 
-	// X
+    // X
 
-	// Y
+    // Y
 
-	// Z
-	'z' => 'z'
+    // Z
+    'z' => 'z',
 ];

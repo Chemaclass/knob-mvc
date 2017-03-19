@@ -1,73 +1,73 @@
 <?php
 return [
-	// A
-	'about' => 'über',
-	'avatar' => 'Avatar-Bild',
-	'another_info' => 'eine weitere Infos',
+    // A
+    'about' => 'über',
+    'avatar' => 'Avatar-Bild',
+    'another_info' => 'eine weitere Infos',
 
-	// B
+    // B
 
-	// C
+    // C
 
-	// D
-	'display_name' => 'Nickname',
+    // D
+    'display_name' => 'Nickname',
 
-	// E
-	'enter' => 'Geben',
-	'enter_your_what' => 'Geben Sie deine :what',
+    // E
+    'enter' => 'Geben',
+    'enter_your_what' => 'Geben Sie deine :what',
 
-	// F
-	'full_name' => 'vollständigen Name',
+    // F
+    'full_name' => 'vollständigen Name',
 
-	// G
+    // G
 
-	// H
-	'header' => 'header image',
+    // H
+    'header' => 'header image',
 
-	// I
+    // I
 
-	// J
+    // J
 
-	// K
+    // K
 
-	// L
+    // L
 
-	// M
+    // M
 
-	// N
+    // N
 
-	// O
+    // O
 
-	// P
-	'put_your' => 'stellen Sie Ihre :what',
+    // P
+    'put_your' => 'stellen Sie Ihre :what',
 
-	// Q
+    // Q
 
-	// R
-	'recommended_sizes' => 'Größen empfohlen',
-	'rol' => 'Rolle',
+    // R
+    'recommended_sizes' => 'Größen empfohlen',
+    'rol' => 'Rolle',
 
-	// S
-	'select_your' => 'Wählen Sie eine :what',
-	'show_profile' => 'Profil',
-	'social_networks' => 'soziale Netzwerke',
+    // S
+    'select_your' => 'Wählen Sie eine :what',
+    'show_profile' => 'Profil',
+    'social_networks' => 'soziale Netzwerke',
 
-	// T
-	'total_publish_posts' => 'veröffentlichen Beiträge',
-	'total_comments' => 'Kommentare',
+    // T
+    'total_publish_posts' => 'veröffentlichen Beiträge',
+    'total_comments' => 'Kommentare',
 
-	// U
+    // U
 
-	// V
+    // V
 
-	// W
-	'web' => 'web',
-	'without_description' => 'ohne Beschereibung',
+    // W
+    'web' => 'web',
+    'without_description' => 'ohne Beschereibung',
 
-	// X
+    // X
 
-	// Y
+    // Y
 
-	// Z
-	'z' => 'z'
+    // Z
+    'z' => 'z',
 ];
