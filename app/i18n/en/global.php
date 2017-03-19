@@ -1,105 +1,105 @@
 <?php
 return [
-	// A
-	'archive' => 'archive',
-	'archives' => 'archives',
+    // A
+    'archive' => 'archive',
+    'archives' => 'archives',
 
-	// B
-	'by' => 'by',
+    // B
+    'by' => 'by',
 
-	// C
-	'category' => 'category',
-	'categories' => 'categories',
-	'comment' => 'comment',
-	'comments' => 'comments',
-	'current' => 'current',
-	'current_lang' => 'current language',
+    // C
+    'category' => 'category',
+    'categories' => 'categories',
+    'comment' => 'comment',
+    'comments' => 'comments',
+    'current' => 'current',
+    'current_lang' => 'current language',
 
-	// D
-	'delete' => 'delete',
+    // D
+    'delete' => 'delete',
 
-	// E
-	'english' => 'english',
-	'email' => 'email',
-	'edit' => 'edit',
-	'error' => 'error',
+    // E
+    'english' => 'english',
+    'email' => 'email',
+    'edit' => 'edit',
+    'error' => 'error',
 
-	// F
+    // F
 
-	// G
+    // G
 
-	// H
-	'high' => 'high',
+    // H
+    'high' => 'high',
 
-	// I
-	'in' => 'in',
+    // I
+    'in' => 'in',
 
-	// J
+    // J
 
-	// K
+    // K
 
-	// L
-	'lang_de' => 'german',
-	'lang_en' => 'english',
-	'lang_es' => 'spanish',
-	'language' => 'language',
-	'logged_as' => 'You are logged in as',
-	'login' => 'login',
-	'logout' => 'logout',
+    // L
+    'lang_de' => 'german',
+    'lang_en' => 'english',
+    'lang_es' => 'spanish',
+    'language' => 'language',
+    'logged_as' => 'You are logged in as',
+    'login' => 'login',
+    'logout' => 'logout',
 
-	// M
-	'menu_header' => 'menu header',
-	'menu_footer' => 'menu footer',
+    // M
+    'menu_header' => 'menu header',
+    'menu_footer' => 'menu footer',
 
-	// N
-	'name' => 'name',
-	'not_found' => 'not found',
+    // N
+    'name' => 'name',
+    'not_found' => 'not found',
 
-	// O
+    // O
 
-	// P
-	'page' => 'page',
-	'pages' => 'pages',
-	'password' => 'password',
-	'post' => 'post',
-	'posts' => 'posts',
-	'profile' => 'profile',
+    // P
+    'page' => 'page',
+    'pages' => 'pages',
+    'password' => 'password',
+    'post' => 'post',
+    'posts' => 'posts',
+    'profile' => 'profile',
 
-	// Q
+    // Q
 
-	// R
-	'random' => 'random',
-	'register' => 'register',
-	'remember_me' => 'remember me',
+    // R
+    'random' => 'random',
+    'register' => 'register',
+    'remember_me' => 'remember me',
 
-	// S
-	'search' => 'search',
-	'searcher' => 'searcher',
-	'see_more' => 'see more',
-	'share_comment' => 'share comment',
-	'show_more' => 'show more',
-	'spanish' => 'spanish',
+    // S
+    'search' => 'search',
+    'searcher' => 'searcher',
+    'see_more' => 'see more',
+    'share_comment' => 'share comment',
+    'show_more' => 'show more',
+    'spanish' => 'spanish',
 
-	// T
-	'tag' => 'tag',
-	'tags' => 'tags',
-	'total' => 'total',
+    // T
+    'tag' => 'tag',
+    'tags' => 'tags',
+    'total' => 'total',
 
-	// U
-	'username' => 'username',
+    // U
+    'username' => 'username',
 
-	// V
+    // V
 
-	// W
-	'website' => 'website',
-	'welcome' => 'welcome',
-	'width' => 'width',
-	'without_permissions' => 'without permissions',
+    // W
+    'website' => 'website',
+    'welcome' => 'welcome',
+    'width' => 'width',
+    'without_permissions' => 'without permissions',
 
-	// X
+    // X
 
-	// Y
+    // Y
 
-	// Z
-	'z' => 'z'
+    // Z
+    'z' => 'z',
 ];

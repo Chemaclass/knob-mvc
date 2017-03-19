@@ -16,18 +16,17 @@ namespace Libs;
  */
 class WalkerNavMenu extends \Walker_Nav_Menu
 {
-
     /**
      *
      * @param unknown $output
      * @param unknown $depth
      */
-    public function start_lvl(&$output, $depth = 0, $args = array())
+    public function start_lvl(&$output, $depth = 0, $args = [])
     {
         $indent = str_repeat("\t", $depth);
         $output .= "\n$indent";
 
-        if (strpos($output, 'menu-item-has-children')) {
+        if (false !== strpos($output, 'menu-item-has-children')) {
             $output = preg_replace('/<a(.*)href="([^"]*)"(.*)>/',
                 '<a$1
 					href="#" class="dropdown-toggle" data-toggle="dropdown"
@@ -42,7 +41,7 @@ class WalkerNavMenu extends \Walker_Nav_Menu
      * @param unknown $output
      * @param unknown $depth
      */
-    public function end_lvl(&$output, $depth = 0, $args = array())
+    public function end_lvl(&$output, $depth = 0, $args = [])
     {
         $indent = str_repeat("\t", $depth);
         $output .= "$indent</ul>";
@@ -56,9 +55,9 @@ class WalkerNavMenu extends \Walker_Nav_Menu
      * @param int $depth Depth of menu item. May be used for padding.
      * @param array $args Additional strings.
      */
-    public function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0)
+    public function start_el(&$output, $item, $depth = 0, $args = [], $id = 0)
     {
-        $classes = empty($item->classes) ? array() : (array) $item->classes;
+        $classes = empty($item->classes) ? [] : (array)$item->classes;
 
         $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item));
 
@@ -74,11 +73,14 @@ class WalkerNavMenu extends \Walker_Nav_Menu
         !empty($item->url) and $attributes .= ' href="' . esc_attr($item->url) . '"';
 
         // insert description for top level elements only you may change this
-        $description = (!empty($item->description) and 0 == $depth) ? '<small class="nav_desc">' . esc_attr($item->description) . '</small>' : '';
+        $description = (!empty($item->description) && 0 === $depth)
+            ? '<small class="nav_desc">' . esc_attr($item->description) . '</small>' : '';
 
         $title = apply_filters('the_title', $item->title, $item->ID);
 
-        $item_output = $args->before . "<a $attributes>" . $args->link_before . $title . '</a> ' . $args->link_after . $description . $args->after;
+        $item_output = $args->before
+            . "<a $attributes>" . $args->link_before . $title . '</a> '
+            . $args->link_after . $description . $args->after;
 
         // Since $output is called by reference we don't need to return anything.
         $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);

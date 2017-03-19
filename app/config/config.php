@@ -22,7 +22,7 @@ return [
     'env' => [
         'prod' => 'knob.chemaclass.com',
         'dev' => 'knob.chemaclass.dev',
-        'loc' => 'knob.chemaclass.local'
+        'loc' => 'knob.chemaclass.local',
     ],
 
     /**
@@ -33,7 +33,7 @@ return [
     'langAvailable' => [
         'en' => 'english',
         'es' => 'español',
-        'de' => 'deutsch'
+        'de' => 'deutsch',
     ],
 
     /**
@@ -51,6 +51,6 @@ return [
     'mailer' => [
         'host' => '%mailer_host%',
         'username' => '%mailer_username%',
-        'password' => '%mailer_password%'
-    ]
+        'password' => '%mailer_password%',
+    ],
 ];

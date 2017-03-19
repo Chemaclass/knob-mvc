@@ -18,13 +18,13 @@ use Knob\Models\User as KnobUser;
 class User extends KnobUser
 {
 
-    /** @var User $currentUser Singleton */
-    private static $currentUser = null;
+    const WITH_SIDEBAR_DEFAULT = true;
 
     /*
      * Sidebar
      */
-    const WITH_SIDEBAR_DEFAULT = true;
+    /** @var User $currentUser Singleton */
+    private static $currentUser = null;
 
     /**
      * Return the instance of the current user, or null if they're not logged
@@ -37,10 +37,10 @@ class User extends KnobUser
             if (null === static::$currentUser) {
                 static::$currentUser = User::find($user_ID);
             }
-            
+
             return static::$currentUser;
         }
-        
+
         return null;
     }
 }

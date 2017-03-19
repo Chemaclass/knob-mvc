@@ -1,73 +1,73 @@
 <?php
 return [
-	// A
-	'about' => 'sobre mi',
-	'avatar' => 'imagen de perfil',
-	'another_info' => 'otra información',
+    // A
+    'about' => 'sobre mi',
+    'avatar' => 'imagen de perfil',
+    'another_info' => 'otra información',
 
-	// B
+    // B
 
-	// C
+    // C
 
-	// D
-	'display_name' => 'apodo',
+    // D
+    'display_name' => 'apodo',
 
-	// E
-	'enter' => 'introduce',
-	'enter_your_what' => 'introduce tu :what',
+    // E
+    'enter' => 'introduce',
+    'enter_your_what' => 'introduce tu :what',
 
-	// F
-	'full_name' => 'nombre',
+    // F
+    'full_name' => 'nombre',
 
-	// G
+    // G
 
-	// H
-	'header' => 'imagen de cabecera',
+    // H
+    'header' => 'imagen de cabecera',
 
-	// I
+    // I
 
-	// J
+    // J
 
-	// K
+    // K
 
-	// L
+    // L
 
-	// M
+    // M
 
-	// N
+    // N
 
-	// O
+    // O
 
-	// P
-	'put_your' => 'introduce tu :what',
+    // P
+    'put_your' => 'introduce tu :what',
 
-	// Q
+    // Q
 
-	// R
-	'recommended_sizes' => 'tamaños recomendados',
-	'rol' => 'rol',
+    // R
+    'recommended_sizes' => 'tamaños recomendados',
+    'rol' => 'rol',
 
-	// S
-	'select_your' => 'selecciona tu :what',
-	'show_profile' => 'ver perfil',
-	'social_networks' => 'redes sociales',
+    // S
+    'select_your' => 'selecciona tu :what',
+    'show_profile' => 'ver perfil',
+    'social_networks' => 'redes sociales',
 
-	// T
-	'total_publish_posts' => 'entradas',
-	'total_comments' => 'comentarios',
+    // T
+    'total_publish_posts' => 'entradas',
+    'total_comments' => 'comentarios',
 
-	// U
+    // U
 
-	// V
+    // V
 
-	// W
-	'web' => 'web',
-	'without_description' => 'sin descripcion',
+    // W
+    'web' => 'web',
+    'without_description' => 'sin descripcion',
 
-	// X
+    // X
 
-	// Y
+    // Y
 
-	// Z
-	'z' => 'z'
+    // Z
+    'z' => 'z',
 ];

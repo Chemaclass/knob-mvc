@@ -10,9 +10,8 @@
 namespace Libs;
 
 use Controllers\BackendController;
-use Models\User;
-use Knob\I18n\I18n;
 use Knob\Libs\Actions as KnobActions;
+use Models\User;
 
 /**
  * Actions for Wordpress
@@ -22,30 +21,24 @@ use Knob\Libs\Actions as KnobActions;
 class Actions extends KnobActions
 {
 
-    /**
-     * Setup the actions
-     *
-     * @see KnobActions::setup()
-     */
-    public static function setup()
+    public function __construct()
     {
-        parent::setup();
-
-        static::adminPrintScripts();
-        static::adminPrintStyles();
-        static::loginView();
-        static::registerNavMenus();
-        static::userProfileAddImgAvatarAndHeader();
-        static::userProfileAddSocialNetworks();
-        static::userProfileAddLanguage();
-        static::widgetsInit();
-        static::wpBeforeAdminBarRender();
+        parent::__construct();
+        $this->adminPrintScripts();
+        $this->adminPrintStyles();
+        $this->loginView();
+        $this->registerNavMenus();
+        $this->userProfileAddImgAvatarAndHeader();
+        $this->userProfileAddSocialNetworks();
+        $this->userProfileAddLanguage();
+        $this->widgetsInit();
+        $this->wpBeforeAdminBarRender();
     }
 
     /**
      * Put scripts into the admin view
      */
-    public static function adminPrintScripts()
+    public function adminPrintScripts()
     {
         add_action('admin_print_scripts',
             function () {
@@ -58,7 +51,7 @@ class Actions extends KnobActions
     /**
      * Put styles into the admin view.
      */
-    public static function adminPrintStyles()
+    public function adminPrintStyles()
     {
         add_action('admin_print_styles',
             function () {
@@ -72,7 +65,7 @@ class Actions extends KnobActions
     /**
      * Load the styles, headerurl and headertitle in the login section.
      */
-    public static function loginView()
+    public function loginView()
     {
         add_action('login_enqueue_scripts', function () {
             wp_enqueue_style('main', PUBLIC_DIR . '/css/main.css');
@@ -86,53 +79,16 @@ class Actions extends KnobActions
         });
     }
 
-      /**
-     * Register Sidebar using register_sidebar from WP.
-     *
-     * List with your active widgets.
-     * 'id': His id. We'll use it later for get it and put in his correct place.
-     * 'name': Sidebar name. Optional
-     * 'classBeforeWidget': Class for 'beforeWidget'. Optional
-     * 'beforeWidget': HTML to place before every widge. Optional
-     * 'afterWidget': HTML to place after every widget. Optional
-     * 'beforeTitle': HTML to place before every title. Optional
-     * 'afterTitle': HTML to place after every title. Optional
-     *
-     * @see KnobActions::widgetsInit($activeWidgets)
-     */
-    public static function widgetsInit($activeWidgets = [])
-    {
-        foreach (Widgets::getDinamicSidebarActive() as $key => $sidebarActive) {
-            $activeWidgets[] = [
-                'id' => $sidebarActive
-            ];
-        }
-
-        parent::widgetsInit($activeWidgets);
-    }
-
-    /**
-     * Delete the WP logo from the admin bar
-     */
-    public static function wpBeforeAdminBarRender()
-    {
-        add_action('wp_before_admin_bar_render',
-            function () {
-                global $wp_admin_bar;
-                $wp_admin_bar->remove_menu('wp-logo');
-            });
-    }
-
     /**
      * Register Nav Menus.
      *
      * @see http://codex.wordpress.org/Navigation_Menus
      */
-    public static function registerNavMenus()
+    public function registerNavMenus()
     {
         add_action('init', function () {
-            foreach (Menu::getMenusActive() as $menu) {
-                $menus[$menu] = I18n::transu($menu);
+            foreach ($this->menus->activeIds() as $menu) {
+                $menus[$menu] = $this->i18n->transU($menu);
             }
             register_nav_menus($menus);
         });
@@ -141,7 +97,7 @@ class Actions extends KnobActions
     /**
      * Add img avatar and header to user profile
      */
-    public static function userProfileAddImgAvatarAndHeader()
+    public function userProfileAddImgAvatarAndHeader()
     {
         /*
          * We need it if we can activate the img into the forms
@@ -204,7 +160,7 @@ class Actions extends KnobActions
     /**
      * Add Social networks to user
      */
-    public static function userProfileAddSocialNetworks()
+    public function userProfileAddSocialNetworks()
     {
         /** @var WP_User $user */
         $addSocialNetworks = function ($user) {
@@ -216,6 +172,7 @@ class Actions extends KnobActions
 
         $updateSocialNetworks = function ($user_ID) {
             if (current_user_can('edit_user', $user_ID)) {
+                /** @var User $user */
                 $user = User::find($user_ID);
                 $user->setTwitter($_POST[User::KEY_TWITTER]);
                 $user->setFacebook($_POST[User::KEY_FACEBOOK]);
@@ -229,7 +186,7 @@ class Actions extends KnobActions
     /**
      * Add language to user profile
      */
-    public static function userProfileAddLanguage()
+    public function userProfileAddLanguage()
     {
         /** @var WP_User $user */
         $addLang = function ($user) {
@@ -247,5 +204,43 @@ class Actions extends KnobActions
         };
         add_action('personal_options_update', $updateLang);
         add_action('edit_user_profile_update', $updateLang);
+    }
+
+    /**
+     * Register Sidebar using register_sidebar from WP.
+     *
+     * List with your active widgets.
+     * 'id': His id. We'll use it later for get it and put in his correct place.
+     * 'name': Sidebar name. Optional
+     * 'classBeforeWidget': Class for 'beforeWidget'. Optional
+     * 'beforeWidget': HTML to place before every widge. Optional
+     * 'afterWidget': HTML to place after every widget. Optional
+     * 'beforeTitle': HTML to place before every title. Optional
+     * 'afterTitle': HTML to place after every title. Optional
+     *
+     * @param array $activeWidgets
+     * @see KnobActions::widgetsInit($activeWidgets)
+     */
+    public function widgetsInit($activeWidgets = [])
+    {
+        foreach ($this->widgets->dynamicSidebarActive() as $key => $sidebarActive) {
+            $activeWidgets[] = [
+                'id' => $sidebarActive,
+            ];
+        }
+
+        parent::widgetsInit($activeWidgets);
+    }
+
+    /**
+     * Delete the WP logo from the admin bar
+     */
+    public function wpBeforeAdminBarRender()
+    {
+        add_action('wp_before_admin_bar_render',
+            function () {
+                global $wp_admin_bar;
+                $wp_admin_bar->remove_menu('wp-logo');
+            });
     }
 }

@@ -23,7 +23,9 @@ class BackendController extends BaseController
     /**
      * Return the view to change img from User
      *
-     * @param integer $user_ID
+     * @param $keyUserImg
+     * @param bool|int $user_ID
+     * @return string
      */
     public function getRenderProfileImg($keyUserImg, $user_ID = false)
     {
@@ -32,8 +34,9 @@ class BackendController extends BaseController
         }
         $user = User::find($user_ID);
         $args = [
-            'user' => $user
+            'user' => $user,
         ];
+        $template = '';
         switch ($keyUserImg) {
             case User::KEY_AVATAR:
                 $template = 'backend/user/_img_avatar';
@@ -64,7 +67,7 @@ class BackendController extends BaseController
             'user' => $user,
             'KEY_TWITTER' => User::KEY_TWITTER,
             'KEY_FACEBOOK' => User::KEY_FACEBOOK,
-            'KEY_GOOGLE_PLUS' => User::KEY_GOOGLE_PLUS
+            'KEY_GOOGLE_PLUS' => User::KEY_GOOGLE_PLUS,
         ];
         return $this->render('backend/user/_social_networks', $args);
     }
@@ -81,17 +84,17 @@ class BackendController extends BaseController
         $user = User::find($user_ID);
         // Format the list
         $userLang = $user->getLang();
-        foreach (I18n::getAllLangAvailable() as $t) {
+        foreach ($this->i18n->availableLanguages() as $t) {
             $languages[] = [
                 'value' => $t,
-                'text' => I18n::transu('lang_' . $t),
-                'selected' => ($userLang == $t)
+                'text' => $this->i18n->transU('lang_' . $t),
+                'selected' => ($userLang == $t),
             ];
         }
         $args = [
             'user' => $user,
             'KEY_LANGUAGE' => User::KEY_LANGUAGE,
-            'languages' => $languages
+            'languages' => $languages,
         ];
         return $this->render('backend/user/_lang', $args);
     }

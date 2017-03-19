@@ -3,37 +3,36 @@
 */
 .sidebar {
 
-	
-			
-	//border: 1px solid #000;
+  //border: 1px solid #000;
 
-	.sidebar-item {
+  .sidebar-item {
 
-		img {
-			//padding-top: 12px;
-			width: 100%;
-		}
-		
-		margin-bottom: 3px;
-		
-		.pages {}
-		
-		.tags {
-			list-style:none;
-			li {
-				float: left;
-				margin-right: 8px;
-			}			
-		}
-		
-		.title {
-			margin: 6px;
-			padding: 6px;
-			
-			&:first-letter {
-			    text-transform: uppercase;
-			}			
-		}
-		
-	}
+    img {
+      //padding-top: 12px;
+      width: 100%;
+    }
+
+    margin-bottom: 3px;
+
+    .pages {
+    }
+
+    .tags {
+      list-style: none;
+      li {
+        float: left;
+        margin-right: 8px;
+      }
+    }
+
+    .title {
+      margin: 6px;
+      padding: 6px;
+
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
+
+  }
 }

@@ -9,28 +9,23 @@
  */
 namespace Libs;
 
-use Knob\Libs\MenuInterface;
+use Knob\Libs\Menus as KnobMenus;
 
 /**
  * Menu
  *
  * @author José María Valera Reales
  */
-class Menu implements MenuInterface
+class Menus implements KnobMenus
 {
-
-    static $menuHeader = 'menu_header';
-
-    static $menuFooter = 'menu_footer';
-
     /**
      * Return a list with the active menus
      */
-    public static function getMenusActive()
+    public function activeIds()
     {
         return [
-            'header' => static::$menuHeader,
-            'footer' => static::$menuFooter
+            'header' => 'menu_header',
+            'footer' => 'menu_footer',
         ];
     }
 }

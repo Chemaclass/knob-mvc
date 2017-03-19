@@ -10,24 +10,24 @@
 @import "widget.scss";
 
 body, #wpwrap {
-	background-color: $body-background-color;
-	color: $body-color;
-	font-family: Helvetica,Arial;
-	font-size: 16px;
+  background-color: $body-background-color;
+  color: $body-color;
+  font-family: Helvetica, Arial;
+  font-size: 16px;
 }
- 
+
 #blog-title {
-	margin-top: 30px;
-	margin-bottom: 30px;
-	text-align: left;
-	a {
-		font-size: 32px;
-		color: #000;
-    	text-decoration: none;
-	}
-	span {
-		font-size: 21px;
-	}
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: left;
+  a {
+    font-size: 32px;
+    color: #000;
+    text-decoration: none;
+  }
+  span {
+    font-size: 21px;
+  }
 }
 
 #content {
@@ -37,19 +37,19 @@ body, #wpwrap {
 }
 
 #footer {
-	border-top: 1px solid #ddd;
-	padding: 12px 0px;
-	margin: 8px 0px;
+  border-top: 1px solid #ddd;
+  padding: 12px 0px;
+  margin: 8px 0px;
 }
 
 .list-posts {
 
-	@extend %post-home;
+  @extend %post-home;
 
-	margin: 12px 0px;
-	border: 1px solid #ccc;	
+  margin: 12px 0px;
+  border: 1px solid #ccc;
 
-	.show-more {
-		margin: 20px 0px;
-	}
+  .show-more {
+    margin: 20px 0px;
+  }
 }

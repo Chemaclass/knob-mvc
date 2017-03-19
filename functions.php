@@ -13,14 +13,6 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-use Libs\Actions;
-use Libs\Filters;
-use Libs\Widgets;
-
-// --------------------------------------------------------------
-// Some constants
-// --------------------------------------------------------------
-
 // BASE DIRECTORIES
 define('PROJECT_DIR', dirname(__FILE__));
 define('VENDOR_DIR', PROJECT_DIR . '/vendor');
@@ -49,26 +41,56 @@ function getBlogTitle()
 {
     if (is_home()) {
         return get_bloginfo('name');
-    } else {
-        return wp_title("-", false, "right") . " " . get_bloginfo('name');
     }
+    return wp_title("-", false, "right") . " " . get_bloginfo('name');
 }
+
 define('BLOG_TITLE', getBlogTitle());
 define('ADMIN_EMAIL', get_bloginfo('admin_email'));
 
-// --------------------------------------------------------------
-// Actions
-// --------------------------------------------------------------
-Actions::setup();
+use Knob\App;
+use Knob\I18n\I18n;
+use Knob\Libs\Mustache\MustacheEngineFactory;
+use Knob\Libs\Mustache\MustacheRender;
+use Knob\Libs\Utils;
+use Libs\WidgetsRegister;
+use Repository\UserRepository;
 
-// --------------------------------------------------------------
-// Filters
-// --------------------------------------------------------------
-Filters::setup();
+$i18n = new I18n(new Utils(APP_DIR, [
+    Utils::AVAILABLE_LANGUAGES => [
+        Utils::LANG_KEY => Utils::LANG_VALUE,
+    ],
+    Utils::DEFAULT_LANGUAGE => Utils::DEFAULT_LANG,
+    Utils::DEFAULT_LANGUAGE_FILE => Utils::DEFAULT_LANG_FILE,
+]));
 
-// --------------------------------------------------------------
-// WidgetController
-// --------------------------------------------------------------
-Widgets::setup();
+App::register(I18n::class, $i18n);
+App::register(
+    Knob\Repository\UserRepository::class,
+    new UserRepository()
+);
+
+
+App::register(
+    MustacheRender::class,
+    new MustacheRender((new MustacheEngineFactory())
+        ->createMustacheEngine())
+);
+
+App::register(
+    Knob\Libs\Widgets::class,
+    new WidgetsRegister([
+        new Widgets\ArchivesWidget(),
+        new Widgets\CategoriesWidget(),
+        new Widgets\LangWidget(),
+        new Widgets\LoginWidget(),
+        new Widgets\PagesWidget(),
+        new Widgets\SearcherWidget(),
+        new Widgets\TagsWidget(),
+    ])
+);
+App::register(Knob\Libs\Menus::class, new Libs\Menus());
+App::register(Knob\Libs\Actions::class, new Libs\Actions());
+App::register(Knob\Libs\Filters::class, new Libs\Filters());
 
 @include_once 'test.php';

@@ -11,46 +11,56 @@ $body-background-color: #fff;
 $body-color: #000;
 
 @mixin col($size) {
-	@if $size == xs {
-		@size only screen and (max-width: $screen-xs-max) { @content; }
-	}
-	@else if $size == sm {
-		@size only screen and (min-width: $screen-sm-min) { @content; }
-	}
-	@else if $size == md {
-		@size only screen and (min-width: $screen-md-min) { @content; }
-	}
-	@else if $size == lg {
-		@size only screen and (min-width: $screen-lg-min) { @content; }
-	}
-	@else if $size == xl {
-		@size only screen and (min-width: $screen-xl-min) { @content; }
-	}
-	@else {
-		@size only screen and (min-width: $size) { @content; }
-	}
+  @if $size == xs {
+    @size only screen and (max-width: $screen-xs-max) {
+      @content;
+    }
+  } @else if $size == sm {
+    @size only screen and (min-width: $screen-sm-min) {
+      @content;
+    }
+  } @else if $size == md {
+    @size only screen and (min-width: $screen-md-min) {
+      @content;
+    }
+  } @else if $size == lg {
+    @size only screen and (min-width: $screen-lg-min) {
+      @content;
+    }
+  } @else if $size == xl {
+    @size only screen and (min-width: $screen-xl-min) {
+      @content;
+    }
+  } @else {
+    @size only screen and (min-width: $size) {
+      @content;
+    }
+  }
 }
 
 %bold {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 %post-home {
-	.post {
-		border-bottom: 1px solid #ccc;
-		padding: 12px 32px;
-		.date {}
-		.excerpt {}
-		.thumbnail {
-			margin: 0px;
-		}
-		.title {
-			.permalink {
-				font-size: 22px;
-				font-weight: bold;
-				text-transform: uppercase;
-			}
-			.total-comments {}
-		}
-	}
+  .post {
+    border-bottom: 1px solid #ccc;
+    padding: 12px 32px;
+    .date {
+    }
+    .excerpt {
+    }
+    .thumbnail {
+      margin: 0px;
+    }
+    .title {
+      .permalink {
+        font-size: 22px;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      .total-comments {
+      }
+    }
+  }
 }
