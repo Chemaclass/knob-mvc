@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": ">=5.4",
+    "php": ">=7.0",
     "phpmailer/phpmailer": "5.2.*",
     "mustache/mustache": "2.7.*",
     "components/bootstrap": "3.3.*",
