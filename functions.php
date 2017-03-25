@@ -49,37 +49,35 @@ define('BLOG_TITLE', getBlogTitle());
 define('ADMIN_EMAIL', get_bloginfo('admin_email'));
 
 use Knob\App;
-use Knob\I18n\I18n;
-use Knob\Libs\Mustache\MustacheEngineFactory;
-use Knob\Libs\Mustache\MustacheRender;
 use Knob\Libs\Utils;
-use Libs\WidgetsRegister;
-use Repository\UserRepository;
 
-$i18n = new I18n(new Utils(APP_DIR, [
-    Utils::AVAILABLE_LANGUAGES => [
-        Utils::LANG_KEY => Utils::LANG_VALUE,
-    ],
-    Utils::DEFAULT_LANGUAGE => Utils::DEFAULT_LANG,
-    Utils::DEFAULT_LANGUAGE_FILE => Utils::DEFAULT_LANG_FILE,
-]));
-
-App::register(I18n::class, $i18n);
 App::register(
-    Knob\Repository\UserRepository::class,
-    new UserRepository()
+    Knob\I18n\I18n::class,
+    new Knob\I18n\I18n(new Utils(APP_DIR, [
+        Utils::AVAILABLE_LANGUAGES => [
+            Utils::LANG_KEY => Utils::LANG_VALUE,
+        ],
+        Utils::DEFAULT_LANGUAGE => Utils::DEFAULT_LANG,
+        Utils::DEFAULT_LANGUAGE_FILE => Utils::DEFAULT_LANG_FILE,
+    ]))
 );
 
+App::register(
+    Knob\Repository\UserRepository::class,
+    new Repository\UserRepository()
+);
 
 App::register(
-    MustacheRender::class,
-    new MustacheRender((new MustacheEngineFactory())
-        ->createMustacheEngine())
+    Knob\Libs\Mustache\MustacheRender::class,
+    new Knob\Libs\Mustache\MustacheRender(
+        (new  Knob\Libs\Mustache\MustacheEngineFactory())
+            ->createMustacheEngine()
+    )
 );
 
 App::register(
     Knob\Libs\Widgets::class,
-    new WidgetsRegister([
+    new Libs\WidgetsRegister([
         new Widgets\ArchivesWidget(),
         new Widgets\CategoriesWidget(),
         new Widgets\LangWidget(),
